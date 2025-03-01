@@ -164,6 +164,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 1229082733}
+  OnfinishMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &440510809
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888294f35e6c0ac43b1f1eec50fec6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerControls: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!4 &440510812
 Transform:
   m_ObjectHideFlags: 0
@@ -670,6 +674,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf26c092f5f75fa45b2b9a9e17dd3eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  On_EnterState:
+    m_PersistentCalls:
+      m_Calls: []
+  On_ExitState:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1506799401
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +725,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c1e7de9490e9f419e66fed05f94e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  On_EnterState:
+    m_PersistentCalls:
+      m_Calls: []
+  On_ExitState:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1607899666
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +777,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d68c9e3b9ad594da19e400859e7f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  On_EnterState:
+    m_PersistentCalls:
+      m_Calls: []
+  On_ExitState:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1837746279
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 1229082733}
+  OnfinishMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1855843728
 GameObject:
   m_ObjectHideFlags: 0

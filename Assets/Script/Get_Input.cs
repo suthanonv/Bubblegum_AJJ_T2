@@ -5,7 +5,7 @@ public class Get_Input : MonoBehaviour
 {
     private Input_handle _input_Handle;
     private Vector2Int direction;
-    [SerializeField] private InputActionReference playerControls; 
+    [SerializeField] private InputActionReference playerControls;
 
     private void Awake()
     {
@@ -22,8 +22,8 @@ public class Get_Input : MonoBehaviour
 
         playerControls.action.Enable();
 
-        playerControls.action.performed += OnMove;  
-        playerControls.action.canceled += OnMove;   
+        playerControls.action.performed += OnMove;
+        playerControls.action.canceled += OnMove;
     }
 
     private void OnDisable()
@@ -46,14 +46,11 @@ public class Get_Input : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        _input_Handle?.Calling(direction);
-    }
 
     private void OnMove(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
         direction = new Vector2Int(Mathf.RoundToInt(input.x), Mathf.RoundToInt(input.y));
+        _input_Handle?.Calling(direction);
     }
 }

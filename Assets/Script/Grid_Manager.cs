@@ -6,6 +6,11 @@ public class Grid_Manager : MonoBehaviour
 
     private Func<Vector2Int, Tile> _getTile;
 
+    private void Start()
+    {
+        Set_Func_Delegate(this.GetComponent<TileManager>().GetTile);
+    }
+
     // Set the delegate function
     public void Set_Func_Delegate(Func<Vector2Int, Tile> get_Tile_Func)
     {

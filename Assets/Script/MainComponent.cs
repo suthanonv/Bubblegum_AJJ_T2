@@ -10,8 +10,29 @@ public class MainComponent : MonoBehaviour
     private void Start()
     {
         grid = FindAnyObjectByType<Grid_Manager>();
-        IntilizedTile();
+        InitializeTile();
     }
+    void InitializeTile()
+    {
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(
+            this.transform.position,
+            this.transform.localScale,
+            0,
+            transform.up,
+            10f,
+            LayerMask.NameToLayer("Tile") // Ensure `layerMask` is defined properly
+        );
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.gameObject.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
+            {
+                tile.SetOccupiedObject(this);
+
+            }
+        }
+    }
+
 
     public void Position(Vector2Int newPosition)
     {
@@ -25,10 +46,6 @@ public class MainComponent : MonoBehaviour
         grid.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(this);
     }
 
-    void IntilizedTile()
-    {
-
-    }
 
     Func<GameObject> GetGameObject = () => null;
 
