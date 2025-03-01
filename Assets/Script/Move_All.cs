@@ -15,7 +15,7 @@ public class Move_All : MonoBehaviour
 
         SetUp(Direction, moveGum, out Validmove, out Invalidmove);
         Move_vallid_Move(Direction, Validmove);
-
+        Interact_invalid_move(Direction, Invalidmove);
     }
 
 
@@ -50,21 +50,32 @@ public class Move_All : MonoBehaviour
         }
     }
 
-    void Check_invalid_move(Vector2Int Direction, List<I_move> InValid_Move)
+    void Interact_invalid_move(Vector2Int Direction, List<I_move> InValid_Move)
     {
         HashSet<I_move> validMoveSet = new HashSet<I_move>(InValid_Move);
 
         foreach (I_move move in validMoveSet)
         {
             Tile moveTile = gridManager.Get_Tile(Direction + move.PremovePosition(Direction));
+            MainComponent Main_Move_Object = gridManager.Get_Tile(move.PremovePosition(Direction)).GetComponent<MoveAble_Tile>().OcupiedObject;
+
 
             if (moveTile.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
-
+                if (tile.OcupiedObject.TryFindComponent_InChild<Object_Interactable>(out Object_Interactable Interact_Obj))
+                {
+                    Interact_Obj.Interact(Main_Move_Object);
+                }
             }
             else
             {
-
+                if (moveTile.TryGetComponent<MainComponent>(out MainComponent main))
+                {
+                    if (main.TryFindComponent_InChild<Object_Interactable>(out Object_Interactable Interact_Obj))
+                    {
+                        Interact_Obj.Interact(Main_Move_Object);
+                    }
+                }
             }
         }
     }

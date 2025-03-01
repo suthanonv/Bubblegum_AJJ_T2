@@ -6,11 +6,13 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
 
     public override void OnEnterState()
     {
+        base.OnEnterState();
         Debug.Log($"{state} enter");
     }
 
     public override void OnExitState()
     {
+        base.OnExitState();
         Debug.Log($"{state} Exit");
 
     }

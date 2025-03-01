@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour, I_move
 
         if (Moving_to_tile.OcupiedObject == null) return mainComponent.currentTile_index + Direction;
 
-        I_move Moveable_Object = Moving_to_tile.OcupiedObject.GetComponent<I_move>();
+        I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
 
         if (Moveable_Object == null) return mainComponent.currentTile_index;
 
@@ -45,7 +45,8 @@ public class Movement : MonoBehaviour, I_move
 
         Tile PreMove_Tile = gridManager.Get_Tile(PremovePosition(Direction));
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
-        I_move Moveable_Object = Moving_to_tile.OcupiedObject.GetComponent<I_move>();
+        I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
+
 
         foreach (I_move i in Moveable_Object.Canmove(Direction))
         {
