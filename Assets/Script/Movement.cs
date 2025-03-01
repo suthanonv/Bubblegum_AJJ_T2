@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour, I_move
 
 
 
+
     public Vector2Int PremovePosition(Vector2Int Direction)
     {
 
@@ -43,8 +44,13 @@ public class Movement : MonoBehaviour, I_move
 
         if (PremovePosition(Direction) == mainComponent.currentTile_index) return Move;
 
+        Move.Add(this);
+
         Tile PreMove_Tile = gridManager.Get_Tile(PremovePosition(Direction));
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
+
+        if (Moving_to_tile.OcupiedObject == null) return Move;
+
         I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
 
 
@@ -53,7 +59,6 @@ public class Movement : MonoBehaviour, I_move
             Move.Add(i);
         }
 
-        Move.Add(this);
 
         return Move;
     }

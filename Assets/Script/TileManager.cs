@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class TileManager : MonoBehaviour
     float tileSize;
     [SerializeField]
     GameObject[,] tileIndex = null;
-    void Start()
+    void Awake()
     {
         Tile[] tiles = GetComponentsInChildren<Tile>();
         foreach (Tile t in tiles)
@@ -31,16 +31,18 @@ public class TileManager : MonoBehaviour
         }
         allXcoordinate = allXcoordinate.OrderBy(x => x).ToList();
         allYcoordinate = allYcoordinate.OrderBy(y => y).ToList();
-        tileIndex = new GameObject[allXcoordinate.Count,allYcoordinate.Count];
+        tileIndex = new GameObject[allXcoordinate.Count, allYcoordinate.Count];
         tileSize = allXcoordinate[1] - allXcoordinate[0];
         foreach (GameObject tile in allTile)
         {
             tileIndex[(int)((tile.transform.position.x - allXcoordinate[0]) / tileSize), (int)((tile.transform.position.y - allYcoordinate[0]) / tileSize)] = tile;
+            tile.GetComponent<Tile>().Tile_Index = new Vector2Int((int)((tile.transform.position.x - allXcoordinate[0]) / tileSize), (int)((tile.transform.position.y - allYcoordinate[0]) / tileSize));
         }
     }
 
     public Tile GetTile(Vector2Int index)
     {
+
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 }

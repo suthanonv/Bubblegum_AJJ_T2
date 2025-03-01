@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class Move_All : MonoBehaviour
 {
@@ -42,6 +43,12 @@ public class Move_All : MonoBehaviour
     }
     void Move_vallid_Move(Vector2Int Direction, List<I_move> Valid_Move)
     {
+        if (Direction == new Vector2Int(0, 1)) Valid_Move = Valid_Move.OrderByDescending(i => i.PremovePosition(Direction).y).ToList();
+        else if (Direction == new Vector2Int(0, -1)) Valid_Move = Valid_Move.OrderBy(i => i.PremovePosition(Direction).y).ToList();
+        else if (Direction == new Vector2Int(1, 0)) Valid_Move = Valid_Move.OrderByDescending(i => i.PremovePosition(Direction).x).ToList();
+        else if (Direction == new Vector2Int(-1, 0)) Valid_Move = Valid_Move.OrderBy(i => i.PremovePosition(Direction).x).ToList();
+
+
         HashSet<I_move> validMoveSet = new HashSet<I_move>(Valid_Move);
 
         foreach (I_move move in validMoveSet)
@@ -69,12 +76,9 @@ public class Move_All : MonoBehaviour
             }
             else
             {
-                if (moveTile.TryGetComponent<MainComponent>(out MainComponent main))
+                if (moveTile.gameObject.TryGetComponent<Object_Interactable>(out Object_Interactable Interact_Obj))
                 {
-                    if (main.TryFindComponent_InChild<Object_Interactable>(out Object_Interactable Interact_Obj))
-                    {
-                        Interact_Obj.Interact(Main_Move_Object);
-                    }
+                    Interact_Obj.Interact(Main_Move_Object);
                 }
             }
         }

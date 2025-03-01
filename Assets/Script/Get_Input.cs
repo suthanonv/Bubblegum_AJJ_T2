@@ -34,6 +34,12 @@ public class Get_Input : MonoBehaviour
             playerControls.action.canceled -= OnMove;
             playerControls.action.Disable();
         }
+
+    }
+
+    private void Update()
+    {
+        _input_Handle?.Calling(direction);
     }
 
     void SetUp()
@@ -51,6 +57,6 @@ public class Get_Input : MonoBehaviour
     {
         Vector2 input = context.ReadValue<Vector2>();
         direction = new Vector2Int(Mathf.RoundToInt(input.x), Mathf.RoundToInt(input.y));
-        _input_Handle?.Calling(direction);
+        Debug.Log(direction);
     }
 }

@@ -42,6 +42,10 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         StateToBehave[newstate].OnEnterState();
     }
 
+    public GameObject Get_Specific_State_Object(T state)
+    {
+        return StateToBehave[state].gameObject;
+    }
 
     public GameObject GetState_Object()
     {

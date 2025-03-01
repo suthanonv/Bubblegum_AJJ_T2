@@ -7,10 +7,15 @@ public class MainComponent : MonoBehaviour
 
     Grid_Manager grid;
 
-    private void Start()
+
+    private void Awake()
     {
         grid = FindAnyObjectByType<Grid_Manager>();
-        InitializeTile();
+
+    }
+    private void Start()
+    {
+        Invoke("InitializeTile", 0.1f);
     }
     void InitializeTile()
     {
@@ -27,8 +32,10 @@ public class MainComponent : MonoBehaviour
         {
             if (hit.collider.gameObject.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
-                tile.SetOccupiedObject(this);
-
+                Debug.Log($"{tile.name} : {tile.Tile_Index}");
+                currentTile_index = tile.Tile_Index;
+                Position(currentTile_index);
+                return;
             }
         }
     }
@@ -36,11 +43,9 @@ public class MainComponent : MonoBehaviour
 
     public void Position(Vector2Int newPosition)
     {
-        if (currentTile_index != new Vector2Int(-10, -10))
-        {
-            grid.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
 
-        }
+        grid.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
+
         currentTile_index = newPosition;
         this.transform.position = grid.Get_Tile(newPosition).transform.position;
         grid.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(this);

@@ -19,6 +19,6 @@ public class Grid_Manager : MonoBehaviour
 
     public Tile Get_Tile(Vector2Int index)
     {
-        return _getTile(index);
+        return _getTile?.Invoke(index);
     }
 }
