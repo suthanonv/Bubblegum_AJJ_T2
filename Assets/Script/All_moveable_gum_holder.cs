@@ -7,7 +7,7 @@ public class All_moveable_gum_holder : MonoBehaviour
     List<Movement> moveableGums = new List<Movement>();
 
 
-    Action<Vector2, List<Movement>> moveCall;
+    Action<Vector2Int, List<Movement>> moveCall;
 
     private void Start()
     {
@@ -26,11 +26,11 @@ public class All_moveable_gum_holder : MonoBehaviour
 
     public void MoveAll_call(Vector2Int Direction)
     {
-        moveCall.Invoke(Direction, moveableGums);
+        moveCall?.Invoke(Direction, moveableGums);
     }
 
 
-    public void Add_moveCall_Listener(Action<Vector2, List<Movement>> newFunc)
+    public void Add_moveCall_Listener(Action<Vector2Int, List<Movement>> newFunc)
     {
         moveCall += newFunc;
     }

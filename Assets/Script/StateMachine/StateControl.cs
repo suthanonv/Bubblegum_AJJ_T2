@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+[RequireComponent(typeof(MainComponent))]
 public class StateControl<T> : MonoBehaviour where T : Enum
 {
     [SerializeField] T _currentState;
@@ -13,6 +14,7 @@ public class StateControl<T> : MonoBehaviour where T : Enum
     {
         SetUp();
         IntilizedState();
+        this.GetComponent<MainComponent>().GameObject_SetFunc(GetState_Object);
     }
 
     void SetUp()
@@ -46,21 +48,6 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         return StateToBehave[_currentState].gameObject;
     }
 
-    public bool TryFindComponent_InChild<A>(GameObject obj, out A Component) where A : class
-    {
-        Component = null;
-
-        foreach (Transform i in obj.transform)
-        {
-            if (i.TryGetComponent<A>(out A _component))
-            {
-                Component = _component;
-                return true;
-            }
-        }
-
-        return false;
-    }
 
 
 }
