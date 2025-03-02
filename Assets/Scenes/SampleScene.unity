@@ -896,7 +896,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888294f35e6c0ac43b1f1eec50fec6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControls: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  playerControls:
+    m_Name: Player Controls
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 235f848e-909c-451f-83cf-355307f86e31
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  initialDelay: 0.5
+  repeatRate: 0.7
 --- !u!4 &440510812
 Transform:
   m_ObjectHideFlags: 0

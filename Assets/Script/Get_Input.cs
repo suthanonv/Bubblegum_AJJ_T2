@@ -11,8 +11,8 @@ public class Get_Input : MonoBehaviour
     private Coroutine repeatCoroutine;
 
     [SerializeField] private InputAction playerControls;
-    [SerializeField] private float initialDelay = 0.3f; 
-    [SerializeField] private float repeatRate = 0.1f; 
+    [SerializeField] private float initialDelay = 0.5f; 
+    [SerializeField] private float repeatRate = 0.7f; 
 
     private void Awake()
     {
