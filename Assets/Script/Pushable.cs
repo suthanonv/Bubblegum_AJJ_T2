@@ -21,7 +21,7 @@ public class Pushable : MonoBehaviour, I_move
 
     public Vector2Int PremovePosition(Vector2Int Direction)
     {
-
+        if (attached_obj.Get_List().Count == 0) return mainComponent.currentTile_index;
         Tile PreMove_Tile = gridManager.Get_Tile(mainComponent.currentTile_index + Direction);
 
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
