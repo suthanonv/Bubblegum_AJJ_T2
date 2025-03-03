@@ -19,16 +19,35 @@ public class Pushable : MonoBehaviour, I_move
         attached_obj = this.GetComponent<Attach_Moveable_List>();
     }
 
-    public Vector2Int PremovePosition(Vector2Int Direction)
+    public Vector2Int PremovePosition(Vector2Int Direction, HashSet<I_move> visited = null)
     {
-        if (attached_obj.Get_List().Count == 0) return mainComponent.currentTile_index;
+        // Initialize visited set if it's the first call
+        if (visited == null)
+            visited = new HashSet<I_move>();
+
+        // If this object has already been processed, return its default position to prevent infinite recursion
+        if (visited.Contains(this))
+            return mainComponent.currentTile_index;
+
+        // Mark this object as visited
+        visited.Add(this);
+
+        // If no attached objects, return current position
+        if (attached_obj.Get_List().Count == 0)
+            return mainComponent.currentTile_index;
+
         Tile PreMove_Tile = gridManager.Get_Tile(mainComponent.currentTile_index + Direction);
+
+        if (PreMove_Tile == null) // Safety check in case the tile does not exist
+            return mainComponent.currentTile_index;
 
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
 
-        if (Moving_to_tile == null) return mainComponent.currentTile_index;
+        if (Moving_to_tile == null)
+            return mainComponent.currentTile_index;
 
-        if (Moving_to_tile.OcupiedObject == null) return mainComponent.currentTile_index + Direction;
+        if (Moving_to_tile.OcupiedObject == null)
+            return mainComponent.currentTile_index + Direction;
 
         I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
 
@@ -37,14 +56,27 @@ public class Pushable : MonoBehaviour, I_move
             if (attached.isElementInList(attached_obj))
             {
                 Debug.Log($"{gameObject.name} : enter state");
-                if (attached.Get_Move.PremovePosition(Direction) == attached.Get_Move.DefaultPosition()) return mainComponent.currentTile_index;
+
+                // Prevent infinite recursion using visited set
+                if (visited.Contains(attached.Get_Move))
+                    return mainComponent.currentTile_index;
+
+                if (attached.Get_Move.PremovePosition(Direction, visited) == attached.Get_Move.DefaultPosition())
+                    return mainComponent.currentTile_index;
+
                 return mainComponent.currentTile_index + Direction;
             }
         }
 
-        if (Moveable_Object == null) return mainComponent.currentTile_index;
+        if (Moveable_Object == null)
+            return mainComponent.currentTile_index;
 
-        if (Moveable_Object.PremovePosition(Direction) == Moveable_Object.DefaultPosition()) return mainComponent.currentTile_index;
+        // Prevent infinite recursion using visited set
+        if (visited.Contains(Moveable_Object))
+            return mainComponent.currentTile_index;
+
+        if (Moveable_Object.PremovePosition(Direction, visited) == Moveable_Object.DefaultPosition())
+            return mainComponent.currentTile_index;
 
         return mainComponent.currentTile_index + Direction;
     }

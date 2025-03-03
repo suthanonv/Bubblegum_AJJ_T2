@@ -50,7 +50,7 @@ public class MainComponent : MonoBehaviour
         currentTile_index = newPosition;
         Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
 
-        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.1f));
+        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.05f));
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(this);
     }
 

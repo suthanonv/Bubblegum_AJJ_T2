@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour, I_move
     public Vector2 DefaultPosition() => mainComponent.currentTile_index;
 
 
-    public Vector2Int PremovePosition(Vector2Int Direction)
+    public Vector2Int PremovePosition(Vector2Int Direction, HashSet<I_move> visited = null)
     {
 
 
@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour, I_move
 
     public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
+
+
         List<I_move> Move = new List<I_move>();
 
         if (PremovePosition(Direction) == mainComponent.currentTile_index) return Move;

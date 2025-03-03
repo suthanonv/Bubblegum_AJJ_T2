@@ -14,16 +14,21 @@ public class Attach_Moveable_List : MonoBehaviour
         Reset_List();
     }
 
-    public void Reset_List()
+    public void Reset_List(HashSet<Attach_Moveable_List> visited = null)
     {
+        if (visited == null)
+            visited = new HashSet<Attach_Moveable_List>();
+
+        if (visited.Contains(this)) return;
+
         if (push_able_List.Count > 0)
         {
             foreach (Attach_Moveable_List i_Move in push_able_List)
             {
+                visited.Add(i_Move);
                 i_Move.Reset_List();
             }
         }
-
 
 
         push_able_List = new List<Attach_Moveable_List>();
