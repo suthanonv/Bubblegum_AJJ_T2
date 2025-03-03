@@ -112,8 +112,11 @@ public class Get_Input : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log($"Button {context} Pressed");
-            _input_Handle?.CallingButtonPressed(); 
+            string buttonName = context.control.name; 
+            //Debug.Log($"Button Pressed: {buttonName}");
+            _input_Handle?.CallingButtonPressed(buttonName); 
         }
     }
+
+
 }

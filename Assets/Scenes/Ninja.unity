@@ -731,6 +731,7 @@ GameObject:
   - component: {fileID: 369972401}
   - component: {fileID: 369972399}
   - component: {fileID: 369972398}
+  - component: {fileID: 369972402}
   m_Layer: 0
   m_Name: InputHandler
   m_TagString: Untagged
@@ -771,7 +772,7 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 2D Vector
+    - m_Name: WASD
       m_Id: 4362568b-61dd-4e50-a9f1-07100c11d8cc
       m_Path: 2DVector
       m_Interactions: 
@@ -811,7 +812,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Player Movement Controls
       m_Flags: 8
-    - m_Name: 2D Vector
+    - m_Name: ArrowKey
       m_Id: c3d5454f-6d49-40ec-963d-3545a80426fb
       m_Path: 2DVector
       m_Interactions: 
@@ -868,6 +869,30 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Player Button Pressed
       m_Flags: 0
+    - m_Name: 
+      m_Id: dba1e43a-a9e5-4499-b50e-dd08c8329198
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 9a890cd5-2fe8-451f-92f7-6d4c21daa0b8
+      m_Path: <Keyboard>/z
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 65249ec0-4bc2-4c6e-90b1-4f02eac0cbd5
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
     m_Flags: 0
 --- !u!4 &369972401
 Transform:
@@ -885,6 +910,18 @@ Transform:
   - {fileID: 1736495006}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &369972402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369972397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11611c076febe743b34fbedf4fec736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &374411463
 GameObject:
   m_ObjectHideFlags: 0
