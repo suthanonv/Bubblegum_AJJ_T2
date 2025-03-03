@@ -42,6 +42,21 @@ public class Attach_Moveable_List : MonoBehaviour
             if (push_able_List.Contains(move)) continue;
             push_able_List.Add(move);
         }
+
+        List<Attach_Moveable_List> allList = new List<Attach_Moveable_List>();
+
+        foreach (Attach_Moveable_List i in push_able_List)
+        {
+            foreach (Attach_Moveable_List e in push_able_List)
+            {
+                allList.Add(e);
+            }
+        }
+
+        foreach (Attach_Moveable_List e in push_able_List)
+        {
+            e.Set_Same_list(push_able_List);
+        }
     }
 
     public List<Attach_Moveable_List> Get_List() => push_able_List;
@@ -50,5 +65,10 @@ public class Attach_Moveable_List : MonoBehaviour
     public bool isElementInList(Attach_Moveable_List i)
     {
         return push_able_List.Contains(i);
+    }
+
+    public void Set_Same_list(List<Attach_Moveable_List> Origin)
+    {
+        push_able_List = Origin;
     }
 }

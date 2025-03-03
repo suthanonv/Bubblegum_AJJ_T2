@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour, I_move
         return mainComponent.currentTile_index + Direction;
     }
 
-    public List<I_move> Canmove(Vector2Int Direction)
+    public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
         List<I_move> Move = new List<I_move>();
 

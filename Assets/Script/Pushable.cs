@@ -44,61 +44,64 @@ public class Pushable : MonoBehaviour, I_move
 
         if (Moveable_Object == null) return mainComponent.currentTile_index;
 
-        if (Moveable_Object.Canmove(Direction).Count == 0) return mainComponent.currentTile_index;
+        if (Moveable_Object.PremovePosition(Direction) == Moveable_Object.DefaultPosition()) return mainComponent.currentTile_index;
 
         return mainComponent.currentTile_index + Direction;
     }
 
-    public List<I_move> Canmove(Vector2Int Direction)
+    public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
+        // If visited is null (first call), create a new HashSet
+        if (visited == null)
+            visited = new HashSet<I_move>();
+
+        // If this object has already been processed, return an empty list to prevent infinite loops
+        if (visited.Contains(this))
+            return new List<I_move>();
+
+        // Mark this object as visited
+        visited.Add(this);
+
         List<I_move> Move = new List<I_move>();
-
-
 
         if (PremovePosition(Direction) == mainComponent.currentTile_index) return Move;
         if (attached_obj.Get_List().Count == 0) return Move;
-
-
-
 
         foreach (Attach_Moveable_List i in attached_obj.Get_List())
         {
             if (attached_obj == i) continue;
             if (i.Get_Move.PremovePosition(Direction) == i.Get_Move.DefaultPosition()) return Move;
-            else
-            {
-                Move.Add(i.Get_Move);
-                if (gridManager.Get_Tile(i.Get_Move.PremovePosition(Direction)).TryGetComponent<MoveAble_Tile>(out MoveAble_Tile move_tile))
-                {
-                    if (move_tile.OcupiedObject != null)
-                    {
-                        if (move_tile.OcupiedObject.TryFindComponent_InChild<I_move>(out I_move move))
 
-                            foreach (I_move e in move.Canmove(Direction))
-                            {
-                                Move.Add(e);
-                            }
+            Move.Add(i.Get_Move);
+
+            if (gridManager.Get_Tile(i.Get_Move.PremovePosition(Direction))
+                .TryGetComponent<MoveAble_Tile>(out MoveAble_Tile move_tile))
+            {
+                if (move_tile.OcupiedObject != null)
+                {
+                    if (move_tile.OcupiedObject.TryFindComponent_InChild<I_move>(out I_move move))
+                    {
+                        // Use the visited set to prevent infinite recursion
+                        Move.AddRange(move.Canmove(Direction, visited));
                     }
                 }
             }
         }
 
-
-        if (gridManager.Get_Tile(PremovePosition(Direction)).TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
+        if (gridManager.Get_Tile(PremovePosition(Direction))
+            .TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
         {
             if (tile.OcupiedObject != null)
             {
                 if (tile.OcupiedObject.TryFindComponent_InChild<I_move>(out I_move move))
-
-                    foreach (I_move i in move.Canmove(Direction))
-                    {
-                        Move.Add(i);
-                    }
+                {
+                    // Use the visited set to prevent infinite recursion
+                    Move.AddRange(move.Canmove(Direction, visited));
+                }
             }
         }
 
         Move.Add(this);
-
         Debug.Log("Success");
         return Move;
     }

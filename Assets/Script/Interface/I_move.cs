@@ -6,7 +6,7 @@ public interface I_move
 
     Vector2 DefaultPosition();
 
-    List<I_move> Canmove(Vector2Int Direction);
+    List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null);
 
     void Move(Vector2Int Direction);
 
