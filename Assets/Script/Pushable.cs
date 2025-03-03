@@ -10,6 +10,9 @@ public class Pushable : MonoBehaviour, I_move
     Grid_Manager gridManager;
 
     Attach_Moveable_List attached_obj;
+
+    public Vector2 DefaultPosition() => mainComponent.currentTile_index;
+
     void Start()
     {
         gridManager = FindAnyObjectByType<Grid_Manager>();
@@ -45,7 +48,6 @@ public class Pushable : MonoBehaviour, I_move
 
         if (PremovePosition(Direction) == mainComponent.currentTile_index) return Move;
         if (attached_obj.Get_List().Count == 0) return Move;
-        Debug.Log("pass two");
 
 
 
@@ -53,19 +55,10 @@ public class Pushable : MonoBehaviour, I_move
         foreach (Attach_Moveable_List i in attached_obj.Get_List())
         {
             if (attached_obj == i) continue;
-            List<I_move> Move_List = i.Get_Move.Canmove(Direction);
+            if (i.Get_Move.PremovePosition(Direction) == DefaultPosition()) return Move;
 
-            if (Move_List.Count == 0)
-            {
-                return Move;
-            }
-            else
-            {
-                foreach (I_move attaced_obj in Move_List)
-                {
-                    Move.Add(attaced_obj);
-                }
-            }
+            Move.Add(i.Get_Move);
+
         }
 
 

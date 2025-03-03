@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour, I_move
     }
 
 
+    public Vector2 DefaultPosition() => mainComponent.currentTile_index;
 
 
     public Vector2Int PremovePosition(Vector2Int Direction)
