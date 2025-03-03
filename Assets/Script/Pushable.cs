@@ -65,7 +65,22 @@ public class Pushable : MonoBehaviour, I_move
         {
             if (attached_obj == i) continue;
             if (i.Get_Move.PremovePosition(Direction) == i.Get_Move.DefaultPosition()) return Move;
-            Move.Add(i.Get_Move);
+            else
+            {
+                Move.Add(i.Get_Move);
+                if (gridManager.Get_Tile(i.Get_Move.PremovePosition(Direction)).TryGetComponent<MoveAble_Tile>(out MoveAble_Tile move_tile))
+                {
+                    if (move_tile.OcupiedObject != null)
+                    {
+                        if (move_tile.OcupiedObject.TryFindComponent_InChild<I_move>(out I_move move))
+
+                            foreach (I_move e in move.Canmove(Direction))
+                            {
+                                Move.Add(e);
+                            }
+                    }
+                }
+            }
         }
 
 
