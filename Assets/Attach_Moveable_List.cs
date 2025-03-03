@@ -45,4 +45,10 @@ public class Attach_Moveable_List : MonoBehaviour
     }
 
     public List<Attach_Moveable_List> Get_List() => push_able_List;
+
+
+    public bool isElementInList(Attach_Moveable_List i)
+    {
+        return push_able_List.Contains(i);
+    }
 }

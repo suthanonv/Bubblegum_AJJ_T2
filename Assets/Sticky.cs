@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Object_Interactable))]
 public class Sticky : MonoBehaviour
 {
     Object_Interactable Object_Interactable;
