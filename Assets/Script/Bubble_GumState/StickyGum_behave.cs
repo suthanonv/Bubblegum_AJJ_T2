@@ -15,7 +15,13 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
     {
         base.OnExitState();
         FindAnyObjectByType<All_Sticky_Gum_Holder>().Remove_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
-
+        foreach (Transform i in this.transform)
+        {
+            if (i.gameObject.TryGetComponent<Attach_Moveable_List>(out Attach_Moveable_List attached))
+            {
+                attached.Reset_List();
+            }
+        }
         Debug.Log($"{state} Exit");
 
     }

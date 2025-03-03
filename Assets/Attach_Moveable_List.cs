@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Attach_Moveable_List : MonoBehaviour
 {
-    List<Attach_Moveable_List> push_able_List = new List<Attach_Moveable_List>();
-
-    I_move this_move;
+    private List<Attach_Moveable_List> push_able_List = new List<Attach_Moveable_List>();
+    private I_move this_move;
 
     public I_move Get_Move => this_move;
+
     private void Start()
     {
         this_move = GetComponent<I_move>();
@@ -19,19 +19,26 @@ public class Attach_Moveable_List : MonoBehaviour
         if (visited == null)
             visited = new HashSet<Attach_Moveable_List>();
 
-        if (visited.Contains(this)) return;
+        // Prevent infinite recursion in case of cyclic references
+        if (visited.Contains(this))
+            return;
 
-        if (push_able_List.Count > 0)
+        visited.Add(this);
+
+        // Create a copy to prevent modifying the list while iterating
+        List<Attach_Moveable_List> tempList = new List<Attach_Moveable_List>(push_able_List);
+
+        // Process children first
+        foreach (Attach_Moveable_List i_Move in tempList)
         {
-            foreach (Attach_Moveable_List i_Move in push_able_List)
+            foreach (Attach_Moveable_List i_ in i_Move.Get_List())
             {
-                visited.Add(i_Move);
-                i_Move.Reset_List();
+                i_.Reset_List(visited);
             }
         }
 
-
-        push_able_List = new List<Attach_Moveable_List>();
+        // Now reset the list
+        push_able_List.Clear();
         push_able_List.Add(this);
     }
 
@@ -44,28 +51,23 @@ public class Attach_Moveable_List : MonoBehaviour
     {
         foreach (Attach_Moveable_List move in newList)
         {
-            if (push_able_List.Contains(move)) continue;
-            push_able_List.Add(move);
-        }
-
-        List<Attach_Moveable_List> allList = new List<Attach_Moveable_List>();
-
-        foreach (Attach_Moveable_List i in push_able_List)
-        {
-            foreach (Attach_Moveable_List e in push_able_List)
+            if (!push_able_List.Contains(move))
             {
-                allList.Add(e);
+                push_able_List.Add(move);
             }
         }
 
+        // Instead of redundant loops, just make a copy of push_able_List
+        List<Attach_Moveable_List> allList = new List<Attach_Moveable_List>(push_able_List);
+
+        // Update each item with the new list
         foreach (Attach_Moveable_List e in push_able_List)
         {
-            e.Set_Same_list(push_able_List);
+            e.Set_Same_list(allList);
         }
     }
 
-    public List<Attach_Moveable_List> Get_List() => push_able_List;
-
+    public List<Attach_Moveable_List> Get_List() => new List<Attach_Moveable_List>(push_able_List);
 
     public bool isElementInList(Attach_Moveable_List i)
     {
@@ -74,6 +76,7 @@ public class Attach_Moveable_List : MonoBehaviour
 
     public void Set_Same_list(List<Attach_Moveable_List> Origin)
     {
-        push_able_List = Origin;
+        // Copy the list instead of sharing the same reference
+        push_able_List = new List<Attach_Moveable_List>(Origin);
     }
 }
