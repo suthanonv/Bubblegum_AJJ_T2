@@ -42,7 +42,7 @@ public class TileManager : MonoBehaviour
 
     public Tile GetTile(Vector2Int index)
     {
-
+        Debug.Log(index);
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 }
