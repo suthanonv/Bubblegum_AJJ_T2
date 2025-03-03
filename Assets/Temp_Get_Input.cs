@@ -24,14 +24,14 @@ public class Temp_Get_Input : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             direction = new Vector2Int(0, 1);
-            _input_Handle.Calling(direction);
+            _input_Handle.CallingMovement(direction);
             return;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             direction = new Vector2Int(0, -1);
 
-            _input_Handle.Calling(direction);
+            _input_Handle.CallingMovement(direction);
             return;
         }
         if (Input.GetKeyDown(KeyCode.D))
@@ -39,7 +39,7 @@ public class Temp_Get_Input : MonoBehaviour
             direction = new Vector2Int(1, 0);
 
 
-            _input_Handle.Calling(direction);
+            _input_Handle.CallingMovement(direction);
             return;
         }
         if (Input.GetKeyDown(KeyCode.A))
@@ -47,7 +47,7 @@ public class Temp_Get_Input : MonoBehaviour
 
             direction = new Vector2Int(-1, 0);
 
-            _input_Handle.Calling(direction);
+            _input_Handle.CallingMovement(direction);
             return;
         }
     }

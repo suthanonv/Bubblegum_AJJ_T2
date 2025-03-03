@@ -9,55 +9,13 @@ public class Get_Input : MonoBehaviour
     [SerializeField] private float inputCooldown = 0.25f;
     private float nextMoveTime = 0f;
 
-    [SerializeField] private InputAction playerControls;
+    [SerializeField] private InputAction playerMovementControls;
+    [SerializeField] private InputAction playerButtonPressed;
 
     private void Awake()
     {
         SetUp();
     }
-
-    private void OnEnable()
-    {
-        if (playerControls == null)
-        {
-            Debug.LogError("PlayerControls is not assigned in Get_Input.");
-            return;
-        }
-
-        playerControls.Enable();
-
-
-
-        playerControls.performed -= PerformedMove;
-        playerControls.canceled -= PerformedMove;
-
-        playerControls.performed += PerformedMove;
-        playerControls.canceled += PerformedMove;
-
-        Debug.Log("OnMove successfully subscribed.");
-    }
-
-    private void OnDisable()
-    {
-        if (playerControls != null)
-        {
-            playerControls.performed -= PerformedMove;
-            playerControls.canceled -= PerformedMove;
-            playerControls.Disable();
-        }
-    }
-
-    private void Update()
-    {
-        if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
-        {
-            direction = queuedDirection;
-            _input_Handle?.Calling(direction);
-            nextMoveTime = Time.time + inputCooldown;
-            Debug.Log($"Direction updated: {direction}");
-        }
-    }
-
     void SetUp()
     {
         _input_Handle = GetComponent<Input_handle>();
@@ -67,6 +25,65 @@ public class Get_Input : MonoBehaviour
             Debug.LogError("Input_handle component is missing from " + gameObject.name);
         }
     }
+
+    private void OnEnable()
+    {
+        if (playerMovementControls == null || playerButtonPressed == null)
+        {
+            Debug.LogError("PlayerControls or ButtonPressed is not assigned in Get_Input.");
+            return;
+        }
+
+        playerMovementControls.Enable();
+        playerButtonPressed.Enable();
+
+        playerMovementControls.performed -= PerformedMove;
+        playerMovementControls.canceled -= PerformedMove;
+        playerButtonPressed.performed -= PerformedButtonPress;
+
+        playerMovementControls.performed += PerformedMove;
+        playerMovementControls.canceled += PerformedMove;
+        playerButtonPressed.performed += PerformedButtonPress;
+
+        Debug.Log("OnMove and Button Press successfully subscribed.");
+    }
+
+    private void OnDisable()
+    {
+        if (playerMovementControls != null)
+        {
+            playerMovementControls.performed -= PerformedMove;
+            playerMovementControls.canceled -= PerformedMove;
+            playerMovementControls.Disable();
+        }
+
+        if (playerButtonPressed != null)
+        {
+            playerButtonPressed.performed -= PerformedButtonPress;
+            playerButtonPressed.Disable();
+        }
+    }
+
+    private void Update()
+    {
+        /*if (playerMovementControls != null)
+        {
+            Vector2 debugInput = playerMovementControls.ReadValue<Vector2>();
+            if (debugInput != Vector2.zero)
+            {
+                Debug.Log($"Raw Input Detected: {debugInput}");
+            }
+        }*/
+
+        if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
+        {
+            direction = queuedDirection;
+            _input_Handle?.CallingMovement(direction);
+            nextMoveTime = Time.time + inputCooldown;
+            Debug.Log($"Direction updated: {direction}");
+        }
+    }
+
 
     public void PerformedMove(InputAction.CallbackContext context)
     {
@@ -88,6 +105,15 @@ public class Get_Input : MonoBehaviour
         {
             queuedDirection = Vector2Int.zero;
             Debug.Log("Input Canceled, queued direction reset.");
+        }
+    }
+
+    public void PerformedButtonPress(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log($"Button {context} Pressed");
+            _input_Handle?.CallingButtonPressed(); 
         }
     }
 }

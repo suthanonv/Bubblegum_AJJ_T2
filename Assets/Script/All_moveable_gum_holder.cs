@@ -11,7 +11,7 @@ public class All_moveable_gum_holder : MonoBehaviour
 
     private void Start()
     {
-        FindAnyObjectByType<Input_handle>().AddListener(MoveAll_call);
+        FindAnyObjectByType<Input_handle>().AddMovementListener(MoveAll_call);
     }
 
     public void Add_movealbe(Movement move)

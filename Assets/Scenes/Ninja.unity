@@ -762,57 +762,113 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888294f35e6c0ac43b1f1eec50fec6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControls:
-    m_Name: Player Controls
+  inputCooldown: 0.25
+  playerMovementControls:
+    m_Name: Player Movement Controls
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: e1410579-b720-4b1e-a4c2-ed5fc7a704d0
+    m_Id: 99fc17b4-759a-451d-8017-c985c492388c
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 2D Vector
-      m_Id: 1513b76b-64de-4e9c-a0d6-85eafde8386e
+      m_Id: 4362568b-61dd-4e50-a9f1-07100c11d8cc
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Player Controls
+      m_Action: Player Movement Controls
       m_Flags: 4
     - m_Name: up
-      m_Id: b0b99258-3157-4f99-bbee-a7f17b1a0c7f
+      m_Id: 2fd77ac5-1468-46fc-9252-a75fbf90c875
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Player Controls
+      m_Action: Player Movement Controls
       m_Flags: 8
     - m_Name: down
-      m_Id: 886f814c-29a6-4bab-a141-e8459a665dae
+      m_Id: 22277e42-d1c3-4156-95f5-72a7d9ec2034
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Player Controls
+      m_Action: Player Movement Controls
       m_Flags: 8
     - m_Name: left
-      m_Id: 0988aef7-f316-4827-8b74-bbbe47938e96
+      m_Id: 73a1185f-c792-4a96-bbdb-8b38c91a822c
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Player Controls
+      m_Action: Player Movement Controls
       m_Flags: 8
     - m_Name: right
-      m_Id: 0f947165-1103-447b-8942-2b4b595c5707
+      m_Id: cdb27d7a-cd1e-4b00-8ec3-9dc06adf478d
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Player Controls
+      m_Action: Player Movement Controls
+      m_Flags: 8
+    - m_Name: 2D Vector
+      m_Id: c3d5454f-6d49-40ec-963d-3545a80426fb
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement Controls
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 54f4639a-0188-4d52-b8a3-78dc0d358d72
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement Controls
+      m_Flags: 8
+    - m_Name: down
+      m_Id: cdb43256-2af2-46c2-b825-5775161fea51
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement Controls
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 1c426138-17a2-4aca-b2ed-f59a32e3734e
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement Controls
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 6989619d-f2c1-43bb-87bc-75f791338e24
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Movement Controls
       m_Flags: 8
     m_Flags: 0
-  initialDelay: 0.5
-  repeatRate: 0.7
+  playerButtonPressed:
+    m_Name: Player Button Pressed
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b1bdd2d0-47f5-4c37-bebf-c75999305035
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a7e13605-4fe8-4595-a41f-1cca4a782d76
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
+    m_Flags: 0
 --- !u!4 &369972401
 Transform:
   m_ObjectHideFlags: 0
@@ -1305,6 +1361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511422135}
   - component: {fileID: 511422136}
+  - component: {fileID: 511422137}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -1343,6 +1400,18 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &511422137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511422134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &542053089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1497,6 +1566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 572264188}
   - component: {fileID: 572264189}
+  - component: {fileID: 572264190}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -1535,6 +1605,18 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &572264190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572264187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &756220902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 970353750}
   - component: {fileID: 970353751}
+  - component: {fileID: 970353752}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -1910,6 +1993,18 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &970353752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970353749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &988539515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,6 +2340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1102101045}
   - component: {fileID: 1102101046}
+  - component: {fileID: 1102101047}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -2283,6 +2379,18 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1102101047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102101044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1109315149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3939,6 +4047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1854350888}
   - component: {fileID: 1854350889}
+  - component: {fileID: 1854350890}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -3977,6 +4086,18 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1854350890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854350887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860044524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,6 +4108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1860044525}
   - component: {fileID: 1860044526}
+  - component: {fileID: 1860044527}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -4025,6 +4147,18 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1860044527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860044524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1874473333
 PrefabInstance:
   m_ObjectHideFlags: 0
