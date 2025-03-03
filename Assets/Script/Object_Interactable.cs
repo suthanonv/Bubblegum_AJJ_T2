@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class Object_Interactable : MonoBehaviour
 {
-    UnityEvent<MainComponent> OnInteract = new UnityEvent<MainComponent>();
+    [SerializeField] UnityEvent<MainComponent> OnInteract = new UnityEvent<MainComponent>();
 
     public void On_interact_AddListerner(UnityAction<MainComponent> new_Action)
     {

@@ -25,12 +25,12 @@ public class Move_All : MonoBehaviour
         validMove = new List<I_move>();
         InvalidMove = new List<I_move>();
 
-        foreach (Movement m in moveGum)
+        foreach (I_move m in moveGum)
         {
             List<I_move> moves = m.Canmove(Direction);
             if (moves.Count > 0)
             {
-                foreach (Movement movement in moves)
+                foreach (I_move movement in moves)
                 {
                     validMove.Add(movement);
                 }

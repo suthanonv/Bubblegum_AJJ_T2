@@ -2,14 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Attach_Moveable_List))]
 public class Pushable : MonoBehaviour, I_move
 {
     [SerializeField] MainComponent mainComponent;
     [SerializeField] UnityEvent OnfinishMove = new UnityEvent();
     Grid_Manager gridManager;
+
+    Attach_Moveable_List attached_obj;
     void Start()
     {
         gridManager = FindAnyObjectByType<Grid_Manager>();
+        attached_obj = this.GetComponent<Attach_Moveable_List>();
     }
 
     public Vector2Int PremovePosition(Vector2Int Direction)
@@ -37,6 +41,50 @@ public class Pushable : MonoBehaviour, I_move
     {
         List<I_move> Move = new List<I_move>();
 
+
+
+        if (PremovePosition(Direction) == mainComponent.currentTile_index) return Move;
+        if (attached_obj.Get_List().Count == 0) return Move;
+        Debug.Log("pass two");
+
+
+
+
+        foreach (Attach_Moveable_List i in attached_obj.Get_List())
+        {
+            if (attached_obj == i) continue;
+            List<I_move> Move_List = i.Get_Move.Canmove(Direction);
+
+            if (Move_List.Count == 0)
+            {
+                return Move;
+            }
+            else
+            {
+                foreach (I_move attaced_obj in Move_List)
+                {
+                    Move.Add(attaced_obj);
+                }
+            }
+        }
+
+
+        if (gridManager.Get_Tile(PremovePosition(Direction)).TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
+        {
+            if (tile.OcupiedObject != null)
+            {
+                if (tile.OcupiedObject.TryFindComponent_InChild<I_move>(out I_move move))
+
+                    foreach (I_move i in move.Canmove(Direction))
+                    {
+                        Move.Add(i);
+                    }
+            }
+        }
+
+        Move.Add(this);
+
+        Debug.Log("Success");
         return Move;
     }
 

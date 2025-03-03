@@ -10,6 +10,7 @@ public class MainComponent : MonoBehaviour
 
     private void Awake()
     {
+        GetGameObject = () => this.gameObject;
         grid = FindAnyObjectByType<Grid_Manager>();
 
     }
@@ -53,6 +54,10 @@ public class MainComponent : MonoBehaviour
 
 
     Func<GameObject> GetGameObject = () => null;
+
+
+
+
 
     public void GameObject_SetFunc(Func<GameObject> newFunc)
     {

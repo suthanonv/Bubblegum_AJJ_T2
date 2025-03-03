@@ -6,8 +6,8 @@ public class Get_Input : MonoBehaviour
     private Input_handle _input_Handle;
     private Vector2Int direction = Vector2Int.zero;
     private Vector2Int queuedDirection = Vector2Int.zero;
-    [SerializeField]private float inputCooldown = 0.25f; 
-    private float nextMoveTime = 0f; 
+    [SerializeField] private float inputCooldown = 0.25f;
+    private float nextMoveTime = 0f;
 
     [SerializeField] private InputAction playerControls;
 
@@ -25,6 +25,8 @@ public class Get_Input : MonoBehaviour
         }
 
         playerControls.Enable();
+
+
 
         playerControls.performed -= PerformedMove;
         playerControls.canceled -= PerformedMove;
@@ -51,7 +53,7 @@ public class Get_Input : MonoBehaviour
         {
             direction = queuedDirection;
             _input_Handle?.Calling(direction);
-            nextMoveTime = Time.time + inputCooldown; 
+            nextMoveTime = Time.time + inputCooldown;
             Debug.Log($"Direction updated: {direction}");
         }
     }
