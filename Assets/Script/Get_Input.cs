@@ -3,47 +3,52 @@ using UnityEngine.InputSystem;
 
 public class Get_Input : MonoBehaviour
 {
-    private Input_handle _input_Handle;
+    private Input_handle _inputHandle;
     private Vector2Int direction = Vector2Int.zero;
     private Vector2Int queuedDirection = Vector2Int.zero;
+
     [SerializeField] private float inputCooldown = 0.25f;
     private float nextMoveTime = 0f;
 
-    [SerializeField] private InputAction playerControls;
+    [SerializeField] private InputAction playerMovementControls;
+    [SerializeField] private InputAction playerButtonPressed;
 
     private void Awake()
     {
-        SetUp();
+        Initialize();
     }
 
     private void OnEnable()
     {
-        if (playerControls == null)
+        if (playerMovementControls == null || playerButtonPressed == null)
         {
-            Debug.LogError("PlayerControls is not assigned in Get_Input.");
+            Debug.LogError("Player movement or button input action is not assigned.");
             return;
         }
 
-        playerControls.Enable();
+        playerMovementControls.Enable();
+        playerButtonPressed.Enable();
 
+        playerMovementControls.performed += OnMovePerformed;
+        playerMovementControls.canceled += OnMovePerformed;
+        playerButtonPressed.performed += OnButtonPressed;
 
-
-        playerControls.performed -= PerformedMove;
-        playerControls.canceled -= PerformedMove;
-
-        playerControls.performed += PerformedMove;
-        playerControls.canceled += PerformedMove;
-
-        Debug.Log("OnMove successfully subscribed.");
+        //Debug.Log("Input actions successfully subscribed.");
     }
 
     private void OnDisable()
     {
-        if (playerControls != null)
+        if (playerMovementControls != null)
         {
-            playerControls.performed -= PerformedMove;
-            playerControls.canceled -= PerformedMove;
-            playerControls.Disable();
+            playerMovementControls.performed -= OnMovePerformed;
+            playerMovementControls.canceled -= OnMovePerformed;
+            playerMovementControls.Disable();
+        }
+
+        if (playerButtonPressed != null)
+        {
+            playerButtonPressed.performed -= OnButtonPressed;
+            playerButtonPressed.Disable();
         }
     }
 
@@ -52,42 +57,47 @@ public class Get_Input : MonoBehaviour
         if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
         {
             direction = queuedDirection;
-            _input_Handle?.Calling(direction);
+            _inputHandle?.CallingMovement(direction);
             nextMoveTime = Time.time + inputCooldown;
-            Debug.Log($"Direction updated: {direction}");
+            //Debug.Log($"Direction updated: {direction}");
         }
     }
 
-    void SetUp()
+    private void Initialize()
     {
-        _input_Handle = GetComponent<Input_handle>();
+        _inputHandle = GetComponent<Input_handle>();
 
-        if (_input_Handle == null)
+        if (_inputHandle == null)
         {
-            Debug.LogError("Input_handle component is missing from " + gameObject.name);
+            Debug.LogError($"Input_handle component is missing from {gameObject.name}");
         }
     }
 
-    public void PerformedMove(InputAction.CallbackContext context)
+    private void OnMovePerformed(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
 
         if (context.performed)
         {
-            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
-            {
-                queuedDirection = new Vector2Int(input.x > 0 ? 1 : -1, 0);
-            }
-            else
-            {
-                queuedDirection = new Vector2Int(0, input.y > 0 ? 1 : -1);
-            }
-            Debug.Log($"Queued Direction: {queuedDirection}");
+            queuedDirection = Mathf.Abs(input.x) > Mathf.Abs(input.y)
+                ? new Vector2Int(input.x > 0 ? 1 : -1, 0)
+                : new Vector2Int(0, input.y > 0 ? 1 : -1);
+
+            //Debug.Log($"Queued Direction: {queuedDirection}");
         }
         else if (context.canceled)
         {
             queuedDirection = Vector2Int.zero;
-            Debug.Log("Input Canceled, queued direction reset.");
+            //Debug.Log("Input canceled, queued direction reset.");
+        }
+    }
+
+    private void OnButtonPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            string buttonName = context.control.name;
+            _inputHandle?.CallingButtonPressed(buttonName);
         }
     }
 }
