@@ -1,17 +1,17 @@
 using System;
+using System.Collections;
 using UnityEngine;
-
 public class MainComponent : MonoBehaviour
 {
     public Vector2Int currentTile_index { get; private set; } = new Vector2Int(-10, -10);
 
-    Grid_Manager grid;
+    Grid_Manager grid_Manager;
 
 
     private void Awake()
     {
         GetGameObject = () => this.gameObject;
-        grid = FindAnyObjectByType<Grid_Manager>();
+        grid_Manager = FindAnyObjectByType<Grid_Manager>();
 
     }
     private void Start()
@@ -45,11 +45,29 @@ public class MainComponent : MonoBehaviour
     public void Position(Vector2Int newPosition)
     {
 
-        grid.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
-
+        grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
+        Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
-        this.transform.position = grid.Get_Tile(newPosition).transform.position;
-        grid.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(this);
+        Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
+
+        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.1f));
+        grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(this);
+    }
+
+
+
+    IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            transform.position = Vector2.Lerp(_current_pos, _future_pos, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = _future_pos; // Ensure it reaches the exact position at the end
     }
 
 

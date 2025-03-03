@@ -32,8 +32,17 @@ public class Pushable : MonoBehaviour, I_move
 
         I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
 
-        if (Moveable_Object == null) return mainComponent.currentTile_index;
+        if (Moving_to_tile.OcupiedObject.TryFindComponent_InChild<Attach_Moveable_List>(out Attach_Moveable_List attached))
+        {
+            if (attached.isElementInList(attached_obj))
+            {
+                Debug.Log($"{gameObject.name} : enter state");
+                if (attached.Get_Move.PremovePosition(Direction) == attached.Get_Move.DefaultPosition()) return mainComponent.currentTile_index;
+                return mainComponent.currentTile_index + Direction;
+            }
+        }
 
+        if (Moveable_Object == null) return mainComponent.currentTile_index;
 
         if (Moveable_Object.Canmove(Direction).Count == 0) return mainComponent.currentTile_index;
 
@@ -55,10 +64,8 @@ public class Pushable : MonoBehaviour, I_move
         foreach (Attach_Moveable_List i in attached_obj.Get_List())
         {
             if (attached_obj == i) continue;
-            if (i.Get_Move.PremovePosition(Direction) == DefaultPosition()) return Move;
-
+            if (i.Get_Move.PremovePosition(Direction) == i.Get_Move.DefaultPosition()) return Move;
             Move.Add(i.Get_Move);
-
         }
 
 
