@@ -8,6 +8,8 @@ public class Attach_Moveable_List : MonoBehaviour
 
     public I_move Get_Move => this_move;
 
+
+
     private void Start()
     {
         this_move = GetComponent<I_move>();

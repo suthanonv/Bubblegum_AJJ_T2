@@ -12,7 +12,7 @@ public class Interact : MonoBehaviour
     }
     public void _Interact()
     {
-        Vector2Int CurrentPos = mainComponent.currentTile_index;
+        Vector2Int CurrentPos = mainComponent.Transform.currentTile_index;
 
 
         foreach (Vector2Int all_direct in All_Direction.Directions)

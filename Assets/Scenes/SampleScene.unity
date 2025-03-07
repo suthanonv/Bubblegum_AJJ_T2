@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 48742831}
   - component: {fileID: 48742830}
   - component: {fileID: 48742829}
+  - component: {fileID: 48742832}
   - component: {fileID: 48742828}
   m_Layer: 0
   m_Name: Bubble_Gum_state (2)
@@ -236,6 +237,18 @@ Transform:
   - {fileID: 1349343261}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &48742832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48742827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &56098805
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +317,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &62458855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -498,6 +517,7 @@ GameObject:
   - component: {fileID: 147031983}
   - component: {fileID: 147031982}
   - component: {fileID: 147031981}
+  - component: {fileID: 147031984}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -589,6 +609,18 @@ Transform:
   - {fileID: 164180580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &147031984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147031980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &164180579
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d465c2ea55f9e5340986a8b6f2ee333e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileSize: 1
 --- !u!4 &310745054
 Transform:
   m_ObjectHideFlags: 0
@@ -1321,6 +1352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &471316073 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3472027135309750284, guid: fdca67c8349fa5c4388b78e57c6bf542, type: 3}
@@ -1343,6 +1380,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &471316078
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1594,6 +1637,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,6 +1936,7 @@ GameObject:
   - component: {fileID: 703674184}
   - component: {fileID: 703674183}
   - component: {fileID: 703674182}
+  - component: {fileID: 703674185}
   - component: {fileID: 703674181}
   m_Layer: 0
   m_Name: Bubble_Gum_state (1)
@@ -1993,6 +2043,18 @@ Transform:
   - {fileID: 2134855471}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703674185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703674180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &704280432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2229,6 +2291,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &925752711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,6 +2705,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1007632056
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,6 +3561,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1229082730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,6 +3578,7 @@ GameObject:
   - component: {fileID: 1229082732}
   - component: {fileID: 1229082731}
   - component: {fileID: 1229082733}
+  - component: {fileID: 1229082735}
   - component: {fileID: 1229082734}
   m_Layer: 0
   m_Name: Bubble_Gum_state
@@ -3604,6 +3685,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1229082735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229082730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1293851969
 GameObject:
   m_ObjectHideFlags: 0
@@ -3789,6 +3882,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1322632439
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4457,6 +4556,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1474963564
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5002,6 +5107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1582952325
 GameObject:
   m_ObjectHideFlags: 0
@@ -5245,6 +5356,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1675509718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5545,6 +5662,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1745096068
 GameObject:
   m_ObjectHideFlags: 0
@@ -5640,6 +5763,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1757291281
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6376,6 +6505,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1892728449
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6566,6 +6701,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &1987012626
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6680,6 +6821,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425f2162e4035d4e9d7ff1e0584bb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2008055223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6881,6 +7028,7 @@ GameObject:
   - component: {fileID: 2126842719}
   - component: {fileID: 2126842718}
   - component: {fileID: 2126842717}
+  - component: {fileID: 2126842720}
   m_Layer: 0
   m_Name: Box (1)
   m_TagString: Untagged
@@ -6972,6 +7120,18 @@ Transform:
   - {fileID: 97658958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126842720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126842716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2134855470
 GameObject:
   m_ObjectHideFlags: 0

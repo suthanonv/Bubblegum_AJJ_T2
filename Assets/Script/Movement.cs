@@ -13,30 +13,30 @@ public class Movement : MonoBehaviour, I_move
     }
 
 
-    public Vector2 DefaultPosition() => mainComponent.currentTile_index;
+    public Vector2 DefaultPosition() => mainComponent.Transform.currentTile_index;
 
 
     public Vector2Int PremovePosition(Vector2Int Direction, HashSet<I_move> visited = null)
     {
 
 
-        Tile PreMove_Tile = gridManager.Get_Tile(mainComponent.currentTile_index + Direction);
+        Tile PreMove_Tile = gridManager.Get_Tile(mainComponent.Transform.currentTile_index + Direction);
 
 
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
 
-        if (Moving_to_tile == null) return mainComponent.currentTile_index;
+        if (Moving_to_tile == null) return mainComponent.Transform.currentTile_index;
 
-        if (Moving_to_tile.OcupiedObject == null) return mainComponent.currentTile_index + Direction;
+        if (Moving_to_tile.OcupiedObject == null) return mainComponent.Transform.currentTile_index + Direction;
 
         I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
 
-        if (Moveable_Object == null) return mainComponent.currentTile_index;
+        if (Moveable_Object == null) return mainComponent.Transform.currentTile_index;
 
 
-        if (Moveable_Object.Canmove(Direction).Count == 0) return mainComponent.currentTile_index;
+        if (Moveable_Object.Canmove(Direction).Count == 0) return mainComponent.Transform.currentTile_index;
 
-        return mainComponent.currentTile_index + Direction;
+        return mainComponent.Transform.currentTile_index + Direction;
     }
 
     public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour, I_move
 
         List<I_move> Move = new List<I_move>();
 
-        if (PremovePosition(Direction) == mainComponent.currentTile_index) return Move;
+        if (PremovePosition(Direction) == mainComponent.Transform.currentTile_index) return Move;
 
         Move.Add(this);
 
@@ -68,7 +68,7 @@ public class Movement : MonoBehaviour, I_move
 
     public void Move(Vector2Int Direction)
     {
-        mainComponent.Position(Direction + mainComponent.currentTile_index);
+        mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index);
         OnFinishMove();
     }
 
