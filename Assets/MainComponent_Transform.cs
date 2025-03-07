@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using UnityEngine;
-
 [RequireComponent(typeof(MainComponent_Transform))]
 public class MainComponent_Transform : MonoBehaviour
 {
@@ -46,7 +46,7 @@ public class MainComponent_Transform : MonoBehaviour
         }
     }
 
-    public void Position(Vector2Int newPosition)
+    public void Position(Vector2Int newPosition, Action OnFinishMove = null)
     {
 
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
@@ -54,11 +54,11 @@ public class MainComponent_Transform : MonoBehaviour
         currentTile_index = newPosition;
         Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
 
-        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.15f));
+        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.15f, OnFinishMove: OnFinishMove));
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
-    IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration)
+    IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration, Action OnFinishMove)
     {
         float elapsedTime = 0f;
 
@@ -69,7 +69,8 @@ public class MainComponent_Transform : MonoBehaviour
             yield return null;
         }
 
-        transform.position = _future_pos; // Ensure it reaches the exact position at the end
+        transform.position = _future_pos;
+        OnFinishMove?.Invoke();
     }
 
 }
