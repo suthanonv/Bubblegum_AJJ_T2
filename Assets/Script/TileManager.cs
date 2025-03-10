@@ -13,6 +13,15 @@ public class TileManager : MonoBehaviour
     GameObject[,] tileIndex = null;
     void Awake()
     {
+        if (tileIndex == null)
+        {
+            InitializeTiles();
+        }
+    }
+
+    [ContextMenu("InitializeTiles")]
+    void InitializeTiles()
+    {
         Tile[] tiles = GetComponentsInChildren<Tile>();
         foreach (Tile t in tiles)
         {
@@ -20,13 +29,13 @@ public class TileManager : MonoBehaviour
         }
         foreach (GameObject tile in allTile)
         {
-            if (!allXcoordinate.Contains(tile.transform.position.x))
+            if (!allXcoordinate.Contains(tile.transform.localPosition.x))
             {
-                allXcoordinate.Add(tile.transform.position.x);
+                allXcoordinate.Add(tile.transform.localPosition.x);
             }
-            if (!allYcoordinate.Contains(tile.transform.position.y))
+            if (!allYcoordinate.Contains(tile.transform.localPosition.y))
             {
-                allYcoordinate.Add(tile.transform.position.y);
+                allYcoordinate.Add(tile.transform.localPosition.y);
             }
         }
         allXcoordinate = allXcoordinate.OrderBy(x => x).ToList();
@@ -36,14 +45,21 @@ public class TileManager : MonoBehaviour
         tileSizeY = allYcoordinate[1] - allYcoordinate[0];
         foreach (GameObject tile in allTile)
         {
-            tileIndex[(int)((tile.transform.position.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.position.y - allYcoordinate[0]) / tileSizeY)] = tile;
-            tile.GetComponent<Tile>().Tile_Index = new Vector2Int((int)((tile.transform.position.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.position.y - allYcoordinate[0]) / tileSizeY));
+            tileIndex[(int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY)] = tile;
+            tile.GetComponent<Tile>().Tile_Index = new Vector2Int((int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY));
+            Debug.Log($"{tile.name} : {new Vector2Int((int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY))}");
+
         }
+    }
+    [ContextMenu("Reset Tile")]
+
+    private void Reset()
+    {
+        tileIndex = null;
     }
 
     public Tile GetTile(Vector2Int index)
     {
-        Debug.Log(index);
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 }

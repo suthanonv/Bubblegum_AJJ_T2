@@ -23,11 +23,19 @@ public class MainComponent_Transform : MonoBehaviour
     {
         Invoke("InitializeTile", 0.1f);
     }
+
+    [ContextMenu("InitializeTile")]
     void InitializeTile()
     {
+        if (grid_Manager == null)
+        {
+            grid_Manager = FindAnyObjectByType<Grid_Manager>();
+        }
+
+
         RaycastHit2D[] hits = Physics2D.BoxCastAll(
             this.transform.position,
-            this.transform.localScale,
+            new Vector2(0.1f, 0.1f),
             0,
             transform.up,
             10f,
@@ -46,21 +54,23 @@ public class MainComponent_Transform : MonoBehaviour
         }
     }
 
-    public void Position(Vector2Int newPosition, Action OnFinishMove = null)
+    public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
-
+        Debug.Log($"is Gird manager Null? {grid_Manager == null}");
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
         Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
 
-        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.15f, OnFinishMove: OnFinishMove));
+        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.15f, OnMove, OnFinishMove));
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
-    IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration, Action OnFinishMove)
+    IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration, Action OnMove, Action OnFinishMove)
     {
         float elapsedTime = 0f;
+
+        OnMove?.Invoke();
 
         while (elapsedTime < duration)
         {
