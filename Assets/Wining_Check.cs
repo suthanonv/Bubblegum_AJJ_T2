@@ -23,7 +23,10 @@ public class Wining_Check : MonoBehaviour
 
         foreach (var i in wining_tiles)
         {
-            if (i.IsWin == false) isWin = false; break;
+            if (i.IsWin == false)
+            {
+                isWin = false; break;
+            }
         }
 
 
