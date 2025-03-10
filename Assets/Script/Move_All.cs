@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,13 +11,14 @@ public class Move_All : MonoBehaviour
         this.GetComponent<All_moveable_gum_holder>().Add_moveCall_Listener(MoveAll);
         gridManager = FindAnyObjectByType<Grid_Manager>();
     }
-    public void MoveAll(Vector2Int Direction, List<Movement> moveGum)
+    public void MoveAll(Vector2Int Direction, List<Movement> moveGum, Action CallBack)
     {
         List<I_move> Validmove, Invalidmove;
 
         SetUp(Direction, moveGum, out Validmove, out Invalidmove);
         Move_vallid_Move(Direction, Validmove);
         Interact_invalid_move(Direction, Invalidmove);
+        CallBack?.Invoke();
     }
 
 

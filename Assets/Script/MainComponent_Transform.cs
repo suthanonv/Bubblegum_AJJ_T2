@@ -56,7 +56,6 @@ public class MainComponent_Transform : MonoBehaviour
 
     public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
-        Debug.Log($"is Gird manager Null? {grid_Manager == null}");
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;

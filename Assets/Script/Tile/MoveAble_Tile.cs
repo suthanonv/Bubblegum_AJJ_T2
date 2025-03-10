@@ -8,6 +8,22 @@ public class MoveAble_Tile : Tile
     [SerializeField] UnityEvent<MainComponent> OnExit;
 
 
+    private void Awake()
+    {
+        SetUp_Delegate();
+    }
+
+    void SetUp_Delegate()
+    {
+        foreach (var i in gameObject.GetComponents<Grid_Collider>())
+        {
+            OnEnter.AddListener(i.OnEnter);
+            OnExit.AddListener(i.OnExit);
+        }
+    }
+
+
+
     public void SetOccupiedObject(MainComponent _ocupiedObject)
     {
         this.OcupiedObject = _ocupiedObject;

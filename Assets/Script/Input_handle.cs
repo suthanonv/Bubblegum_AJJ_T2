@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class Input_handle : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class Input_handle : MonoBehaviour
         _input_action += action;
     }
 
-    public void AddButtonListener(System.Action<string> action) 
+    public void AddButtonListener(System.Action<string> action)
     {
         _buttonPressedAction += action;
     }
@@ -23,6 +22,6 @@ public class Input_handle : MonoBehaviour
 
     public void CallingButtonPressed(string buttonName)
     {
-        _buttonPressedAction?.Invoke(buttonName); 
+        _buttonPressedAction?.Invoke(buttonName);
     }
 }

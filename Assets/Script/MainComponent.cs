@@ -33,6 +33,7 @@ public class MainComponent : MonoBehaviour
     }
 
 
+    #region Find Component
     public bool TryFindComponent_InChild<A>(out A Component) where A : class
     {
         Component = null;
@@ -64,5 +65,5 @@ public class MainComponent : MonoBehaviour
         return _Component;
 
     }
-
+    #endregion
 }

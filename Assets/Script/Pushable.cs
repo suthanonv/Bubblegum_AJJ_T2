@@ -134,7 +134,6 @@ public class Pushable : MonoBehaviour, I_move
         }
 
         Move.Add(this);
-        Debug.Log("Success");
         return Move;
     }
 
