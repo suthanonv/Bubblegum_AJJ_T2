@@ -69,7 +69,6 @@ public class Movement : MonoBehaviour, I_move
     public void Move(Vector2Int Direction)
     {
         mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnFinishMove);
-        OnFinishMove();
     }
 
     void OnFinishMove()
