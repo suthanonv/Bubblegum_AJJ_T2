@@ -10,5 +10,5 @@ public interface I_move
 
     void Move(Vector2Int Direction);
 
-
+    void OnFinishMove();
 }

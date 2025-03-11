@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Movement_Assign))]
 public class Movement : MonoBehaviour, I_move
 {
     Grid_Manager gridManager;
@@ -71,7 +72,7 @@ public class Movement : MonoBehaviour, I_move
         mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnFinishMove);
     }
 
-    void OnFinishMove()
+    public void OnFinishMove()
     {
         OnfinishMove.Invoke();
     }

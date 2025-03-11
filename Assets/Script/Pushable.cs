@@ -142,7 +142,7 @@ public class Pushable : MonoBehaviour, I_move
         mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnFinishMove);
     }
 
-    void OnFinishMove()
+    public void OnFinishMove()
     {
         OnfinishMove.Invoke();
     }

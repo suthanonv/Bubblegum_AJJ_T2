@@ -21,9 +21,9 @@ public class Interact : MonoBehaviour
             {
                 if ((tile.OcupiedObject == null)) continue;
 
-                if (tile.OcupiedObject.FindComponnet_InChild<Area_interact>() == null) continue;
+                if (tile.OcupiedObject.FindComponnet_InChild<Area_interactable>() == null) continue;
 
-                tile.OcupiedObject.FindComponnet_InChild<Area_interact>().Interact();
+                tile.OcupiedObject.FindComponnet_InChild<Area_interactable>().Interact();
             }
         }
     }

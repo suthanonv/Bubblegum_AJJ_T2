@@ -47,7 +47,7 @@ public class TileManager : MonoBehaviour
         {
             tileIndex[(int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY)] = tile;
             tile.GetComponent<Tile>().Tile_Index = new Vector2Int((int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY));
-            Debug.Log($"{tile.name} : {new Vector2Int((int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY))}");
+            //Debug.Log($"{tile.name} : {new Vector2Int((int)((tile.transform.localPosition.x - allXcoordinate[0]) / tileSizeX), (int)((tile.transform.localPosition.y - allYcoordinate[0]) / tileSizeY))}");
 
         }
     }
