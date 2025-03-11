@@ -17,7 +17,7 @@ public class Un_Stick : MonoBehaviour
         foreach (StateControl<Bubble_Gum_State> i in copyList)
         {
             {
-                i.SetState(Bubble_Gum_State.Normle);
+                i.SetState(Bubble_Gum_State.Normal);
             }
         }
     }
