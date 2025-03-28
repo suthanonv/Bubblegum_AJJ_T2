@@ -14,7 +14,7 @@ public class SaveLevel : MonoBehaviour
         List<SaveObjectTile> allTiles = new List<SaveObjectTile>();
 
         allTiles.Add(new SaveObjectTile(new Vector2Int(0, 0), null, null));
-
+        Debug.Log(allTiles.Count);
         Level_data = new Level_ScriptableObject(allTiles);
     }
 

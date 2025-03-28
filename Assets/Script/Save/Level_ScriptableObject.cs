@@ -11,7 +11,7 @@ public class Level_ScriptableObject : ScriptableObject
 
     public List<SaveObjectTile> Level => _level;
 
-    public Level_ScriptableObject(List<SaveObjectTile> level)
+    public void Save(List<SaveObjectTile> level)
     {
         _level = level;
     }
