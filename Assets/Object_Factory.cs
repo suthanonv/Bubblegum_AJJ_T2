@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tile_Facotory : MonoBehaviour
+public class Object_Factory : MonoBehaviour
 {
-    [SerializeField] List<Tile_Type_class> tile_Type_Classes = new List<Tile_Type_class>();
+    [SerializeField] List<Object_Type_class> tile_Type_Classes = new List<Object_Type_class>();
 
     public Tile GetTilePrefeb(Tile runtimeTile)
     {
@@ -12,16 +12,16 @@ public class Tile_Facotory : MonoBehaviour
 
         foreach (var typeClass in tile_Type_Classes)
         {
-            if (CompareTileComponents(runtimeTile.gameObject, typeClass.TilePrefeb.gameObject))
+            if (CompareObjectComponents(runtimeTile.gameObject, typeClass.ObjectPrefeb.gameObject))
             {
-                return typeClass.TilePrefeb;
+                return typeClass.ObjectPrefeb;
             }
         }
 
         return null;
     }
 
-    private bool CompareTileComponents(GameObject obj1, GameObject obj2)
+    private bool CompareObjectComponents(GameObject obj1, GameObject obj2)
     {
         Component[] comps1 = obj1.GetComponentsInChildren<Component>(true);
         Component[] comps2 = obj2.GetComponentsInChildren<Component>(true);
@@ -43,10 +43,11 @@ public class Tile_Facotory : MonoBehaviour
     }
 }
 
+
 [System.Serializable]
-public class Tile_Type_class
+public class Object_Type_class
 {
-    public string TileType;
-    public Tile TilePrefeb;
+    public string ObjectType;
+    public Tile ObjectPrefeb;
 }
 
