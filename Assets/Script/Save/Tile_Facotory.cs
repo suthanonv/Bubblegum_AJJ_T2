@@ -47,6 +47,7 @@ public class Tile_Facotory : MonoBehaviour
 public class Tile_Type_class
 {
     public string TileType;
+    public int ID;
     public Tile TilePrefeb;
 }
 

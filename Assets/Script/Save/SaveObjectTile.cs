@@ -11,12 +11,11 @@ public class SaveObjectTile
     Vector2Int _tileIndex;
 
 
-    public Vector2Int TileIndexID { get { return _tileIndex; } }
+    public Vector2Int TileIndex { get { return _tileIndex; } }
     int _tileTypeID;
     public int Tile_TypeID { get { return _tileTypeID; } }
     int _ocupiedObjectID;
     public int OcupiedTileID { get { return _ocupiedObjectID; } }
-
 
     public SaveObjectTile(string name, Vector2Int tileindex, int TileTypeID, int objectOnTileID)
     {
