@@ -45,11 +45,11 @@ public class TileManager : MonoBehaviour, IInitialize
         }
         foreach (GameObject tile in allTile)
         {
-            if (!CheckContains(allXcoordinate,tile.transform.localPosition.x))
+            if (!CheckContains(allXcoordinate, tile.transform.localPosition.x))
             {
                 allXcoordinate.Add(tile.transform.localPosition.x);
             }
-            if (!CheckContains(allYcoordinate,tile.transform.localPosition.y))
+            if (!CheckContains(allYcoordinate, tile.transform.localPosition.y))
             {
                 allYcoordinate.Add(tile.transform.localPosition.y);
             }
@@ -82,7 +82,7 @@ public class TileManager : MonoBehaviour, IInitialize
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 
-    bool CheckContains(List<float> posList ,float pos)
+    bool CheckContains(List<float> posList, float pos)
     {
         bool contains = false;
         foreach (float t in posList)

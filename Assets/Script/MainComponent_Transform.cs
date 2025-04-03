@@ -24,7 +24,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         Initialize().Invoke(); // will fixing in the future
     }
 
-    public int InitializeLayer() => 1;
+    public int InitializeLayer() => 2;
     public Action Initialize()
     {
         Action action;

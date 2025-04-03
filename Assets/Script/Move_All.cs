@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public class Move_All : MonoBehaviour
+public class Move_All : MonoBehaviour, IInitialize
 {
     Grid_Manager gridManager;
 
@@ -11,6 +11,25 @@ public class Move_All : MonoBehaviour
         this.GetComponent<All_moveable_gum_holder>().Add_moveCall_Listener(MoveAll);
         gridManager = FindAnyObjectByType<Grid_Manager>();
     }
+
+
+    public int InitializeLayer() => 1;
+    public Action Initialize()
+    {
+        Action action;
+
+        action = () => { Setting(); };
+
+        return action;
+    }
+
+    void Setting()
+    {
+        this.GetComponent<All_moveable_gum_holder>().Add_moveCall_Listener(MoveAll);
+        gridManager = FindAnyObjectByType<Grid_Manager>();
+    }
+
+
     public void MoveAll(Vector2Int Direction, List<Movement> moveGum, Action CallBack)
     {
         List<I_move> Validmove, Invalidmove;
