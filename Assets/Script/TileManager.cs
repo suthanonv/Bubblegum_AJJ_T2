@@ -33,7 +33,7 @@ public class TileManager : MonoBehaviour, IInitialize
 
     void InitializeTiles()
     {
-        List<GameObject> allTile = new List<GameObject>();
+        allTile = new List<GameObject>();
         allXcoordinate = new List<float>();
         allYcoordinate = new List<float>();
 
@@ -44,11 +44,11 @@ public class TileManager : MonoBehaviour, IInitialize
         }
         foreach (GameObject tile in allTile)
         {
-            if (!allXcoordinate.Contains(tile.transform.localPosition.x))
+            if (!CheckContains(allXcoordinate,tile.transform.localPosition.x))
             {
                 allXcoordinate.Add(tile.transform.localPosition.x);
             }
-            if (!allYcoordinate.Contains(tile.transform.localPosition.y))
+            if (!CheckContains(allYcoordinate,tile.transform.localPosition.y))
             {
                 allYcoordinate.Add(tile.transform.localPosition.y);
             }
@@ -79,5 +79,18 @@ public class TileManager : MonoBehaviour, IInitialize
     {
         Debug.Log(tileIndex.Length);
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
+    }
+
+    bool CheckContains(List<float> posList ,float pos)
+    {
+        bool contains = false;
+        foreach (float t in posList)
+        {
+            if (Mathf.Approximately(t, pos))
+            {
+                contains = true; break;
+            }
+        }
+        return contains;
     }
 }
