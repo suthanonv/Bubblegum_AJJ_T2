@@ -6,8 +6,15 @@ public class LevelEditorInitializer : MonoBehaviour
 {
     [SerializeField] PrefabID prefabID;
     [SerializeField] GameObject canvas;
+    [SerializeField] GameObject canvas2;
     [SerializeField] GameObject GridManager;
     [SerializeField] GameObject ObjectFolder;
+    [SerializeField] GameObject InputHandler;
+
+    GameObject tileFolder;
+    GameObject Objectfolder;
+    GameObject IH;
+
     public TileSlot[,] tileSlots = null;
     public float tileSize;
     Vector2 startingPos;
@@ -39,8 +46,9 @@ public class LevelEditorInitializer : MonoBehaviour
     }
     public void CreateLevel()
     {
-        GameObject tileFolder = Instantiate(GridManager);
-        GameObject Objectfolder = Instantiate(ObjectFolder);
+        tileFolder = Instantiate(GridManager);
+        Objectfolder = Instantiate(ObjectFolder);
+        IH = Instantiate(InputHandler);
         foreach (var tile in tileSlots)
         {
             if (tile.gameObject.GetComponentInChildren<DraggablePrefab>() != null)
@@ -63,7 +71,15 @@ public class LevelEditorInitializer : MonoBehaviour
             }
         }
         canvas.SetActive(false);
+        canvas2.SetActive(true);
     }
 
-    
+    public void Return()
+    {
+        Destroy(tileFolder);
+        Destroy(Objectfolder);
+        Destroy(IH);
+        canvas.SetActive(true);
+        canvas2.SetActive(false);
+    }
 }
