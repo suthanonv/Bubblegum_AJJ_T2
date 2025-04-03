@@ -1777,8 +1777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe4dfe0857de344b9845d22e72017d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X: 3
-  Y: 3
+  X: 10
+  Y: 8
   TileSize: 1
   TileSlot: {fileID: 3214763681277431933, guid: 0ee3ce378e87ab64bade59e763c19834, type: 3}
   canvas: {fileID: 1144007950}
@@ -2222,6 +2222,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabID: {fileID: 2042635569}
   canvas: {fileID: 1144007946}
+  GridManager: {fileID: 6829389272263752354, guid: 332dabc490501ac489ea20d2bdfc2940, type: 3}
+  ObjectFolder: {fileID: 4624501488651645165, guid: d53d2191c54f39c44a3f46a441e05d64, type: 3}
   tileSize: 0
 --- !u!4 &2040899938
 Transform:

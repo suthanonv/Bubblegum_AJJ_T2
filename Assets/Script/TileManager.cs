@@ -33,6 +33,7 @@ public class TileManager : MonoBehaviour, IInitialize
 
     void InitializeTiles()
     {
+        tileIndex = null;
         allTile = new List<GameObject>();
         allXcoordinate = new List<float>();
         allYcoordinate = new List<float>();
