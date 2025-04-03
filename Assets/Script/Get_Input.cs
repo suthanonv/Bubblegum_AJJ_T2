@@ -54,13 +54,7 @@ public class Get_Input : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
-        {
-            direction = queuedDirection;
-            _inputHandle?.CallingMovement(direction);
-            nextMoveTime = Time.time + inputCooldown;
-            //Debug.Log($"Direction updated: {direction}");
-        }
+        inputBuffering();
     }
 
     private void Initialize()
@@ -98,6 +92,16 @@ public class Get_Input : MonoBehaviour
         {
             string buttonName = context.control.name;
             _inputHandle?.CallingButtonPressed(buttonName);
+        }
+    }
+    private void inputBuffering()
+    {
+        if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
+        {
+            direction = queuedDirection;
+            _inputHandle?.CallingMovement(direction);
+            nextMoveTime = Time.time + inputCooldown;
+            //Debug.Log($"Direction updated: {direction}");
         }
     }
 }

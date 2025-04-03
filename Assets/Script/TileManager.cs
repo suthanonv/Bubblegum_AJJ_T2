@@ -93,4 +93,12 @@ public class TileManager : MonoBehaviour, IInitialize
         }
         return contains;
     }
+    public bool IsValidTile(Vector2Int index)
+    {
+        return index.x >= 0 && index.y >= 0 &&
+               index.x < tileIndex.GetLength(0) &&
+               index.y < tileIndex.GetLength(1) &&
+               tileIndex[index.x, index.y] != null;
+    }
+
 }

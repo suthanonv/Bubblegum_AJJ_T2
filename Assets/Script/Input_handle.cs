@@ -4,6 +4,12 @@ public class Input_handle : MonoBehaviour
 {
     private System.Action<Vector2Int> _input_action;
     private System.Action<string> _buttonPressedAction;
+    private System.Action _registerStateAllCharacters;
+
+    public void AddRegisterStateListener(System.Action action)
+    {
+        _registerStateAllCharacters += action;
+    }
 
     public void AddMovementListener(System.Action<Vector2Int> action)
     {
@@ -17,9 +23,10 @@ public class Input_handle : MonoBehaviour
 
     public void CallingMovement(Vector2Int Direction)
     {
-
+        _registerStateAllCharacters?.Invoke(); 
         _input_action?.Invoke(Direction);
     }
+
 
     public void CallingButtonPressed(string buttonName)
     {

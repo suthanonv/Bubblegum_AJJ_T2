@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(MainComponent))]
 public class StateControl<T> : MonoBehaviour where T : Enum
 {
+    public T GetCurrentState() => _currentState;
     [SerializeField] T _currentState;
     Dictionary<T, StateBehaviour<T>> StateToBehave = new Dictionary<T, StateBehaviour<T>>();
 
