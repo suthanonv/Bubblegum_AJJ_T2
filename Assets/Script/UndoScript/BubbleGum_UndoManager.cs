@@ -9,13 +9,12 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     {
         public Vector2Int tileIndex;
         public Bubble_Gum_State state;
-
         public List<GameObject> attachedObjectList;
     }
 
-
     private MainComponent_Transform movementComponent;
     private Main_BubbleGumstate bubbleGumStateComponent;
+    [SerializeField]private Attach_Moveable_List attach_Moveable_List;
 
     public static List<BubbleGum_UndoManager> AllCharacters = new List<BubbleGum_UndoManager>();
 
@@ -35,12 +34,13 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     {
         movementComponent = GetComponent<MainComponent_Transform>();
         bubbleGumStateComponent = GetComponent<Main_BubbleGumstate>();
+        
 
         if (movementComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing MainComponent_Transform!");
-
         if (bubbleGumStateComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing Main_BubbleGumstate!");
+        
     }
 
     public void RegisterState()
@@ -51,16 +51,13 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
             return;
         }
 
-        var attachList = GetComponent<Attach_Moveable_List>()?.Get_List();
+        var fullGroup = attach_Moveable_List.Get_List();
         List<GameObject> attachedObjects = new List<GameObject>();
 
-        if (attachList != null)
+        foreach (var move in fullGroup)
         {
-            foreach (var move in attachList)
-            {
-                if (move != null && move.gameObject != this.gameObject)
-                    attachedObjects.Add(move.gameObject);
-            }
+            if (move != null)
+                attachedObjects.Add(move.gameObject);
         }
 
         var snapshot = new CharacterSnapshot
@@ -73,53 +70,55 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         base.RegisterState(snapshot);
     }
 
-
     public void Undo(Action OnMove = null, Action OnFinishMove = null)
     {
         if (UndoCount == 0) return;
 
         var snapshot = base.UndoState(GetCurrentSnapshot);
-        
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+
         bubbleGumStateComponent.SetState(snapshot.state);
-
-        if (snapshot.attachedObjectList == null || snapshot.attachedObjectList.Count == 0)
-            return;
-
         RestoreAttachment(snapshot.attachedObjectList);
+        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
     }
-
 
     public void Redo(Action OnMove = null, Action OnFinishMove = null)
     {
         if (RedoCount == 0) return;
 
         var snapshot = base.RedoState(GetCurrentSnapshot);
+
+        bubbleGumStateComponent.SetState(snapshot.state);
         RestoreAttachment(snapshot.attachedObjectList);
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-        bubbleGumStateComponent.SetState(snapshot.state);
-
-        if (snapshot.attachedObjectList == null || snapshot.attachedObjectList.Count == 0)
-            return;
-
-        RestoreAttachment(snapshot.attachedObjectList);
     }
-
 
     private CharacterSnapshot GetCurrentSnapshot()
     {
+        var group = attach_Moveable_List?.Get_List();
+        List<GameObject> attachedObjects = new List<GameObject>();
+
+        if (group != null)
+        {
+            foreach (var move in group)
+            {
+                if (move != null)
+                    attachedObjects.Add(move.gameObject);
+            }
+        }
+
         return new CharacterSnapshot
         {
             tileIndex = movementComponent.currentTile_index,
-            state = bubbleGumStateComponent.GetCurrentState()
+            state = bubbleGumStateComponent.GetCurrentState(),
+            attachedObjectList = attachedObjects
         };
     }
+
     private void RestoreAttachment(List<GameObject> previousAttachList)
     {
-        var selfAttach = GetComponent<Attach_Moveable_List>();
-        if (selfAttach == null) return;
+        if (previousAttachList == null || previousAttachList.Count == 0) return;
 
-        List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List> { selfAttach };
+        List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List>();
 
         foreach (var obj in previousAttachList)
         {
@@ -128,7 +127,11 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
                 attachMoveables.Add(attach);
         }
 
-        selfAttach.Add_New_Moveable(attachMoveables);
-    }
+        foreach (var item in attachMoveables)
+        {
+            item.Set_Same_list(attachMoveables);
+        }
 
+        Debug.Log($"[RestoreAttachment] Group restored with {attachMoveables.Count} objects");
+    }
 }

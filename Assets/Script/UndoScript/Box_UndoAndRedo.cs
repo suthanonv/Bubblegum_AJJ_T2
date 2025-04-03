@@ -8,9 +8,11 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
     public struct BoxSnapshot
     {
         public Vector2Int tileIndex;
+        public List<GameObject> attachedObjectList;
     }
 
     private MainComponent_Transform movementComponent;
+    [SerializeField]private Attach_Moveable_List attach_Moveable_List;
 
     public static List<Box_UndoAndRedo> AllBoxes = new List<Box_UndoAndRedo>();
 
@@ -29,22 +31,34 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
     private void Awake()
     {
         movementComponent = GetComponent<MainComponent_Transform>();
+        
 
         if (movementComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing MainComponent_Transform!");
+        
     }
 
     public void RegisterState()
     {
         if (movementComponent == null)
         {
-            Debug.LogWarning($"[{gameObject.name}] Box RegisterState failed — missing component.");
+            Debug.LogWarning($"[{gameObject.name}] RegisterState failed — Required component missing.");
             return;
+        }
+
+        var fullGroup = attach_Moveable_List.Get_List();
+        List<GameObject> attachedObjects = new List<GameObject>();
+
+        foreach (var move in fullGroup)
+        {
+            if (move != null)
+                attachedObjects.Add(move.gameObject);
         }
 
         var snapshot = new BoxSnapshot
         {
-            tileIndex = movementComponent.currentTile_index
+            tileIndex = movementComponent.currentTile_index,
+            attachedObjectList = attachedObjects
         };
 
         base.RegisterState(snapshot);
@@ -56,6 +70,7 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
 
         var snapshot = base.UndoState(GetCurrentSnapshot);
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        RestoreAttachment(snapshot.attachedObjectList);
     }
 
     public void Redo(Action OnMove = null, Action OnFinishMove = null)
@@ -64,13 +79,48 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
 
         var snapshot = base.RedoState(GetCurrentSnapshot);
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        RestoreAttachment(snapshot.attachedObjectList);
     }
 
-    private BoxSnapshot GetCurrentSnapshot()
+    private BoxSnapshot GetCurrentSnapshot() 
     {
+        var group = attach_Moveable_List?.Get_List();
+        List<GameObject> attachedObjects = new List<GameObject>();
+
+        if (group != null)
+        {
+            foreach (var move in group)
+            {
+                if (move != null)
+                    attachedObjects.Add(move.gameObject);
+            }
+        }
+
         return new BoxSnapshot
         {
-            tileIndex = movementComponent.currentTile_index
+            tileIndex = movementComponent.currentTile_index,
+            attachedObjectList = attachedObjects
         };
+    }
+
+    private void RestoreAttachment(List<GameObject> previousAttachList)
+    {
+        if (previousAttachList == null || previousAttachList.Count == 0) return;
+
+        List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List>();
+
+        foreach (var obj in previousAttachList)
+        {
+            var attach = obj?.GetComponent<Attach_Moveable_List>();
+            if (attach != null)
+                attachMoveables.Add(attach);
+        }
+
+        foreach (var item in attachMoveables)
+        {
+            item.Set_Same_list(attachMoveables);
+        }
+
+        Debug.Log($"[RestoreAttachment] Group restored with {attachMoveables.Count} objects");
     }
 }
