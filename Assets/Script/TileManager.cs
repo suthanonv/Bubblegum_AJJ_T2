@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-public class TileManager : MonoBehaviour
+public class TileManager : MonoBehaviour, IInitialize
 {
     List<GameObject> allTile = new List<GameObject>();
     List<float> allXcoordinate = new List<float> { };
@@ -19,9 +19,24 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("InitializeTiles")]
+
+    public int InitializeLayer() => 1;
+    public Action Initialize()
+    {
+        Action action;
+
+        action = () => { InitializeTiles(); };
+
+        return action;
+    }
+
+
     void InitializeTiles()
     {
+        List<GameObject> allTile = new List<GameObject>();
+        allXcoordinate = new List<float>();
+        allYcoordinate = new List<float>();
+
         Tile[] tiles = GetComponentsInChildren<Tile>();
         foreach (Tile t in tiles)
         {
@@ -55,11 +70,14 @@ public class TileManager : MonoBehaviour
 
     private void Reset()
     {
+        List<GameObject> allTile = new List<GameObject>();
+        allXcoordinate = new List<float>();
+        allYcoordinate = new List<float>();
         tileIndex = null;
     }
-
     public Tile GetTile(Vector2Int index)
     {
+        Debug.Log(tileIndex.Length);
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 }

@@ -1,8 +1,15 @@
 using System;
 using UnityEngine;
 
-public class Grid_Manager : MonoBehaviour
+public class Grid_Manager : MonoBehaviour, IInitialize
 {
+
+    public int InitializeLayer() => 0;
+    public Action Initialize()
+    {
+        Action action = () => { Set_Func_Delegate(this.GetComponent<TileManager>().GetTile); };
+        return action;
+    }
 
     private Func<Vector2Int, Tile> _getTile;
 

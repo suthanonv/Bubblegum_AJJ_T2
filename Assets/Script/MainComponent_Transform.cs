@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 [RequireComponent(typeof(MainComponent_Transform))]
-public class MainComponent_Transform : MonoBehaviour
+public class MainComponent_Transform : MonoBehaviour, IInitialize
 {
     public Vector2Int currentTile_index { get; private set; } = new Vector2Int(-10, -10);
     Grid_Manager grid_Manager;
@@ -21,18 +21,26 @@ public class MainComponent_Transform : MonoBehaviour
 
     private void Start()
     {
-        Invoke("InitializeTile", 0.1f);
+        Initialize().Invoke(); // will fixing in the future
     }
 
-    [ContextMenu("InitializeTile")]
-    void InitializeTile()
+    public int InitializeLayer() => 1;
+    public Action Initialize()
+    {
+        Action action;
+
+        action = () => { Invoke("InitializeTiles", 0.5f); };
+
+        return action;
+    }
+
+
+    public void InitializeTiles()
     {
         if (grid_Manager == null)
         {
             grid_Manager = FindAnyObjectByType<Grid_Manager>();
         }
-
-
         RaycastHit2D[] hits = Physics2D.BoxCastAll(
             this.transform.position,
             new Vector2(0.1f, 0.1f),
