@@ -25,7 +25,6 @@ public class Move_All : MonoBehaviour, IInitialize
 
     void Setting()
     {
-        this.GetComponent<All_moveable_gum_holder>().Add_moveCall_Listener(MoveAll);
         gridManager = FindAnyObjectByType<Grid_Manager>();
     }
 
@@ -72,8 +71,10 @@ public class Move_All : MonoBehaviour, IInitialize
 
         HashSet<I_move> validMoveSet = new HashSet<I_move>(Valid_Move);
 
+
         foreach (I_move move in validMoveSet)
         {
+
             move.Move(Direction);
         }
     }

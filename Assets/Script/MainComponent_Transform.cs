@@ -54,7 +54,6 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         {
             if (hit.collider.gameObject.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
-                Debug.Log($"{tile.name} : {tile.Tile_Index}");
                 currentTile_index = tile.Tile_Index;
                 Position(currentTile_index);
                 return;

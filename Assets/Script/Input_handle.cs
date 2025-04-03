@@ -17,6 +17,7 @@ public class Input_handle : MonoBehaviour
 
     public void CallingMovement(Vector2Int Direction)
     {
+
         _input_action?.Invoke(Direction);
     }
 
