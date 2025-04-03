@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BubbleGum_UndoManager : MonoBehaviour
+public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.CharacterSnapshot>
 {
+    [Serializable]
+    public struct CharacterSnapshot
+    {
+        public Vector2Int tileIndex;
+        public Bubble_Gum_State state;
 
-    private Stack<CharacterSnapshot> undoStack = new Stack<CharacterSnapshot>();
-    private Stack<CharacterSnapshot> redoStack = new Stack<CharacterSnapshot>();
+        public List<GameObject> attachedObjectList;
+    }
+
 
     private MainComponent_Transform movementComponent;
     private Main_BubbleGumstate bubbleGumStateComponent;
@@ -38,13 +43,6 @@ public class BubbleGum_UndoManager : MonoBehaviour
             Debug.LogError($"[{gameObject.name}] is missing Main_BubbleGumstate!");
     }
 
-    [Serializable]
-    private struct CharacterSnapshot
-    {
-        public Vector2Int tileIndex;
-        public Bubble_Gum_State state;
-    }
-
     public void RegisterState()
     {
         if (movementComponent == null || bubbleGumStateComponent == null)
@@ -53,63 +51,84 @@ public class BubbleGum_UndoManager : MonoBehaviour
             return;
         }
 
+        var attachList = GetComponent<Attach_Moveable_List>()?.Get_List();
+        List<GameObject> attachedObjects = new List<GameObject>();
+
+        if (attachList != null)
+        {
+            foreach (var move in attachList)
+            {
+                if (move != null && move.gameObject != this.gameObject)
+                    attachedObjects.Add(move.gameObject);
+            }
+        }
+
         var snapshot = new CharacterSnapshot
         {
             tileIndex = movementComponent.currentTile_index,
-            state = bubbleGumStateComponent.GetCurrentState()
+            state = bubbleGumStateComponent.GetCurrentState(),
+            attachedObjectList = attachedObjects
         };
 
-        undoStack.Push(snapshot);
-        redoStack.Clear();
-
-        //Debug.Log($"[{gameObject.name}] Registered state: {snapshot.tileIndex}, {snapshot.state}");
+        base.RegisterState(snapshot);
     }
 
-    public void UndoState(Action OnMove = null, Action OnFinishMove = null)
-    {
-        if (undoStack.Count == 0)
-        {
-            //Debug.LogWarning($"[{gameObject.name}] UndoState failed — Stack empty.");
-            return;
-        }
 
-        var currentSnapshot = new CharacterSnapshot
+    public void Undo(Action OnMove = null, Action OnFinishMove = null)
+    {
+        if (UndoCount == 0) return;
+
+        var snapshot = base.UndoState(GetCurrentSnapshot);
+        
+        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        bubbleGumStateComponent.SetState(snapshot.state);
+
+        if (snapshot.attachedObjectList == null || snapshot.attachedObjectList.Count == 0)
+            return;
+
+        RestoreAttachment(snapshot.attachedObjectList);
+    }
+
+
+    public void Redo(Action OnMove = null, Action OnFinishMove = null)
+    {
+        if (RedoCount == 0) return;
+
+        var snapshot = base.RedoState(GetCurrentSnapshot);
+        RestoreAttachment(snapshot.attachedObjectList);
+        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        bubbleGumStateComponent.SetState(snapshot.state);
+
+        if (snapshot.attachedObjectList == null || snapshot.attachedObjectList.Count == 0)
+            return;
+
+        RestoreAttachment(snapshot.attachedObjectList);
+    }
+
+
+    private CharacterSnapshot GetCurrentSnapshot()
+    {
+        return new CharacterSnapshot
         {
             tileIndex = movementComponent.currentTile_index,
             state = bubbleGumStateComponent.GetCurrentState()
         };
-
-        redoStack.Push(currentSnapshot);
-        var snapshot = undoStack.Pop();
-
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-        bubbleGumStateComponent.SetState(snapshot.state);
-
-       // Debug.Log($"[{gameObject.name}] Undo to Tile: {snapshot.tileIndex}, State: {snapshot.state}");
     }
-
-    public void RedoState(Action OnMove = null, Action OnFinishMove = null)
+    private void RestoreAttachment(List<GameObject> previousAttachList)
     {
-        if (redoStack.Count == 0)
+        var selfAttach = GetComponent<Attach_Moveable_List>();
+        if (selfAttach == null) return;
+
+        List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List> { selfAttach };
+
+        foreach (var obj in previousAttachList)
         {
-            //Debug.LogWarning($"[{gameObject.name}] RedoState failed — Stack empty.");
-            return;
+            var attach = obj?.GetComponent<Attach_Moveable_List>();
+            if (attach != null)
+                attachMoveables.Add(attach);
         }
 
-        var currentSnapshot = new CharacterSnapshot
-        {
-            tileIndex = movementComponent.currentTile_index,
-            state = bubbleGumStateComponent.GetCurrentState()
-        };
-
-        undoStack.Push(currentSnapshot);
-        var snapshot = redoStack.Pop();
-
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-        bubbleGumStateComponent.SetState(snapshot.state);
-
-        //Debug.Log($"[{gameObject.name}] Redo to Tile: {snapshot.tileIndex}, State: {snapshot.state}");
+        selfAttach.Add_New_Moveable(attachMoveables);
     }
-
 
 }
