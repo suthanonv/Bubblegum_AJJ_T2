@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class Get_Input : MonoBehaviour
 {
     private Input_handle _inputHandle;
-    private Vector2Int direction = Vector2Int.zero;
+    private Vector2Int _direction = Vector2Int.zero;
+    public Vector2Int direction => _direction;
+
     private Vector2Int queuedDirection = Vector2Int.zero;
 
     [SerializeField] private float inputCooldown = 0.25f;
@@ -82,7 +84,7 @@ public class Get_Input : MonoBehaviour
         else if (context.canceled)
         {
             queuedDirection = Vector2Int.zero;
-            //Debug.Log("Input canceled, queued direction reset.");
+            //Debug.Log("Input canceled, queued _direction reset.");
         }
     }
 
@@ -98,10 +100,10 @@ public class Get_Input : MonoBehaviour
     {
         if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
         {
-            direction = queuedDirection;
-            _inputHandle?.CallingMovement(direction);
+            _direction = queuedDirection;
+            _inputHandle?.CallingMovement(_direction);
             nextMoveTime = Time.time + inputCooldown;
-            //Debug.Log($"Direction updated: {direction}");
+            //Debug.Log($"Direction updated: {_direction}");
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.CharacterSnapshot>
@@ -10,7 +11,9 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         public Vector2Int tileIndex;
         public Bubble_Gum_State state;
         public List<GameObject> attachedObjectList;
+        public Vector2Int directionFrom; 
     }
+
 
     private MainComponent_Transform movementComponent;
     private Main_BubbleGumstate bubbleGumStateComponent;
@@ -43,18 +46,18 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         
     }
 
-    public void RegisterState()
+    public void RegisterState(Vector2Int direction)
     {
-        if (movementComponent == null || bubbleGumStateComponent == null)
+        if (movementComponent == null || bubbleGumStateComponent == null || attach_Moveable_List == null)
         {
             Debug.LogWarning($"[{gameObject.name}] RegisterState failed — Required component missing.");
             return;
         }
 
-        var fullGroup = attach_Moveable_List.Get_List();
+        var group = attach_Moveable_List.Get_List();
         List<GameObject> attachedObjects = new List<GameObject>();
 
-        foreach (var move in fullGroup)
+        foreach (var move in group)
         {
             if (move != null)
                 attachedObjects.Add(move.gameObject);
@@ -64,11 +67,13 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         {
             tileIndex = movementComponent.currentTile_index,
             state = bubbleGumStateComponent.GetCurrentState(),
-            attachedObjectList = attachedObjects
+            attachedObjectList = attachedObjects,
+            directionFrom = direction 
         };
 
         base.RegisterState(snapshot);
     }
+
 
     public void Undo(Action OnMove = null, Action OnFinishMove = null)
     {
@@ -78,8 +83,14 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
 
         bubbleGumStateComponent.SetState(snapshot.state);
         RestoreAttachment(snapshot.attachedObjectList);
+
+        // Wait For PunPun To Fix
+        //Vector2Int backDirection = snapshot.directionFrom;
+        //movementComponent.FaceDirection(backDirection); 
+
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
     }
+
 
     public void Redo(Action OnMove = null, Action OnFinishMove = null)
     {

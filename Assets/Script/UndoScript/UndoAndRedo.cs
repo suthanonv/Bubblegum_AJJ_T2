@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public abstract class UndoAndRedo<T> : MonoBehaviour
 {
     protected Stack<T> undoStack = new Stack<T>();
@@ -50,4 +51,8 @@ public abstract class UndoAndRedo<T> : MonoBehaviour
 
     public int UndoCount => undoStack.Count;
     public int RedoCount => redoStack.Count;
+
+
+   
+
 }

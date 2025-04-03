@@ -1,8 +1,11 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UndoAndRedoController : MonoBehaviour
 {
     private Input_handle inputHandle;
+    private Get_Input get_input;
     private BubbleGum_UndoManager bubblegum_undoManager;
     private Box_UndoAndRedo box_UndoAndRedo;
 
@@ -36,7 +39,7 @@ public class UndoAndRedoController : MonoBehaviour
         }
         foreach (var character in Box_UndoAndRedo.AllBoxes)
         {
-            character.Undo();
+            character.Redo();
         }
     }
     
@@ -44,7 +47,7 @@ public class UndoAndRedoController : MonoBehaviour
     {
         foreach (var character in BubbleGum_UndoManager.AllCharacters)
         {
-            character.RegisterState();
+            character.RegisterState(get_input.direction);
         }
         foreach (var character in Box_UndoAndRedo.AllBoxes)
         {
