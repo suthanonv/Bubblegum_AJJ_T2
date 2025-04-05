@@ -12,6 +12,7 @@ public class UndoAndRedoController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        get_input = GetComponent<Get_Input>();
         inputHandle = GetComponent<Input_handle>();
         bubblegum_undoManager = GetComponent<BubbleGum_UndoManager>();
         box_UndoAndRedo = GetComponent<Box_UndoAndRedo>();
