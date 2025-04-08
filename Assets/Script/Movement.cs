@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour, I_move
 {
     Grid_Manager gridManager;
     [SerializeField] MainComponent mainComponent;
+    [SerializeField] UnityEvent OnMoveing = new UnityEvent();
+
     [SerializeField] UnityEvent OnfinishMove = new UnityEvent();
     private void Start()
     {
@@ -69,11 +71,16 @@ public class Movement : MonoBehaviour, I_move
 
     public void Move(Vector2Int Direction)
     {
-        mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnFinishMove);
+        mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnMove, OnFinishMove);
     }
 
     public void OnFinishMove()
     {
         OnfinishMove.Invoke();
+    }
+
+    void OnMove()
+    {
+        OnMoveing.Invoke();
     }
 }
