@@ -8,7 +8,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     Grid_Manager grid_Manager;
 
     MainComponent main;
-
+    Direction _currentDirection;
     private void Awake()
     {
         grid_Manager = FindAnyObjectByType<Grid_Manager>();
@@ -63,6 +63,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
     public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
+        SetRotation(currentTile_index, newPosition);
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
@@ -72,6 +73,14 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
+    void SetRotation(Vector2Int OldPos, Vector2Int NewPos)
+    {
+
+        Vector2Int Direction = NewPos - OldPos;
+        _currentDirection = Vector2IntToDirect.ConvertVector2IntToDirection(Direction);
+
+
+    }
     IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration, Action OnMove, Action OnFinishMove)
     {
         float elapsedTime = 0f;

@@ -6,7 +6,9 @@ using UnityEngine.Events;
 public class Pushable : MonoBehaviour, I_move
 {
     [SerializeField] MainComponent mainComponent;
+    [SerializeField] UnityEvent OnMoveing = new UnityEvent();
     [SerializeField] UnityEvent OnfinishMove = new UnityEvent();
+
     Grid_Manager gridManager;
 
     Attach_Moveable_List attached_obj;
@@ -55,7 +57,6 @@ public class Pushable : MonoBehaviour, I_move
         {
             if (attached.isElementInList(attached_obj))
             {
-                Debug.Log($"{gameObject.name} : enter state");
 
                 // Prevent infinite recursion using visited set
                 if (visited.Contains(attached.Get_Move))
@@ -139,9 +140,13 @@ public class Pushable : MonoBehaviour, I_move
 
     public void Move(Vector2Int Direction)
     {
-        mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnFinishMove);
+        mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnMove, OnFinishMove);
     }
 
+    void OnMove()
+    {
+        OnMoveing.Invoke();
+    }
     public void OnFinishMove()
     {
         OnfinishMove.Invoke();
