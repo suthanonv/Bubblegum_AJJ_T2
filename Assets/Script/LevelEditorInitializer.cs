@@ -15,12 +15,17 @@ public class LevelEditorInitializer : MonoBehaviour
     GameObject Objectfolder;
     GameObject IH;
 
+    TileGen tileGen;
+
     public TileSlot[,] tileSlots = null;
     public float tileSize;
     Vector2 startingPos;
     bool XEven;
     bool YEven;
-
+    public void Awake()
+    {
+        tileGen = FindFirstObjectByType<TileGen>();
+    }
     public void CreateTileList(int X, int Y, float size)
     {
         tileSize = size;
@@ -65,6 +70,7 @@ public class LevelEditorInitializer : MonoBehaviour
                     }
                     else
                     {
+                        createdTiles.transform.localScale = new Vector3(tileSize, tileSize);
                         createdTiles.transform.SetParent(tileFolder.transform, false);
                     }
                 }
@@ -72,6 +78,8 @@ public class LevelEditorInitializer : MonoBehaviour
         }
         canvas.SetActive(false);
         canvas2.SetActive(true);
+
+        Initializer.ExecuteInitialize();
     }
 
     public void Return()

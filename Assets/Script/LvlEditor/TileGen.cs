@@ -4,7 +4,7 @@ public class TileGen : MonoBehaviour
 {
     [SerializeField] int X;
     [SerializeField] int Y;
-    [SerializeField] float TileSize;
+    [SerializeField] public float TileSize;
     [SerializeField] GameObject TileSlot;
     [SerializeField] Transform canvas;
     [SerializeField] LevelEditorInitializer LvlIni;
