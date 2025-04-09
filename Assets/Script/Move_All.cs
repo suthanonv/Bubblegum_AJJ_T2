@@ -47,7 +47,11 @@ public class Move_All : MonoBehaviour, IInitialize
 
         foreach (I_move m in moveGum)
         {
+
+
             List<I_move> moves = m.Canmove(Direction);
+
+
             if (moves.Count > 0)
             {
                 foreach (I_move movement in moves)
