@@ -139,21 +139,21 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     private void RestoreAttachment(List<GameObject> previousAttachList)
     {
         if (previousAttachList == null || previousAttachList.Count == 0) return;
-
         List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List>();
-
+        
         foreach (var obj in previousAttachList)
         {
             var attach = obj?.GetComponent<Attach_Moveable_List>();
-            if (attach != null)
-                attachMoveables.Add(attach);
+            attachMoveables.Add(attach);
         }
+        
 
         foreach (var item in attachMoveables)
         {
             item.Set_Same_list(attachMoveables);
+            Debug.Log("มึงนี่เองไอเหี้ย RestoreAttachment ของ Bubblegum ");
         }
 
-        Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count} objects");
+        Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count}, objects");
     }
 }
