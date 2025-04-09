@@ -81,6 +81,28 @@ public class TileManager : MonoBehaviour, IInitialize
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 
+    public void ResetObjectOnTiles()
+    {
+        int width = tileIndex.GetLength(0);  // number of rows
+        int height = tileIndex.GetLength(1); // number of columns
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameObject tile = tileIndex[x, y];
+                if (tile != null)
+                {
+                    if (tile.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile moveTile))
+                    {
+                        moveTile.SetOccupiedObject(null);
+                    }
+                }
+            }
+        }
+    }
+
+
     bool CheckContains(List<float> posList, float pos)
     {
         bool contains = false;
