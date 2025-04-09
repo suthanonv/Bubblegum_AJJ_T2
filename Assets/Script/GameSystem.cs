@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour
 {
     [SerializeField] Get_Input get_Input;
-    private void Awake()
+    [SerializeField] GameObject inputGameObject;
+
+    private void Start()
     {
-        get_Input.OnEnable();
+        inputGameObject.SetActive(true);
+        Debug.Log($"{this.gameObject.name} Set inputGameObject to true");
+        
     }
+    
 }

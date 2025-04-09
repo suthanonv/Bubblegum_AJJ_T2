@@ -10,7 +10,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     MainComponent main;
     Direction _currentDirectionEnum;
 
-    Vector2Int _current_Direction = new Vector2Int(0, 0);
+    Vector2Int _current_Direction = new Vector2Int(1, 0);
     public Vector2Int Current_direction => _current_Direction;
 
 
@@ -68,7 +68,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
     public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
-        SetRotation(currentTile_index, newPosition);
+        SetRotation(currentTile_index - newPosition);
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
@@ -78,10 +78,9 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
-    public void SetRotation(Vector2Int OldPos, Vector2Int NewPos)
+    public void SetRotation(Vector2Int Direction)
     {
 
-        Vector2Int Direction = NewPos - OldPos;
         _current_Direction = Direction;
         _currentDirectionEnum = Vector2IntToDirect.ConvertVector2IntToDirection(Direction);
 

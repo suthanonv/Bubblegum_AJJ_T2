@@ -84,7 +84,7 @@ public class Pushable : MonoBehaviour, I_move
 
     public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
-        mainComponent.Transform.SetRotation(Vector2Int.one, Vector2Int.one + Direction);
+        mainComponent.Transform.SetRotation(Direction);
 
         // If visited is null (first call), create a new HashSet
         if (visited == null)

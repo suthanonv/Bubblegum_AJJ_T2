@@ -13,13 +13,13 @@ public class Wining_Tile : Grid_Collider
 
         else _iswin = true;
 
-        Debug.Log(_iswin);
+        //Debug.Log(_iswin);
     }
 
     protected override void _OnExit(MainComponent main)
     {
         _iswin = false;
-        Debug.Log(_iswin);
+        //Debug.Log(_iswin);
 
     }
 

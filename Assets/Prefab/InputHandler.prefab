@@ -60,7 +60,7 @@ MonoBehaviour:
     - m_Name: WASD
       m_Id: 4362568b-61dd-4e50-a9f1-07100c11d8cc
       m_Path: 2DVector
-      m_Interactions: 
+      m_Interactions: Press
       m_Processors: 
       m_Groups: 
       m_Action: Player Movement Controls
@@ -100,7 +100,7 @@ MonoBehaviour:
     - m_Name: ArrowKey
       m_Id: c3d5454f-6d49-40ec-963d-3545a80426fb
       m_Path: 2DVector
-      m_Interactions: 
+      m_Interactions: Press
       m_Processors: 
       m_Groups: 
       m_Action: Player Movement Controls
@@ -149,7 +149,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: a7e13605-4fe8-4595-a41f-1cca4a782d76
       m_Path: <Keyboard>/space
-      m_Interactions: 
+      m_Interactions: Press
       m_Processors: 
       m_Groups: 
       m_Action: Player Button Pressed
@@ -157,7 +157,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: dba1e43a-a9e5-4499-b50e-dd08c8329198
       m_Path: <Keyboard>/r
-      m_Interactions: 
+      m_Interactions: Press
       m_Processors: 
       m_Groups: 
       m_Action: Player Button Pressed
@@ -165,7 +165,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: 65249ec0-4bc2-4c6e-90b1-4f02eac0cbd5
       m_Path: <Keyboard>/escape
-      m_Interactions: 
+      m_Interactions: Press
       m_Processors: 
       m_Groups: 
       m_Action: Player Button Pressed
@@ -189,7 +189,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: de3c790f-6243-413d-ad87-cdc71711fa44
       m_Path: <Keyboard>/o
-      m_Interactions: 
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Player Button Pressed
@@ -197,7 +197,7 @@ MonoBehaviour:
     - m_Name: 
       m_Id: 43634fc5-70af-4354-b0d4-ccd9c517a992
       m_Path: <Keyboard>/p
-      m_Interactions: 
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Player Button Pressed
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   undoController: {fileID: 0}
   levelLoader: {fileID: 0}
+  inputCooldown: 0.25
 --- !u!1 &6582785716908012170
 GameObject:
   m_ObjectHideFlags: 0

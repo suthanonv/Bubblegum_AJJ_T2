@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +17,7 @@ public class Get_Input : MonoBehaviour
     [SerializeField] private InputAction playerButtonPressed;
 
 
-    public void OnEnable()
+    public void Start()
     {
         Initialize();
         if (playerMovementControls == null || playerButtonPressed == null)
@@ -36,7 +37,7 @@ public class Get_Input : MonoBehaviour
         //Debug.Log("Input actions successfully subscribed.");
     }
 
-    public void OnDisable()
+    public void OnDestroy()
     {
         if (playerMovementControls != null)
         {
