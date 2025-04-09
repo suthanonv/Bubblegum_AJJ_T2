@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5775108240387342459}
   - component: {fileID: 2024761490995396756}
+  - component: {fileID: 7405198240216059789}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -49,6 +50,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   get_Input: {fileID: 3607169577175370261}
   inputGameObject: {fileID: 1545200041596791765}
+  wining_Check: {fileID: 7405198240216059789}
+  levelLoader: {fileID: 6673735276361764639}
+--- !u!114 &7405198240216059789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67369892459877981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a32f3e238df0d45acb07df2e32cb4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &543183423221232191
 GameObject:
   m_ObjectHideFlags: 0

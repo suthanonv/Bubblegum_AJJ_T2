@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Wining_Check : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Wining_Check : MonoBehaviour
         wining_tiles.Add(tile);
     }
 
+    private bool _completedLevel = false;
+    public bool completedLevel => _completedLevel; 
 
     public void Check_isWining()
     {
@@ -35,11 +38,11 @@ public class Wining_Check : MonoBehaviour
 
         if (isWin)
         {
-            if (Trigedred) return;
-            Trigedred = true;
-
-
+            if (completedLevel) return;
+            _completedLevel = true;
         }
     }
+
+    
 
 }

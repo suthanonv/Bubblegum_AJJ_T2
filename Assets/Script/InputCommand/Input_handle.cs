@@ -5,7 +5,6 @@ public class Input_handle : MonoBehaviour
 {
     private System.Action<Vector2Int> _input_action;
     private System.Action<string> _buttonPressedAction;
-
     private System.Action _registerStateAllCharacters;
     
 
