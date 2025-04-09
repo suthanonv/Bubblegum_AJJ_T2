@@ -69,7 +69,8 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
         if (UndoCount == 0) return;
 
         var snapshot = base.UndoState(GetCurrentSnapshot);
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        //movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        movementComponent.Position(snapshot.tileIndex);
         RestoreAttachment(snapshot.attachedObjectList);
     }
 
@@ -78,7 +79,8 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
         if (RedoCount == 0) return;
 
         var snapshot = base.RedoState(GetCurrentSnapshot);
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        //movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        movementComponent.Position(snapshot.tileIndex);
         RestoreAttachment(snapshot.attachedObjectList);
     }
 

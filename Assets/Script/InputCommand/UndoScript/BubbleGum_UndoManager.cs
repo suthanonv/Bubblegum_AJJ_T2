@@ -86,7 +86,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         movementComponent.SetRotation(backDirection);
 
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-
+        //movementComponent.InstantSetPosition(snapshot.tileIndex);
 
         //moveAll.MoveAll(backDirection, Move.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
 
@@ -104,7 +104,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         
         movementComponent.SetRotation(snapshot.directionFrom);
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-
+        //movementComponent.InstantSetPosition(snapshot.tileIndex);
         //moveAll.MoveAll(snapshot.tileIndex, attach_Moveable_List.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
     }
 

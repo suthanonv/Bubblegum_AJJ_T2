@@ -19,11 +19,11 @@ public class GameSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (wining_Check.completedLevel)
+        /*if (wining_Check.completedLevel)
         {
             StartCoroutine(delay());
             levelLoader.loadNextScene();
-        }
+        }*/
     }
     IEnumerator delay()
     {
