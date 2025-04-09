@@ -19,7 +19,7 @@ public abstract class UndoAndRedo<T> : MonoBehaviour
         if (undoStack.Count == 0)
         {
             Debug.LogWarning($"[{gameObject.name}] Undo stack is empty.");
-            return default(T); 
+            return default(T);
         }
 
         T current = getCurrentSnapshot();
@@ -33,7 +33,7 @@ public abstract class UndoAndRedo<T> : MonoBehaviour
         if (redoStack.Count == 0)
         {
             Debug.LogWarning($"[{gameObject.name}] Redo stack is empty.");
-            return default(T); 
+            return default(T);
         }
 
         T current = getCurrentSnapshot();
@@ -53,6 +53,6 @@ public abstract class UndoAndRedo<T> : MonoBehaviour
     public int RedoCount => redoStack.Count;
 
 
-   
+
 
 }

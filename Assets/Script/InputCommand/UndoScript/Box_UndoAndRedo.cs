@@ -14,7 +14,9 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
 
     [SerializeField] MainComponent_Transform movementComponent;
     [SerializeField] private Attach_Moveable_List attach_Moveable_List;
-    
+
+    Grid_Manager gridManage;
+
 
     public static List<Box_UndoAndRedo> AllBoxes = new List<Box_UndoAndRedo>();
 
@@ -35,7 +37,9 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
 
         if (movementComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing MainComponent_Transform!");
-        
+
+        gridManage = FindAnyObjectByType<Grid_Manager>();
+
     }
 
     public void RegisterState()
@@ -69,22 +73,26 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
         if (UndoCount == 0) return;
 
         var snapshot = base.UndoState(GetCurrentSnapshot);
+        if (movementComponent.currentTile_index != snapshot.tileIndex)
+            gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         //movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-        movementComponent.Position(snapshot.tileIndex);
+        movementComponent.InstantSetPosition(snapshot.tileIndex);
         RestoreAttachment(snapshot.attachedObjectList);
     }
 
     public void Redo(Action OnMove = null, Action OnFinishMove = null)
     {
         if (RedoCount == 0) return;
-
+        gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         var snapshot = base.RedoState(GetCurrentSnapshot);
+        if (movementComponent.currentTile_index != snapshot.tileIndex)
+            gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         //movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
-        movementComponent.Position(snapshot.tileIndex);
+        movementComponent.InstantSetPosition(snapshot.tileIndex);
         RestoreAttachment(snapshot.attachedObjectList);
     }
 
-    private BoxSnapshot GetCurrentSnapshot() 
+    private BoxSnapshot GetCurrentSnapshot()
     {
         var group = attach_Moveable_List?.Get_List();
         List<GameObject> attachedObjects = new List<GameObject>();
