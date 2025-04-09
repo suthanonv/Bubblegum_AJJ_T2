@@ -3,13 +3,11 @@ using UnityEngine;
 public class MainComponent : MonoBehaviour
 {
 
-    Grid_Manager grid_Manager;
 
 
     private void Awake()
     {
         GetGameObject = () => this.gameObject;
-        grid_Manager = FindAnyObjectByType<Grid_Manager>();
     }
 
 
