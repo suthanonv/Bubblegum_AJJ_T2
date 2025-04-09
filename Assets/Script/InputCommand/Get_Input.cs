@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,13 +16,10 @@ public class Get_Input : MonoBehaviour
     [SerializeField] private InputAction playerMovementControls;
     [SerializeField] private InputAction playerButtonPressed;
 
-    private void Awake()
+
+    public void Start()
     {
         Initialize();
-    }
-
-    private void OnEnable()
-    {
         if (playerMovementControls == null || playerButtonPressed == null)
         {
             Debug.LogError("Player movement or button input action is not assigned.");
@@ -34,11 +32,12 @@ public class Get_Input : MonoBehaviour
         playerMovementControls.performed += OnMovePerformed;
         playerMovementControls.canceled += OnMovePerformed;
         playerButtonPressed.performed += OnButtonPressed;
+        playerButtonPressed.canceled += OnButtonPressed;
 
         //Debug.Log("Input actions successfully subscribed.");
     }
 
-    private void OnDisable()
+    public void OnDestroy()
     {
         if (playerMovementControls != null)
         {
@@ -50,6 +49,7 @@ public class Get_Input : MonoBehaviour
         if (playerButtonPressed != null)
         {
             playerButtonPressed.performed -= OnButtonPressed;
+            playerButtonPressed.canceled -= OnButtonPressed;
             playerButtonPressed.Disable();
         }
     }

@@ -81,9 +81,9 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         bubbleGumStateComponent.SetState(snapshot.state);
         RestoreAttachment(snapshot.attachedObjectList);
 
-        // Wait For PunPun To Fix
-        //Vector2Int backDirection = snapshot.directionFrom;
-        //movementComponent.FaceDirection(backDirection); 
+        
+        Vector2Int backDirection = snapshot.directionFrom;
+        movementComponent.SetRotation(backDirection);
 
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
     }
@@ -97,6 +97,8 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
 
         bubbleGumStateComponent.SetState(snapshot.state);
         RestoreAttachment(snapshot.attachedObjectList);
+        
+        movementComponent.SetRotation(snapshot.directionFrom);
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
     }
 

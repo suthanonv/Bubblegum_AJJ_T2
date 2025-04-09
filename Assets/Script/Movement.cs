@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour, I_move
     public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
 
-        mainComponent.Transform.SetRotation(Vector2Int.one, Vector2Int.one + Direction);
+        mainComponent.Transform.SetRotation(Direction);
 
         List<I_move> Move = new List<I_move>();
 
