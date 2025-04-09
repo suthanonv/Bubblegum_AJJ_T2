@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class GameSystem : Singleton<GameSystem>
+public class GameSystem : MonoBehaviour
 {
-    protected override void Init()
+    [SerializeField] Get_Input get_Input;
+    private void Awake()
     {
-        Debug.Log("GameManager initialized!");
+        get_Input.OnEnable();
     }
-
 }

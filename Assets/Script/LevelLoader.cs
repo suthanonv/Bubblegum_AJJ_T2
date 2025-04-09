@@ -6,13 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    private int _currentLevel;
-    private int currentLevel => _currentLevel;
-    private void Start()
-    {
-        _currentLevel = SceneManager.GetActiveScene().buildIndex;
-    }
-    
+    [SerializeField] Get_Input get_Input;
+
+
 
     public void LoadLevel(int levelNumber)
     {
@@ -20,14 +16,28 @@ public class LevelLoader : MonoBehaviour
     }
     public void loadNextScene()
     {
+        int _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (get_Input == null)
+            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
+
         LoadLevel(_currentLevel + 1);
     }
     public void loadPreviousScene()
     {
+        int _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (get_Input == null)
+            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
+
+
         LoadLevel(_currentLevel - 1);
     }
     public void reloadScene()
     {
+        int _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (get_Input == null)
+            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
+
+
         LoadLevel(_currentLevel);
     }
 }
