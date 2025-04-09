@@ -7,7 +7,7 @@ public class Wining_Check : MonoBehaviour
     List<Wining_Tile> wining_tiles = new List<Wining_Tile>();
 
 
-    bool Trigedred = false;
+    //bool Trigedred = false;
 
     private void Start()
     {

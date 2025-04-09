@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour
@@ -8,6 +9,8 @@ public class GameSystem : MonoBehaviour
     [SerializeField] Wining_Check wining_Check;
     [SerializeField] LevelLoader levelLoader;
 
+    [SerializeField] private int sceneTransitionTime = 1;
+
     private void Start()
     {
         inputGameObject.SetActive(true);
@@ -16,7 +19,14 @@ public class GameSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (wining_Check.completedLevel) levelLoader.loadNextScene();
+        if (wining_Check.completedLevel)
+        {
+            StartCoroutine(delay());
+            levelLoader.loadNextScene();
+        }
     }
-
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(sceneTransitionTime);
+    }
 }
