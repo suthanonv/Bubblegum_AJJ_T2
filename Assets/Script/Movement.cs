@@ -45,11 +45,11 @@ public class Movement : MonoBehaviour, I_move
     public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
 
+        mainComponent.Transform.SetRotation(Vector2Int.one, Vector2Int.one + Direction);
 
         List<I_move> Move = new List<I_move>();
 
         if (PremovePosition(Direction) == mainComponent.Transform.currentTile_index) return Move;
-        mainComponent.Transform.SetRotation(Vector2Int.one, Vector2Int.one + Direction);
         Move.Add(this);
 
         Tile PreMove_Tile = gridManager.Get_Tile(PremovePosition(Direction));
