@@ -119,4 +119,27 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         OnFinishMove?.Invoke();
     }
 
+
+    public void AddOnMoveListener()
+    {
+
+    }
+
+    public void RemoveOneMoveListener()
+    {
+
+    }
+
+    public void AddOnFinishMove()
+    {
+
+    }
+
+    public void RemoveOnfinishMove()
+    {
+
+    }
+
+
+
 }
