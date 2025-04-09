@@ -9,10 +9,12 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
     {
         public Vector2Int tileIndex;
         public List<GameObject> attachedObjectList;
+        public Vector2Int directionFrom;
     }
 
-    private MainComponent_Transform movementComponent;
-    [SerializeField]private Attach_Moveable_List attach_Moveable_List;
+    [SerializeField] MainComponent_Transform movementComponent;
+    [SerializeField] private Attach_Moveable_List attach_Moveable_List;
+    
 
     public static List<Box_UndoAndRedo> AllBoxes = new List<Box_UndoAndRedo>();
 
@@ -30,8 +32,6 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
 
     private void Awake()
     {
-        movementComponent = GetComponent<MainComponent_Transform>();
-        
 
         if (movementComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing MainComponent_Transform!");
@@ -58,7 +58,7 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
         var snapshot = new BoxSnapshot
         {
             tileIndex = movementComponent.currentTile_index,
-            attachedObjectList = attachedObjects
+            attachedObjectList = attachedObjects,
         };
 
         base.RegisterState(snapshot);

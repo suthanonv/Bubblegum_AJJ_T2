@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using System.Linq;
 using UnityEngine;
 
 public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.CharacterSnapshot>
@@ -14,7 +14,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         public Vector2Int directionFrom; 
     }
 
-
+    [SerializeField] private Move_All moveAll;
     [SerializeField] private MainComponent_Transform movementComponent;
     [SerializeField] private Main_BubbleGumstate bubbleGumStateComponent;
     [SerializeField] private Attach_Moveable_List attach_Moveable_List;
@@ -86,6 +86,10 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         movementComponent.SetRotation(backDirection);
 
         movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+
+
+        //moveAll.MoveAll(backDirection, Move.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
+
     }
 
 
@@ -99,7 +103,8 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         RestoreAttachment(snapshot.attachedObjectList);
         
         movementComponent.SetRotation(snapshot.directionFrom);
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        
+        //moveAll.MoveAll(snapshot.tileIndex, attach_Moveable_List.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
     }
 
     private CharacterSnapshot GetCurrentSnapshot()

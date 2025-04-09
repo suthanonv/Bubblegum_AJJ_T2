@@ -16,10 +16,14 @@ public class Get_Input : MonoBehaviour
     [SerializeField] private InputAction playerMovementControls;
     [SerializeField] private InputAction playerButtonPressed;
 
+    private void Awake()
+    {
+        Initialize();
+    }
 
     public void Start()
     {
-        Initialize();
+        
         if (playerMovementControls == null || playerButtonPressed == null)
         {
             Debug.LogError("Player movement or button input action is not assigned.");

@@ -40,7 +40,7 @@ public class Move_All : MonoBehaviour, IInitialize
     }
 
 
-    void SetUp(Vector2Int Direction, List<Movement> moveGum, out List<I_move> validMove, out List<I_move> InvalidMove)
+    public void SetUp(Vector2Int Direction, List<Movement> moveGum, out List<I_move> validMove, out List<I_move> InvalidMove)
     {
         validMove = new List<I_move>();
         InvalidMove = new List<I_move>();
@@ -83,6 +83,7 @@ public class Move_All : MonoBehaviour, IInitialize
         }
     }
 
+    
     void Interact_invalid_move(Vector2Int Direction, List<I_move> InValid_Move)
     {
         HashSet<I_move> validMoveSet = new HashSet<I_move>(InValid_Move);
