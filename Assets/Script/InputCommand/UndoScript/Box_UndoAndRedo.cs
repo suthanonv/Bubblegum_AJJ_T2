@@ -121,6 +121,6 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
             item.Set_Same_list(attachMoveables);
         }
 
-        Debug.Log($"[RestoreAttachment] Group restored with {attachMoveables.Count} objects");
+        Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count} objects");
     }
 }

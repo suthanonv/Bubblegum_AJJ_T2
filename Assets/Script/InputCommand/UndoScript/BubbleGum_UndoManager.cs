@@ -103,7 +103,8 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         RestoreAttachment(snapshot.attachedObjectList);
         
         movementComponent.SetRotation(snapshot.directionFrom);
-        
+        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+
         //moveAll.MoveAll(snapshot.tileIndex, attach_Moveable_List.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
     }
 
@@ -147,6 +148,6 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
             item.Set_Same_list(attachMoveables);
         }
 
-        Debug.Log($"[RestoreAttachment] Group restored with {attachMoveables.Count} objects");
+        Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count} objects");
     }
 }
