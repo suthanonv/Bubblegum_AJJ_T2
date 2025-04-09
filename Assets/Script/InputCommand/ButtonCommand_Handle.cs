@@ -39,8 +39,7 @@ public class ButtonCommand_Handle : MonoBehaviour
             _buttonCommand = buttonName;
 
             if (buttonName == "space") Space_button_Action?.Invoke();
-            else if (buttonName == "q") undoController.Undo();
-            else if (buttonName == "e") undoController.Redo();
+            else if (buttonName == "z") undoController.Undo();
             else if (buttonName == "r") levelLoader.reloadScene();
             else if (buttonName == "o") levelLoader.loadPreviousScene();
             else if (buttonName == "p") levelLoader.loadNextScene();
