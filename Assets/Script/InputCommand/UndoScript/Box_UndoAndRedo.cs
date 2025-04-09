@@ -121,6 +121,7 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
         foreach (var item in attachMoveables)
         {
             item.Set_Same_list(attachMoveables);
+            Debug.Log("มึงนี่เองไอเหี้ย RestoreAttachment ของ กล่อง ");
         }
 
         Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count} objects");

@@ -66,6 +66,7 @@ public class Attach_Moveable_List : MonoBehaviour
         foreach (Attach_Moveable_List e in push_able_List)
         {
             e.Set_Same_list(allList);
+            Debug.Log("มึงนี่เองไอเหี้ย Add_New_Moveable ");
         }
     }
 
@@ -80,5 +81,6 @@ public class Attach_Moveable_List : MonoBehaviour
     {
         // Copy the list instead of sharing the same reference
         push_able_List = new List<Attach_Moveable_List>(Origin);
+        
     }
 }
