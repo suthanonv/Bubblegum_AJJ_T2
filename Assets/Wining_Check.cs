@@ -6,10 +6,13 @@ public class Wining_Check : MonoBehaviour
     List<Wining_Tile> wining_tiles = new List<Wining_Tile>();
 
 
+    bool Trigedred = false;
+
     private void Start()
     {
         FindAnyObjectByType<All_moveable_gum_holder>().OnFinishMove_AddListener(Check_isWining);
     }
+
 
     public void Add_WiningTile(Wining_Tile tile)
     {
@@ -32,7 +35,10 @@ public class Wining_Check : MonoBehaviour
 
         if (isWin)
         {
-            Debug.Log("Wining");
+            if (Trigedred) return;
+            Trigedred = true;
+
+
         }
     }
 
