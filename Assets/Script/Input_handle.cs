@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Input_handle : MonoBehaviour
+public class Input_handle : MonoBehaviour 
 {
     private System.Action<Vector2Int> _input_action;
     private System.Action<string> _buttonPressedAction;
@@ -31,5 +31,6 @@ public class Input_handle : MonoBehaviour
     public void CallingButtonPressed(string buttonName)
     {
         _buttonPressedAction?.Invoke(buttonName);
+        Debug.Log($"CallingCommand {buttonName}");
     }
 }

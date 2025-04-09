@@ -5,6 +5,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     private static T _instance;
 
     public static T Instance => _instance;
+    protected virtual void Init() { }
 
     private void Awake()
     {
@@ -12,6 +13,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
         {
             _instance = this as T;
             DontDestroyOnLoad(gameObject);
+            Init();
         }
         else
         {

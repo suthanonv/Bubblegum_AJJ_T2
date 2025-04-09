@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 2381752518797789037}
+  OnMoveing:
+    m_PersistentCalls:
+      m_Calls: []
   OnfinishMove:
     m_PersistentCalls:
       m_Calls:
@@ -133,6 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 2381752518797789037}
+  OnMoveing:
+    m_PersistentCalls:
+      m_Calls: []
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
@@ -368,6 +374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 2381752518797789037}
+  OnMoveing:
+    m_PersistentCalls:
+      m_Calls: []
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
@@ -475,6 +484,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite_render: {fileID: 7566038166600481597}
   color: {r: 1, g: 0, b: 0, a: 1}
+--- !u!1 &7141832419030555081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3522875561411097322}
+  m_Layer: 0
+  m_Name: undo_behave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3522875561411097322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141832419030555081}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5631382, y: 0.010366678, z: 2.6664443}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6112234016279903078}
+  m_Father: {fileID: 5959533876969039035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7802741348432830772
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +667,6 @@ GameObject:
   - component: {fileID: 2381752518797789037}
   - component: {fileID: 1272283085219849108}
   - component: {fileID: 7566038166600481597}
-  - component: {fileID: 176734095744615236}
   m_Layer: 0
   m_Name: Bubble_Gum_state Sleep
   m_TagString: Untagged
@@ -647,6 +687,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3522875561411097322}
   - {fileID: 8953957680075327671}
   - {fileID: 6454747799228444684}
   - {fileID: 2121816248075280304}
@@ -744,16 +785,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &176734095744615236
+--- !u!1 &9069447542810040607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6112234016279903078}
+  - component: {fileID: 4041442255322829805}
+  m_Layer: 0
+  m_Name: undo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6112234016279903078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069447542810040607}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3522875561411097322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4041442255322829805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057344287037826286}
+  m_GameObject: {fileID: 9069447542810040607}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a55c713573078042b771e49ebc20d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementComponent: {fileID: 1272283085219849108}
+  bubbleGumStateComponent: {fileID: 2255999318209877694}
   attach_Moveable_List: {fileID: 5739459924472443303}

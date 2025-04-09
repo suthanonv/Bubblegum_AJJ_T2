@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1107713908659833917}
   - component: {fileID: 2271819485986258643}
   - component: {fileID: 4949784946261957537}
-  - component: {fileID: -7425133261164095673}
   m_Layer: 0
   m_Name: InputHandler
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2891866422315855357}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -164,16 +163,40 @@ MonoBehaviour:
       m_Action: Player Button Pressed
       m_Flags: 0
     - m_Name: 
-      m_Id: 9a890cd5-2fe8-451f-92f7-6d4c21daa0b8
-      m_Path: <Keyboard>/z
+      m_Id: 65249ec0-4bc2-4c6e-90b1-4f02eac0cbd5
+      m_Path: <Keyboard>/escape
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Player Button Pressed
       m_Flags: 0
     - m_Name: 
-      m_Id: 65249ec0-4bc2-4c6e-90b1-4f02eac0cbd5
-      m_Path: <Keyboard>/escape
+      m_Id: 0d1db3f4-7e7e-4a6d-9cf7-072523a01f8e
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 9f9a4877-bde1-49a5-9bef-c001e0e29a13
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
+    - m_Name: 
+      m_Id: de3c790f-6243-413d-ad87-cdc71711fa44
+      m_Path: <Keyboard>/o
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Button Pressed
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 43634fc5-70af-4354-b0d4-ccd9c517a992
+      m_Path: <Keyboard>/p
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -204,18 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11611c076febe743b34fbedf4fec736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7425133261164095673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891866422315855357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b5f0178ff4bd247b83ad7a4ec599d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  undoController: {fileID: 0}
+  levelLoader: {fileID: 0}
 --- !u!1 &6582785716908012170
 GameObject:
   m_ObjectHideFlags: 0

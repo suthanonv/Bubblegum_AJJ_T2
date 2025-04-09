@@ -15,9 +15,9 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     }
 
 
-    private MainComponent_Transform movementComponent;
-    private Main_BubbleGumstate bubbleGumStateComponent;
-    [SerializeField]private Attach_Moveable_List attach_Moveable_List;
+    [SerializeField] private MainComponent_Transform movementComponent;
+    [SerializeField] private Main_BubbleGumstate bubbleGumStateComponent;
+    [SerializeField] private Attach_Moveable_List attach_Moveable_List;
 
     public static List<BubbleGum_UndoManager> AllCharacters = new List<BubbleGum_UndoManager>();
 
@@ -35,9 +35,6 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
 
     private void Awake()
     {
-        movementComponent = GetComponent<MainComponent_Transform>();
-        bubbleGumStateComponent = GetComponent<Main_BubbleGumstate>();
-        
 
         if (movementComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing MainComponent_Transform!");

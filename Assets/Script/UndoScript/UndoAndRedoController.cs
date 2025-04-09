@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class UndoAndRedoController : MonoBehaviour
 {
-    private Input_handle inputHandle;
-    private Get_Input get_input;
+    [SerializeField] private Input_handle inputHandle;
+    [SerializeField] private Get_Input get_input;
     private BubbleGum_UndoManager bubblegum_undoManager;
     private Box_UndoAndRedo box_UndoAndRedo;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        get_input = GetComponent<Get_Input>();
-        inputHandle = GetComponent<Input_handle>();
+
         bubblegum_undoManager = GetComponent<BubbleGum_UndoManager>();
         box_UndoAndRedo = GetComponent<Box_UndoAndRedo>();
         if (inputHandle != null)
         {
             inputHandle.AddRegisterStateListener(RegisterAllCharacterStates);
+        }
+        if(bubblegum_undoManager != null)
+        {
+            Debug.LogError($"{bubblegum_undoManager} is missing");
+        }
+        if (box_UndoAndRedo != null)
+        {
+            Debug.LogError($"{box_UndoAndRedo} is missing");
         }
     }
     public void Undo()
