@@ -35,7 +35,7 @@ public class StateControl<T> : MonoBehaviour where T : Enum
     }
 
 
-    public void SetState(T newstate)
+    public virtual void SetState(T newstate)
     {
         T oldState = _currentState;
         StateToBehave[oldState].OnExitState();

@@ -21,6 +21,21 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         main = this.GetComponent<MainComponent>();
 
         main.SetTransform(() => this);
+
+
+        _GetDuration = () => 0.15f;
+    }
+
+
+
+    float Duration() => _GetDuration.Invoke();
+
+
+    Func<float> _GetDuration;
+
+    public void Set_GetOnMoveDuration_Func(Func<float> _duration_Func)
+    {
+        _GetDuration = _duration_Func;
     }
 
 
@@ -68,13 +83,16 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
     public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
+        Action onMove = this.OnMove + OnMove;
+        Action onFinishMove = this.OnFinishMove + OnFinishMove;
+
         SetRotation(currentTile_index - newPosition);
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
         Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
 
-        StartCoroutine(Lerping_Move(current_Pos, _future_pos, 0.15f, OnMove, OnFinishMove));
+        StartCoroutine(Lerping_Move(current_Pos, _future_pos, Duration(), onMove, onFinishMove));
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
@@ -120,24 +138,27 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     }
 
 
-    public void AddOnMoveListener()
+    public void AddOnMoveListener(Action OnMoveCall)
     {
+        OnMove += OnMoveCall;
+    }
+
+    public void RemoveOneMoveListener(Action OnMoveCall)
+    {
+        OnMove -= OnMoveCall;
 
     }
 
-    public void RemoveOneMoveListener()
+    Action OnFinishMove;
+    Action OnMove;
+    public void AddOnFinishMove(Action OnFinishMoveCall)
     {
-
+        OnFinishMove += OnFinishMoveCall;
     }
 
-    public void AddOnFinishMove()
+    public void RemoveOnfinishMove(Action OnFinishMoveCall)
     {
-
-    }
-
-    public void RemoveOnfinishMove()
-    {
-
+        OnFinishMove -= OnFinishMoveCall;
     }
 
 

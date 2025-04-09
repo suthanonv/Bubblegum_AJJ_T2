@@ -78,7 +78,7 @@ public class Attach_Moveable_List : MonoBehaviour
 
     public void Set_Same_list(List<Attach_Moveable_List> Origin)
     {
-        // Copy the list instead of sharing the same reference
+        Debug.Log(Origin);
         push_able_List = new List<Attach_Moveable_List>(Origin);
     }
 }

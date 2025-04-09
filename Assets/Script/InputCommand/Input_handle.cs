@@ -1,12 +1,15 @@
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-public class Input_handle : MonoBehaviour 
+public class Input_handle : MonoBehaviour
 {
     private System.Action<Vector2Int> _input_action;
     private System.Action<string> _buttonPressedAction;
     private System.Action _registerStateAllCharacters;
-    
+
+    private void Start()
+    {
+        FindAnyObjectByType<All_moveable_gum_holder>().OnFinishMove_AddListener(_registerStateAllCharacters);
+    }
 
     public void AddRegisterStateListener(System.Action action)
     {
@@ -25,7 +28,6 @@ public class Input_handle : MonoBehaviour
 
     public void CallingMovement(Vector2Int Direction)
     {
-        _registerStateAllCharacters?.Invoke(); 
         _input_action?.Invoke(Direction);
     }
 
