@@ -80,12 +80,25 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
             }
         }
     }
+    Action onMove;
+    Action onFinishMove;
 
+    bool OnActive = false;
     public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
-        Action onMove = this.OnMove + OnMove;
-        Action onFinishMove = this.OnFinishMove + OnFinishMove;
+        if (OnActive)
+        {
+            this.transform.position = grid_Manager.Get_Tile(currentTile_index).transform.position;
+            onFinishMove.Invoke();
+            OnActive = false;
+        }
 
+        onMove = this.OnMove + OnMove;
+        onFinishMove = this.OnFinishMove + OnFinishMove;
+
+
+
+        OnActive = false;
         SetRotation(currentTile_index - newPosition);
         grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
@@ -122,6 +135,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     }
     IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration, Action OnMove, Action OnFinishMove)
     {
+        OnActive = true;
         float elapsedTime = 0f;
 
         OnMove?.Invoke();
@@ -135,6 +149,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
         transform.position = _future_pos;
         OnFinishMove?.Invoke();
+        OnActive = false;
     }
 
 
