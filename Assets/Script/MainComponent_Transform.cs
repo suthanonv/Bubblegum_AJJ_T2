@@ -8,7 +8,12 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     Grid_Manager grid_Manager;
 
     MainComponent main;
-    Direction _currentDirection;
+    Direction _currentDirectionEnum;
+
+    Vector2Int _current_Direction = new Vector2Int(0, 0);
+    public Vector2Int Current_direction => _current_Direction;
+
+
     private void Awake()
     {
         grid_Manager = FindAnyObjectByType<Grid_Manager>();
@@ -73,11 +78,12 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
-    void SetRotation(Vector2Int OldPos, Vector2Int NewPos)
+    public void SetRotation(Vector2Int OldPos, Vector2Int NewPos)
     {
 
         Vector2Int Direction = NewPos - OldPos;
-        _currentDirection = Vector2IntToDirect.ConvertVector2IntToDirection(Direction);
+        _current_Direction = Direction;
+        _currentDirectionEnum = Vector2IntToDirect.ConvertVector2IntToDirection(Direction);
 
 
     }
