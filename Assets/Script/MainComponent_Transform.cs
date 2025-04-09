@@ -78,6 +78,22 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
     }
 
+    public void InstantSetPosition(Vector2Int newPosition)
+    {
+
+
+        MoveAble_Tile _future_tile = grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>();
+
+        Debug.LogError("Sum thin wong [from MainComponnent_transfrom , InstatnPostion Method]");
+
+        Vector2 _future_pos = _future_tile.gameObject.transform.position;
+
+        transform.position = _future_pos;
+
+        _future_tile.SetOccupiedObject(main);
+
+    }
+
     public void SetRotation(Vector2Int Direction)
     {
 
