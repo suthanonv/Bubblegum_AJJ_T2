@@ -52,6 +52,7 @@ MonoBehaviour:
   inputGameObject: {fileID: 1545200041596791765}
   wining_Check: {fileID: 7405198240216059789}
   levelLoader: {fileID: 6673735276361764639}
+  sceneTransitionTime: 1
 --- !u!114 &7405198240216059789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +165,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5775108240387342459}
     m_Modifications:
+    - target: {fileID: 1107713908659833917, guid: 9a606ba0861f9174c9a0b2515aa9a951, type: 3}
+      propertyPath: inputCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2891866422315855357, guid: 9a606ba0861f9174c9a0b2515aa9a951, type: 3}
       propertyPath: m_Name
       value: InputHandler
