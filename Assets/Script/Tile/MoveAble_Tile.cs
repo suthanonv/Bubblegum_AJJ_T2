@@ -11,6 +11,7 @@ public class MoveAble_Tile : Tile
     private void Awake()
     {
         SetUp_Delegate();
+        this.GetComponent<SpriteRenderer>().sortingOrder = Tile_SpriteOrder.GetSpriteOrder(OBjectType.WalkAble_Tile);
     }
 
     void SetUp_Delegate()

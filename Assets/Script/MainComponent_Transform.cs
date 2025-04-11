@@ -10,8 +10,12 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     MainComponent main;
     Direction _currentDirectionEnum;
 
+    public Direction CurretionDirectionEnum => _currentDirectionEnum;
+
     Vector2Int _current_Direction = new Vector2Int(1, 0);
     public Vector2Int Current_direction => _current_Direction;
+
+
 
 
     private void Awake()

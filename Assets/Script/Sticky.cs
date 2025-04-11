@@ -5,6 +5,10 @@ public class Sticky : MonoBehaviour
 {
     Object_Interactable Object_Interactable;
 
+    private void Start()
+    {
+        this.GetComponent<SpriteRenderer>().sortingOrder = Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble);
+    }
 
 
 

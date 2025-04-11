@@ -7,17 +7,20 @@ using UnityEngine;
 public class StateControl<T> : MonoBehaviour where T : Enum
 {
     public T GetCurrentState() => _currentState;
-    [SerializeField] T _currentState;
+    [SerializeField] protected T _currentState;
     Dictionary<T, StateBehaviour<T>> StateToBehave = new Dictionary<T, StateBehaviour<T>>();
 
 
-    private void Start()
+    private void Awake()
     {
         SetUp();
-        IntilizedState();
         this.GetComponent<MainComponent>().GameObject_SetFunc(GetState_Object);
     }
 
+    private void Start()
+    {
+        IntilizedState();
+    }
     void SetUp()
     {
         foreach (Transform i in this.transform)
