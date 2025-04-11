@@ -26,10 +26,10 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
     void Delete()
     {
-        this.gameObject.SetActive(false);
 
         mainComponent.RemoveOneMoveListener(Walk);
         mainComponent.RemoveOnfinishMove(Idle);
+        this.gameObject.SetActive(false);
 
     }
 

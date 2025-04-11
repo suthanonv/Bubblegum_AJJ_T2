@@ -27,7 +27,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         main.SetTransform(() => this);
 
 
-        _GetDuration = () => 0.15f;
+        _GetDuration = () => 0.25f;
     }
 
 
@@ -176,6 +176,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
     public void RemoveOnfinishMove(Action OnFinishMoveCall)
     {
+        Debug.Log($"Removed {OnFinishMoveCall.Method.Name}");
         OnFinishMove -= OnFinishMoveCall;
     }
 
