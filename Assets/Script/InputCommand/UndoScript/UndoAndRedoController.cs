@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UndoAndRedoController : MonoBehaviour
@@ -8,18 +6,18 @@ public class UndoAndRedoController : MonoBehaviour
     [SerializeField] private Get_Input get_input;
     private BubbleGum_UndoManager bubblegum_undoManager;
     private Box_UndoAndRedo box_UndoAndRedo;
-
+    TileManager tileManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        tileManager = FindAnyObjectByType<TileManager>();
         bubblegum_undoManager = GetComponent<BubbleGum_UndoManager>();
         box_UndoAndRedo = GetComponent<Box_UndoAndRedo>();
         if (inputHandle != null)
         {
             inputHandle.AddRegisterStateListener(RegisterAllCharacterStates);
         }
-        if(bubblegum_undoManager != null)
+        if (bubblegum_undoManager != null)
         {
             Debug.LogError($"{bubblegum_undoManager} is missing");
         }
@@ -41,6 +39,8 @@ public class UndoAndRedoController : MonoBehaviour
     }
     public void Redo()
     {
+
+
         foreach (var character in BubbleGum_UndoManager.AllCharacters)
         {
             character.Redo();
@@ -50,7 +50,7 @@ public class UndoAndRedoController : MonoBehaviour
             character.Redo();
         }
     }
-    
+
     private void RegisterAllCharacterStates()
     {
         foreach (var character in BubbleGum_UndoManager.AllCharacters)

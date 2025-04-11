@@ -13,6 +13,8 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         public Vector2Int directionFrom;
     }
 
+    Grid_Manager gridManage;
+
     [SerializeField] private Move_All moveAll;
     [SerializeField] private MainComponent_Transform movementComponent;
     [SerializeField] private Main_BubbleGumstate bubbleGumStateComponent;
@@ -39,6 +41,8 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
             Debug.LogError($"[{gameObject.name}] is missing MainComponent_Transform!");
         if (bubbleGumStateComponent == null)
             Debug.LogError($"[{gameObject.name}] is missing Main_BubbleGumstate!");
+
+        gridManage = FindAnyObjectByType<Grid_Manager>();
 
     }
 
@@ -81,9 +85,11 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     public void Undo(Action OnMove = null, Action OnFinishMove = null)
     {
         if (UndoCount == 0) return;
+        gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
 
         var snapshot = base.UndoState(GetCurrentSnapshot);
-
+        if (movementComponent.currentTile_index != snapshot.tileIndex)
+            gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         bubbleGumStateComponent.SetState(snapshot.state);
         RestoreAttachment(snapshot.attachedObjectList);
 
@@ -91,7 +97,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         Vector2Int backDirection = snapshot.directionFrom;
         movementComponent.SetRotation(backDirection);
 
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        movementComponent.InstantSetPosition(snapshot.tileIndex);
         //movementComponent.InstantSetPosition(snapshot.tileIndex);
 
         //moveAll.MoveAll(backDirection, Move.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
@@ -102,14 +108,16 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     public void Redo(Action OnMove = null, Action OnFinishMove = null)
     {
         if (RedoCount == 0) return;
+        gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
 
         var snapshot = base.RedoState(GetCurrentSnapshot);
-
+        if (movementComponent.currentTile_index != snapshot.tileIndex)
+            gridManage.Get_Tile(movementComponent.currentTile_index).GetComponent<MoveAble_Tile>().SetOccupiedObject(null);
         bubbleGumStateComponent.SetState(snapshot.state);
         RestoreAttachment(snapshot.attachedObjectList);
 
         movementComponent.SetRotation(snapshot.directionFrom);
-        movementComponent.Position(snapshot.tileIndex, OnMove, OnFinishMove);
+        movementComponent.InstantSetPosition(snapshot.tileIndex);
         //movementComponent.InstantSetPosition(snapshot.tileIndex);
         //moveAll.MoveAll(snapshot.tileIndex, attach_Moveable_List.Get_List().Select(g => g.GetComponent<Movement>()).ToList(), OnFinishMove);
     }
@@ -139,21 +147,21 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     private void RestoreAttachment(List<GameObject> previousAttachList)
     {
         if (previousAttachList == null || previousAttachList.Count == 0) return;
-
         List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List>();
 
         foreach (var obj in previousAttachList)
         {
             var attach = obj?.GetComponent<Attach_Moveable_List>();
-            if (attach != null)
-                attachMoveables.Add(attach);
+            attachMoveables.Add(attach);
         }
+
 
         foreach (var item in attachMoveables)
         {
             item.Set_Same_list(attachMoveables);
+            Debug.Log("มึงนี่เองไอเหี้ย RestoreAttachment ของ Bubblegum ");
         }
 
-        Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count} objects");
+        Debug.Log($"{movementComponent.name} [RestoreAttachment] Group restored with {attachMoveables.Count}, objects");
     }
 }
