@@ -10,6 +10,7 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] Get_Input get_Input;
     [SerializeField] GameObject inputGameObject;
+    GameObject cloud;
     UnityEngine.UI.Slider loadSceneProgressBar;
     GameObject loadScene;
     GameObject loadSceneCanva;
@@ -65,23 +66,28 @@ public class LevelLoader : MonoBehaviour
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;
         loadSceneCanva = loadScene.transform.parent.gameObject;
         loadSceneProgressBar = loadScene.GetComponentInChildren<UnityEngine.UI.Slider>(true);
+        cloud = FindAnyObjectByType<Cloud>(FindObjectsInactive.Include).gameObject;
         LoadTimeChecker = false;
-        loadScene.SetActive(true);
-        loadSceneProgressBar.value = 0f;
+        //loadScene.SetActive(true);
+        //loadSceneProgressBar.value = 0f;
+        cloud.SetActive(true);
+        for(int i = 0; i < 220; i++)
+        {
+            cloud.transform.position += new Vector3(-16f, -9f);
+            yield return null;
+        }
         AsyncOperation asyncload = SceneManager.LoadSceneAsync(levelNumber);
         StartCoroutine(CheckLoadTime());
         while (!asyncload.isDone)
         {
-            loadSceneProgressBar.value = asyncload.progress;
+            //loadSceneProgressBar.value = asyncload.progress;
             yield return null;
         }
-        if (LoadTimeChecker)
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i < 220; i++)
         {
-            yield return new WaitForSeconds(0.5f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(1.5f);
+            cloud.transform.position += new Vector3(-16f, -9f);
+            yield return null;
         }
         Destroy(loadSceneCanva);
         Destroy(gameObject);
