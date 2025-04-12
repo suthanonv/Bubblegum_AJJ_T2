@@ -13,9 +13,19 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
-        inputGameObject.SetActive(true);
-        Debug.Log($"{this.gameObject.name} Set inputGameObject to true");
-        
+        if (wining_Check != null)
+        {
+            wining_Check.OnWin += HandleWin;
+        }
+        else
+        {
+            Debug.LogError("[GameSystem] Wining_Check not assigned.");
+        }
+    }
+    private void HandleWin()
+    {
+        Debug.Log("[GameSystem] Handling win... loading next scene.");
+        levelLoader.loadNextScene();
     }
     private void Update()
     {
@@ -28,5 +38,12 @@ public class GameSystem : MonoBehaviour
     IEnumerator delay()
     {
         yield return new WaitForSeconds(sceneTransitionTime);
+    }
+    private void OnDestroy()
+    {
+        if (wining_Check != null)
+        {
+            wining_Check.OnWin -= HandleWin; 
+        }
     }
 }

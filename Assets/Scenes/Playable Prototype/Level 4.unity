@@ -457,8 +457,8 @@ Transform:
   m_GameObject: {fileID: 108956199}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: -0.26, y: 1.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1460817105}
@@ -3237,7 +3237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5959533876969039035, guid: 46b72529cddf7814ab77f50af1e075e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.6
+      value: -3.95
       objectReference: {fileID: 0}
     - target: {fileID: 5959533876969039035, guid: 46b72529cddf7814ab77f50af1e075e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3297,6 +3297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 2024761490995396756, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4521227
@@ -3345,6 +3349,10 @@ PrefabInstance:
       propertyPath: loadSceneCanva
       value: 
       objectReference: {fileID: 1517501854}
+    - target: {fileID: 7405198240216059789, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

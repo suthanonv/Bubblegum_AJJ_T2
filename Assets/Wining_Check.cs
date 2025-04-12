@@ -1,48 +1,50 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Wining_Check : MonoBehaviour
 {
-    List<Wining_Tile> wining_tiles = new List<Wining_Tile>();
+    private readonly List<Wining_Tile> wining_tiles = new();
+    private bool _completedLevel = false;
 
-
-    //bool Trigedred = false;
+    public event Action OnWin;
+    public bool CompletedLevel => _completedLevel;
 
     private void Start()
     {
-        FindAnyObjectByType<All_moveable_gum_holder>().OnFinishMove_AddListener(Check_isWining);
+        var gumHolder = FindAnyObjectByType<All_moveable_gum_holder>();
+        if (gumHolder != null)
+        {
+            gumHolder.OnFinishMove_AddListener(Check_isWining);
+        }
+        else
+        {
+            Debug.LogError("[Wining_Check] Cannot find All_moveable_gum_holder in scene.");
+        }
     }
-
 
     public void Add_WiningTile(Wining_Tile tile)
     {
-        wining_tiles.Add(tile);
+        if (tile != null && !wining_tiles.Contains(tile))
+        {
+            wining_tiles.Add(tile);
+        }
     }
-
-    private bool _completedLevel = false;
-    public bool completedLevel => _completedLevel; 
 
     public void Check_isWining()
     {
-        bool isWin = true;
+        if (_completedLevel) return;
 
-        foreach (var i in wining_tiles)
+        foreach (var tile in wining_tiles)
         {
-            if (i.IsWin == false)
+            if (tile == null || !tile.IsWin)
             {
-                isWin = false; break;
+                return;
             }
         }
 
-
-        if (isWin)
-        {
-            if (completedLevel) return;
-            _completedLevel = true;
-        }
+        _completedLevel = true;
+        Debug.Log("[Wining_Check] All tiles are in win state. Broadcasting victory.");
+        OnWin?.Invoke();
     }
-
-    
-
 }
