@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +17,8 @@ public class Get_Input : MonoBehaviour
 
     [SerializeField] private InputAction playerMovementControls;
     [SerializeField] private InputAction playerButtonPressed;
+
+    bool yes = false;
 
     private void Awake()
     {
@@ -60,7 +64,14 @@ public class Get_Input : MonoBehaviour
 
     private void Update()
     {
-        inputBuffering();
+        if (yes)
+        {
+            inputBuffering();
+        }
+        else
+        {
+            StartCoroutine(WaitSec(1f));
+        }
     }
 
     private void Initialize()
@@ -109,5 +120,11 @@ public class Get_Input : MonoBehaviour
             nextMoveTime = Time.time + inputCooldown;
             //Debug.Log($"Direction updated: {_direction}");
         }
+    }
+
+    IEnumerator WaitSec(float time)
+    {
+        yield return new WaitForSeconds(time);
+        yes = true;
     }
 }
