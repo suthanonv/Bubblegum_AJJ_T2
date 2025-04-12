@@ -10,6 +10,7 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] Get_Input get_Input;
     [SerializeField] GameObject inputGameObject;
+    GameObject newInput;
     GameObject cloud;
     UnityEngine.UI.Slider loadSceneProgressBar;
     GameObject loadScene;
@@ -84,12 +85,15 @@ public class LevelLoader : MonoBehaviour
             //loadSceneProgressBar.value = asyncload.progress;
             yield return null;
         }
+        newInput = FindAnyObjectByType<Get_Input>().gameObject;
+        newInput.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < 220; i++)
         {
             cloud.transform.position += new Vector3(-16f, -9f);
             yield return null;
         }
+        newInput.SetActive(true);
         Destroy(loadSceneCanva);
         Destroy(gameObject);
     }
