@@ -79,7 +79,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
             if (hit.collider.gameObject.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
                 currentTile_index = tile.Tile_Index;
-                Position(currentTile_index);
+                InstantSetPosition(currentTile_index);
                 return;
             }
         }

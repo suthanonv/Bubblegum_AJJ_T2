@@ -25,6 +25,7 @@ public class Awake_Gum_Animate_control : MonoBehaviour
         mainComponent.AddOnMoveListener(Walk);
         mainComponent.AddOnFinishMove(Idle);
         mainComponent.Set_GetOnMoveDuration_Func(MoveDutation);
+
     }
 
     void Delete()
