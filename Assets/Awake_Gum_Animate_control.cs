@@ -6,19 +6,22 @@ public class Awake_Gum_Animate_control : MonoBehaviour
     [SerializeField] AnimationClip clip;
     Animator animator;
 
+    SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         SetUp();
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_EnterState_Listner(SetUp);
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_ExitState_Listener(Delete);
-        this.gameObject.SetActive(false);
+        animator.enabled = false;
 
     }
 
     void SetUp()
     {
-        this.gameObject.SetActive(true);
+        animator.enabled = true;
         mainComponent.AddOnMoveListener(Walk);
         mainComponent.AddOnFinishMove(Idle);
         mainComponent.Set_GetOnMoveDuration_Func(MoveDutation);
@@ -29,8 +32,8 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
         mainComponent.RemoveOneMoveListener(Walk);
         mainComponent.RemoveOnfinishMove(Idle);
-        this.gameObject.SetActive(false);
-
+        animator.enabled = false;
+        spriteRenderer.sprite = null;
     }
 
 
