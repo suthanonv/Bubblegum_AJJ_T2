@@ -151,7 +151,9 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         }
 
         transform.position = _future_pos;
+        Debug.Log("On finish Lerping Call Onfinish Move");
         OnFinishMove?.Invoke();
+
         OnActive = false;
     }
 

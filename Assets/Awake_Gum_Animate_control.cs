@@ -21,6 +21,7 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
     void SetUp()
     {
+
         animator.enabled = true;
         mainComponent.AddOnMoveListener(Walk);
         mainComponent.AddOnFinishMove(Idle);
@@ -56,6 +57,7 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
     void Idle()
     {
+        Debug.Log("Play Idle");
         animator.StopPlayback();
         animator.Play("IDLE");
     }

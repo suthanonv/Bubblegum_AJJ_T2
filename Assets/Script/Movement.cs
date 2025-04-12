@@ -76,6 +76,7 @@ public class Movement : MonoBehaviour, I_move
 
     public void OnFinishMove()
     {
+        Debug.Log("Begin Onfinishmove delegate of Movement");
         OnfinishMove.Invoke();
     }
 

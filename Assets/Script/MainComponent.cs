@@ -54,13 +54,21 @@ public class MainComponent : MonoBehaviour
 
         foreach (Transform i in Main_GameObject.transform)
         {
+            Debug.Log($"Find Component {i.gameObject.name}");
+
             if (i.TryGetComponent<B>(out B _component))
             {
                 _Component = _component;
                 return _Component;
             }
         }
+        Debug.Log($"Found nothing , so i try find component in child");
+        _Component = Main_GameObject.transform.GetComponentInChildren<B>();
+
+        Debug.Log($"{_Component == null} : Result of Serching Component");
+
         return _Component;
+
 
     }
     #endregion

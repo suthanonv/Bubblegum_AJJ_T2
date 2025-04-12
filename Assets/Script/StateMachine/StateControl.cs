@@ -15,12 +15,10 @@ public class StateControl<T> : MonoBehaviour where T : Enum
     {
         SetUp();
         this.GetComponent<MainComponent>().GameObject_SetFunc(GetState_Object);
-    }
-
-    private void Start()
-    {
         IntilizedState();
     }
+
+
     void SetUp()
     {
         foreach (Transform i in this.transform)

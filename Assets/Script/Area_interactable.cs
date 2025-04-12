@@ -8,6 +8,7 @@ public class Area_interactable : MonoBehaviour
 
     public void Interact()
     {
+        Debug.Log("Begin Interact");
         interacted_event?.Invoke();
     }
 }
