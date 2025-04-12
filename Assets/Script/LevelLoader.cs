@@ -14,7 +14,7 @@ public class LevelLoader : MonoBehaviour
     UnityEngine.UI.Slider loadSceneProgressBar;
     GameObject loadScene;
     GameObject loadSceneCanva;
-    bool LoadTimeChecker;
+    private bool LoadTimeChecker;
     private void Awake()
     {
         this.transform.parent = null;
@@ -23,11 +23,12 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(int levelNumber)
     {
+        inputGameObject.SetActive(false);
         SceneManager.LoadScene(levelNumber);
     }
     public void loadNextScene()
     {
-        inputGameObject.SetActive(false);
+        
         Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
@@ -38,7 +39,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void loadPreviousScene()
     {
-        inputGameObject.SetActive(false);
+        
         Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
@@ -50,7 +51,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void reloadScene()
     {
-        inputGameObject.SetActive(false);
+        
         Debug.Log($"{this.gameObject.name}, reloadScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
