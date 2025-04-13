@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSelectTile : Grid_Collider
 {
     LevelLoader lvl;
     [SerializeField] int lvlSelect;
-    [SerializeField] int sceneSkip;
     private void Start()
     {
         lvl =  FindAnyObjectByType<LevelLoader>();
@@ -14,7 +14,7 @@ public class LevelSelectTile : Grid_Collider
     {
         if (main.GetComponent<StateControl<Bubble_Gum_State>>() != null)
         {
-            lvl.loadLevelSelectedScene(lvlSelect + sceneSkip);
+            lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
         }
     }
 
