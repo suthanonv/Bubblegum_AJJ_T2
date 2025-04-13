@@ -36,7 +36,7 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel + 1));
+        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 1));
     }
     public void loadPreviousScene()
     {
@@ -48,7 +48,7 @@ public class LevelLoader : MonoBehaviour
 
 
         //LoadLevel(_currentLevel - 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel - 1));
+        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 1));
     }
     public void reloadScene()
     {
@@ -60,7 +60,7 @@ public class LevelLoader : MonoBehaviour
 
 
         //LoadLevel(_currentLevel);
-        StartCoroutine(ASyncLoadScene(_currentLevel));
+        StartCoroutine(ASyncLoadScene(_currentLevel, 2));
     }
     public void loadLevelSelectedScene(int lvl)
     {
@@ -71,9 +71,9 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(lvl));
+        StartCoroutine(ASyncLoadScene(lvl, 1));
     }
-    IEnumerator ASyncLoadScene(int levelNumber)
+    IEnumerator ASyncLoadScene(int levelNumber, int cloudSpeed)
     {
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;
         loadSceneCanva = loadScene.transform.parent.gameObject;
@@ -83,9 +83,9 @@ public class LevelLoader : MonoBehaviour
         //loadScene.SetActive(true);
         //loadSceneProgressBar.value = 0f;
         cloud.SetActive(true);
-        for(int i = 0; i < 220; i++)
+        for(int i = 0; i < 880/cloudSpeed; i++)
         {
-            cloud.transform.position += new Vector3(-16f, -9f);
+            cloud.transform.position += new Vector3(-4f*cloudSpeed, -2.25f*cloudSpeed);
             yield return null;
         }
         AsyncOperation asyncload = SceneManager.LoadSceneAsync(levelNumber);
@@ -98,9 +98,9 @@ public class LevelLoader : MonoBehaviour
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        for (int i = 0; i < 220; i++)
+        for (int i = 0; i < 880/cloudSpeed; i++)
         {
-            cloud.transform.position += new Vector3(-16f, -9f);
+            cloud.transform.position += new Vector3(-4f * cloudSpeed, -2.25f * cloudSpeed);
             yield return null;
         }
         newInput.SetActive(true);
