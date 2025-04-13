@@ -70,7 +70,7 @@ public class Get_Input : MonoBehaviour
         }
         else
         {
-            StartCoroutine(WaitSec(1f));
+            StartCoroutine(WaitSec(0.3f));
         }
     }
 

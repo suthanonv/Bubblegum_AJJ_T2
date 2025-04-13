@@ -15,7 +15,7 @@ public class LevelLoader : MonoBehaviour
     UnityEngine.UI.Slider loadSceneProgressBar;
     GameObject loadScene;
     GameObject loadSceneCanva;
-    private bool LoadTimeChecker;
+    //private bool LoadTimeChecker;
     private void Awake()
     {
         this.transform.parent = null;
@@ -62,14 +62,24 @@ public class LevelLoader : MonoBehaviour
         //LoadLevel(_currentLevel);
         StartCoroutine(ASyncLoadScene(_currentLevel));
     }
+    public void loadLevelSelectedScene(int lvl)
+    {
 
+        Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
+        int _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (get_Input == null)
+            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
+
+        //LoadLevel(_currentLevel + 1);
+        StartCoroutine(ASyncLoadScene(lvl));
+    }
     IEnumerator ASyncLoadScene(int levelNumber)
     {
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;
         loadSceneCanva = loadScene.transform.parent.gameObject;
         loadSceneProgressBar = loadScene.GetComponentInChildren<UnityEngine.UI.Slider>(true);
         cloud = FindAnyObjectByType<Cloud>(FindObjectsInactive.Include).gameObject;
-        LoadTimeChecker = false;
+        //LoadTimeChecker = false;
         //loadScene.SetActive(true);
         //loadSceneProgressBar.value = 0f;
         cloud.SetActive(true);
@@ -107,6 +117,6 @@ public class LevelLoader : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
             currCountdownValue -= 0.1f;
         }
-        LoadTimeChecker = true;
+        //LoadTimeChecker = true;
     }
 }
