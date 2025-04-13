@@ -97,7 +97,7 @@ public class LevelLoader : MonoBehaviour
         }
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < 880/cloudSpeed; i++)
         {
             cloud.transform.position += new Vector3(-4f * cloudSpeed, -2.25f * cloudSpeed);
