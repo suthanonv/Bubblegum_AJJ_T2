@@ -36,7 +36,7 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 1));
+        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 1.5f));
     }
     public void loadPreviousScene()
     {
@@ -48,7 +48,7 @@ public class LevelLoader : MonoBehaviour
 
 
         //LoadLevel(_currentLevel - 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 1));
+        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 1.5f));
     }
     public void reloadScene()
     {
@@ -60,7 +60,7 @@ public class LevelLoader : MonoBehaviour
 
 
         //LoadLevel(_currentLevel);
-        StartCoroutine(ASyncLoadScene(_currentLevel, 2));
+        StartCoroutine(ASyncLoadScene(_currentLevel, 1));
     }
     public void loadLevelSelectedScene(int lvl)
     {
@@ -71,9 +71,9 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(lvl, 1));
+        StartCoroutine(ASyncLoadScene(lvl, 1.5f));
     }
-    IEnumerator ASyncLoadScene(int levelNumber, int cloudSpeed)
+    IEnumerator ASyncLoadScene(int levelNumber, float duration)
     {
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;
         loadSceneCanva = loadScene.transform.parent.gameObject;
@@ -83,11 +83,22 @@ public class LevelLoader : MonoBehaviour
         //loadScene.SetActive(true);
         //loadSceneProgressBar.value = 0f;
         cloud.SetActive(true);
+        /*
         for(int i = 0; i < 880/cloudSpeed; i++)
         {
             cloud.transform.position += new Vector3(-4f*cloudSpeed, -2.25f*cloudSpeed);
             yield return null;
         }
+        */
+        float time = 0;
+        Vector2 startingPos = cloud.transform.localPosition;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            cloud.transform.localPosition = Vector2.Lerp(startingPos, Vector2.zero, time / duration);
+            yield return null;
+        }
+        cloud.transform.localPosition = Vector2.zero;
         AsyncOperation asyncload = SceneManager.LoadSceneAsync(levelNumber);
         StartCoroutine(CheckLoadTime());
         while (!asyncload.isDone)
@@ -97,12 +108,23 @@ public class LevelLoader : MonoBehaviour
         }
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
+        /*
         for (int i = 0; i < 880/cloudSpeed; i++)
         {
             cloud.transform.position += new Vector3(-4f * cloudSpeed, -2.25f * cloudSpeed);
             yield return null;
         }
+        */
+        time = 0;
+        startingPos = cloud.transform.localPosition;
+        while (time < duration)
+        {
+            cloud.transform.localPosition = Vector2.Lerp(startingPos, new Vector2(-3520, -1980), time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        cloud.transform.localPosition = new Vector2(-3520, -1980);
         newInput.SetActive(true);
         Destroy(loadSceneCanva);
         Destroy(gameObject);
