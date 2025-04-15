@@ -125,8 +125,44 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         transform.position = _future_pos;
 
         _future_tile.SetOccupiedObject(main);
-
+        Invoke("RayCastSetPosAgain", 0.05f);
     }
+
+    void RayCastSetPosAgain()
+    {
+
+        if (grid_Manager == null)
+        {
+            grid_Manager = FindAnyObjectByType<Grid_Manager>();
+        }
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(
+            this.transform.position,
+            new Vector2(0.1f, 0.1f),
+            0,
+            transform.up,
+            10f,
+            LayerMask.NameToLayer("Tile") // Ensure `layerMask` is defined properly
+        );
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider.gameObject.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
+            {
+                currentTile_index = tile.Tile_Index;
+
+                MoveAble_Tile _future_tile = grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>();
+
+
+                Vector2 _future_pos = _future_tile.gameObject.transform.position;
+
+                transform.position = _future_pos;
+
+                _future_tile.SetOccupiedObject(main);
+                return;
+            }
+        }
+    }
+
 
     public void SetRotation(Vector2Int Direction)
     {
