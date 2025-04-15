@@ -7835,7 +7835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1031057758
 Transform:
   m_ObjectHideFlags: 0
@@ -7845,7 +7845,7 @@ Transform:
   m_GameObject: {fileID: 1031057757}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4417777, y: 1.0359998, z: -0.007227864}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7858,12 +7858,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031057757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847e77856062ab5429968b3ab5422953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainComponent: {fileID: 0}
+  mainComponent: {fileID: 2134607712}
   clip: {fileID: 7400000, guid: 9e773793db68df545bdc6ea7c1f4a113, type: 2}
 --- !u!95 &1031057760
 Animator:
@@ -7873,7 +7873,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031057757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e41e1310f52f18d4e9affa6a21a66412, type: 2}
   m_CullingMode: 0
@@ -7894,7 +7894,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031057757}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -15647,6 +15647,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5959533876969039035, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
   m_PrefabInstance: {fileID: 2134607710}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2134607712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1272283085219849108, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
+  m_PrefabInstance: {fileID: 2134607710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
