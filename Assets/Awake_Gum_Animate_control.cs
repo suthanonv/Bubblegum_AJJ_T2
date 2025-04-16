@@ -45,7 +45,7 @@ public class Awake_Gum_Animate_control : MonoBehaviour
     }
     void Walk()
     {
-
+        SoundManager.PlaySound(SoundType.BBG_Jump, 1f);
 
         Vector2Int Direction = mainComponent.Current_direction;
 
