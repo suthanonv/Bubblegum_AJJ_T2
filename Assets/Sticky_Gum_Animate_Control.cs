@@ -24,6 +24,7 @@ public class Sticky_Gum_Animate_Control : MonoBehaviour
 
     void SetUp()
     {
+        Main.FreezeRotation = true;
         this.gameObject.SetActive(true);
         Direction _gum_Current_Direct = Main.CurretionDirectionEnum;
         Debug.Log("Active");
@@ -34,6 +35,7 @@ public class Sticky_Gum_Animate_Control : MonoBehaviour
 
     void Delete()
     {
+        Main.FreezeRotation = false;
         this.gameObject.SetActive(false);
     }
 

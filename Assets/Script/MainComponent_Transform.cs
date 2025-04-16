@@ -15,7 +15,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     Vector2Int _current_Direction = new Vector2Int(1, 0);
     public Vector2Int Current_direction => _current_Direction;
 
-
+    public bool FreezeRotation { get; set; }
 
 
     private void Awake()
@@ -130,11 +130,9 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
     public void SetRotation(Vector2Int Direction)
     {
-
+        if (FreezeRotation) return;
         _current_Direction = Direction;
         _currentDirectionEnum = Vector2IntToDirect.ConvertVector2IntToDirection(Direction);
-
-
     }
     IEnumerator Lerping_Move(Vector2 _current_pos, Vector2 _future_pos, float duration, Action OnMove, Action OnFinishMove)
     {

@@ -8,7 +8,7 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
     {
         base.OnEnterState();
         FindAnyObjectByType<All_Sticky_Gum_Holder>().Add_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
-        //Debug.Log($"{state} enter");
+
     }
 
     public override void OnExitState()

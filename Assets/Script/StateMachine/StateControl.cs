@@ -10,7 +10,6 @@ public class StateControl<T> : MonoBehaviour where T : Enum
     [SerializeField] protected T _currentState;
     Dictionary<T, StateBehaviour<T>> StateToBehave = new Dictionary<T, StateBehaviour<T>>();
 
-
     private void Awake()
     {
         SetUp();
@@ -53,6 +52,7 @@ public class StateControl<T> : MonoBehaviour where T : Enum
     {
         return StateToBehave[_currentState].gameObject;
     }
+
 
 
 
