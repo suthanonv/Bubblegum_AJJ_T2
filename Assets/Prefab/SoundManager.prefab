@@ -202,9 +202,17 @@ MonoBehaviour:
     maxPitch: 0
     mixer: {fileID: 0}
     sounds: []
+  - name: Effect_EnterWinning
+    volume: 1
+    minPitch: 0.8
+    maxPitch: 1.21
+    mixer: {fileID: 4447541719591035320, guid: 114fabe048f9904448e29742f447d83e, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 3e5a86c8b66b01f41a93bec2388ad68f, type: 3}
   - name: Effect_Winning
-    volume: 0
-    minPitch: 0
-    maxPitch: 0
-    mixer: {fileID: 0}
-    sounds: []
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
+    mixer: {fileID: -6703154473126394953, guid: 114fabe048f9904448e29742f447d83e, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 225748f71ee94c9419b21353a454ddb6, type: 3}

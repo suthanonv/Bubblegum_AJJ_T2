@@ -44,6 +44,7 @@ public class Wining_Check : MonoBehaviour
         }
 
         _completedLevel = true;
+        SoundManager.PlaySound(SoundType.Effect_Winning);
         Debug.Log("[Wining_Check] All tiles are in win state. Broadcasting victory.");
         OnWin?.Invoke();
     }
