@@ -25,6 +25,7 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
     {
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
+        _spriteRenderer.sortingOrder = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
 
         _animator.StopPlayback();
 
@@ -35,6 +36,11 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
         StartCoroutine(Transition(CallBack));
     }
 
+    int GetSpriteOrder(Direction direct)
+    {
+        if (direct == Direction.Up) return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) + 1;
+        else return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) - 1;
+    }
 
     IEnumerator Transition(Action CallBack)
     {
