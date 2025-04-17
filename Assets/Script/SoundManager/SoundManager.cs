@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 public enum SoundType
 {
     BBG_Jump,
-    BBG_Noise,
+    BBG_GrassNoise,
     BBG_Land,
     
     BBG_toStick,
@@ -43,26 +43,26 @@ public class SoundManager : MonoBehaviour
     public static void PlaySound(SoundType sound, float volume = 1f)
     {
         if (instance == null || instance.SL == null || (int)sound >= instance.SL.Length)
-        {
-            Debug.LogWarning("SoundManager: sound list not properly configured.");
             return;
-        }
 
         SoundList soundList = instance.SL[(int)sound];
-        AudioClip[] clips = soundList.sounds;
-
-        if (clips == null || clips.Length == 0)
-        {
-            Debug.LogWarning($"SoundManager: No clips set for sound {sound}");
+        if (soundList.sounds == null || soundList.sounds.Length == 0)
             return;
-        }
 
-        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        AudioClip randomClip = soundList.sounds[UnityEngine.Random.Range(0, soundList.sounds.Length)];
 
-        instance.audioSource.outputAudioMixerGroup = soundList.mixer;
-        instance.audioSource.pitch = UnityEngine.Random.Range(soundList.minPitch, soundList.maxPitch);
-        instance.audioSource.PlayOneShot(randomClip, volume * soundList.volume);
+        
+        GameObject tempGO = new GameObject("TempAudio");
+        AudioSource aSource = tempGO.AddComponent<AudioSource>();
+        aSource.outputAudioMixerGroup = soundList.mixer;
+        aSource.clip = randomClip;
+        aSource.volume = volume * soundList.volume;
+        aSource.pitch = UnityEngine.Random.Range(soundList.minPitch, soundList.maxPitch);
+        aSource.Play();
+
+        UnityEngine.Object.Destroy(tempGO, randomClip.length / aSource.pitch);
     }
+
 
 #if UNITY_EDITOR
     private void OnValidate()

@@ -36,6 +36,7 @@ public class MoveAble_Tile : Tile
         else
 
         {
+            SoundManager.PlaySound(SoundType.BBG_Land);
             OnEnter.Invoke(_ocupiedObject);
         }
     }
