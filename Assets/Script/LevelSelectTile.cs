@@ -8,11 +8,18 @@ public class LevelSelectTile : Grid_Collider
     LevelLoader lvl;
     [SerializeField] int lvlSelect;
     TMP_Text lvlName;
+    string LvlName;
     bool isIn;
     private void Start()
     {
         lvl = FindAnyObjectByType<LevelLoader>();
         lvlName = FindAnyObjectByType<lvlNameText>().gameObject.GetComponent<TMP_Text>();
+        LvlName = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+        string[] sceneNamefull = LvlName.Split('/');
+        int index = sceneNamefull.Length;
+        LvlName = sceneNamefull[index-1];
+        string[] name = LvlName.Split(".");
+        LvlName = name[0];
     }
 
     private void Update()
@@ -31,13 +38,13 @@ public class LevelSelectTile : Grid_Collider
         if (main.GetComponent<StateControl<Bubble_Gum_State>>() != null)
         {
             isIn = true;
-            lvlName.text = $"Level {lvlSelect + SceneManager.GetActiveScene().buildIndex}";
+            lvlName.text = $"{LvlName}";
         }
     }
 
     protected override void _OnExit(MainComponent main)
     {
-
         isIn = false;
+        lvlName.text = $"";
     }
 }

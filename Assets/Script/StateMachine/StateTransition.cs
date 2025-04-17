@@ -1,26 +1,31 @@
 using System;
+using UnityEngine;
 
-public struct StateTransition<T> where T : Enum
+public class StateTransition<T> : MonoBehaviour where T : Enum
 {
 
-    private T _currentState;
-    private T _nextState;
-    public Action<Action> Action;
+    protected virtual T CurrentState { get; }
+    protected virtual T _nextState { get; }
+    System.Action<Action> _action;
 
-    public StateTransition(T currentState, T nextState, Action<Action> action)
+
+    protected virtual void Awake()
     {
-        _currentState = currentState;
-        _nextState = nextState;
-        Action = action;
+        _action += OnTransition;
     }
 
-    public Action<Action> GetTransition(T currentState, T nextState)
+    protected virtual void OnTransition(System.Action CallBack)
     {
-        if (currentState.Equals(_currentState) && nextState.Equals(_nextState))
+        CallBack.Invoke();
+    }
+
+    public void GetTransition(T currentState, T nextState, System.Action CallBack)
+    {
+        if (currentState.Equals(CurrentState) && nextState.Equals(_nextState))
         {
-            return Action;
+            _action?.Invoke(CallBack);
         }
-        return null;
+        return;
     }
 
 

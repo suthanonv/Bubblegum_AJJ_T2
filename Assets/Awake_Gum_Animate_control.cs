@@ -23,6 +23,7 @@ public class Awake_Gum_Animate_control : MonoBehaviour
     {
 
         animator.enabled = true;
+        Idle();
         mainComponent.AddOnMoveListener(Walk);
         mainComponent.AddOnFinishMove(Idle);
         mainComponent.Set_GetOnMoveDuration_Func(MoveDutation);
