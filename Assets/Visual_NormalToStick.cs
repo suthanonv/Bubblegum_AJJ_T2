@@ -30,7 +30,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
 
         _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
         _animator.SetFloat("y", MainComponent_Tranform.Current_direction.y);
-        _animator.Play(AnimationState);
+        _animator.Play(AnimationState , 0 , 0f);
 
         StartCoroutine(Transition(CallBack));
     }
