@@ -9,7 +9,9 @@ public class CustomRuleTileSubBase : RuleTile<CustomRuleTileSubBase.Neighbor>
 {
     public bool alwaysConnect;
     public TileBase[] tilesToConnect;
+    public TileBase tileToAccept;
     public TileBase tileToIgnore;
+    public TileBase tileToIgnore2;
     public bool checkSelf;
 
 
@@ -18,6 +20,8 @@ public class CustomRuleTileSubBase : RuleTile<CustomRuleTileSubBase.Neighbor>
         public const int SpecifiedList = 4;
         public const int Specific = 5;
         public const int Empty = 6;
+        public const int Ignore = 7;
+        public const int Ignore2 = 8;
     }
 
     public override bool RuleMatch(int neighbor, TileBase tile) {
@@ -28,6 +32,8 @@ public class CustomRuleTileSubBase : RuleTile<CustomRuleTileSubBase.Neighbor>
             case Neighbor.SpecifiedList: return CheckSpecifiedList(tile);
             case Neighbor.Specific: return CheckSpecific(tile);
             case Neighbor.Empty: return CheckEmpty(tile);
+            case Neighbor.Ignore: return CheckIgnore(tile);
+            case Neighbor.Ignore2: return CheckIgnore2(tile);
         }
         return base.RuleMatch(neighbor, tile);
     }
@@ -56,11 +62,23 @@ public class CustomRuleTileSubBase : RuleTile<CustomRuleTileSubBase.Neighbor>
 
     private bool CheckSpecific(TileBase tile)
     {
-        return tileToIgnore == tile;
+        return tileToAccept == tile;
     }
 
     private bool CheckEmpty(TileBase tile)
     {
         return tile == null;
+    }
+
+    private bool CheckIgnore(TileBase tile)
+    {
+        if (tile == tileToIgnore) { return true; }
+        else return false;
+    }
+
+    private bool CheckIgnore2(TileBase tile)
+    {
+        if (tile == tileToIgnore2) { return true; }
+        else return false;
     }
 }

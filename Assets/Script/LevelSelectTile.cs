@@ -12,7 +12,7 @@ public class LevelSelectTile : Grid_Collider
     bool isIn;
     private void Start()
     {
-        lvl = FindAnyObjectByType<LevelLoader>();
+        //lvl = FindAnyObjectByType<LevelLoader>();
         lvlName = FindAnyObjectByType<lvlNameText>().gameObject.GetComponent<TMP_Text>();
         LvlName = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
         string[] sceneNamefull = LvlName.Split('/');
@@ -28,6 +28,7 @@ public class LevelSelectTile : Grid_Collider
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                lvl = FindAnyObjectByType<LevelLoader>();
                 lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
             }
         }
