@@ -55,8 +55,8 @@ public class Awake_Gum_Animate_control : MonoBehaviour
         animator.SetFloat("Y", Direction.y);
 
         animator.Play("Move");
-        //SoundManager.PlaySound(SoundType.BBG_Land, 1f);
-        SoundManager.PlaySound(SoundType.BBG_GrassNoise);
+        
+        SoundManager.PlaySound(SoundType.BBG_Jump);
     }
 
     void Idle()
