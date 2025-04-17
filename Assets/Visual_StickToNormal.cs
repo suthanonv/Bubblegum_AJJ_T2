@@ -15,6 +15,8 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.enabled = false;
+
     }
 
     protected override void OnTransition(Action CallBack)
