@@ -17,6 +17,7 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         IntilizedState();
     }
 
+    List<StateTransition<T>> StateTransitionList = new List<StateTransition<T>>();
 
     void SetUp()
     {
@@ -24,9 +25,19 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         {
             var StateToStore = i.gameObject.GetComponent<StateBehaviour<T>>();
 
-            if (StateToStore == null) continue;
+            if (StateToStore != null)
+            {
 
-            StateToBehave.Add(StateToStore.state, StateToStore);
+                StateToBehave.Add(StateToStore.state, StateToStore);
+            }
+
+            var StateTranstion = i.gameObject.GetComponent<StateTransition<T>>();
+
+            if (StateTranstion != null)
+            {
+                StateTransitionList.Add(StateTranstion);
+            }
+
         }
     }
     void IntilizedState()
@@ -34,13 +45,29 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         StateToBehave[_currentState].OnEnterState();
     }
 
+    T _preNewState;
+
 
     public virtual void SetState(T newstate)
     {
         T oldState = _currentState;
         StateToBehave[oldState].OnExitState();
-        _currentState = newstate;
-        StateToBehave[newstate].OnEnterState();
+        _preNewState = newstate;
+
+        foreach (var i in StateTransitionList)
+        {
+            i.GetTransition(oldState, newstate, SetNewState);
+        }
+
+
+    }
+
+
+
+    void SetNewState()
+    {
+        _currentState = _preNewState;
+        StateToBehave[_preNewState].OnEnterState();
     }
 
     public GameObject Get_Specific_State_Object(T state)
