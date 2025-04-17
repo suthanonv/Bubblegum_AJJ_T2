@@ -5,7 +5,8 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 
 [CreateAssetMenu]
-public class CustomRuleTile : RuleTile<CustomRuleTile.Neighbor> {
+public class CustomRuleTileSubBase : RuleTile<CustomRuleTileSubBase.Neighbor> 
+{
     public bool alwaysConnect;
     public TileBase[] tilesToConnect;
     public TileBase tileToIgnore;
