@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class NonRepeatingRandomCustomRuleTile : RuleTile<NonRepeatingRandomCustomRuleTile.Neighbor>
 {
     public Sprite[] randomSprites;
-    private int tileType;
+    private int tileSprite;
 
     public class Neighbor : RuleTile.TilingRuleOutput.Neighbor
     {
@@ -31,7 +31,7 @@ public class NonRepeatingRandomCustomRuleTile : RuleTile<NonRepeatingRandomCusto
         }
 
         // Check neighbors to avoid repetition
-        bool isValidPlacement = true;
+        bool isSameSprite = true;
         Vector3Int[] neighborOffsets = 
         {
             new Vector3Int(1, 0, 0),  // Right
@@ -47,24 +47,26 @@ public class NonRepeatingRandomCustomRuleTile : RuleTile<NonRepeatingRandomCusto
 
             if (neighborTile is NonRepeatingRandomCustomRuleTile neighborRuleTile)
             {
-                if (neighborRuleTile.tileType == this.tileType)
+                if (neighborRuleTile.tileSprite == this.tileSprite)//if neighbour is the same sprite
                 {
-                    isValidPlacement = false;
-                    break;
+                    if (isSameSprite)
+                    {
+                        // Assign a random sprite and tile type
+                        int randomIndex = Random.Range(0, randomSprites.Length);
+                        tileData.sprite = randomSprites[randomIndex];
+                        this.tileSprite = randomIndex; // Store the type for future checks
+                    }
+                    else
+                    {
+                        //If FALSE place random sprite instead of NULL
+                        int randomIndex = Random.Range(0, randomSprites.Length);
+                        tileData.sprite = randomSprites[randomIndex];
+                        this.tileSprite = randomIndex; // Store the type for future checks
+
+                        //tileData.sprite = null; // Don't place the tile
+                    }
                 }
             }
-        }
-
-        if (isValidPlacement)
-        {
-            // Assign a random sprite and tile type
-            int randomIndex = Random.Range(0, randomSprites.Length);
-            tileData.sprite = randomSprites[randomIndex];
-            this.tileType = randomIndex; // Store the type for future checks
-        }
-        else
-        {
-            tileData.sprite = null; // Don't place the tile
         }
     }
 }
