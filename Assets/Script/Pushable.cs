@@ -105,7 +105,14 @@ public class Pushable : MonoBehaviour, I_move
         foreach (Attach_Moveable_List i in attached_obj.Get_List())
         {
             if (attached_obj == i) continue;
-            if (i.Get_Move.PremovePosition(Direction) == i.Get_Move.DefaultPosition()) return Move;
+
+            Debug.Log($"{i.gameObject.name} : Pushable  Premoe Pos {i.Get_Move.PremovePosition(Direction)}, Default pos{i.Get_Move.DefaultPosition()}");
+
+            if (i.Get_Move.PremovePosition(Direction) == i.Get_Move.DefaultPosition())
+            {
+                Move = new List<I_move>();
+                return Move;
+            }
 
             Move.Add(i.Get_Move);
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UndoAndRedoController : MonoBehaviour
@@ -10,6 +11,7 @@ public class UndoAndRedoController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        StoreAllMoveableObject();
         tileManager = FindAnyObjectByType<TileManager>();
         bubblegum_undoManager = GetComponent<BubbleGum_UndoManager>();
         box_UndoAndRedo = GetComponent<Box_UndoAndRedo>();
@@ -26,6 +28,27 @@ public class UndoAndRedoController : MonoBehaviour
             Debug.LogError($"{box_UndoAndRedo} is missing");
         }
     }
+
+
+    List<MainComponent_Transform> moveableObjectList = new List<MainComponent_Transform>();
+    void StoreAllMoveableObject()
+    {
+        moveableObjectList.Clear(); // Optional: clear the list first if reusing
+        foreach (var i in FindObjectsByType<MainComponent_Transform>(FindObjectsSortMode.None))
+        {
+            moveableObjectList.Add(i);
+        }
+
+    }
+
+    void initializeAllObject()
+    {
+        foreach (var i in moveableObjectList)
+        {
+            i.InitializeTiles();
+        }
+    }
+
     public void Undo()
     {
         foreach (var character in BubbleGum_UndoManager.AllCharacters)
@@ -36,6 +59,8 @@ public class UndoAndRedoController : MonoBehaviour
         {
             character.Undo();
         }
+
+        tileManager.ResetObjectOnTiles(initializeAllObject);
     }
     public void Redo()
     {

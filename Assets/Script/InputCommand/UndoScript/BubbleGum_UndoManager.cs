@@ -75,7 +75,8 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
             tileIndex = movementComponent.currentTile_index,
             state = bubbleGumStateComponent.GetCurrentState(),
             attachedObjectList = attachedObjects,
-            directionFrom = direction
+
+            directionFrom = movementComponent.Current_direction
         };
 
         base.RegisterState(snapshot);
