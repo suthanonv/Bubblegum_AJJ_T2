@@ -19,6 +19,7 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
         _animator.enabled = false;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
+
     }
 
     protected override void OnTransition(Action CallBack)
@@ -26,7 +27,6 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
         _spriteRenderer.sortingOrder = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
-
         _animator.StopPlayback();
 
         _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
@@ -36,20 +36,21 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
         StartCoroutine(Transition(CallBack));
     }
 
+
     int GetSpriteOrder(Direction direct)
     {
         if (direct == Direction.Up) return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) + 1;
         else return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) - 1;
     }
 
+
     IEnumerator Transition(Action CallBack)
     {
 
         yield return new WaitForSeconds(GetDuration());
 
-        _animator.enabled = false;
         _spriteRenderer.enabled = false;
-
+        _animator.enabled = false;
         CallBack.Invoke();
     }
 
@@ -58,4 +59,5 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
     {
         return _clip.length;
     }
+
 }
