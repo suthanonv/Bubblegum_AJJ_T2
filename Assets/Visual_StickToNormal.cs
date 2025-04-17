@@ -12,16 +12,19 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
     [SerializeField] AnimationClip _clip;
     [SerializeField] string AnimationState;
     Animator _animator;
+    SpriteRenderer _spriteRenderer;
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _animator.enabled = false;
-
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.enabled = false;
     }
 
     protected override void OnTransition(Action CallBack)
     {
         _animator.enabled = true;
+        _spriteRenderer.enabled = true;
 
         _animator.StopPlayback();
 
@@ -39,6 +42,8 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
         yield return new WaitForSeconds(GetDuration());
 
         _animator.enabled = false;
+        _spriteRenderer.enabled = false;
+
         CallBack.Invoke();
     }
 
