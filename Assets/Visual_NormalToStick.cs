@@ -16,6 +16,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
     {
         _animator = GetComponent<Animator>();
         _animator.enabled = false;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
 
     }
