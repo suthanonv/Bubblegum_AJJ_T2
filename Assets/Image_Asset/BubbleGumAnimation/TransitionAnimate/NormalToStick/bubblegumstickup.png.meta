@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: df03826443c096b49a1bc842723d3a00
+guid: 3befdc6fe9eac2f4ea71e736e14421cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8378042947934889737
-    second: bubblegumwakingup_0
+      213: 6445108510278321412
+    second: bubblegumstickup_0
   - first:
-      213: -5255043974675258953
-    second: bubblegumwakingup_1
+      213: -6138204571089359733
+    second: bubblegumstickup_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -99,24 +99,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bubblegumwakingup_0
+      name: bubblegumstickup_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,21 +111,21 @@ TextureImporter:
         width: 384
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 90720a02ca9c44470800000000000000
-      internalID: 8378042947934889737
+      spriteID: 4058cfdda00a17950800000000000000
+      internalID: 6445108510278321412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bubblegumwakingup_1
+      name: bubblegumstickup_1
       rect:
         serializedVersion: 2
         x: 384
@@ -146,15 +133,15 @@ TextureImporter:
         width: 384
         height: 384
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b1ac62f8555217b0800000000000000
-      internalID: -5255043974675258953
+      spriteID: b8c2a85d677b0daa0800000000000000
+      internalID: -6138204571089359733
       vertices: []
       indices: 
       edges: []
@@ -163,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1a371d44a5ed66a4bb01ba2e1c3f92fd
+    spriteID: 1496be1dbb180c842a1a3dd442ecd7a9
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bubblegumwakingup_0: 8378042947934889737
-      bubblegumwakingup_1: -5255043974675258953
+      bubblegumstickup_0: 6445108510278321412
+      bubblegumstickup_1: -6138204571089359733
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
