@@ -61,6 +61,6 @@ public class Awake_Gum_Animate_control : MonoBehaviour
     {
         Debug.Log("Play Idle");
         animator.StopPlayback();
-        animator.Play("IDLE");
+        animator.Play("IDLE", 0, 0f);
     }
 }

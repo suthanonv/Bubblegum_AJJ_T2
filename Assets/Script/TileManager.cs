@@ -78,10 +78,11 @@ public class TileManager : MonoBehaviour, IInitialize
     }
     public Tile GetTile(Vector2Int index)
     {
+        Debug.Log($"GetTile , Debuging Index {index}");
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 
-    public void ResetObjectOnTiles()
+    public void ResetObjectOnTiles(System.Action callBack)
     {
         int width = tileIndex.GetLength(0);  // number of rows
         int height = tileIndex.GetLength(1); // number of columns
@@ -100,6 +101,8 @@ public class TileManager : MonoBehaviour, IInitialize
                 }
             }
         }
+
+        callBack.Invoke();
     }
 
 
