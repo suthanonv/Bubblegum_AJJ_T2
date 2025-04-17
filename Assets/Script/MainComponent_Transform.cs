@@ -65,13 +65,15 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         {
             grid_Manager = FindAnyObjectByType<Grid_Manager>();
         }
+
+        currentTile_index = new Vector2Int(-10, -10);
         RaycastHit2D[] hits = Physics2D.BoxCastAll(
             this.transform.position,
             new Vector2(0.1f, 0.1f),
             0,
             transform.up,
             10f,
-            LayerMask.NameToLayer("Tile") // Ensure `layerMask` is defined properly
+            LayerMask.NameToLayer("Tile")
         );
 
         foreach (var hit in hits)
@@ -125,7 +127,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
         transform.position = _future_pos;
 
         _future_tile.SetOccupiedObject(main);
-        Invoke("RayCastSetPosAgain", 0.05f);
+        RayCastSetPosAgain();
     }
 
     void RayCastSetPosAgain()

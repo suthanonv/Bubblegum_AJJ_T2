@@ -23,6 +23,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
 
     protected override void OnTransition(Action CallBack)
     {
+        MainComponent_Tranform.FreezeRotation = true;
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
         _spriteRenderer.sortingOrder = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
@@ -30,7 +31,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
 
         _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
         _animator.SetFloat("y", MainComponent_Tranform.Current_direction.y);
-        _animator.Play(AnimationState , 0 , 0f);
+        _animator.Play(AnimationState, 0, 0f);
 
         StartCoroutine(Transition(CallBack));
     }
