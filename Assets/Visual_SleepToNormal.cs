@@ -26,7 +26,7 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
         _animator.StopPlayback();
-        _animator.Play(_animationStateName);
+        _animator.Play(_animationStateName, 0, 0f);
         StartCoroutine(Transition(CallBack));
     }
 
