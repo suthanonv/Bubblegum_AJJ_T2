@@ -1,55 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu]
-public class NonRepeatingRandomCustomRuleTile : RuleTile<NonRepeatingRandomCustomRuleTile.Neighbor> {
+public class NonRepeatingRandomCustomRuleTile : RuleTile<NonRepeatingRandomCustomRuleTile.Neighbor>
+{
     public Sprite[] randomSprites;
+    private int tileType;
 
     public class Neighbor : RuleTile.TilingRuleOutput.Neighbor
     {
-        public const int DontMatch = 3;
+        // You can add custom neighbor checks here if needed
     }
 
-    public void bool GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+    public override bool RuleMatch(int neighbor, TileBase tile)
     {
-        // Grab neighbor sprites
-        HashSet<Sprite> neighborSprites = new HashSet<Sprite>();
+        // Default rule matching behavior
+        return base.RuleMatch(neighbor, tile);
+    }
 
-        foreach (Vector3Int offset in RuleTile.TilingRule.neighborPositions)
+    public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+    {
+        base.GetTileData(position, tilemap, ref tileData);
+
+        if (randomSprites == null || randomSprites.Length == 0)
         {
-            TileBase neighborTile = tilemap.GetTile(position + offset);
-            if (neighborTile is RuleTile neighborRuleTile)
+            Debug.LogWarning("No random sprites assigned!");
+            return;
+        }
+
+        // Check neighbors to avoid repetition
+        bool isValidPlacement = true;
+        Vector3Int[] neighborOffsets = 
+        {
+            new Vector3Int(1, 0, 0),  // Right
+            new Vector3Int(-1, 0, 0), // Left
+            new Vector3Int(0, 1, 0),   // Up
+            new Vector3Int(0, -1, 0)   // Down
+        };
+
+        foreach (var offset in neighborOffsets)
+        {
+            Vector3Int neighborPos = position + offset;
+            TileBase neighborTile = tilemap.GetTile(neighborPos);
+
+            if (neighborTile is NonRepeatingRandomCustomRuleTile neighborRuleTile)
             {
-                TileData neighborData = new TileData();
-                neighborRuleTile.GetTileData(position + offset, tilemap, ref neighborData);
-                if (neighborData.sprite != null)
+                if (neighborRuleTile.tileType == this.tileType)
                 {
-                    neighborSprites.Add(neighborData.sprite);
+                    isValidPlacement = false;
+                    break;
                 }
             }
         }
 
-        // Pick a sprite that isn't in neighbors
-        List<Sprite> options = new List<Sprite>();
-        foreach (Sprite sprite in randomSprites)
+        if (isValidPlacement)
         {
-            if (!neighborSprites.Contains(sprite))
-            {
-                options.Add(sprite);
-            }
+            // Assign a random sprite and tile type
+            int randomIndex = Random.Range(0, randomSprites.Length);
+            tileData.sprite = randomSprites[randomIndex];
+            this.tileType = randomIndex; // Store the type for future checks
         }
-
-        // Fallback if all are taken
-        Sprite selected = options.Count > 0
-            ? options[Random.Range(0, options.Count)]
-            : randomSprites[Random.Range(0, randomSprites.Length)];
-
-        tileData.sprite = selected;
-        tileData.colliderType = this.m_DefaultSpriteColliderType;
-
-        return true;
+        else
+        {
+            tileData.sprite = null; // Don't place the tile
+        }
     }
 }
