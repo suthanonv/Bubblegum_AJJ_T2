@@ -50,6 +50,7 @@ public class StateControl<T> : MonoBehaviour where T : Enum
 
     public virtual void SetState(T newstate)
     {
+        isSetedStaete = false;
         T oldState = _currentState;
         StateToBehave[oldState].OnExitState();
         _preNewState = newstate;
@@ -58,15 +59,18 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         {
             i.GetTransition(oldState, newstate, SetNewState);
         }
-
+        if (isSetedStaete == false)
+        {
+            SetNewState();
+        }
 
     }
 
-
+    bool isSetedStaete;
 
     void SetNewState()
     {
-
+        isSetedStaete = true;
         StateToBehave[_preNewState].OnEnterState();
     }
 
