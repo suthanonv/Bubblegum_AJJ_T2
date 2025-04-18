@@ -19,6 +19,7 @@ public class Movement_Assign : MonoBehaviour
 
     public void Remove_move()
     {
+        Debug.Log("Removed Move");
         move_holder.Remove_moveable(move);
     }
 }

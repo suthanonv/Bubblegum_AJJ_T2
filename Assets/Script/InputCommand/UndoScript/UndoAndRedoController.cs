@@ -49,8 +49,11 @@ public class UndoAndRedoController : MonoBehaviour
         }
     }
 
+    public bool EnableUndo { get; set; } = true;
+
     public void Undo()
     {
+        if (EnableUndo == false) return;
         foreach (var character in BubbleGum_UndoManager.AllCharacters)
         {
             character.Undo();
