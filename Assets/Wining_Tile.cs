@@ -9,10 +9,11 @@ public class Wining_Tile : Grid_Collider
 
     protected override void _OnEnter(MainComponent main)
     {
+        SoundManager.PlaySound(SoundType.Effect_EnterWinning);
         if (main.GetComponent<StateControl<Bubble_Gum_State>>() == null) _iswin = false;
 
         else _iswin = true;
-
+        
         //Debug.Log(_iswin);
     }
 
