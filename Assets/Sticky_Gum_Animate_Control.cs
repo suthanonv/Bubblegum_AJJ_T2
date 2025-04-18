@@ -29,7 +29,7 @@ public class Sticky_Gum_Animate_Control : MonoBehaviour
         Direction _gum_Current_Direct = Main.CurretionDirectionEnum;
         Debug.Log("Active");
         spriteRender.sprite = Sprite_List.FirstOrDefault(i => i.Direction == _gum_Current_Direct).GumSprite;
-        spriteRender.sortingOrder = GetSpriteOrder(_gum_Current_Direct);
+        spriteRender.sortingLayerName = GetSpriteOrder(_gum_Current_Direct);
 
     }
 
@@ -40,11 +40,12 @@ public class Sticky_Gum_Animate_Control : MonoBehaviour
     }
 
 
-    int GetSpriteOrder(Direction direct)
+    string GetSpriteOrder(Direction direct)
     {
-        if (direct == Direction.Up) return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) + 1;
-        else return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) - 1;
+        if (direct == Direction.Up) return "Elevated2InfrontGum";
+        else return "ElevatedBehindGum";
     }
+
 }
 
 [System.Serializable]

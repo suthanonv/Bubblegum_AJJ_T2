@@ -26,7 +26,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
         MainComponent_Tranform.FreezeRotation = true;
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
-        _spriteRenderer.sortingOrder = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
+        _spriteRenderer.sortingLayerName = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
         _animator.StopPlayback();
 
         _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
@@ -37,10 +37,10 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
     }
 
 
-    int GetSpriteOrder(Direction direct)
+    string GetSpriteOrder(Direction direct)
     {
-        if (direct == Direction.Up) return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) + 1;
-        else return Tile_SpriteOrder.GetSpriteOrder(OBjectType.StickAble) - 1;
+        if (direct == Direction.Up) return "Elevated2InfrontGum";
+        else return "ElevatedBehindGum";
     }
 
 

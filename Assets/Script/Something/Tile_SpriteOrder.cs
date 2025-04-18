@@ -19,4 +19,14 @@ public class Tile_SpriteOrder
 
         return int.MaxValue;
     }
+
+
+    public string GetSortedLayerName()
+    {
+        string layerName = "";
+
+
+        return layerName;
+
+    }
 }
