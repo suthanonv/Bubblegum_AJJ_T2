@@ -4603,6 +4603,10 @@ PrefabInstance:
       propertyPath: loadSceneCanva
       value: 
       objectReference: {fileID: 4136605454277779454, guid: 7b713ac871fadd845aca99759b8f0da4, type: 3}
+    - target: {fileID: 9006082291352485995, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: _beamUpClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 04eebf2a89ee39e4c8e785f02f97458e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6116,6 +6120,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5694923453476205307, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
+      propertyPath: On_EnterState.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5959533876969039035, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.04
@@ -6155,6 +6163,22 @@ PrefabInstance:
     - target: {fileID: 5959533876969039035, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769057398782951180, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769057398782951180, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769057398782951180, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8583516207479176198, guid: 9f8f57e05ef620541af875b530ab30c8, type: 3}
+    - target: {fileID: 6769057398782951180, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9057344287037826286, guid: b544c849de7dcaf48b3cf11071d6d27d, type: 3}
       propertyPath: m_Name
