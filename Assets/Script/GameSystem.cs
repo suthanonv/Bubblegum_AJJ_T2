@@ -1,6 +1,5 @@
-using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class GameSystem : MonoBehaviour
 {
@@ -24,9 +23,25 @@ public class GameSystem : MonoBehaviour
     }
     private void HandleWin()
     {
+        _transition.Invoke(loadNextScene);
+    }
+
+
+    System.Action<System.Action> _transition;
+
+    public void SetHandleWinTransition(System.Action<System.Action> Transiton)
+    {
+        _transition = Transiton;
+    }
+
+
+
+    void loadNextScene()
+    {
         Debug.Log("[GameSystem] Handling win... loading next scene.");
         levelLoader.loadNextScene();
     }
+
     private void Update()
     {
         /*if (wining_Check.completedLevel)
@@ -35,6 +50,9 @@ public class GameSystem : MonoBehaviour
             levelLoader.loadNextScene();
         }*/
     }
+
+
+
     IEnumerator delay()
     {
         yield return new WaitForSeconds(sceneTransitionTime);
@@ -43,7 +61,7 @@ public class GameSystem : MonoBehaviour
     {
         if (wining_Check != null)
         {
-            wining_Check.OnWin -= HandleWin; 
+            wining_Check.OnWin -= HandleWin;
         }
     }
 }

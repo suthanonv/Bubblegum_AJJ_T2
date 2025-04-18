@@ -11,7 +11,7 @@ public class Settings : MonoBehaviour
     [SerializeField] TMP_Text returnButtonText;
     [SerializeField] Slider[] sliders;
     Input_handle input;
-    int CurrentSelect;
+    public int CurrentSelect;
     Color grey;
     void Start()
     {
@@ -45,7 +45,7 @@ public class Settings : MonoBehaviour
 
     public void OpenSettings()
     {
-        input = FindAnyObjectByType<Input_handle>();
+        input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(false);
         Time.timeScale = 0;
         CurrentSelect = 1;
@@ -54,7 +54,7 @@ public class Settings : MonoBehaviour
         UpdateVisual();
     }
 
-    void CloseSettings()
+    public void CloseSettings()
     {
         input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(true);
@@ -64,7 +64,7 @@ public class Settings : MonoBehaviour
 
     }
 
-    void UpdateVisual()
+    public void UpdateVisual()
     {
         if (CurrentSelect != 4)
         {

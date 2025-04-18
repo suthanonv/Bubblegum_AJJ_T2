@@ -19,6 +19,12 @@ public class StateTransition<T> : MonoBehaviour where T : Enum
         CallBack.Invoke();
     }
 
+
+    public bool IsTransitionExit(T currentState, T nextState)
+    {
+        return (currentState.Equals(CurrentState) && nextState.Equals(_nextState));
+    }
+
     public void GetTransition(T currentState, T nextState, System.Action CallBack)
     {
         if (currentState.Equals(CurrentState) && nextState.Equals(_nextState))

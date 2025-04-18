@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -29,7 +25,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void loadNextScene()
     {
-        
+
         Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
@@ -40,7 +36,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void loadPreviousScene()
     {
-        
+
         Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
@@ -52,7 +48,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void reloadScene()
     {
-        
+
         Debug.Log($"{this.gameObject.name}, reloadScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
@@ -106,6 +102,8 @@ public class LevelLoader : MonoBehaviour
             //loadSceneProgressBar.value = asyncload.progress;
             yield return null;
         }
+
+        loadSceneComplete?.Invoke();
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
         yield return new WaitForSeconds(0.05f);
@@ -141,4 +139,16 @@ public class LevelLoader : MonoBehaviour
         }
         //LoadTimeChecker = true;
     }
+
+    public delegate void OnLoadSceneComplete();
+    OnLoadSceneComplete loadSceneComplete;
+
+
+
+    public void AddListener(OnLoadSceneComplete listener)
+    {
+        loadSceneComplete += listener;
+    }
+
+
 }

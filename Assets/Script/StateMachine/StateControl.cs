@@ -56,17 +56,21 @@ public class StateControl<T> : MonoBehaviour where T : Enum
         _currentState = _preNewState;
         foreach (var i in StateTransitionList)
         {
-            i.GetTransition(oldState, newstate, SetNewState);
+            if (i.IsTransitionExit(oldState, newstate) == true)
+            {
+
+                i.GetTransition(oldState, newstate, SetNewState);
+                return;
+            }
         }
+        SetNewState();
 
 
     }
 
 
-
     void SetNewState()
     {
-
         StateToBehave[_preNewState].OnEnterState();
     }
 
