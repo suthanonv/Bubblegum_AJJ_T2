@@ -27,7 +27,6 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
 
     protected override void OnTransition(Action CallBack, Action PreEnter)
     {
-
         _inputHandle.AddMovementListener(InstantEndTransition);
         _callback = CallBack;
         Debug.Log("being played");

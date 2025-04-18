@@ -22,7 +22,7 @@ public class Input_handle : MonoBehaviour
 
     public void RemoveMovementListener(System.Action<Vector2Int> action)
     {
-        _input_action -= action;    
+        _input_action -= action;
     }
 
     public void AddButtonListener(System.Action<string> action)
@@ -30,8 +30,12 @@ public class Input_handle : MonoBehaviour
         _buttonPressedAction += action;
     }
 
+
+
+    public bool EnableMove { get; set; } = true;
     public void CallingMovement(Vector2Int Direction)
     {
+        if (EnableMove == false) return;
         _registerStateAllCharacters.Invoke();
         _input_action?.Invoke(Direction);
     }

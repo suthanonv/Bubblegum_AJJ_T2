@@ -8,17 +8,20 @@ public class BubbleGumBeamController : MonoBehaviour
 
     [SerializeField] AnimationClip _beamUpClip;
     UndoAndRedoController undocontroler;
+    Input_handle _inputHandle;
     private void Start()
     {
-        FindAnyObjectByType<LevelLoader>().AddListener(SetUp);
+        FindAnyObjectByType<LevelLoader>().AddListener(OnLoadNewScene);
         FindAnyObjectByType<GameSystem>().SetHandleWinTransition(PlayAllAnimation);
         undocontroler = FindAnyObjectByType<UndoAndRedoController>();
-        SetUp();
+        _inputHandle = FindAnyObjectByType<Input_handle>();
+        OnLoadNewScene();
     }
 
-    void SetUp()
+    void OnLoadNewScene()
     {
         undocontroler.EnableUndo = true;
+        _inputHandle.EnableMove = true;
         foreach (var i in FindObjectsByType<Main_BubbleGumstate>(FindObjectsSortMode.None))
         {
             AllGums.Add(i);
@@ -34,6 +37,7 @@ public class BubbleGumBeamController : MonoBehaviour
     IEnumerator Animated(System.Action Callback)
     {
         undocontroler.EnableUndo = false;
+        _inputHandle.EnableMove = false;
         foreach (var gum in AllGums)
         {
             gum.SetState(Bubble_Gum_State.Normal);

@@ -13,21 +13,36 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
     [SerializeField] string AnimationState;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
+    Input_handle _inputHandle;
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _animator.enabled = false;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
+        _inputHandle = FindAnyObjectByType<Input_handle>();
 
     }
 
+
+    void InstantEndTransition(Vector2Int none)
+    {
+        StopAllCoroutines();
+        OnEnd();
+        _callback?.Invoke();
+
+
+    }
+
+    Action _callback;
     protected override void OnTransition(Action CallBack, Action PreEnter)
     {
+        _callback = CallBack;
+        _inputHandle.AddMovementListener(InstantEndTransition);
+        PreEnter?.Invoke();
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
         _spriteRenderer.sortingLayerName = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
-
         _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
         _animator.SetFloat("y", MainComponent_Tranform.Current_direction.y);
         _animator.Play(AnimationState, 0, 0f);
@@ -42,13 +57,20 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
     }
 
 
+
+    void OnEnd()
+    {
+        _animator.enabled = false;
+        _spriteRenderer.enabled = false;
+        _inputHandle.RemoveMovementListener(InstantEndTransition);
+    }
+
     IEnumerator Transition(Action CallBack)
     {
 
         yield return new WaitForSeconds(GetDuration());
 
-        _spriteRenderer.enabled = false;
-        _animator.enabled = false;
+        OnEnd();
         CallBack.Invoke();
     }
 
