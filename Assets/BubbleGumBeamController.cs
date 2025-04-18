@@ -40,7 +40,7 @@ public class BubbleGumBeamController : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(0.5);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (var gum in AllGums)
         {
