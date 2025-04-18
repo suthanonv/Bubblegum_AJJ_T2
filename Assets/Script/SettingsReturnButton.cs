@@ -7,6 +7,7 @@ public class SettingsReturnButton : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] int myButton;
     bool isIn;
 
+    int tempLastButton;
     void Update()
     {
         if (isIn)
@@ -18,8 +19,10 @@ public class SettingsReturnButton : MonoBehaviour, IPointerEnterHandler, IPointe
         }
     }
 
+
     public void OnPointerEnter(PointerEventData data)
     {
+        tempLastButton = settings.CurrentSelect;
         settings.CurrentSelect = myButton;
         settings.UpdateVisual();
         isIn = true;
@@ -27,6 +30,9 @@ public class SettingsReturnButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData data)
     {
+        settings.CurrentSelect = tempLastButton;
+        settings.UpdateVisual();
         isIn = false;
     }
 }
+
