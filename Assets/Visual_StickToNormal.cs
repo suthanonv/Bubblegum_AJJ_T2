@@ -22,7 +22,7 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
 
     }
 
-    protected override void OnTransition(Action CallBack)
+    protected override void OnTransition(Action CallBack, Action PreEnter)
     {
         _animator.enabled = true;
         _spriteRenderer.enabled = true;

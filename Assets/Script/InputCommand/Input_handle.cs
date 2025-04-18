@@ -20,6 +20,11 @@ public class Input_handle : MonoBehaviour
         _input_action += action;
     }
 
+    public void RemoveMovementListener(System.Action<Vector2Int> action)
+    {
+        _input_action -= action;    
+    }
+
     public void AddButtonListener(System.Action<string> action)
     {
         _buttonPressedAction += action;

@@ -9,7 +9,7 @@ public class Movement_Assign : MonoBehaviour
         move_holder = FindAnyObjectByType<All_moveable_gum_holder>();
         move = GetComponent<Movement>();
 
-        this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_EnterState_Listner(Add_move);
+        this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_PreEnter_Listener(Add_move);
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_ExitState_Listener(Remove_move);
     }
     public void Add_move()

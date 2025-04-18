@@ -21,7 +21,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
 
     }
 
-    protected override void OnTransition(Action CallBack)
+    protected override void OnTransition(Action CallBack, Action PreEnter)
     {
         MainComponent_Tranform.FreezeRotation = true;
         _animator.enabled = true;

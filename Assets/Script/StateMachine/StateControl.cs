@@ -42,6 +42,7 @@ public class StateControl<T> : MonoBehaviour where T : Enum
     }
     void IntilizedState()
     {
+        StateToBehave[_currentState].PreEnter();
         StateToBehave[_currentState].OnEnterState();
     }
 
@@ -59,10 +60,11 @@ public class StateControl<T> : MonoBehaviour where T : Enum
             if (i.IsTransitionExit(oldState, newstate) == true)
             {
 
-                i.GetTransition(oldState, newstate, SetNewState);
+                i.GetTransition(oldState, newstate, SetNewState, StateToBehave[_preNewState].PreEnter);
                 return;
             }
         }
+        StateToBehave[_preNewState].PreEnter();
         SetNewState();
 
 

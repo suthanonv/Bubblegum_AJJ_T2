@@ -12,17 +12,26 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
     Animator _animator;
     [SerializeField] string _animationStateName;
     SpriteRenderer _spriteRenderer;
-
+    Input_handle _inputHandle;
     private void Start()
     {
+        _inputHandle = FindAnyObjectByType<Input_handle>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator.enabled = false;
         _spriteRenderer.enabled = false;
     }
 
-    protected override void OnTransition(Action CallBack)
+
+    Action _callback;
+
+    protected override void OnTransition(Action CallBack, Action PreEnter)
     {
+
+        _inputHandle.AddMovementListener(InstantEndTransition);
+        _callback = CallBack;
+        Debug.Log("being played");
+        PreEnter?.Invoke();
         _animator.enabled = true;
         _spriteRenderer.enabled = true;
         _animator.StopPlayback();
@@ -30,15 +39,33 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
         StartCoroutine(Transition(CallBack));
     }
 
+    void InstantEndTransition(Vector2Int none)
+    {
+        StopAllCoroutines();
+        OnEnd();
+        _callback?.Invoke();
+
+
+    }
+
+
+
+
     IEnumerator Transition(System.Action CallBack)
     {
         yield return new WaitForSeconds(GetDuration());
 
-        _animator.enabled = false;
-        _spriteRenderer.enabled = false;
+        OnEnd();
         CallBack.Invoke();
     }
 
+
+    void OnEnd()
+    {
+        _animator.enabled = false;
+        _spriteRenderer.enabled = false;
+        _inputHandle.RemoveMovementListener(InstantEndTransition);
+    }
 
     float GetDuration()
     {
