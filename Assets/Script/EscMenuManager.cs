@@ -11,7 +11,7 @@ public class EscMenuManager : MonoBehaviour
     LevelLoader levelLoader;
     Input_handle input;
     bool isOpen;
-    int CurrentSelect;
+    public int CurrentSelect;
     Image[] imageList;
     TMP_Text[] textList;
     Color grey;
@@ -56,7 +56,7 @@ public class EscMenuManager : MonoBehaviour
 
     public void OpenEscMenu()
     {
-        input = FindAnyObjectByType<Input_handle>();
+        input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(false);
         Time.timeScale = 0;
         CurrentSelect = 1;
@@ -74,7 +74,7 @@ public class EscMenuManager : MonoBehaviour
         Menu.SetActive(false);
     }
 
-    void UpdateVisual(int Index)
+    public void UpdateVisual(int Index)
     {
         List<int> list = new List<int> { 1, 2, 3, 4, 5 };
 
@@ -91,7 +91,7 @@ public class EscMenuManager : MonoBehaviour
         }
     }
 
-    private void OnSelect()
+    public void OnSelect()
     {
         levelLoader = FindAnyObjectByType<LevelLoader>();
         if (CurrentSelect == 1)

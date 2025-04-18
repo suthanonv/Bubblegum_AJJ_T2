@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -106,6 +108,8 @@ public class LevelLoader : MonoBehaviour
             //loadSceneProgressBar.value = asyncload.progress;
             yield return null;
         }
+        loadSceneComplete = OnLoad;
+        loadSceneComplete.Invoke();
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
         yield return new WaitForSeconds(0.05f);
@@ -140,5 +144,13 @@ public class LevelLoader : MonoBehaviour
             currCountdownValue -= 0.1f;
         }
         //LoadTimeChecker = true;
+    }
+
+    delegate void OnLoadSceneComplete();
+    OnLoadSceneComplete loadSceneComplete;
+
+    private void OnLoad()
+    {
+
     }
 }
