@@ -6,6 +6,8 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
 
     public override void OnEnterState()
     {
+        SoundManager.PlaySound(SoundType.BBG_Stick, 1f);
+
         base.OnEnterState();
         FindAnyObjectByType<All_Sticky_Gum_Holder>().Add_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
 
@@ -13,6 +15,8 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
 
     public override void OnExitState()
     {
+        SoundManager.PlaySound(SoundType.BBG_Unstick, 1f);
+
         base.OnExitState();
         FindAnyObjectByType<All_Sticky_Gum_Holder>().Remove_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
         foreach (Transform i in this.transform)
