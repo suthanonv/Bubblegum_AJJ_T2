@@ -5,12 +5,12 @@ public class Cam_Idle : MonoBehaviour
 
 
 
-    [SerializeField] Vector2 RangeX = new Vector2();
-    [SerializeField] Vector2 RangeY = new Vector2();
+    [SerializeField] Vector2 RangeX = new Vector2(0.1f, 0.1f);
+    [SerializeField] Vector2 RangeY = new Vector2(0.1f, 0.1f);
     Vector2 StatPostion = new Vector2();
     Vector2 Destination;
 
-    [SerializeField] float Period = 0.25f;
+    [SerializeField] float Period = 3;
     private void Awake()
     {
         StatPostion = this.transform.position;
