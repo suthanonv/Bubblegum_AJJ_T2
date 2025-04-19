@@ -13,6 +13,8 @@ public class Settings : MonoBehaviour
     Input_handle input;
     public int CurrentSelect;
     Color grey;
+
+    [SerializeField] bool isMainMenu;
     void Start()
     {
         
@@ -60,8 +62,10 @@ public class Settings : MonoBehaviour
         input.gameObject.SetActive(true);
         Time.timeScale = 1;
         this.gameObject.SetActive(false);
-        EscMenuManager.OpenEscMenu();
-
+        if (!isMainMenu)
+        {
+            EscMenuManager.OpenEscMenu();
+        }
     }
 
     public void UpdateVisual()

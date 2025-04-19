@@ -65,7 +65,7 @@ public class EscMenuManager : MonoBehaviour
         UpdateVisual(CurrentSelect);
     }
 
-    void CloseEscMenu()
+    public void CloseEscMenu()
     {
         input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(true);
@@ -105,7 +105,7 @@ public class EscMenuManager : MonoBehaviour
         }
         else if (CurrentSelect == 3)
         {
-            levelLoader.loadLevelSelectedScene(0);
+            levelLoader.loadLevelSelectedScene(1);
             CloseEscMenu();
         }
         else if (CurrentSelect == 4)
@@ -114,11 +114,12 @@ public class EscMenuManager : MonoBehaviour
         }
         else if (CurrentSelect == 5)
         {
-            //Load Main Menu
+            levelLoader.loadLevelSelectedScene(0);
+            CloseEscMenu();
         }
     }
 
-    void OpenSetting()
+    public void OpenSetting()
     {
         CloseEscMenu();
         Settings.OpenSettings();

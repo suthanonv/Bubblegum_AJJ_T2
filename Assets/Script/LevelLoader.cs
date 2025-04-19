@@ -22,6 +22,7 @@ public class LevelLoader : MonoBehaviour
     {
         inputGameObject.SetActive(false);
         SceneManager.LoadScene(levelNumber);
+        Destroy(this.gameObject);
     }
     public void loadNextScene()
     {
