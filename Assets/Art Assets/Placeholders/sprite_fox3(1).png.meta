@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 063658feaf3824d48affa74d07b9c1d7
+guid: e18e6c3696b038d4cb451599026a8e53
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3097342991762851659
-    second: mushrooms_0
+      213: 1144033939158967346
+    second: sprite_fox3(1)_0
   - first:
-      213: -8835274597533513770
-    second: mushrooms_1
+      213: 3644448631774114385
+    second: sprite_fox3(1)_1
+  - first:
+      213: 5813504018806626518
+    second: sprite_fox3(1)_2
+  - first:
+      213: -3522910808721330033
+    second: sprite_fox3(1)_3
+  - first:
+      213: 1704238493263611613
+    second: sprite_fox3(1)_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mushrooms_0
+      name: sprite_fox3(1)_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 31
-        width: 29
-        height: 32
+        x: 26
+        y: 37
+        width: 198
+        height: 157
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b8fd6c95f60405d0800000000000000
-      internalID: -3097342991762851659
+      spriteID: 234af8a6ecc60ef00800000000000000
+      internalID: 1144033939158967346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mushrooms_1
+      name: sprite_fox3(1)_1
       rect:
         serializedVersion: 2
-        x: 55
-        y: 44
-        width: 39
-        height: 40
+        x: 227
+        y: 46
+        width: 30
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +149,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6d78bf8909cc26580800000000000000
-      internalID: -8835274597533513770
+      spriteID: 152fd03b8bea39230800000000000000
+      internalID: 3644448631774114385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_fox3(1)_2
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 45
+        width: 206
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d856459a17bda050800000000000000
+      internalID: 5813504018806626518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_fox3(1)_3
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 42
+        width: 212
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f80f7ced84b1c1fc0800000000000000
+      internalID: -3522910808721330033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_fox3(1)_4
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 44
+        width: 206
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd6468351eba6a710800000000000000
+      internalID: 1704238493263611613
       vertices: []
       indices: 
       edges: []
@@ -150,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -159,9 +234,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      mushrooms_0: -3097342991762851659
-      mushrooms_1: -8835274597533513770
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
