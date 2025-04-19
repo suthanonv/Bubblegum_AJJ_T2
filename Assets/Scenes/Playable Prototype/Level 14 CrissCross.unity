@@ -750,6 +750,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &190629578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2588650917653703438, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679572117394662355, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293506598144241125, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_Name
+      value: Tilemap GridLayers V2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
 --- !u!1 &201016431
 GameObject:
   m_ObjectHideFlags: 0
@@ -5332,3 +5393,4 @@ SceneRoots:
   - {fileID: 2144531665}
   - {fileID: 85174541}
   - {fileID: 28135220}
+  - {fileID: 190629578}
