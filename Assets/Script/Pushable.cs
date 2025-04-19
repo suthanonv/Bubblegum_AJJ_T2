@@ -154,7 +154,7 @@ public class Pushable : MonoBehaviour, I_move
 
     void OnMove()
     {
-        SoundManager.PlaySound(SoundType.Rock_Move, 1f);
+        SoundManager.PlaySound(SoundType.Effect_RockMove, 1f);
         Debug.Log("Play Sound Rock Move");
         OnMoveing.Invoke();
     }

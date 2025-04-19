@@ -213,7 +213,7 @@ MonoBehaviour:
     poolSize: 1
     mixer: {fileID: -3498201014538277241, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
-    - {fileID: 8300000, guid: f049f12b505847d44ab8639743495219, type: 3}
+    - {fileID: 8300000, guid: 7c65b4a9b4836cf4b8a157f0bd645413, type: 3}
   - name: Effect_EnterWinning
     volume: 1
     minPitch: 0.8
@@ -230,3 +230,11 @@ MonoBehaviour:
     mixer: {fileID: -6703154473126394953, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 225748f71ee94c9419b21353a454ddb6, type: 3}
+  - name: Effect_Undo
+    volume: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+    poolSize: 3
+    mixer: {fileID: 6025932516310839017, guid: 114fabe048f9904448e29742f447d83e, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: 29ea4f239ae0d9d488dd909102fe22a1, type: 3}

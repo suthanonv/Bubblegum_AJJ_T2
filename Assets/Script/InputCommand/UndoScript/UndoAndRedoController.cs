@@ -62,7 +62,7 @@ public class UndoAndRedoController : MonoBehaviour
         {
             character.Undo();
         }
-
+        SoundManager.PlaySound(SoundType.Effect_Undo, 1f);
         tileManager.ResetObjectOnTiles(initializeAllObject);
     }
     public void Redo()

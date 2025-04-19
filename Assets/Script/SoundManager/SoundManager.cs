@@ -16,10 +16,11 @@ public enum SoundType
     BBG_Unstick,
 
     UI_Select,
-    Rock_Move,
 
+    Effect_RockMove,
     Effect_EnterWinning,
-    Effect_Winning
+    Effect_Winning,
+    Effect_Undo,
 }
 
 public class SoundManager : MonoBehaviour
