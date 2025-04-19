@@ -147,6 +147,7 @@ MonoBehaviour:
     volume: 1
     minPitch: 0.75
     maxPitch: 1.3
+    poolSize: 3
     mixer: {fileID: 9064955240670014066, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 468a193240c4e4d4b955e1d5830334ce, type: 3}
@@ -154,6 +155,7 @@ MonoBehaviour:
     volume: 1
     minPitch: 1.21
     maxPitch: 0.8
+    poolSize: 3
     mixer: {fileID: 2306553247670676596, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 903916d9fc27c524aa4860f10a3bb1eb, type: 3}
@@ -163,6 +165,7 @@ MonoBehaviour:
     volume: 1
     minPitch: 0.81
     maxPitch: 1.15
+    poolSize: 3
     mixer: {fileID: 2849976735395317973, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: f926dafa9b31ed449864a9f5275c4768, type: 3}
@@ -170,12 +173,14 @@ MonoBehaviour:
     volume: 0
     minPitch: 0
     maxPitch: 0
+    poolSize: 3
     mixer: {fileID: 0}
     sounds: []
   - name: BBG_Stick
     volume: 1
     minPitch: 0.8
     maxPitch: 1.3
+    poolSize: 3
     mixer: {fileID: 7176854803644609573, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 6573f95e0946f8646b4e82086b0ca976, type: 3}
@@ -183,12 +188,14 @@ MonoBehaviour:
     volume: 0
     minPitch: 0
     maxPitch: 0
+    poolSize: 3
     mixer: {fileID: 0}
     sounds: []
   - name: BBG_Unstick
     volume: 1
     minPitch: 0.25
     maxPitch: 0.75
+    poolSize: 3
     mixer: {fileID: -6299536207963096376, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: dd4c8c7d35a1fbb4b807ae5a863bd728, type: 3}
@@ -196,12 +203,14 @@ MonoBehaviour:
     volume: 0
     minPitch: 0
     maxPitch: 0
+    poolSize: 3
     mixer: {fileID: 0}
     sounds: []
   - name: Rock_Move
     volume: 1
     minPitch: 0.95
     maxPitch: 1.05
+    poolSize: 1
     mixer: {fileID: -3498201014538277241, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: f049f12b505847d44ab8639743495219, type: 3}
@@ -209,6 +218,7 @@ MonoBehaviour:
     volume: 1
     minPitch: 0.8
     maxPitch: 1.21
+    poolSize: 3
     mixer: {fileID: 4447541719591035320, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 3e5a86c8b66b01f41a93bec2388ad68f, type: 3}
@@ -216,6 +226,7 @@ MonoBehaviour:
     volume: 1
     minPitch: 1
     maxPitch: 1
+    poolSize: 3
     mixer: {fileID: -6703154473126394953, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 225748f71ee94c9419b21353a454ddb6, type: 3}

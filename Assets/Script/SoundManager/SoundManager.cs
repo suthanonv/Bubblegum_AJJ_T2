@@ -14,10 +14,8 @@ public enum SoundType
     BBG_Stick,
     BBG_toUnstick,
     BBG_Unstick,
-    
 
     UI_Select,
-
     Rock_Move,
 
     Effect_EnterWinning,
@@ -28,8 +26,6 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] SL;
     private static SoundManager instance = null;
-
-    private const int PoolSizePerSound = 3;
 
     private class SoundSource
     {
@@ -46,14 +42,22 @@ public class SoundManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // Create pool per sound type
+            
             foreach (SoundType type in Enum.GetValues(typeof(SoundType)))
             {
+                int index = (int)type;
+                int poolSize = 3; 
+
+                if (index < SL.Length)
+                {
+                    poolSize = Mathf.Max(1, SL[index].poolSize); 
+                }
+
                 GameObject groupGO = new GameObject($"Pool_{type}");
                 groupGO.transform.SetParent(transform);
 
                 List<SoundSource> pool = new List<SoundSource>();
-                for (int i = 0; i < PoolSizePerSound; i++)
+                for (int i = 0; i < poolSize; i++)
                 {
                     GameObject audioGO = new GameObject($"Audio_{type}_{i}");
                     audioGO.transform.SetParent(groupGO.transform);
@@ -106,7 +110,7 @@ public class SoundManager : MonoBehaviour
             }
         }
 
-        Debug.LogWarning($"All AudioSources for {sound} are busy.");
+        //Debug.LogWarning($"All AudioSources for {sound} are busy.");
     }
 
     private IEnumerator ReleaseAfter(AudioSource source, SoundSource s, float delay)
@@ -123,6 +127,8 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < names.Length; i++)
         {
             SL[i].name = names[i];
+            if (SL[i].poolSize <= 0)
+                SL[i].poolSize = 3; 
         }
     }
 #endif
@@ -135,6 +141,7 @@ public struct SoundList
     [Range(0, 1)] public float volume;
     [Range(0.1f, 3f)] public float minPitch;
     [Range(0.1f, 3f)] public float maxPitch;
+    public int poolSize; 
     public AudioMixerGroup mixer;
     public AudioClip[] sounds;
 }
