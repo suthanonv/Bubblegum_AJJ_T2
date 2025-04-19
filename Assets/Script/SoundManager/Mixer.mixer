@@ -94,6 +94,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-4677480624742978517
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1d994b7916a4f06449139fd695898035
+  m_EffectName: Attenuation
+  m_MixLevel: 58fdea3de00036f4f873f8c458fe93ff
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-4337362867566732821
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -179,6 +193,7 @@ AudioMixerController:
     - 0dccc02333eda0d4db0b3457665130a5
     - 1f9b3eee2bff373498c7a45dd2e864a9
     - a982db4feb6cac546b2a12b81e05cd2b
+    - a04b4714619985f4b9454f4406c1cfcc
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -291,6 +306,7 @@ AudioMixerGroupController:
   - {fileID: 2306553247670676596}
   - {fileID: 2849976735395317973}
   - {fileID: 9064955240670014066}
+  - {fileID: 7176854803644609573}
   m_Volume: a762f217993afd943baccfa0a85f8d9c
   m_Pitch: 647ec4bb048c8e14488d6e2ef8fbb794
   m_Send: 00000000000000000000000000000000
@@ -444,6 +460,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &7176854803644609573
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Stick
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: a04b4714619985f4b9454f4406c1cfcc
+  m_Children: []
+  m_Volume: cc5a68813cf5fac4eaa6e7ab0c8e9597
+  m_Pitch: 0783a746d0ed8f649a2c5562d0397d48
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -4677480624742978517}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &8160560306858156773
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
