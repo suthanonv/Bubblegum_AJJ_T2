@@ -40,6 +40,7 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
 
     void InstantEndTransition(Vector2Int none)
     {
+        Debug.Log("Instant Ended");
         StopAllCoroutines();
         OnEnd();
         _callback?.Invoke();

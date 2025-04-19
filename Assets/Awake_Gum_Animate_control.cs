@@ -13,21 +13,24 @@ public class Awake_Gum_Animate_control : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         SetUp();
+        this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_PreEnter_Listener(PreEnter);
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_EnterState_Listner(SetUp);
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_ExitState_Listener(Delete);
-        animator.enabled = false;
+        spriteRenderer.enabled = false;
 
+    }
+
+
+    void PreEnter()
+    {
+        mainComponent.AddOnMoveListener(Walk);
+        mainComponent.AddOnFinishMove(Idle);
+        mainComponent.Set_GetOnMoveDuration_Func(MoveDutation);
     }
 
     void SetUp()
     {
-
-        animator.enabled = true;
-        Idle();
-        mainComponent.AddOnMoveListener(Walk);
-        mainComponent.AddOnFinishMove(Idle);
-        mainComponent.Set_GetOnMoveDuration_Func(MoveDutation);
-
+        spriteRenderer.enabled = true;
     }
 
     void Delete()
@@ -35,8 +38,7 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
         mainComponent.RemoveOneMoveListener(Walk);
         mainComponent.RemoveOnfinishMove(Idle);
-        animator.enabled = false;
-        spriteRenderer.sprite = null;
+        spriteRenderer.enabled = false;
     }
 
 
