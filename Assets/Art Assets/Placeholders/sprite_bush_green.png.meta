@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 063658feaf3824d48affa74d07b9c1d7
+guid: 0a57152b5022aa2429a3f704885bf301
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3097342991762851659
-    second: mushrooms_0
+      213: -2361067984679488781
+    second: sprite_bush_green_0
   - first:
-      213: -8835274597533513770
-    second: mushrooms_1
+      213: 4745740772530034680
+    second: sprite_bush_green_1
+  - first:
+      213: -3790092559771265864
+    second: sprite_bush_green_2
+  - first:
+      213: 1137411481742421764
+    second: sprite_bush_green_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,45 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mushrooms_0
+      name: sprite_bush_green_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 31
-        width: 29
-        height: 32
+        x: 0
+        y: 0
+        width: 384
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5b8fd6c95f60405d0800000000000000
-      internalID: -3097342991762851659
+      spriteID: 91138edaee270ad44ae653285da7ac4b
+      internalID: -413338406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mushrooms_1
+      name: sprite_bush_green_1
       rect:
         serializedVersion: 2
-        x: 55
-        y: 44
-        width: 39
-        height: 40
+        x: 384
+        y: 0
+        width: 384
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6d78bf8909cc26580800000000000000
-      internalID: -8835274597533513770
+      spriteID: 3568c571edf27ab40bc94db61148bb89
+      internalID: -1981474896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_bush_green_2
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02cb938cbe25bb141b3c7d97b7df06d7
+      internalID: 467906717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_bush_green_3
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 384
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcd36e43df100b245a4feb878139d7dd
+      internalID: 1494842619
       vertices: []
       indices: 
       edges: []
@@ -150,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: c45f8e49ca97a194fbe05bf4cfba7ddf
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mushrooms_0: -3097342991762851659
-      mushrooms_1: -8835274597533513770
+      sprite_bush_green_0: -413338406
+      sprite_bush_green_1: -1981474896
+      sprite_bush_green_2: 467906717
+      sprite_bush_green_3: 1494842619
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
