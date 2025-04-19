@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EscMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject Menu;
     [SerializeField] Settings Settings;
+    [SerializeField] TMP_Text levelName; 
     LevelLoader levelLoader;
     Input_handle input;
     bool isOpen;
@@ -56,6 +58,8 @@ public class EscMenuManager : MonoBehaviour
 
     public void OpenEscMenu()
     {
+        levelName.text = SceneManager.GetActiveScene().name;
+        levelName.gameObject.SetActive(true);
         input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(false);
         Time.timeScale = 0;
@@ -67,6 +71,7 @@ public class EscMenuManager : MonoBehaviour
 
     public void CloseEscMenu()
     {
+        levelName.gameObject.SetActive(false);
         input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(true);
         Time.timeScale = 1;
@@ -82,12 +87,12 @@ public class EscMenuManager : MonoBehaviour
 
         imageList[(Index * 2)].color = Color.black;
 
-        textList[Index - 1].fontStyle = TMPro.FontStyles.Bold;
+        textList[Index].fontStyle = TMPro.FontStyles.Bold;
 
         foreach (int i in list)
         {
             imageList[(i * 2)].color = grey;
-            textList[i - 1].fontStyle = TMPro.FontStyles.Normal;
+            textList[i].fontStyle = TMPro.FontStyles.Normal;
         }
     }
 
