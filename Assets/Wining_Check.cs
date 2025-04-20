@@ -33,7 +33,7 @@ public class Wining_Check : MonoBehaviour
 
     public void Check_isWining()
     {
-        if (_completedLevel && wining_tiles.Count == 0) return;
+        if (_completedLevel || wining_tiles.Count == 0) return;
 
         foreach (var tile in wining_tiles)
         {
