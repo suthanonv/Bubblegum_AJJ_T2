@@ -88,7 +88,7 @@ public class LevelLoader : MonoBehaviour
         }
         */
         float time = 0;
-        Vector2 startingPos = cloud.transform.localPosition;
+        Vector2 startingPos = new Vector2 (3520,1980);
         while (time < duration)
         {
             time += Time.deltaTime;
@@ -116,7 +116,7 @@ public class LevelLoader : MonoBehaviour
         }
         */
         time = 0;
-        startingPos = cloud.transform.localPosition;
+        startingPos = Vector2.zero;
         while (time < duration)
         {
             cloud.transform.localPosition = Vector2.Lerp(startingPos, new Vector2(-3520, -1980), time / duration);
