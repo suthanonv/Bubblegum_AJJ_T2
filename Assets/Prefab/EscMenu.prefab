@@ -1464,7 +1464,7 @@ GameObject:
   - component: {fileID: 2472178485110521513}
   - component: {fileID: 3923356503733486662}
   m_Layer: 0
-  m_Name: Slider (2)
+  m_Name: MasterSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1840,7 +1840,7 @@ GameObject:
   - component: {fileID: 2888830559164253882}
   - component: {fileID: 2620733541964911061}
   m_Layer: 0
-  m_Name: Slider (1)
+  m_Name: SFXSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2490,6 +2490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3944186647202024418}
   - component: {fileID: 2191671700623044724}
+  - component: {fileID: 2910343799357868367}
   m_Layer: 0
   m_Name: EscMenu
   m_TagString: Untagged
@@ -2505,7 +2506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7081862244686036097}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2532,6 +2533,22 @@ MonoBehaviour:
   CurrentSelect: 0
   lightColor: {r: 0, g: 0, b: 0, a: 0}
   darkColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &2910343799357868367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081862244686036097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6d6bf19a81c447a1ad033e4285120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 114fabe048f9904448e29742f447d83e, type: 2}
+  musicSlider: {fileID: 8814371030390028895}
+  sfxSlider: {fileID: 2620733541964911061}
+  MasterSlider: {fileID: 3923356503733486662}
 --- !u!1 &7104415532523540783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,7 +2732,7 @@ GameObject:
   - component: {fileID: 7265998468727816911}
   - component: {fileID: 8814371030390028895}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: MusicSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
