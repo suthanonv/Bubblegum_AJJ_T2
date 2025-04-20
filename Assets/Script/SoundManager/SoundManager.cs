@@ -16,6 +16,8 @@ public enum SoundType
     BBG_Unstick,
 
     UI_Select,
+    UI_Hover,
+    UI_Interact,
 
     Effect_RockMove,
 
