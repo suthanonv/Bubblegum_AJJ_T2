@@ -36,6 +36,7 @@ public class BubbleGumBeamController : MonoBehaviour
 
     IEnumerator Animated(System.Action Callback)
     {
+        SoundManager.PlaySound(SoundType.Effect_Warp, 1f);
         undocontroler.EnableUndo = false;
         _inputHandle.EnableMove = false;
         foreach (var gum in AllGums)
