@@ -230,10 +230,18 @@ MonoBehaviour:
     mixer: {fileID: -6703154473126394953, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 225748f71ee94c9419b21353a454ddb6, type: 3}
-  - name: Effect_Undo
+  - name: Effect_Warp
     volume: 1
     minPitch: 0.95
     maxPitch: 1.05
+    poolSize: 1
+    mixer: {fileID: 6025932516310839017, guid: 114fabe048f9904448e29742f447d83e, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: ea7afbb377e4cf24b871067399aff610, type: 3}
+  - name: Effect_Undo
+    volume: 1
+    minPitch: 1.45
+    maxPitch: 1.94
     poolSize: 3
     mixer: {fileID: 6025932516310839017, guid: 114fabe048f9904448e29742f447d83e, type: 2}
     sounds:

@@ -539,17 +539,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1086882471635730571, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 5389749076018010441, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1210781945}
+    - target: {fileID: 5389749076018010441, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 2125031404}
+    - target: {fileID: 5389749076018010441, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
+      propertyPath: MasterSlider
+      value: 
+      objectReference: {fileID: 2107553649}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1086882471635730571, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1582124567}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
 --- !u!1 &34935179
 GameObject:
@@ -23773,27 +23778,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1582124563 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1086882471635730571, guid: 3ce55c89d8b34e64ea8b6d676109e683, type: 3}
-  m_PrefabInstance: {fileID: 28135220}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1582124567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582124563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16b6d6bf19a81c447a1ad033e4285120, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 114fabe048f9904448e29742f447d83e, type: 2}
-  musicSlider: {fileID: 2125031404}
-  sfxSlider: {fileID: 1210781945}
-  MasterSlider: {fileID: 2107553649}
 --- !u!1001 &1583037367
 PrefabInstance:
   m_ObjectHideFlags: 0
