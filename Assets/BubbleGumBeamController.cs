@@ -18,11 +18,11 @@ public class BubbleGumBeamController : MonoBehaviour
         OnLoadNewScene();
     }
 
-    void OnLoadNewScene()
+    public void OnLoadNewScene()
     {
         undocontroler.EnableUndo = true;
         _inputHandle.EnableMove = true;
-        foreach (var i in FindObjectsByType<Main_BubbleGumstate>(FindObjectsSortMode.None))
+        foreach (var i in FindObjectsByType<Main_BubbleGumstate>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
             AllGums.Add(i);
         }
