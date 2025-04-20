@@ -18,8 +18,11 @@ public enum SoundType
     UI_Select,
 
     Effect_RockMove,
+
     Effect_EnterWinning,
     Effect_Winning,
+
+    Effect_Warp,
     Effect_Undo,
 }
 
