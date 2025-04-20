@@ -97,9 +97,10 @@ public class LevelLoader : MonoBehaviour
         }
         cloud.transform.localPosition = Vector2.zero;
 
-        int sceneCount = SceneManager.sceneCount;
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
 
-        if (levelNumber > sceneCount) levelNumber = 0;
+        if (levelNumber >= sceneCount) levelNumber = 0;
+
 
         AsyncOperation asyncload = SceneManager.LoadSceneAsync(levelNumber);
         StartCoroutine(CheckLoadTime());
