@@ -16,12 +16,14 @@ public class EscMenuManager : MonoBehaviour
     public int CurrentSelect;
     Image[] imageList;
     TMP_Text[] textList;
-    Color grey;
+    public Color lightColor;
+    public Color darkColor;
     void Start()
     {
         imageList = GetComponentsInChildren<Image>(true);
         textList = GetComponentsInChildren<TMP_Text>(true);
-        grey = imageList[2].color;
+        darkColor = imageList[1].color;
+        lightColor = imageList[2].color;
     }
 
     void Update()
@@ -85,13 +87,13 @@ public class EscMenuManager : MonoBehaviour
 
         list.RemoveAt(Index - 1);
 
-        imageList[(Index * 2)].color = Color.black;
+        imageList[(Index * 2)].color = darkColor;
 
         textList[Index].fontStyle = TMPro.FontStyles.Bold;
 
         foreach (int i in list)
         {
-            imageList[(i * 2)].color = grey;
+            imageList[(i * 2)].color = lightColor;
             textList[i].fontStyle = TMPro.FontStyles.Normal;
         }
     }
