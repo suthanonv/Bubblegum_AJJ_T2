@@ -88,7 +88,7 @@ public class LevelLoader : MonoBehaviour
         }
         */
         float time = 0;
-        Vector2 startingPos = new Vector2 (3520,1980);
+        Vector2 startingPos = new Vector2(3520, 1980);
         while (time < duration)
         {
             time += Time.deltaTime;
@@ -96,6 +96,11 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         cloud.transform.localPosition = Vector2.zero;
+
+        int sceneCount = SceneManager.sceneCount;
+
+        if (levelNumber > sceneCount) levelNumber = 0;
+
         AsyncOperation asyncload = SceneManager.LoadSceneAsync(levelNumber);
         StartCoroutine(CheckLoadTime());
         while (!asyncload.isDone)
