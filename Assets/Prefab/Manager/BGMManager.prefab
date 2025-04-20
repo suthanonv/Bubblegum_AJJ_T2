@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 895401214527259834}
   - component: {fileID: 8660517558752469872}
   m_Layer: 0
-  m_Name: BBGManager
+  m_Name: BGMManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a00a668718802a40b7d7513ac0a8066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bgm: {fileID: 8300000, guid: 81b7d9589f715e54f931bdf781c57ab8, type: 3}
+  _musicAdjustList:
+  - {fileID: 11400000, guid: f98b5ddb5342bf54d8e1b6a4d2b97ff7, type: 2}
 --- !u!82 &8660517558752469872
 AudioSource:
   m_ObjectHideFlags: 0
