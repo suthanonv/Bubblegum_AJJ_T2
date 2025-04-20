@@ -7,17 +7,19 @@ public class Settings : MonoBehaviour
 
     [SerializeField] GameObject Gum;
     [SerializeField] EscMenuManager EscMenuManager;
+    [SerializeField] Image returnButtonColor;
     [SerializeField] Image returnButtonImage;
     [SerializeField] TMP_Text returnButtonText;
     [SerializeField] Slider[] sliders;
     Input_handle input;
     public int CurrentSelect;
-    Color grey;
+    Color darkColor;
+    Color lightColor;
 
     [SerializeField] bool isMainMenu;
     void Start()
     {
-        
+
     }
     void Update()
     {
@@ -47,12 +49,13 @@ public class Settings : MonoBehaviour
 
     public void OpenSettings()
     {
+        lightColor = EscMenuManager.lightColor;
+        darkColor = EscMenuManager.darkColor;
         input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
         input.gameObject.SetActive(false);
         Time.timeScale = 0;
         CurrentSelect = 1;
         this.gameObject.SetActive(true);
-        grey = returnButtonImage.color;
         UpdateVisual();
     }
 
@@ -72,7 +75,7 @@ public class Settings : MonoBehaviour
     {
         if (CurrentSelect != 4)
         {
-            returnButtonImage.color = grey;
+            returnButtonImage.color = lightColor;
             returnButtonText.fontStyle = TMPro.FontStyles.Normal;
             Gum.SetActive(true);
             RectTransform rt = Gum.GetComponent<RectTransform>();
@@ -81,7 +84,7 @@ public class Settings : MonoBehaviour
         else 
         {
             Gum.SetActive(false);
-            returnButtonImage.color = Color.black;
+            returnButtonImage.color = darkColor;
             returnButtonText.fontStyle = TMPro.FontStyles.Bold;
         }
     }
