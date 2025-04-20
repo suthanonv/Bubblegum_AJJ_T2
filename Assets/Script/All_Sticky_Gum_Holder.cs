@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 public class All_Sticky_Gum_Holder : MonoBehaviour
@@ -12,9 +13,17 @@ public class All_Sticky_Gum_Holder : MonoBehaviour
         FindAnyObjectByType<ButtonCommand_Handle>().Add_Space_Action(UnStick_Handle);
     }
 
+
+    Action OnBubbleGumStick;
+    public void AddOnBubbleGumStickEvent(Action Event)
+    {
+        OnBubbleGumStick += Event;
+    }
+
     public void Add_Sticky_Gum(StateControl<Bubble_Gum_State> gum)
     {
         StickedGum.Add(gum);
+        OnBubbleGumStick?.Invoke();
     }
 
     public void Remove_Sticky_Gum(StateControl<Bubble_Gum_State> gum)
