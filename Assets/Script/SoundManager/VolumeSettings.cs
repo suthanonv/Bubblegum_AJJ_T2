@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
 {
@@ -13,24 +13,43 @@ public class VolumeSettings : MonoBehaviour
     const string MIXER_SFX = "SFXVolumn";
     const string MIXER_MASTER = "MASTERVolumn";
 
+    const string PREF_MUSIC = "MusicVolume";
+    const string PREF_SFX = "SFXVolume";
+    const string PREF_MASTER = "MasterVolume";
 
     private void Awake()
     {
-        MasterSlider.onValueChanged.AddListener(SetMasterVolume);
+        // Load saved values
+        musicSlider.value = PlayerPrefs.GetFloat(PREF_MUSIC, 0.75f);
+        sfxSlider.value = PlayerPrefs.GetFloat(PREF_SFX, 0.75f);
+        MasterSlider.value = PlayerPrefs.GetFloat(PREF_MASTER, 0.75f);
+
+        // Apply loaded values
+        SetMusicVolume(musicSlider.value);
+        SetSFXVolume(sfxSlider.value);
+        SetMasterVolume(MasterSlider.value);
+
+        // Set listeners
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
-        sfxSlider.onValueChanged.AddListener(SetSFXVolume); 
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+        MasterSlider.onValueChanged.AddListener(SetMasterVolume);
     }
 
     private void SetMusicVolume(float value)
     {
         audioMixer.SetFloat(MIXER_MUSIC, Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat(PREF_MUSIC, value);
     }
+
     private void SetSFXVolume(float value)
     {
         audioMixer.SetFloat(MIXER_SFX, Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat(PREF_SFX, value);
     }
+
     private void SetMasterVolume(float value)
     {
         audioMixer.SetFloat(MIXER_MASTER, Mathf.Log10(value) * 20);
+        PlayerPrefs.SetFloat(PREF_MASTER, value);
     }
 }
