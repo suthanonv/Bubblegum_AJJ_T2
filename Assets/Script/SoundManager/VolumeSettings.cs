@@ -20,6 +20,16 @@ public class VolumeSettings : MonoBehaviour
     private void Awake()
     {
         // Load saved values
+
+
+        // Set listeners
+        musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+        MasterSlider.onValueChanged.AddListener(SetMasterVolume);
+    }
+
+    private void Start()
+    {
         musicSlider.value = PlayerPrefs.GetFloat(PREF_MUSIC, 0.75f);
         sfxSlider.value = PlayerPrefs.GetFloat(PREF_SFX, 0.75f);
         MasterSlider.value = PlayerPrefs.GetFloat(PREF_MASTER, 0.75f);
@@ -28,11 +38,6 @@ public class VolumeSettings : MonoBehaviour
         SetMusicVolume(musicSlider.value);
         SetSFXVolume(sfxSlider.value);
         SetMasterVolume(MasterSlider.value);
-
-        // Set listeners
-        musicSlider.onValueChanged.AddListener(SetMusicVolume);
-        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-        MasterSlider.onValueChanged.AddListener(SetMasterVolume);
     }
 
     private void SetMusicVolume(float value)
