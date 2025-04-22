@@ -29,7 +29,7 @@ public class Move_All : MonoBehaviour, IInitialize
     }
 
     Action currentCallback;
-    public void MoveAll(Vector2Int Direction, List<Movement> moveGum, Action CallBack)
+    public void MoveAll(Vector2Int Direction, List<I_move> moveGum, Action CallBack)
     {
         List<I_move> Validmove, Invalidmove;
 
@@ -41,7 +41,7 @@ public class Move_All : MonoBehaviour, IInitialize
 
 
 
-    public void SetUp(Vector2Int Direction, List<Movement> moveGum, out List<I_move> validMove, out List<I_move> InvalidMove)
+    public void SetUp(Vector2Int Direction, List<I_move> moveGum, out List<I_move> validMove, out List<I_move> InvalidMove)
     {
         validMove = new List<I_move>();
         InvalidMove = new List<I_move>();
