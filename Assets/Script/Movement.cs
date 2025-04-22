@@ -28,11 +28,17 @@ public class Movement : MonoBehaviour, I_move
 
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
 
+
+
         if (Moving_to_tile == null) return mainComponent.Transform.currentTile_index;
+
+        if (Moving_to_tile.CanMove(mainComponent) == false) return mainComponent.Transform.currentTile_index;
+
 
         if (Moving_to_tile.OcupiedObject == null) return mainComponent.Transform.currentTile_index + Direction;
 
         I_move Moveable_Object = Moving_to_tile.OcupiedObject.FindComponnet_InChild<I_move>();
+
 
         if (Moveable_Object == null) return mainComponent.Transform.currentTile_index;
 

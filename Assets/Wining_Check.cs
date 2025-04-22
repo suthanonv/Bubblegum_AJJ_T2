@@ -43,9 +43,20 @@ public class Wining_Check : MonoBehaviour
             }
         }
 
+
         _completedLevel = true;
         SoundManager.PlaySound(SoundType.Effect_Winning);
         Debug.Log("[Wining_Check] All tiles are in win state. Broadcasting victory.");
         OnWin?.Invoke();
+    }
+
+
+    public void OnDisableWinTile_Sprite()
+    {
+        foreach (var tile in wining_tiles)
+        {
+            tile.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        }
+
     }
 }

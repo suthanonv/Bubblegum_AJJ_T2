@@ -46,12 +46,14 @@ public class BubbleGumBeamController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.5f);
+        FindAnyObjectByType<Wining_Check>().OnDisableWinTile_Sprite();
 
         foreach (var gum in AllGums)
         {
             gum.SetState(Bubble_Gum_State.Win);
 
         }
+
 
         yield return new WaitForSeconds(_beamUpClip == null ? 0f : _beamUpClip.length);
 

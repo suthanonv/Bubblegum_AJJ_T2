@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 public class MoveAble_Tile : Tile
@@ -23,7 +24,12 @@ public class MoveAble_Tile : Tile
         }
     }
 
+    Func<MainComponent, bool> CanMoveConditon;
 
+    public bool CanMove(MainComponent _object)
+    {
+        return CanMoveConditon?.Invoke(_object) ?? true;
+    }
 
     public void SetOccupiedObject(MainComponent _ocupiedObject)
     {

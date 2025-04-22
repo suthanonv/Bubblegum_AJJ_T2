@@ -48,6 +48,8 @@ public class Pushable : MonoBehaviour, I_move
         if (Moving_to_tile == null)
             return mainComponent.Transform.currentTile_index;
 
+        if (Moving_to_tile.CanMove(mainComponent) == false) return mainComponent.Transform.currentTile_index;
+
         if (Moving_to_tile.OcupiedObject == null)
             return mainComponent.Transform.currentTile_index + Direction;
 
