@@ -4,10 +4,10 @@ using UnityEngine;
 public class All_moveable_gum_holder : MonoBehaviour
 {
 
-    List<Movement> moveableGums = new List<Movement>();
+    List<I_move> moveableGums = new List<I_move>();
 
 
-    Action<Vector2Int, List<Movement>, Action> moveCall;
+    Action<Vector2Int, List<I_move>, Action> moveCall;
 
     Action _onfinishmove;
 
@@ -37,7 +37,7 @@ public class All_moveable_gum_holder : MonoBehaviour
     {
         moveCall?.Invoke(Direction, moveableGums, _onfinishmove);
     }
-    public void Add_moveCall_Listener(Action<Vector2Int, List<Movement>, Action> newFunc)
+    public void Add_moveCall_Listener(Action<Vector2Int, List<I_move>, Action> newFunc)
     {
         moveCall += newFunc;
     }
