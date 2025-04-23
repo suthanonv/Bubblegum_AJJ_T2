@@ -19,24 +19,41 @@ public class Cinematic_manager : MonoBehaviour
 
     private void BeginMethod()
     {
+        OnStart?.Invoke();
+        FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include).enabled = false;
         FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = false;
         FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = false;
     }
 
+
+
     private void StopMethod()
     {
-        FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = true;
-        FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = true;
+        OnStop?.Invoke();
+
+        if (video.isPlaying)
+        {
+            video.Stop();
+        }
+
+        Invoke("Delayed", 0.0001f);
 
     }
 
+    void Delayed()
+    {
+        FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include).enabled = true;
 
+        FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = true;
+        FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = true;
+    }
 
 
     private void Awake()
     {
-        OnStart.AddListener(BeginMethod);
-        OnStop.AddListener(StopMethod);
+
+        FindAnyObjectByType<ButtonCommand_Handle>().Add_Esc_Action(StopMethod);
+
 
         if (playedCinematicList.Contains(Cinimatic_index)) return;
 
@@ -51,9 +68,9 @@ public class Cinematic_manager : MonoBehaviour
 
     IEnumerator VideoClip(double Time)
     {
-        OnStart?.Invoke();
+        BeginMethod();
         yield return new WaitForSeconds((float)Time - RemoveBackScene);
-        OnStop?.Invoke();
+        StopMethod();
     }
 
 }

@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class ButtonCommand_Handle : MonoBehaviour
 {
-    
+
     private Input_handle inputHandle;
     [SerializeField] private UndoAndRedoController undoController;
     [SerializeField] private LevelLoader levelLoader;
@@ -43,12 +42,18 @@ public class ButtonCommand_Handle : MonoBehaviour
             else if (buttonName == "r") levelLoader.reloadScene();
             else if (buttonName == "o") levelLoader.loadPreviousScene();
             else if (buttonName == "p") levelLoader.loadNextScene();
-            else if (buttonName == "escape") Debug.Log("escape pressed");
+            else if (buttonName == "escape") Esc_button_Action?.Invoke();
 
             nextMoveTime = Time.time + inputCooldown;
         }
     }
 
+
+    public void Add_Esc_Action(Action newAct)
+    {
+        Esc_button_Action += newAct;
+    }
+    Action Esc_button_Action;
 
 
 
@@ -59,7 +64,7 @@ public class ButtonCommand_Handle : MonoBehaviour
     {
         Space_button_Action += newAct;
     }
-    
+
 
 
 
