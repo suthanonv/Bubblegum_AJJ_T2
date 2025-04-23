@@ -36,31 +36,17 @@ public class MainComponent : MonoBehaviour
     {
         Component = null;
 
-        foreach (Transform i in Main_GameObject.transform)
-        {
-            if (i.TryGetComponent<A>(out A _component))
-            {
-                Component = _component;
-                return true;
-            }
-        }
+        Component = Main_GameObject.transform.GetComponentInChildren<A>();
 
-        return false;
+
+        return Component != null;
     }
 
     public B FindComponnet_InChild<B>() where B : class
     {
         B _Component = null;
 
-        foreach (Transform i in Main_GameObject.transform)
-        {
 
-            if (i.TryGetComponent<B>(out B _component))
-            {
-                _Component = _component;
-                return _Component;
-            }
-        }
         _Component = Main_GameObject.transform.GetComponentInChildren<B>();
 
 

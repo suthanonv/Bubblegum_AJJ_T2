@@ -48,6 +48,10 @@ public class Movement : MonoBehaviour, I_move
         return mainComponent.Transform.currentTile_index + Direction;
     }
 
+
+
+
+
     public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
 
