@@ -130,9 +130,21 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         cloud.transform.localPosition = new Vector2(-3520, -1980);
+        onFinsishCloud?.Invoke();
+        Debug.Log("Finish load cloud");
         newInput.SetActive(true);
         Destroy(loadSceneCanva);
         Destroy(gameObject);
+    }
+
+
+
+    System.Action onFinsishCloud;
+
+
+    public void OnFinsihCloudLisener(System.Action doSomething)
+    {
+        onFinsishCloud += doSomething;
     }
 
     public IEnumerator CheckLoadTime(float countdownValue = 1.5f)
