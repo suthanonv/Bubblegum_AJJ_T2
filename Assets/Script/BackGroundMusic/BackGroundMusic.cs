@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -69,8 +71,8 @@ public class BackGroundMusic : MonoBehaviour
         Debug.Log($"current scene name {currentSceneName}");
         foreach (var musicData in _musicAdjustList)
         {
-            Debug.Log(musicData.SceneThatUsethisMusic.Count);
-            foreach (var scene in musicData.SceneThatUsethisMusic)
+
+            foreach (var scene in ListScenesInFolder(musicData.ScenePath))
             {
                 Debug.Log($"scene {scene}");
 
@@ -87,4 +89,32 @@ public class BackGroundMusic : MonoBehaviour
         currentPlayedBGM = null;
         Debug.LogWarning("No matching music found for this scene.");
     }
+
+    static List<string> ListScenesInFolder(string folderPath)
+    {
+        if (folderPath == null || folderPath == string.Empty) return new List<string>();
+
+        // Specify your folder inside "Assets/" (example: "Assets/Scenes")
+        folderPath = "Assets/Scenes";
+        // Get all .unity files in the folder (recursive)
+        string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { folderPath });
+
+        List<string> sceneNames = new List<string>();
+
+        foreach (string guid in guids)
+        {
+            // Get the full asset path
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+
+            // Get the file name without extension
+            string sceneName = Path.GetFileNameWithoutExtension(path);
+
+            Debug.Log("Scene: " + sceneName);
+
+            sceneNames.Add(sceneName);
+        }
+
+        return sceneNames;
+    }
+
 }
