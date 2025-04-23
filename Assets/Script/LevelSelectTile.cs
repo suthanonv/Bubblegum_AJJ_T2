@@ -7,6 +7,9 @@ public class LevelSelectTile : Grid_Collider
 {
     LevelLoader lvl;
     [SerializeField] int lvlSelect;
+
+    public int LelSelect => lvlSelect;
+
     TMP_Text lvlName;
     string LvlName;
     bool isIn;
@@ -17,7 +20,7 @@ public class LevelSelectTile : Grid_Collider
         LvlName = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
         string[] sceneNamefull = LvlName.Split('/');
         int index = sceneNamefull.Length;
-        LvlName = sceneNamefull[index-1];
+        LvlName = sceneNamefull[index - 1];
         string[] name = LvlName.Split(".");
         LvlName = name[0];
     }

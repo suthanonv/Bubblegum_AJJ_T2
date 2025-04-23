@@ -53,7 +53,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
     {
         Action action;
 
-        action = () => { Invoke("InitializeTiles", 0.5f); };
+        action = () => { Invoke("InitializeTiles", 0); };
 
         return action;
     }
