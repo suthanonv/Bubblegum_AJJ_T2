@@ -9,31 +9,26 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
 
     [SerializeField] MainComponent_Transform MainComponent_Tranform;
     [SerializeField] AnimationClip _clip;
-    [SerializeField] string AnimationState;
-    Animator _animator;
+    string AnimationState = "Base Layer.Normal To Stick";
+    [SerializeField] Animator _Animator;
     SpriteRenderer _spriteRenderer;
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        _animator.enabled = false;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.enabled = false;
-
+        _spriteRenderer = _Animator.GetComponent<SpriteRenderer>();
     }
 
     protected override void OnTransition(Action CallBack, Action PreEnter)
     {
         PreEnter?.Invoke();
         MainComponent_Tranform.FreezeRotation = true;
-        _animator.enabled = true;
-        _spriteRenderer.enabled = true;
-        _spriteRenderer.sortingLayerName = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
-        _animator.StopPlayback();
 
-        _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
-        _animator.SetFloat("y", MainComponent_Tranform.Current_direction.y);
-        _animator.Play(AnimationState, 0, 0f);
-        
+        _spriteRenderer.sortingLayerName = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
+
+
+        _Animator.SetFloat("X", MainComponent_Tranform.Current_direction.x);
+        _Animator.SetFloat("Y", MainComponent_Tranform.Current_direction.y);
+        _Animator.Play(AnimationState, 0, 0f);
+
         StartCoroutine(Transition(CallBack));
     }
 
@@ -50,8 +45,7 @@ public class Visual_NormalToStick : StateTransition<Bubble_Gum_State>
 
         yield return new WaitForSeconds(GetDuration());
 
-        _spriteRenderer.enabled = false;
-        _animator.enabled = false;
+
         CallBack.Invoke();
     }
 

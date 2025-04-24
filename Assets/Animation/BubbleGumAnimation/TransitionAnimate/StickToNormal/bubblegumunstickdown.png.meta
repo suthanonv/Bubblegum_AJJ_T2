@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 3befdc6fe9eac2f4ea71e736e14421cf
+guid: ba06a0c0565428b46be5e9c5664c8a9f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6445108510278321412
-    second: bubblegumstickup_0
+      213: 1773261629549689133
+    second: bubblegumunstickdown_0
   - first:
-      213: -6138204571089359733
-    second: bubblegumstickup_1
+      213: -4483837969527202070
+    second: bubblegumunstickdown_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,11 +99,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bubblegumstickup_0
+      name: bubblegumunstickdown_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4058cfdda00a17950800000000000000
-      internalID: 6445108510278321412
+      spriteID: d29b3239e04eb9810800000000000000
+      internalID: 1773261629549689133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bubblegumstickup_1
+      name: bubblegumunstickdown_1
       rect:
         serializedVersion: 2
         x: 384
@@ -140,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8c2a85d677b0daa0800000000000000
-      internalID: -6138204571089359733
+      spriteID: aee1ce38f1536c1c0800000000000000
+      internalID: -4483837969527202070
       vertices: []
       indices: 
       edges: []
@@ -150,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1496be1dbb180c842a1a3dd442ecd7a9
+    spriteID: 761dab0c6d90b9541985f93e6af00db7
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bubblegumstickup_0: 6445108510278321412
-      bubblegumstickup_1: -6138204571089359733
+      bubblegumunstickdown_0: 1773261629549689133
+      bubblegumunstickdown_1: -4483837969527202070
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

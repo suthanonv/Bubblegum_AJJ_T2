@@ -109,7 +109,6 @@ public class BackGroundMusic : MonoBehaviour
             // Get the file name without extension
             string sceneName = Path.GetFileNameWithoutExtension(path);
 
-            Debug.Log("Scene: " + sceneName);
 
             sceneNames.Add(sceneName);
         }

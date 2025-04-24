@@ -4,20 +4,15 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 {
     [SerializeField] MainComponent_Transform mainComponent;
     [SerializeField] AnimationClip clip;
-    Animator animator;
-
-    SpriteRenderer spriteRenderer;
+    [SerializeField] Animator Animator;
+    SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        SetUp();
+        _spriteRenderer = Animator.GetComponent<SpriteRenderer>();
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_PreEnter_Listener(PreEnter);
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_EnterState_Listner(SetUp);
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_ExitState_Listener(Delete);
-        spriteRenderer.enabled = false;
-
     }
 
 
@@ -30,15 +25,14 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
     void SetUp()
     {
-        spriteRenderer.enabled = true;
+        _spriteRenderer.sortingLayerName = "PlayableGameObjectvv";
+
     }
 
     void Delete()
     {
-
         mainComponent.RemoveOneMoveListener(Walk);
         mainComponent.RemoveOnfinishMove(Idle);
-        spriteRenderer.enabled = false;
     }
 
 
@@ -53,18 +47,16 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
         Vector2Int Direction = mainComponent.Current_direction;
 
-        animator.SetFloat("X", Direction.x);
-        animator.SetFloat("Y", Direction.y);
+        Animator.SetFloat("X", Direction.x);
+        Animator.SetFloat("Y", Direction.y);
 
-        animator.Play("Move");
+        Animator.Play("Base Layer.Normal.Move", 0, 0f);
 
         SoundManager.PlaySound(SoundType.BBG_Jump);
     }
 
     void Idle()
     {
-        Debug.Log("Play Idle");
-        animator.StopPlayback();
-        animator.Play("IDLE", 0, 0f);
+        Animator.Play("Base Layer.Normal.IDLE", 0, 0f);
     }
 }

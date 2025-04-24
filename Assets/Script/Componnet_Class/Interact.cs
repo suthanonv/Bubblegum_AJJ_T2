@@ -10,15 +10,22 @@ public class Interact : MonoBehaviour
     {
         grid = GameObject.FindAnyObjectByType<Grid_Manager>();
     }
+
+
     public void _Interact()
     {
 
-        Debug.Log("Begin Interacting after Movement");
         Vector2Int CurrentPos = mainComponent.Transform.currentTile_index;
+
+        if (CurrentPos.x < 0) return;
+
+        Debug.Log($"Current Tile Pos {CurrentPos}");
 
 
         foreach (Vector2Int all_direct in All_Direction.Directions)
         {
+
+            Debug.Log($" Grid is  Null {grid == null}");
 
             if (grid.Get_Tile(all_direct + CurrentPos).gameObject.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
@@ -32,5 +39,6 @@ public class Interact : MonoBehaviour
                 tile.OcupiedObject.FindComponnet_InChild<Area_interactable>().Interact();
             }
         }
+
     }
 }
