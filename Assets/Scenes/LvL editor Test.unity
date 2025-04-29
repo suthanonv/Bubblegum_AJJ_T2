@@ -477,6 +477,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1144007950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &316105158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 67369892459877981, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_Name
+      value: GameSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4521227
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775108240387342459, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673735276361764639, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: loadScene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673735276361764639, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+      propertyPath: loadSceneCanva
+      value: 
+      objectReference: {fileID: 4136605454277779454, guid: 7b713ac871fadd845aca99759b8f0da4, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
 --- !u!1001 &356947072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,6 +643,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4020247295362089758, guid: 6dfd286a46626814394c566bd2ff574a, type: 3}
   m_PrefabInstance: {fileID: 1660890813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &613245701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 67369892459877981, guid: ac6fa6d10f22b1644b4e10d764363dbe, type: 3}
+  m_PrefabInstance: {fileID: 316105158}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &665853898
 GameObject:
@@ -1518,9 +1588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe4dfe0857de344b9845d22e72017d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X: 10
-  Y: 10
-  TileSize: 1
+  X: 30
+  Y: 30
+  TileSize: 0.3
   TileSlot: {fileID: 3214763681277431933, guid: 0ee3ce378e87ab64bade59e763c19834, type: 3}
   canvas: {fileID: 1144007950}
   LvlIni: {fileID: 2040899937}
@@ -2298,7 +2368,7 @@ MonoBehaviour:
   canvas2: {fileID: 1758786400}
   GridManager: {fileID: 6829389272263752354, guid: 332dabc490501ac489ea20d2bdfc2940, type: 3}
   ObjectFolder: {fileID: 4624501488651645165, guid: d53d2191c54f39c44a3f46a441e05d64, type: 3}
-  InputHandler: {fileID: 2891866422315855357, guid: 9a606ba0861f9174c9a0b2515aa9a951, type: 3}
+  InputHandler: {fileID: 613245701}
   tileSize: 0
 --- !u!4 &2040899938
 Transform:
@@ -2907,3 +2977,4 @@ SceneRoots:
   - {fileID: 2042635570}
   - {fileID: 2040899938}
   - {fileID: 1758786401}
+  - {fileID: 316105158}

@@ -11045,6 +11045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tilemap GridLayers V2
       objectReference: {fileID: 0}
+    - target: {fileID: 7293506598144241125, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7722367610917897702, guid: 206441eb3c33e7943b9a5af7a0a011bf, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 29
@@ -19276,7 +19280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1647451228
 Transform:
   m_ObjectHideFlags: 0
