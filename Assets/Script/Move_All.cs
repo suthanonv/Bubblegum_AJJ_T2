@@ -91,6 +91,7 @@ public class Move_All : MonoBehaviour, IInitialize
 
         foreach (I_move move in validMoveSet)
         {
+
             Tile moveTile = gridManager.Get_Tile(Direction + move.PremovePosition(Direction));
             MainComponent Main_Move_Object = gridManager.Get_Tile(move.PremovePosition(Direction)).GetComponent<MoveAble_Tile>().OcupiedObject;
 
@@ -109,6 +110,8 @@ public class Move_All : MonoBehaviour, IInitialize
                     Interact_Obj.Interact(Main_Move_Object);
                 }
             }
+
+            move.OnInvalidMove();
         }
     }
 }

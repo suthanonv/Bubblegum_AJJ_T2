@@ -1,46 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Attach_Moveable_List))]
-public class Pushable : MonoBehaviour, I_move
+public class Group_Moving : Base_Movement
 {
-    [SerializeField] MainComponent mainComponent;
-    [SerializeField] UnityEvent OnMoveing = new UnityEvent();
-    [SerializeField] UnityEvent OnfinishMove = new UnityEvent();
-
-    Grid_Manager gridManager;
 
     Attach_Moveable_List attached_obj;
 
-    public Vector2 DefaultPosition() => mainComponent.Transform.currentTile_index;
-
-    void Start()
+    protected override void Start()
     {
-        gridManager = FindAnyObjectByType<Grid_Manager>();
+        base.Start();
         attached_obj = this.GetComponent<Attach_Moveable_List>();
     }
 
-    public Vector2Int PremovePosition(Vector2Int Direction, HashSet<I_move> visited = null)
+    public override Vector2Int Check_PremovePosition(Vector2Int Direction, HashSet<I_move> visited = null)
     {
-        // Initialize visited set if it's the first call
+        #region Set up HashSet
         if (visited == null)
             visited = new HashSet<I_move>();
-
-        // If this object has already been processed, return its default position to prevent infinite recursion
         if (visited.Contains(this))
             return mainComponent.Transform.currentTile_index;
-
-        // Mark this object as visited
         visited.Add(this);
 
-        // If no attached objects, return current position
+        #endregion
+
         if (attached_obj.Get_List().Count == 0)
             return mainComponent.Transform.currentTile_index;
 
         Tile PreMove_Tile = gridManager.Get_Tile(mainComponent.Transform.currentTile_index + Direction);
 
-        if (PreMove_Tile == null) // Safety check in case the tile does not exist
+        if (PreMove_Tile == null)
             return mainComponent.Transform.currentTile_index;
 
         MoveAble_Tile Moving_to_tile = PreMove_Tile.GetComponent<MoveAble_Tile>();
@@ -60,7 +49,6 @@ public class Pushable : MonoBehaviour, I_move
             if (attached.isElementInList(attached_obj))
             {
 
-                // Prevent infinite recursion using visited set
                 if (visited.Contains(attached.Get_Move))
                     return mainComponent.Transform.currentTile_index;
 
@@ -84,10 +72,12 @@ public class Pushable : MonoBehaviour, I_move
         return mainComponent.Transform.currentTile_index + Direction;
     }
 
-    public List<I_move> Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
+
+
+
+    public override List<I_move> Check_Canmove(Vector2Int Direction, HashSet<I_move> visited = null)
     {
         mainComponent.Transform.SetRotation(Direction);
-
         // If visited is null (first call), create a new HashSet
         if (visited == null)
             visited = new HashSet<I_move>();
@@ -149,19 +139,5 @@ public class Pushable : MonoBehaviour, I_move
         return Move;
     }
 
-    public void Move(Vector2Int Direction)
-    {
-        mainComponent.Transform.Position(Direction + mainComponent.Transform.currentTile_index, OnMove, OnFinishMove);
-    }
 
-    void OnMove()
-    {
-        SoundManager.PlaySound(SoundType.Effect_RockMove, 1f);
-        Debug.Log("Play Sound Rock Move");
-        OnMoveing.Invoke();
-    }
-    public void OnFinishMove()
-    {
-        OnfinishMove.Invoke();
-    }
 }

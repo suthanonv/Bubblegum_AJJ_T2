@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Movement_Assign : MonoBehaviour
+public class Movement_Controler : MonoBehaviour
 {
     Movement move;
     All_moveable_gum_holder move_holder;

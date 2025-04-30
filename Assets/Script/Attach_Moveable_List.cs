@@ -13,16 +13,16 @@ public class Attach_Moveable_List : MonoBehaviour
 
     List<Attach_Moveable_List> base_group = new List<Attach_Moveable_List>();
 
-    private void Awake()
+    private void Start()
     {
         this_move = GetComponent<I_move>();
-        BaseSetUp();
+        BaseSetUp(Group);
         Reset_List();
     }
 
 
 
-    void BaseSetUp()
+    public void BaseSetUp(List<MainComponent> Group)
     {
         foreach (var item in Group)
         {
@@ -36,6 +36,10 @@ public class Attach_Moveable_List : MonoBehaviour
     void SetUP()
     {
         this.Add_New_Moveable(base_group);
+        if (base_group.Contains(this) == false)
+        {
+            base_group.Add(this);
+        }
     }
 
     public void Reset_List(HashSet<Attach_Moveable_List> visited = null)
@@ -63,8 +67,6 @@ public class Attach_Moveable_List : MonoBehaviour
 
         // Now reset the list
         push_able_List.Clear();
-
-        push_able_List.Add(this);
         SetUP();
     }
 
@@ -90,7 +92,6 @@ public class Attach_Moveable_List : MonoBehaviour
         foreach (Attach_Moveable_List e in push_able_List)
         {
             e.Set_Same_list(allList);
-            Debug.Log("มึงนี่เองไอเหี้ย Add_New_Moveable ");
         }
     }
 
