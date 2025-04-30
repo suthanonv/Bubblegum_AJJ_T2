@@ -16,13 +16,13 @@ public class Attach_Moveable_List : MonoBehaviour
     private void Start()
     {
         this_move = GetComponent<I_move>();
-        BaseSetUp(Group);
+        BaseSetUp();
         Reset_List();
     }
 
 
 
-    public void BaseSetUp(List<MainComponent> Group)
+    public void BaseSetUp()
     {
         foreach (var item in Group)
         {
@@ -31,15 +31,15 @@ public class Attach_Moveable_List : MonoBehaviour
                 base_group.Add(attachedd);
             }
         }
+        if (base_group.Contains(this) == false)
+        {
+            base_group.Add(this);
+        }
     }
 
     void SetUP()
     {
         this.Add_New_Moveable(base_group);
-        if (base_group.Contains(this) == false)
-        {
-            base_group.Add(this);
-        }
     }
 
     public void Reset_List(HashSet<Attach_Moveable_List> visited = null)

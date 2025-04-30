@@ -105,6 +105,7 @@ public class Base_Movement : MonoBehaviour, I_move
     {
         _CalculatedPrePos = new Vector2Int(-10000, -10000);
         Cal_Canmove = false;
+        Debug.Log("Bool Reset Freme");
     }
 
     void OnMove()
