@@ -9,11 +9,25 @@ public class Attach_Moveable_List : MonoBehaviour
     public I_move Get_Move => this_move;
 
 
-
-    private void Start()
+    [SerializeField] List<MainComponent> Group;
+    private void Awake()
     {
         this_move = GetComponent<I_move>();
         Reset_List();
+    }
+
+    void SetUP()
+    {
+        foreach (MainComponent grouping in Group)
+        {
+
+            if (grouping.TryFindComponent_InChild<Attach_Moveable_List>(out Attach_Moveable_List attach))
+            {
+
+                attach.Add_New_Moveable(this.Get_List());
+                attach.Add_New_Moveable(attach.Get_List());
+            }
+        }
     }
 
     public void Reset_List(HashSet<Attach_Moveable_List> visited = null)
@@ -41,7 +55,9 @@ public class Attach_Moveable_List : MonoBehaviour
 
         // Now reset the list
         push_able_List.Clear();
+
         push_able_List.Add(this);
+        SetUP();
     }
 
     public void Remove_Moveable(Attach_Moveable_List moveable)
@@ -81,6 +97,6 @@ public class Attach_Moveable_List : MonoBehaviour
     {
         Debug.Log(Origin);
         push_able_List = new List<Attach_Moveable_List>(Origin);
-        
+
     }
 }
