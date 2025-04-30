@@ -10,24 +10,32 @@ public class Attach_Moveable_List : MonoBehaviour
 
 
     [SerializeField] List<MainComponent> Group;
+
+    List<Attach_Moveable_List> base_group = new List<Attach_Moveable_List>();
+
     private void Awake()
     {
         this_move = GetComponent<I_move>();
+        BaseSetUp();
         Reset_List();
+    }
+
+
+
+    void BaseSetUp()
+    {
+        foreach (var item in Group)
+        {
+            if (item.TryFindComponent_InChild<Attach_Moveable_List>(out Attach_Moveable_List attachedd))
+            {
+                base_group.Add(attachedd);
+            }
+        }
     }
 
     void SetUP()
     {
-        foreach (MainComponent grouping in Group)
-        {
-
-            if (grouping.TryFindComponent_InChild<Attach_Moveable_List>(out Attach_Moveable_List attach))
-            {
-
-                attach.Add_New_Moveable(this.Get_List());
-                attach.Add_New_Moveable(attach.Get_List());
-            }
-        }
+        this.Add_New_Moveable(base_group);
     }
 
     public void Reset_List(HashSet<Attach_Moveable_List> visited = null)
