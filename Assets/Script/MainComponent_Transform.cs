@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 [RequireComponent(typeof(MainComponent_Transform))]
-public class MainComponent_Transform : MonoBehaviour, IInitialize
+public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
 {
     public Vector2Int currentTile_index { get; private set; } = new Vector2Int(-10, -10);
     Grid_Manager grid_Manager;

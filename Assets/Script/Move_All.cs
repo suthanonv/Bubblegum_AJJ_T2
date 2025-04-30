@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public class Move_All : MonoBehaviour, IInitialize
+public class Move_All : MonoBehaviour, bbg_IInitialize
 {
     Grid_Manager gridManager;
 

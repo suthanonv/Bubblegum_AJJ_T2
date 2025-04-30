@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Grid_Manager : MonoBehaviour, IInitialize
+public class Grid_Manager : MonoBehaviour, bbg_IInitialize
 {
 
     public int InitializeLayer() => 0;
