@@ -12,7 +12,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
 
     public Direction CurretionDirectionEnum => _currentDirectionEnum;
 
-    Vector2Int _current_Direction = new Vector2Int(1, 0);
+    Vector2Int _current_Direction = new Vector2Int(0, 0);
     public Vector2Int Current_direction => _current_Direction;
 
     public bool FreezeRotation { get; set; }
