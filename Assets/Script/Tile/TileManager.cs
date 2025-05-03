@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public class TileManager : MonoBehaviour, IInitialize
+public class TileManager : MonoBehaviour, bbg_IInitialize
 {
     List<GameObject> allTile = new List<GameObject>();
     List<float> allXcoordinate = new List<float> { };

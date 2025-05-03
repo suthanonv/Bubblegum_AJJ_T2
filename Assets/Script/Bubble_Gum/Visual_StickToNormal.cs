@@ -10,16 +10,14 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
 
     [SerializeField] MainComponent_Transform MainComponent_Tranform;
     [SerializeField] AnimationClip _clip;
-    [SerializeField] string AnimationState;
-    Animator _animator;
-    SpriteRenderer _spriteRenderer;
+    string AnimationState = "Base Layer.Stick To Normal";
+    [SerializeField] Animator _Animator;
     Input_handle _inputHandle;
+
+    SpriteRenderer spriteRenderer;
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        _animator.enabled = false;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.enabled = false;
+        spriteRenderer = _Animator.GetComponent<SpriteRenderer>();
         _inputHandle = FindAnyObjectByType<Input_handle>();
 
     }
@@ -40,12 +38,11 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
         _callback = CallBack;
         _inputHandle.AddMovementListener(InstantEndTransition);
         PreEnter?.Invoke();
-        _animator.enabled = true;
-        _spriteRenderer.enabled = true;
-        _spriteRenderer.sortingLayerName = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
-        _animator.SetFloat("x", MainComponent_Tranform.Current_direction.x);
-        _animator.SetFloat("y", MainComponent_Tranform.Current_direction.y);
-        _animator.Play(AnimationState, 0, 0f);
+
+        spriteRenderer.sortingLayerName = GetSpriteOrder(MainComponent_Tranform.CurretionDirectionEnum);
+        _Animator.SetFloat("X", MainComponent_Tranform.Current_direction.x);
+        _Animator.SetFloat("Y", MainComponent_Tranform.Current_direction.y);
+        _Animator.Play(AnimationState, 0, 0f);
 
         StartCoroutine(Transition(CallBack));
     }
@@ -60,8 +57,7 @@ public class Visual_StickToNormal : StateTransition<Bubble_Gum_State>
 
     void OnEnd()
     {
-        _animator.enabled = false;
-        _spriteRenderer.enabled = false;
+
         _inputHandle.RemoveMovementListener(InstantEndTransition);
     }
 

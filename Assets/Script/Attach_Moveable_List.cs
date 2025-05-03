@@ -9,11 +9,37 @@ public class Attach_Moveable_List : MonoBehaviour
     public I_move Get_Move => this_move;
 
 
+    [SerializeField] List<MainComponent> Group;
+
+    List<Attach_Moveable_List> base_group = new List<Attach_Moveable_List>();
 
     private void Start()
     {
         this_move = GetComponent<I_move>();
+        BaseSetUp();
         Reset_List();
+    }
+
+
+
+    public void BaseSetUp()
+    {
+        foreach (var item in Group)
+        {
+            if (item.TryFindComponent_InChild<Attach_Moveable_List>(out Attach_Moveable_List attachedd))
+            {
+                base_group.Add(attachedd);
+            }
+        }
+        if (base_group.Contains(this) == false)
+        {
+            base_group.Add(this);
+        }
+    }
+
+    void SetUP()
+    {
+        this.Add_New_Moveable(base_group);
     }
 
     public void Reset_List(HashSet<Attach_Moveable_List> visited = null)
@@ -41,7 +67,7 @@ public class Attach_Moveable_List : MonoBehaviour
 
         // Now reset the list
         push_able_List.Clear();
-        push_able_List.Add(this);
+        SetUP();
     }
 
     public void Remove_Moveable(Attach_Moveable_List moveable)
@@ -66,7 +92,6 @@ public class Attach_Moveable_List : MonoBehaviour
         foreach (Attach_Moveable_List e in push_able_List)
         {
             e.Set_Same_list(allList);
-            Debug.Log("มึงนี่เองไอเหี้ย Add_New_Moveable ");
         }
     }
 
@@ -81,6 +106,6 @@ public class Attach_Moveable_List : MonoBehaviour
     {
         Debug.Log(Origin);
         push_able_List = new List<Attach_Moveable_List>(Origin);
-        
+
     }
 }

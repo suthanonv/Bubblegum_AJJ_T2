@@ -6,13 +6,13 @@ public class Initializer
 {
     public static void ExecuteInitialize()
     {
-        List<IInitialize> initializables = new List<IInitialize>();
+        List<bbg_IInitialize> initializables = new List<bbg_IInitialize>();
         Dictionary<int, List<Action>> ExecuteOrder = new Dictionary<int, List<Action>>();
 
-        // Find all MonoBehaviours that implement IInitialize
+        // Find all MonoBehaviours that implement bbg_IInitialize
         foreach (var mono in GameObject.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
         {
-            if (mono is IInitialize initializer)
+            if (mono is bbg_IInitialize initializer)
             {
                 initializables.Add(initializer);
             }

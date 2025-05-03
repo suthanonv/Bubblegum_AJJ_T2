@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 [RequireComponent(typeof(MainComponent_Transform))]
-public class MainComponent_Transform : MonoBehaviour, IInitialize
+public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
 {
     public Vector2Int currentTile_index { get; private set; } = new Vector2Int(-10, -10);
     Grid_Manager grid_Manager;
@@ -12,7 +12,7 @@ public class MainComponent_Transform : MonoBehaviour, IInitialize
 
     public Direction CurretionDirectionEnum => _currentDirectionEnum;
 
-    Vector2Int _current_Direction = new Vector2Int(1, 0);
+    Vector2Int _current_Direction = new Vector2Int(0, 0);
     public Vector2Int Current_direction => _current_Direction;
 
     public bool FreezeRotation { get; set; }

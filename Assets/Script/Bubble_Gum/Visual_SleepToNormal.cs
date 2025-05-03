@@ -8,18 +8,13 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
     protected override Bubble_Gum_State _nextState => Bubble_Gum_State.Normal;
 
     [SerializeField] AnimationClip _clip;
+    [SerializeField] Animator Animator;
 
-    Animator _animator;
-    [SerializeField] string _animationStateName;
-    SpriteRenderer _spriteRenderer;
+    string _animationStateName = "Base Layer.Sleep To Normal";
     Input_handle _inputHandle;
     private void Start()
     {
         _inputHandle = FindAnyObjectByType<Input_handle>();
-        _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator.enabled = false;
-        _spriteRenderer.enabled = false;
     }
 
 
@@ -31,10 +26,8 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
         _callback = CallBack;
         Debug.Log("being played");
         PreEnter?.Invoke();
-        _animator.enabled = true;
-        _spriteRenderer.enabled = true;
-        _animator.StopPlayback();
-        _animator.Play(_animationStateName, 0, 0f);
+
+        Animator.Play(_animationStateName, 0, 0f);
         StartCoroutine(Transition(CallBack));
     }
 
@@ -62,8 +55,6 @@ public class Visual_SleepToNormal : StateTransition<Bubble_Gum_State>
 
     void OnEnd()
     {
-        _animator.enabled = false;
-        _spriteRenderer.enabled = false;
         _inputHandle.RemoveMovementListener(InstantEndTransition);
     }
 
