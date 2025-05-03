@@ -1,19 +1,17 @@
 using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class BackGroundMusic : MonoBehaviour
 {
-
     static BackGroundMusic instance;
 
     [SerializeField] private List<BackGroundMusicAdjust> _musicAdjustList = new List<BackGroundMusicAdjust>();
 
     private AudioSource audioSource;
     private BackGroundMusicAdjust currentPlayedBGM = null;
+    private string _currentSceneName = "";
 
     private void Awake()
     {
@@ -26,7 +24,6 @@ public class BackGroundMusic : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
     private void Start()
@@ -34,14 +31,12 @@ public class BackGroundMusic : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-
-    string _currentSceneName = "";
     private void Update()
     {
-        if (_currentSceneName != SceneManager.GetActiveScene().name)
+        string activeScene = SceneManager.GetActiveScene().name;
+        if (_currentSceneName != activeScene)
         {
-            _currentSceneName = SceneManager.GetActiveScene().name;
-
+            _currentSceneName = activeScene;
             OnLoadNewScene();
         }
     }
@@ -67,20 +62,14 @@ public class BackGroundMusic : MonoBehaviour
     private void OnLoadNewScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
+        Debug.Log($"Current scene name: {currentSceneName}");
 
-        Debug.Log($"current scene name {currentSceneName}");
         foreach (var musicData in _musicAdjustList)
         {
-
-            foreach (var scene in ListScenesInFolder(musicData.ScenePath))
+            if (musicData.SceneNames.Contains(currentSceneName))
             {
-                Debug.Log($"scene {scene}");
-
-                if (scene == currentSceneName)
-                {
-                    PlayMusic(musicData);
-                    return;
-                }
+                PlayMusic(musicData);
+                return;
             }
         }
 
@@ -89,31 +78,4 @@ public class BackGroundMusic : MonoBehaviour
         currentPlayedBGM = null;
         Debug.LogWarning("No matching music found for this scene.");
     }
-
-    static List<string> ListScenesInFolder(string folderPath)
-    {
-        if (folderPath == null || folderPath == string.Empty) return new List<string>();
-
-        // Specify your folder inside "Assets/" (example: "Assets/Scenes")
-        folderPath = "Assets/Scenes";
-        // Get all .unity files in the folder (recursive)
-        string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { folderPath });
-
-        List<string> sceneNames = new List<string>();
-
-        foreach (string guid in guids)
-        {
-            // Get the full asset path
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-
-            // Get the file name without extension
-            string sceneName = Path.GetFileNameWithoutExtension(path);
-
-
-            sceneNames.Add(sceneName);
-        }
-
-        return sceneNames;
-    }
-
 }

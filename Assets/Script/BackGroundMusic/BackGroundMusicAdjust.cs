@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu]
-public class BackGroundMusicAdjust : ScriptableObject
+
+[System.Serializable]
+public class BackGroundMusicAdjust
 {
-    public string ScenePath;
     public AudioClip BGM;
 
-
+    [Tooltip("List all scene names this BGM should play in.")]
+    public List<string> SceneNames;
 }
