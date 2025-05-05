@@ -24,6 +24,9 @@ public class LevelSelectTile : Grid_Collider
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
 
         _canPlay = CanPlay();
+
+        lvlNameText = this.GetComponentInChildren<TMP_Text>();
+        lvlNameText.text = lvlSelect.ToString();
     }
 
 
@@ -59,15 +62,13 @@ public class LevelSelectTile : Grid_Collider
         if (main.GetComponent<StateControl<Bubble_Gum_State>>() != null)
         {
             isIn = true;
-            if (lvlNameText != null)
-                lvlNameText.text = $"{levelDisplayName}";
+
         }
     }
 
     protected override void _OnExit(MainComponent main)
     {
         isIn = false;
-        if (lvlNameText != null)
-            lvlNameText.text = string.Empty;
+
     }
 }
