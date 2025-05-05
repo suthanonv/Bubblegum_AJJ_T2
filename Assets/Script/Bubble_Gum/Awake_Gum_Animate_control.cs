@@ -57,6 +57,5 @@ public class Awake_Gum_Animate_control : MonoBehaviour
 
     void Idle()
     {
-        Animator.Play("Base Layer.Normal.IDLE", 0, 0f);
     }
 }
