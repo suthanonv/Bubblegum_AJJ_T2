@@ -12,9 +12,8 @@ public class LevelSelectTile : Grid_Collider
 
 
     public int LelSelect => lvlSelect;
-
+    public string LvlName => levelDisplayName;
     TMP_Text lvlName;
-    string LvlName;
 
     private void Start()
     {

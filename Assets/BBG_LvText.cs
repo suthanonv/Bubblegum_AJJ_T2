@@ -21,7 +21,7 @@ public class BBG_LvText : MonoBehaviour
         if (LvlTile == null) { m_TextMeshPro.enabled = false; return; }
 
 
-        m_TextMeshPro.text = LvlTile.LelName;
+        m_TextMeshPro.text = LvlTile.LvlName;
         m_TextMeshPro.enabled = true;
 
 
