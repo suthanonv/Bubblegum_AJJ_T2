@@ -10,7 +10,7 @@ public class LevelSelectTile : Grid_Collider
 
     public int LelSelect => lvlSelect;
 
-    public string LelSelectName => SceneManager.GetSceneByBuildIndex(lvlSelect).name;
+    public string LelName => SceneManager.GetSceneByBuildIndex(lvlSelect).name;
 
     TMP_Text lvlName;
     string LvlName;
