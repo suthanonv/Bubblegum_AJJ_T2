@@ -39,7 +39,9 @@ public class GameSystem : MonoBehaviour
     void loadNextScene()
     {
         Debug.Log("[GameSystem] Handling win... loading next scene.");
-        levelLoader.loadNextScene();
+
+        levelLoader.loadLevelSelectedScene(1);
+
     }
 
     private void Update()

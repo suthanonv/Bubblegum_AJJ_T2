@@ -33,7 +33,8 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 1.5f));
+
+        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 0.8f));
     }
     public void loadPreviousScene()
     {
@@ -44,8 +45,9 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
 
+
         //LoadLevel(_currentLevel - 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 1.5f));
+        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 0.8f));
     }
     public void reloadScene()
     {
@@ -56,8 +58,8 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
 
-        //LoadLevel(_currentLevel);
-        StartCoroutine(ASyncLoadScene(_currentLevel, 1));
+
+        StartCoroutine(ASyncLoadScene(_currentLevel, 0.8f));
     }
     public void loadLevelSelectedScene(int lvl)
     {
@@ -68,7 +70,7 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(lvl, 1.5f));
+        StartCoroutine(ASyncLoadScene(lvl, 1));
     }
     IEnumerator ASyncLoadScene(int levelNumber, float duration)
     {
@@ -132,7 +134,6 @@ public class LevelLoader : MonoBehaviour
         cloud.transform.localPosition = new Vector2(-3520, -1980);
         newInput.SetActive(true);
 
-        CurrentLevelClass.SetNewLevel(levelNumber - 1);
 
         Destroy(loadSceneCanva);
         Destroy(gameObject);
