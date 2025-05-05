@@ -10,7 +10,7 @@ public class LevelSelectTile : Grid_Collider
 
     public int LelSelect => lvlSelect;
 
-    public string LelName => SceneManager.GetSceneByBuildIndex(lvlSelect).name;
+    public string LelName => LvlName;
 
     TMP_Text lvlName;
     string LvlName;
@@ -18,8 +18,9 @@ public class LevelSelectTile : Grid_Collider
     private void Start()
     {
         //lvl = FindAnyObjectByType<LevelLoader>();
-        lvlName = FindAnyObjectByType<lvlNameText>().gameObject.GetComponent<TMP_Text>();
+        lvlName = this.transform.GetComponentInChildren<TMP_Text>();
         LvlName = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+        lvlName.text = $"{LelSelect}";
         string[] sceneNamefull = LvlName.Split('/');
         int index = sceneNamefull.Length;
         LvlName = sceneNamefull[index - 1];
@@ -44,13 +45,12 @@ public class LevelSelectTile : Grid_Collider
         if (main.GetComponent<StateControl<Bubble_Gum_State>>() != null)
         {
             isIn = true;
-            lvlName.text = $"{LvlName}";
         }
     }
 
     protected override void _OnExit(MainComponent main)
     {
         isIn = false;
-        lvlName.text = $"";
+
     }
 }

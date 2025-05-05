@@ -111,6 +111,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
         Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
+        _curernt_Tile = grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>();
 
         StartCoroutine(Lerping_Move(current_Pos, _future_pos, Duration(), onMove, onFinishMove));
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
@@ -126,7 +127,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
         Vector2 _future_pos = _future_tile.gameObject.transform.position;
 
         transform.position = _future_pos;
-
+        _curernt_Tile = grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>();
         _future_tile.SetOccupiedObject(main);
         RayCastSetPosAgain();
     }
@@ -161,7 +162,6 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
 
                 transform.position = _future_pos;
 
-                _curernt_Tile = _future_tile;
                 _future_tile.SetOccupiedObject(main);
                 return;
             }
