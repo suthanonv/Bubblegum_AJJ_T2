@@ -5,8 +5,8 @@ public class Cam_Idle : MonoBehaviour
 
 
 
-    [SerializeField] Vector2 RangeX = new Vector2(0.1f, 0.1f);
-    [SerializeField] Vector2 RangeY = new Vector2(0.1f, 0.1f);
+    [SerializeField] Vector2 RangeX = new Vector2(0.01f, 0.01f);
+    [SerializeField] Vector2 RangeY = new Vector2(0.01f, 0.01f);
     Vector2 StatPostion = new Vector2();
     Vector2 Destination;
 
