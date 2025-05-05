@@ -2,41 +2,35 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class LevelSelectTile : Grid_Collider
 {
-    LevelLoader lvl;
-    [SerializeField] int lvlSelect;
+    [SerializeField] private int lvlSelect;
+    [SerializeField] private TMP_Text lvlNameText;
+
+    private string levelDisplayName;
+    private bool isIn = false;
+
 
     public int LelSelect => lvlSelect;
 
-    public string LelName => LvlName;
-
     TMP_Text lvlName;
     string LvlName;
-    bool isIn;
+
     private void Start()
     {
-        //lvl = FindAnyObjectByType<LevelLoader>();
-        lvlName = this.transform.GetComponentInChildren<TMP_Text>();
-        LvlName = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
-        lvlName.text = $"{LelSelect}";
-        string[] sceneNamefull = LvlName.Split('/');
-        int index = sceneNamefull.Length;
-        LvlName = sceneNamefull[index - 1];
-        string[] name = LvlName.Split(".");
-        LvlName = name[0];
+
+        string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+
+
+        levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
     }
 
     private void Update()
     {
-        if (isIn)
+        if (isIn && Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                lvl = FindAnyObjectByType<LevelLoader>();
-                lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
-            }
+            LevelLoader lvl = FindAnyObjectByType<LevelLoader>();
+            lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -45,12 +39,15 @@ public class LevelSelectTile : Grid_Collider
         if (main.GetComponent<StateControl<Bubble_Gum_State>>() != null)
         {
             isIn = true;
+            if (lvlNameText != null)
+                lvlNameText.text = $"{levelDisplayName}";
         }
     }
 
     protected override void _OnExit(MainComponent main)
     {
         isIn = false;
-
+        if (lvlNameText != null)
+            lvlNameText.text = string.Empty;
     }
 }
