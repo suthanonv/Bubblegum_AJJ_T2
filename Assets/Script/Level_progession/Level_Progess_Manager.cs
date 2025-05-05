@@ -1,172 +1,127 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Level_Progress_Manager : MonoBehaviour
 {
-    private static string FolderPath => Application.persistentDataPath;
-    private const string FileName = "Level_Progress";
 
     private static Level_Progress_Manager _instance;
-    public static Level_Progress_Manager Instance => Get_Instance();
 
-    private All_Level_Progression levelProgress;
 
-    public static Level_Progress_Manager Get_Instance()
-    {
-        if (_instance == null)
-        {
-            GameObject obj = new GameObject("Level_Progress_Manager");
-            _instance = obj.AddComponent<Level_Progress_Manager>();
-            DontDestroyOnLoad(obj);
-        }
-        return _instance;
-    }
+    public static Level_Progress_Manager Instance => _instance;
+
+
+    List<Level_Section> _base_Allsection = new List<Level_Section>();
 
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
         {
             Destroy(gameObject);
             return;
         }
-
-        if (levelProgress == null)
-            Load();
+        SetUpList();
+        LoadData();
     }
 
-    public void SetProgress(string levelName, bool state)
-    {
-        if (levelProgress == null)
-        {
-            Load();
-        }
 
-        levelProgress.SetLevelProgress(levelName, state);
-    }
-
-    public bool IsThisScenePassed(string levelName)
-    {
-        if (levelProgress == null)
-        {
-            Load();
-        }
-
-        return levelProgress.CanLoadThisScene(levelName);
-    }
-
-    [ContextMenu("Reset Progression")]
-    private void ResetProgress()
-    {
-        levelProgress = new All_Level_Progression();
-        Save();
-    }
-
+    #region SaveLoad
     private void OnApplicationQuit()
     {
         Save();
     }
 
-    private void Load()
+    void Save()
     {
-        string path = Path.Combine(FolderPath, FileName + ".json");
+        SaveData newData = new SaveData();
+
+        foreach (var section in _base_Allsection)
+        {
+            foreach (var Level in section.All_Level_Info)
+            {
+                newData.AddNewScene(Level._name, Level.IsClear);
+            }
+        }
+    }
+
+    private static string folderPath => Application.persistentDataPath;
+
+    void LoadData()
+    {
+        string path = Path.Combine(folderPath, "Progession" + ".json");
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            levelProgress = JsonUtility.FromJson<All_Level_Progression>(json);
-        }
-        else
-        {
-            levelProgress = new All_Level_Progression();
+            SaveData loadedData = JsonUtility.FromJson<SaveData>(json);
+            loadedData.LoadSceneState(_base_Allsection);
         }
     }
 
-    private void Save()
+    #endregion
+
+
+    const string ScriptAbleObject_FilePath = "Assets/Script/Level_progession/Scriptable_ObJ";
+    void SetUpList()
     {
-        string json = JsonUtility.ToJson(levelProgress, true);
-        File.WriteAllText(Path.Combine(FolderPath, FileName + ".json"), json);
+        _base_Allsection = ScriptableObjectFinder.LoadAllScriptableObjectsInFolder<Level_Section>(ScriptAbleObject_FilePath);
+        Debug.Log(_base_Allsection.Count());
+    }
+
+    public void SetSceneState(string SceneName, bool State)
+    {
+        _base_Allsection.FirstOrDefault(i => i.IsSceneInthisSection(SceneName)).UpdateSceneState(SceneName, State);
+    }
+
+    public Level_Section GetSection(string SceneName)
+    {
+        Debug.Log(SceneName);
+
+
+        foreach (var section in _base_Allsection)
+        {
+            if (section.IsSceneInthisSection(SceneName))
+            {
+                return section;
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    [System.Serializable]
+    public class SaveData
+    {
+        Dictionary<string, bool> SceneNameToValue = new Dictionary<string, bool>();
+
+        public void AddNewScene(string Name, bool Value)
+        {
+            SceneNameToValue[Name] = Value;
+        }
+
+        public void LoadSceneState(List<Level_Section> All_Level)
+        {
+            foreach (Level_Section Section in All_Level)
+            {
+                foreach (Level_Info Level in Section.All_Level_Info)
+                {
+                    if (SceneNameToValue.ContainsKey(Level._name))
+                    {
+                        Section.UpdateSceneState(Level._name, SceneNameToValue[Level._name]);
+                    }
+                }
+            }
+        }
+
     }
 }
 
-[Serializable]
-public class All_Level_Progression
-{
-    private const int FirstLevelIndex = 2;
 
-    [SerializeField]
-    private List<LevelProgressEntry> entries = new List<LevelProgressEntry>();
-
-    private Dictionary<string, bool> sceneProgress = new Dictionary<string, bool>();
-
-    public void SetLevelProgress(string levelName, bool state)
-    {
-        if (!sceneProgress.ContainsKey(levelName))
-        {
-            AddNewScene(levelName, state);
-        }
-        else
-        {
-            SetNewState(levelName, state);
-        }
-    }
-
-    public bool CanLoadThisScene(string levelName)
-    {
-        if (!sceneProgress.ContainsKey(levelName))
-            return false;
-        return sceneProgress[levelName];
-    }
-
-    private void AddNewScene(string levelName, bool state)
-    {
-        int buildIndex = SceneUtility.GetBuildIndexByScenePath(levelName);
-        bool unlocked = buildIndex <= FirstLevelIndex || state;
-        sceneProgress[levelName] = unlocked;
-        entries.Add(new LevelProgressEntry(levelName, unlocked));
-    }
-
-    private void SetNewState(string levelName, bool state)
-    {
-        if (sceneProgress[levelName] == true && state == false) return;
-        sceneProgress[levelName] = state;
-        var entry = entries.Find(e => e.SceneName == levelName);
-        if (entry != null) entry.State = state;
-    }
-
-    // Unity doesn't serialize Dictionary directly, so rebuild after loading
-    public All_Level_Progression()
-    {
-        sceneProgress = new Dictionary<string, bool>();
-    }
-
-    public void OnAfterDeserialize()
-    {
-        sceneProgress = new Dictionary<string, bool>();
-        foreach (var entry in entries)
-        {
-            sceneProgress[entry.SceneName] = entry.State;
-        }
-    }
-
-    public void OnBeforeSerialize() { }
-}
-
-[Serializable]
-public class LevelProgressEntry
-{
-    public string SceneName;
-    public bool State;
-
-    public LevelProgressEntry(string name, bool state)
-    {
-        SceneName = name;
-        State = state;
-    }
-}

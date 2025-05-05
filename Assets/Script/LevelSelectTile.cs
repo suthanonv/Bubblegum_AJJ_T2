@@ -15,7 +15,7 @@ public class LevelSelectTile : Grid_Collider
     public string LvlName => levelDisplayName;
     TMP_Text lvlName;
 
-    private void Awake()
+    private void Start()
     {
 
         string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
@@ -23,24 +23,35 @@ public class LevelSelectTile : Grid_Collider
 
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
 
-
+        _canPlay = CanPlay();
     }
 
-    private void Start()
-    {
-        Level_Progress_Manager.Instance.SetProgress(levelDisplayName, false);
-    }
 
     private void Update()
     {
         if (isIn && Input.GetKeyDown(KeyCode.Space))
         {
-            if (Level_Progress_Manager.Instance.IsThisScenePassed(levelDisplayName))
+            if (Level_Progress_Manager.Instance.GetSection(levelDisplayName).CanPlay)
             {
                 LevelLoader lvl = FindAnyObjectByType<LevelLoader>();
                 lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
             }
         }
+    }
+
+
+    bool _canPlay;
+    private bool CanPlay()
+    {
+        if (Level_Progress_Manager.Instance.GetSection(levelDisplayName) != null)
+        {
+            return Level_Progress_Manager.Instance.GetSection(levelDisplayName).CanPlay;
+
+        }
+
+        Debug.LogWarning($"No Section Found on {this.gameObject.name} GameObject");
+        return false;
+
     }
 
     protected override void _OnEnter(MainComponent main)
