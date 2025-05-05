@@ -15,21 +15,31 @@ public class LevelSelectTile : Grid_Collider
     public string LvlName => levelDisplayName;
     TMP_Text lvlName;
 
-    private void Start()
+    private void Awake()
     {
 
         string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
 
 
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
+
+
+    }
+
+    private void Start()
+    {
+        Level_Progress_Manager.Instance.SetProgress(levelDisplayName, false);
     }
 
     private void Update()
     {
         if (isIn && Input.GetKeyDown(KeyCode.Space))
         {
-            LevelLoader lvl = FindAnyObjectByType<LevelLoader>();
-            lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+            if (Level_Progress_Manager.Instance.IsThisScenePassed(levelDisplayName))
+            {
+                LevelLoader lvl = FindAnyObjectByType<LevelLoader>();
+                lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 
