@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -11,6 +8,10 @@ public class MainMenuButtons : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] MainMenuManager mainMenuManager;
     bool isIn;
     [SerializeField] int index;
+
+    Load_Condition LoadCondition;
+
+
     private void Update()
     {
         if (isIn)

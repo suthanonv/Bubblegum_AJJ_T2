@@ -73,8 +73,10 @@ public class Level_Section : ScriptableObject
         }
     }
 
+    public bool SectionClear { get; private set; }
     public void UpdateSection()
     {
+        SectionClear = true;
         foreach (Level_Section i in NextSection)
         {
             i._canPlayThisSection = true;
