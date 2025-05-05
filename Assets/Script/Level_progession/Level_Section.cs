@@ -26,7 +26,7 @@ public class Level_Section : ScriptableObject
 
     private void OnValidate()
     {
-        _level_Info_List.Clear();
+        _level_Info_List = new List<Level_Info>();
         foreach (SceneAsset scene in _scene_InSection)
         {
             if (scene == null) continue;
