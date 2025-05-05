@@ -65,7 +65,7 @@ public class Level_Progress_Manager : MonoBehaviour
     #endregion
 
 
-    const string ScriptAbleObject_FilePath = "Assets/Script/Level_progession/Scriptable_ObJ";
+    const string ScriptAbleObject_FilePath = "Assets/Scenes/Playable Prototype/Section_Manage";
     void SetUpList()
     {
         _base_Allsection = ScriptableObjectFinder.LoadAllScriptableObjectsInFolder<Level_Section>(ScriptAbleObject_FilePath);
