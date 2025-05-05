@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameSystem : MonoBehaviour
     }
     private void HandleWin()
     {
+        Level_Progress_Manager.Instance.SetProgress(SceneManager.GetActiveScene().name, true);
         _transition.Invoke(loadNextScene);
     }
 
