@@ -26,7 +26,6 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
                 attached.Reset_List();
             }
         }
-        //Debug.Log($"{state} Exit");
 
     }
 }
