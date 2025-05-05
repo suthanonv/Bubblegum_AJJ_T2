@@ -11,6 +11,7 @@ public class GameSystem : MonoBehaviour
 
     [SerializeField] private int sceneTransitionTime = 1;
 
+    Load_Condition loadCondition;
     private void Start()
     {
         if (wining_Check != null)
@@ -21,6 +22,8 @@ public class GameSystem : MonoBehaviour
         {
             Debug.LogError("[GameSystem] Wining_Check not assigned.");
         }
+
+        loadCondition = FindAnyObjectByType<Load_Condition>();
     }
     private void HandleWin()
     {
@@ -42,7 +45,7 @@ public class GameSystem : MonoBehaviour
     {
         Debug.Log("[GameSystem] Handling win... loading next scene.");
 
-        levelLoader.loadLevelSelectedScene(1);
+        loadCondition.LoadingType();
 
     }
 

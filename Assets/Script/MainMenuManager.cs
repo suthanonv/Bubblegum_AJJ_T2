@@ -4,9 +4,14 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] LevelLoader lvlLoader;
     [SerializeField] EscMenuManager EscMenuManager;
+    Load_Condition LoadCondition;
+    void Start()
+    {
+        LoadCondition = FindAnyObjectByType<Load_Condition>();
+    }
     public void StartGame()
     {
-        lvlLoader.LoadLevel(1);
+        LoadCondition.LoadingType();
     }
 
     public void OpenOptions()

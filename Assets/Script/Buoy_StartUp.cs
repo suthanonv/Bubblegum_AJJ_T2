@@ -1,28 +1,40 @@
 using UnityEngine;
-using System.Collections;
 
 public class Buoy_StartUp : MonoBehaviour
 {
+
+
     private void Awake()
     {
-        GetComponent<Animator>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled = false;
-        
-    }
-    private void Start()
-    {
-        StartDelayedActivation();
+        if (this.GetComponent<Animator>() != null)
+        {
+            this.GetComponent<Animator>().enabled = false;
+            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            this.GetComponentInChildren<Animator>().enabled = false;
+            this.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
+        }
+
+
+        FindAnyObjectByType<LevelLoader>().Add_FinishCloudAnimationListener(OnFinishCloudLoad);
     }
 
-    public void StartDelayedActivation()
+    void OnFinishCloudLoad()
     {
-        StartCoroutine(EnableAfterDelay());
-    }
+        if (this.GetComponent<Animator>() != null)
+        {
+            this.GetComponent<Animator>().enabled = true;
+            this.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            this.GetComponentInChildren<Animator>().enabled = true;
+            this.GetComponentInChildren<SpriteRenderer>().enabled = true;
 
-    private IEnumerator EnableAfterDelay()
-    {
-        yield return new WaitForSeconds(5f);
-        GetComponent<Animator>().enabled = true;
-        GetComponent<SpriteRenderer>().enabled = true;
+        }
+
     }
 }

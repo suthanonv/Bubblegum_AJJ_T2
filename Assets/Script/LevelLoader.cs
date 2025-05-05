@@ -134,7 +134,7 @@ public class LevelLoader : MonoBehaviour
         cloud.transform.localPosition = new Vector2(-3520, -1980);
         newInput.SetActive(true);
 
-
+        OnFinishCloud?.Invoke();
         Destroy(loadSceneCanva);
         Destroy(gameObject);
     }
