@@ -14,11 +14,12 @@ public class LevelSelectTile : Grid_Collider
     public int LelSelect => lvlSelect;
     public string LvlName => levelDisplayName;
     TMP_Text lvlName;
+    private LevelLoader level;
 
     private void Start()
     {
-
-        string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+        level = FindAnyObjectByType<LevelLoader>();
+        string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect);
 
 
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
@@ -27,6 +28,8 @@ public class LevelSelectTile : Grid_Collider
 
         lvlNameText = this.GetComponentInChildren<TMP_Text>();
         lvlNameText.text = lvlSelect.ToString();
+        string[] list = levelDisplayName.Split(' ');
+        lvlNameText.text = list[1];
         if (_canPlay == false)
             lvlNameText.color = Color.gray;
 
@@ -39,8 +42,7 @@ public class LevelSelectTile : Grid_Collider
         {
             if (_canPlay)
             {
-                LevelLoader lvl = FindAnyObjectByType<LevelLoader>();
-                lvl.loadLevelSelectedScene(lvlSelect + SceneManager.GetActiveScene().buildIndex);
+                level.loadLevelSelectedScene(lvlSelect);
             }
         }
     }
