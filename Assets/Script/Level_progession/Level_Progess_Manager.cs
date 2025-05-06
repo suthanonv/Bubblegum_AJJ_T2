@@ -46,9 +46,21 @@ public class Level_Progress_Manager : MonoBehaviour
                 newData.AddNewScene(Level.SceneName, Level.IsClear);
             }
         }
+
+        string json = JsonUtility.ToJson(newData, true);
+        string path = Path.Combine(folderPath, "Progession.json");
+        File.WriteAllText(path, json);
     }
 
     private static string folderPath => Application.persistentDataPath;
+
+
+    public void ResetProgess()
+    {
+        SaveData newData = new SaveData();
+        Save();
+        LoadData();
+    }
 
     void LoadData()
     {
@@ -62,6 +74,8 @@ public class Level_Progress_Manager : MonoBehaviour
     }
 
     #endregion
+
+
 
 
     private static Dictionary<string, int> sceneNameToIndex;

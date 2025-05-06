@@ -39,14 +39,16 @@ public class Load_Condition : MonoBehaviour
 
 
 
-
-        if (section.IsSceneInthisSection(nextSceneName))
+        if (section.SectionClear == false)
         {
-            levelLoader.loadNextScene();
-        }
-        else
-        {
-            levelLoader.loadLevelSelectedScene(1);
+            if (section.IsSceneInthisSection(nextSceneName))
+            {
+                levelLoader.loadNextScene();
+            }
+            else
+            {
+                levelLoader.loadLevelSelectedScene(1);
+            }
         }
     }
 

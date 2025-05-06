@@ -98,6 +98,11 @@ public class Level_Section : ScriptableObject
         return null;
     }
 
+    public void ResetSection()
+    {
+
+    }
+
     public void UpdateSceneState(int name, bool state)
     {
         var info = _level_Info_List.FirstOrDefault(i => i.SceneName == name);
