@@ -64,7 +64,7 @@ public class LevelLoader : MonoBehaviour
     public void loadLevelSelectedScene(int lvl)
     {
 
-        Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
+        //  Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
@@ -78,17 +78,7 @@ public class LevelLoader : MonoBehaviour
         loadSceneCanva = loadScene.transform.parent.gameObject;
         loadSceneProgressBar = loadScene.GetComponentInChildren<UnityEngine.UI.Slider>(true);
         cloud = FindAnyObjectByType<Cloud>(FindObjectsInactive.Include).gameObject;
-        //LoadTimeChecker = false;
-        //loadScene.SetActive(true);
-        //loadSceneProgressBar.value = 0f;
         cloud.SetActive(true);
-        /*
-        for(int i = 0; i < 880/cloudSpeed; i++)
-        {
-            cloud.transform.position += new Vector3(-4f*cloudSpeed, -2.25f*cloudSpeed);
-            yield return null;
-        }
-        */
         float time = 0;
         Vector2 startingPos = new Vector2(3520, 1980);
         while (time < duration)
@@ -116,13 +106,6 @@ public class LevelLoader : MonoBehaviour
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
         yield return new WaitForSeconds(0.05f);
-        /*
-        for (int i = 0; i < 880/cloudSpeed; i++)
-        {
-            cloud.transform.position += new Vector3(-4f * cloudSpeed, -2.25f * cloudSpeed);
-            yield return null;
-        }
-        */
         time = 0;
         startingPos = Vector2.zero;
         while (time < duration)

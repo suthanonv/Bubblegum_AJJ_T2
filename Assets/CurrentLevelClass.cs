@@ -7,6 +7,6 @@ public class CurrentLevelClass : MonoBehaviour
 
     public static void SetNewLevel(int _currentLevel)
     {
-        CurrentLevel = _currentLevel;
+        CurrentLevel = _currentLevel + 1;
     }
 }

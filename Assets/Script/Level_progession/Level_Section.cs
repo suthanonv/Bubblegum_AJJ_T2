@@ -77,6 +77,16 @@ public class Level_Section : ScriptableObject
         return false;
     }
 
+    public Level_Info GetLevel(string name)
+    {
+        foreach (var sceneName in All_Level_Info)
+        {
+            if (sceneName.SceneName == name) return sceneName;
+        }
+
+        return null;
+    }
+
     public void UpdateSceneState(string name, bool state)
     {
         var info = _level_Info_List.FirstOrDefault(i => i.SceneName == name);

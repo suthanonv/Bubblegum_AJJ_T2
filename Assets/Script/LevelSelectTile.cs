@@ -15,7 +15,7 @@ public class LevelSelectTile : Grid_Collider
     public string LvlName => levelDisplayName;
     TMP_Text lvlName;
     private LevelLoader level;
-
+    Level_Info lvlInfo;
     private void Start()
     {
         level = FindAnyObjectByType<LevelLoader>();
@@ -25,6 +25,7 @@ public class LevelSelectTile : Grid_Collider
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
 
         _canPlay = Set_canPlay();
+        lvlInfo = Level_Progress_Manager.Instance.GetSection(levelDisplayName).GetLevel(levelDisplayName);
 
         lvlNameText = this.GetComponentInChildren<TMP_Text>();
         lvlNameText.text = lvlSelect.ToString();
@@ -32,7 +33,8 @@ public class LevelSelectTile : Grid_Collider
         lvlNameText.text = list[1];
         if (_canPlay == false)
             lvlNameText.color = Color.gray;
-
+        else if (lvlInfo.IsClear)
+            lvlNameText.color = Color.green;
     }
 
 
@@ -42,9 +44,15 @@ public class LevelSelectTile : Grid_Collider
         {
             if (_canPlay)
             {
+                if (level == null) level = FindAnyObjectByType<LevelLoader>();
+
                 level.loadLevelSelectedScene(lvlSelect);
             }
+
         }
+
+
+
     }
 
 
