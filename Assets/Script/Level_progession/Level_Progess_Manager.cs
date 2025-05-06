@@ -58,8 +58,17 @@ public class Level_Progress_Manager : MonoBehaviour
     public void ResetProgess()
     {
         SaveData newData = new SaveData();
+
         Save();
         LoadData();
+    }
+
+    private void ResetLevel()
+    {
+        foreach (var section in _base_Allsection)
+        {
+            section.ResetSection();
+        }
     }
 
     void LoadData()
@@ -71,6 +80,7 @@ public class Level_Progress_Manager : MonoBehaviour
             SaveData loadedData = JsonUtility.FromJson<SaveData>(json);
             loadedData.LoadSceneState(_base_Allsection);
         }
+
     }
 
     #endregion

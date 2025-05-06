@@ -100,7 +100,10 @@ public class Level_Section : ScriptableObject
 
     public void ResetSection()
     {
-
+        foreach (Level_Info i in _level_Info_List)
+        {
+            i.SetNewState(false);
+        }
     }
 
     public void UpdateSceneState(int name, bool state)
