@@ -9,7 +9,7 @@ public class Load_Condition : MonoBehaviour
     public void LoadingType()
     {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
-        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int currentIndex = Level_Progress_Manager.GetBuildIndexByName(SceneManager.GetActiveScene().name);
 
         // If current scene is the last one
         if (currentIndex == sceneCount - 1)
