@@ -519,6 +519,9 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+  UnityEvent_onInvalidMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8019986631779921247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,6 +1023,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  UnityEvent_onInvalidMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &71550914767671060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,6 +1121,21 @@ MonoBehaviour:
       - m_Target: {fileID: 8439743174122516646}
         m_TargetAssemblyTypeName: Interact, Assembly-CSharp
         m_MethodName: _Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  UnityEvent_onInvalidMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6298277849203328806}
+        m_TargetAssemblyTypeName: Awake_Gum_Animate_control, Assembly-CSharp
+        m_MethodName: OnInvalidMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1983,7 +2004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e64c1ee76836fe488559a7adad89eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 2
+  _currentState: 1
 --- !u!114 &2381752518797789037
 MonoBehaviour:
   m_ObjectHideFlags: 0
