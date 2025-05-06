@@ -17202,7 +17202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.015}
+  m_AnchoredPosition: {x: 2.96, y: 3.42}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &753657270
@@ -17227,8 +17227,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sample text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8377879792fbdaa4ab8a8111a4aa5987, type: 2}
-  m_sharedMaterial: {fileID: 2022712145328003144, guid: 8377879792fbdaa4ab8a8111a4aa5987, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a5281ba6d74b05444b74f0bab1c65974, type: 2}
+  m_sharedMaterial: {fileID: 2022712145328003144, guid: a5281ba6d74b05444b74f0bab1c65974, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17259,7 +17259,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -17290,7 +17290,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 2.0164237, z: 0, w: 2.4463968}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -17322,7 +17322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2022712145328003144, guid: 8377879792fbdaa4ab8a8111a4aa5987, type: 2}
+  - {fileID: 2022712145328003144, guid: a5281ba6d74b05444b74f0bab1c65974, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18702,7 +18702,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -19182,6 +19182,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3696176285428703509, guid: 30d077c6e3eee0c4e96067156abb8eb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526223462198482539, guid: 30d077c6e3eee0c4e96067156abb8eb9, type: 3}
+      propertyPath: m_fontStyle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8190633052358890482, guid: 30d077c6e3eee0c4e96067156abb8eb9, type: 3}
