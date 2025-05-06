@@ -66,11 +66,27 @@ public class BackGroundMusic : MonoBehaviour
     private void OnLoadNewScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            audioSource.Stop();
+            currentPlayedBGM = null;
+            return;
+        }
+
 
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             PlayMusic(_musicAdjustList[0]);
             return;
+        }
+
+
+        if (SceneManager.GetActiveScene().buildIndex == sceneCount - 1)
+        {
+            PlayMusic(_musicAdjustList[1]);
         }
 
         Debug.Log($"Current scene name: {currentSceneName}");
