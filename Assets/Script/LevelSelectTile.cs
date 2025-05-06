@@ -6,7 +6,7 @@ public class LevelSelectTile : Grid_Collider
 {
     [SerializeField] private int lvlSelect;
     [SerializeField] private TMP_Text lvlNameText;
-
+    [SerializeField] private SpriteRenderer lockUI;
     private string levelDisplayName;
     private bool isIn = false;
 
@@ -16,8 +16,19 @@ public class LevelSelectTile : Grid_Collider
     TMP_Text lvlName;
     private LevelLoader level;
     Level_Info lvlInfo;
+
+
+    MoveAble_Tile moveTile;
+
+    bool Check(MainComponent something) => _canPlay;
+
     private void Start()
     {
+        moveTile = this.GetComponent<MoveAble_Tile>();
+
+
+        moveTile.Add_tile_Condition(Check);
+
         level = FindAnyObjectByType<LevelLoader>();
         string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect);
 
@@ -31,10 +42,25 @@ public class LevelSelectTile : Grid_Collider
         lvlNameText.text = lvlSelect.ToString();
         string[] list = levelDisplayName.Split(' ');
         lvlNameText.text = list[1];
+
+
         if (_canPlay == false)
+        {
             lvlNameText.color = Color.gray;
-        else if (lvlInfo.IsClear)
+            lockUI.enabled = true;
+        }
+
+        if (_canPlay == true)
+        {
+            lockUI.enabled = false;
+        }    
+
+        if (lvlInfo.IsClear)
+        {
             lvlNameText.color = Color.green;
+            
+        }
+            
     }
 
 
