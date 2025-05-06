@@ -69,7 +69,7 @@ public class BackGroundMusic : MonoBehaviour
         int sceneCount = SceneManager.sceneCountInBuildSettings;
 
 
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (Level_Progress_Manager.GetBuildIndexByName(currentSceneName) == 0)
         {
             audioSource.Stop();
             currentPlayedBGM = null;
@@ -77,14 +77,14 @@ public class BackGroundMusic : MonoBehaviour
         }
 
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (Level_Progress_Manager.GetBuildIndexByName(currentSceneName) == 1)
         {
             PlayMusic(_musicAdjustList[0]);
             return;
         }
 
 
-        if (SceneManager.GetActiveScene().buildIndex == sceneCount - 1)
+        if (Level_Progress_Manager.GetBuildIndexByName(currentSceneName) == sceneCount - 1)
         {
             PlayMusic(_musicAdjustList[1]);
         }
