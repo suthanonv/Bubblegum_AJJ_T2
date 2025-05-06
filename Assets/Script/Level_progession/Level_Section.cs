@@ -116,6 +116,10 @@ public class Level_Section : ScriptableObject
         {
             UpdateSection();
         }
+        else
+        {
+            SectionClear = false;
+        }
     }
 
     public bool SectionClear { get; private set; }
