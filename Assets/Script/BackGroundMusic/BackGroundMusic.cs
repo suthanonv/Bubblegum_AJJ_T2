@@ -67,6 +67,12 @@ public class BackGroundMusic : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
 
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            PlayMusic(_musicAdjustList[0]);
+            return;
+        }
+
         Debug.Log($"Current scene name: {currentSceneName}");
 
         foreach (var musicData in _musicAdjustList)
