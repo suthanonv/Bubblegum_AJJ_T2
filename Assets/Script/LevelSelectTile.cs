@@ -25,7 +25,7 @@ public class LevelSelectTile : Grid_Collider
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
 
         _canPlay = Set_canPlay();
-        lvlInfo = Level_Progress_Manager.Instance.GetSection(levelDisplayName).GetLevel(levelDisplayName);
+        lvlInfo = Level_Progress_Manager.Instance.GetSection(SceneManager.GetSceneByName(levelDisplayName).buildIndex).GetLevel(SceneManager.GetSceneByName(levelDisplayName).buildIndex);
 
         lvlNameText = this.GetComponentInChildren<TMP_Text>();
         lvlNameText.text = lvlSelect.ToString();
@@ -64,9 +64,9 @@ public class LevelSelectTile : Grid_Collider
 
     private bool Set_canPlay()
     {
-        if (Level_Progress_Manager.Instance.GetSection(levelDisplayName) != null)
+        if (Level_Progress_Manager.Instance.GetSection(SceneManager.GetSceneByName(levelDisplayName).buildIndex) != null)
         {
-            return Level_Progress_Manager.Instance.GetSection(levelDisplayName).CanPlay;
+            return Level_Progress_Manager.Instance.GetSection(SceneManager.GetSceneByName(levelDisplayName).buildIndex).CanPlay;
 
         }
 

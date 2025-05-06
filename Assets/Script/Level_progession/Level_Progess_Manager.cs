@@ -66,7 +66,7 @@ public class Level_Progress_Manager : MonoBehaviour
     const string ScriptAbleObject_FilePath = "Assets/Scenes/Playable Prototype/Section_Manage";
 
 
-    public void SetSceneState(string SceneName, bool State)
+    public void SetSceneState(int SceneName, bool State)
     {
         GetSection(SceneName).UpdateSceneState(SceneName, State);
     }
@@ -74,7 +74,7 @@ public class Level_Progress_Manager : MonoBehaviour
 
 
 
-    public Level_Section GetSection(string SceneName)
+    public Level_Section GetSection(int SceneName)
     {
         Debug.Log(SceneName);
 
@@ -97,9 +97,9 @@ public class Level_Progress_Manager : MonoBehaviour
     [System.Serializable]
     public class SaveData
     {
-        Dictionary<string, bool> SceneNameToValue = new Dictionary<string, bool>();
+        Dictionary<int, bool> SceneNameToValue = new Dictionary<int, bool>();
 
-        public void AddNewScene(string Name, bool Value)
+        public void AddNewScene(int Name, bool Value)
         {
             SceneNameToValue[Name] = Value;
         }

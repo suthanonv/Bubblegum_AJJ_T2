@@ -27,7 +27,7 @@ public class GameSystem : MonoBehaviour
     }
     private void HandleWin()
     {
-        Level_Progress_Manager.Instance.SetSceneState(SceneManager.GetActiveScene().name, true);
+        Level_Progress_Manager.Instance.SetSceneState(SceneManager.GetActiveScene().buildIndex, true);
         _transition.Invoke(loadNextScene);
     }
 
