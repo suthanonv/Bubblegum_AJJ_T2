@@ -4,16 +4,24 @@ using UnityEngine.EventSystems;
 public class SettingsReturnButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Settings settings;
+    [SerializeField] MenuController controller;
     [SerializeField] int myButton;
     bool isIn;
     int tempLastButton;
     void Update()
     {
+        //if (isIn)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Mouse0))
+        //    {
+        //        settings.CloseSettings();
+        //    }
+        //}
         if (isIn)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                settings.CloseSettings();
+                controller.ReturnToPreviousPanel();
             }
         }
     }

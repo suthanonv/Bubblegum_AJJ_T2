@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class Settings : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Settings : MonoBehaviour
     Color lightColor;
 
     [SerializeField] bool isMainMenu;
+    [SerializeField] MenuController controller;
     void Start()
     {
 
@@ -43,43 +45,60 @@ public class Settings : MonoBehaviour
         }
         if ((CurrentSelect == 4 && Input.GetKeyDown(KeyCode.Space)) || Input.GetKeyDown(KeyCode.Escape))
         {
-            CloseSettings();
+            controller.ReturnToPreviousPanel();
         }
     }
 
     public void OpenSettings()
     {
-        lightColor = EscMenuManager.lightColor;
-        darkColor = EscMenuManager.darkColor;
-        input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
-        input.gameObject.SetActive(false);
-        Time.timeScale = 0;
-        CurrentSelect = 1;
-        this.gameObject.SetActive(true);
-        UpdateVisual();
+        //lightColor = EscMenuManager.lightColor;
+        //darkColor = EscMenuManager.darkColor;
+        //input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
+        //input.gameObject.SetActive(false);
+        //Time.timeScale = 0;
+        //CurrentSelect = 1;
+        //this.gameObject.SetActive(true);
+        //UpdateVisual();
     }
 
     public void CloseSettings()
     {
-        input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
-        input.gameObject.SetActive(true);
-        Time.timeScale = 1;
-        this.gameObject.SetActive(false);
-        if (!isMainMenu)
-        {
-            EscMenuManager.OpenEscMenu();
-        }
+        //input = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
+        //input.gameObject.SetActive(true);
+        //Time.timeScale = 1;
+        //this.gameObject.SetActive(false);
+        //if (!isMainMenu)
+        //{
+        //    EscMenuManager.OpenEscMenu();
+        //}
     }
 
     public void UpdateVisual()
     {
+        int positionAdjustment = 212;
         if (CurrentSelect != 4)
         {
+            if(CurrentSelect == 1)
+            {
+                positionAdjustment = 212;
+            }
+            else if(CurrentSelect == 2)
+            {
+                positionAdjustment = 12;
+            }
+            else if( CurrentSelect == 3)
+            {
+                positionAdjustment = -190;
+            }
+            else
+            {
+                positionAdjustment = -1000;
+            }
             returnButtonImage.color = lightColor;
             returnButtonText.fontStyle = TMPro.FontStyles.Normal;
             Gum.SetActive(true);
             RectTransform rt = Gum.GetComponent<RectTransform>();
-            rt.anchoredPosition = new Vector2 (rt.anchoredPosition.x, 340 - ((CurrentSelect - 1) * 190));
+            rt.anchoredPosition = new Vector2 (rt.anchoredPosition.x, positionAdjustment);
         }
         else 
         {

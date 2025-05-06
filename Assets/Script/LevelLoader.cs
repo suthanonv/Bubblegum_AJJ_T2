@@ -47,6 +47,30 @@ public class LevelLoader : MonoBehaviour
         //LoadLevel(_currentLevel - 1);
         StartCoroutine(ASyncLoadScene(_currentLevel - 1, 1.5f));
     }
+    public void loadLevelSelectScene()
+    {
+
+        Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
+        int _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (get_Input == null)
+            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
+
+
+        //LoadLevel(_currentLevel - 1);
+        StartCoroutine(ASyncLoadScene(1, 1.5f));
+    }
+    public void loadMainMenu()
+    {
+
+        Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
+        int _currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (get_Input == null)
+            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
+
+
+        //LoadLevel(_currentLevel - 1);
+        StartCoroutine(ASyncLoadScene(0, 1.5f));
+    }
     public void reloadScene()
     {
 
