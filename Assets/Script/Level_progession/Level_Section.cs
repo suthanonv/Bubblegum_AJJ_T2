@@ -83,10 +83,7 @@ public class Level_Section : ScriptableObject
 
     public bool IsSceneInthisSection(int name)
     {
-        foreach (var sceneName in All_Level_Info)
-        {
-            if (sceneName.SceneName == name) return true;
-        }
+        if (_sceneIndexesInSection.Contains(name)) return true;
 
         return false;
     }
