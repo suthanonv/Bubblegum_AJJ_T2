@@ -21,7 +21,16 @@ public class BBG_LvText : MonoBehaviour
         if (LvlTile == null) { m_TextMeshPro.enabled = false; return; }
 
 
-        m_TextMeshPro.text = LvlTile.LvlName;
+
+        if (LvlTile.CanPlay)
+        {
+            m_TextMeshPro.text = LvlTile.LvlName;
+        }
+        else
+        {
+            m_TextMeshPro.text = $"{LvlTile.LvlName} (Locked)";
+        }
+
         m_TextMeshPro.enabled = true;
 
 
