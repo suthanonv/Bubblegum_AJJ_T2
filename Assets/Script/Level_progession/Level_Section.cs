@@ -100,7 +100,11 @@ public class Level_Section : ScriptableObject
 
     public void ResetSection()
     {
-
+        foreach (Level_Info i in _level_Info_List)
+        {
+            i.SetNewState(false);
+        }
+        CheckAllClear();
     }
 
     public void UpdateSceneState(int name, bool state)
@@ -129,7 +133,7 @@ public class Level_Section : ScriptableObject
 
     public bool SectionClear { get; private set; }
 
-    public void UpdateSection()
+    void UpdateSection()
     {
         SectionClear = true;
         foreach (Level_Section section in NextSection)
