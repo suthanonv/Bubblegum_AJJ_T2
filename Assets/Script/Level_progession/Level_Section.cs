@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -19,7 +20,7 @@ public class Level_Section : ScriptableObject
 #endif
 
     // Scene names used in runtime
-    [SerializeField] private List<string> _sceneNamesInSection = new List<string>();
+    [SerializeField] private List<int> _sceneIndexesInSection = new List<int>();
 
     private List<Level_Info> _level_Info_List;
     public List<Level_Info> All_Level_Info => Get_LevelInfo();
@@ -40,10 +41,24 @@ public class Level_Section : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        _sceneNamesInSection = _sceneAssetsInSection
+        _sceneIndexesInSection = _sceneAssetsInSection
             .Where(scene => scene != null)
-            .Select(scene => scene.name)
+            .Select(scene => GetBuildIndexByName(scene.name))
+            .Where(index => index >= 0)
             .ToList();
+    }
+
+    // Helper method to get build index from scene name
+    private int GetBuildIndexByName(string sceneName)
+    {
+        for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
+        {
+            string path = EditorBuildSettings.scenes[i].path;
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
+            if (name == sceneName)
+                return i;
+        }
+        return -1; // Not found
     }
 #endif
 
@@ -59,25 +74,21 @@ public class Level_Section : ScriptableObject
     private void SetUp()
     {
         _level_Info_List = new List<Level_Info>();
-        foreach (string sceneName in _sceneNamesInSection)
+        foreach (int sceneName in _sceneIndexesInSection)
         {
-            if (string.IsNullOrEmpty(sceneName)) continue;
             Level_Info level_Info = new Level_Info(sceneName, false);
             _level_Info_List.Add(level_Info);
         }
     }
 
-    public bool IsSceneInthisSection(string name)
+    public bool IsSceneInthisSection(int name)
     {
-        foreach (var sceneName in All_Level_Info)
-        {
-            if (sceneName.SceneName == name) return true;
-        }
+        if (_sceneIndexesInSection.Contains(name)) return true;
 
         return false;
     }
 
-    public Level_Info GetLevel(string name)
+    public Level_Info GetLevel(int name)
     {
         foreach (var sceneName in All_Level_Info)
         {
@@ -87,7 +98,7 @@ public class Level_Section : ScriptableObject
         return null;
     }
 
-    public void UpdateSceneState(string name, bool state)
+    public void UpdateSceneState(int name, bool state)
     {
         var info = _level_Info_List.FirstOrDefault(i => i.SceneName == name);
         if (info != null)
@@ -105,6 +116,10 @@ public class Level_Section : ScriptableObject
         {
             UpdateSection();
         }
+        else
+        {
+            SectionClear = false;
+        }
     }
 
     public bool SectionClear { get; private set; }
@@ -121,10 +136,10 @@ public class Level_Section : ScriptableObject
 [System.Serializable]
 public class Level_Info
 {
-    public string SceneName { get; private set; }
+    public int SceneName { get; private set; }
     public bool IsClear { get; private set; }
 
-    public Level_Info(string sceneName, bool isClear)
+    public Level_Info(int sceneName, bool isClear)
     {
         SceneName = sceneName;
         IsClear = isClear;

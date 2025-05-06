@@ -33,8 +33,12 @@ public class Load_Condition : MonoBehaviour
         }
 
         // Check if next scene is in this section
-        string nextSceneName = SceneUtility.GetScenePathByBuildIndex(currentIndex + 1);
-        nextSceneName = System.IO.Path.GetFileNameWithoutExtension(nextSceneName);
+        int nextSceneName = currentIndex + 1;
+
+
+
+
+
 
         if (section.IsSceneInthisSection(nextSceneName))
         {

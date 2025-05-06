@@ -10,7 +10,13 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
 
         base.OnEnterState();
         FindAnyObjectByType<All_Sticky_Gum_Holder>().Add_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
-
+        if (this.transform.parent.GetComponent<MainComponent_Transform>().currentTile_index == Vector2Int.zero)
+        {
+            if (this.transform.GetComponentInChildren<Attach_Moveable_List>()._AddingSelfSetUp == true)
+            {
+                this.transform.GetComponentInChildren<Attach_Moveable_List>()._AddingSelfSetUp = false;
+            }
+        }
     }
 
     public override void OnExitState()

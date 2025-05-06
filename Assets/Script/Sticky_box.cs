@@ -32,6 +32,10 @@ public class Sticky_box : MonoBehaviour
             state.SetState(Bubble_Gum_State.Stick);
             Attach_Moveable_List attach_Moveable_List = state.GetComponent<MainComponent>().FindComponnet_InChild<Attach_Moveable_List>();
 
+            Debug.Log("Stick now");
+
+            attach_Moveable_List.Reset_List();
+
             attach_Moveable_List.Add_New_Moveable(Attach_Moveable_List.Get_List());
             Attach_Moveable_List.Add_New_Moveable(attach_Moveable_List.Get_List());
         }

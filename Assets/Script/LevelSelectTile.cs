@@ -23,10 +23,10 @@ public class LevelSelectTile : Grid_Collider
 
 
         levelDisplayName = System.IO.Path.GetFileNameWithoutExtension(fullPath);
-
+        var section = Level_Progress_Manager.Instance.GetSection(Level_Progress_Manager.GetBuildIndexByName(levelDisplayName));
+        Debug.Log($"{this.gameObject.name}, {section != null}");
+        lvlInfo = section?.GetLevel(lvlSelect);
         _canPlay = Set_canPlay();
-        lvlInfo = Level_Progress_Manager.Instance.GetSection(levelDisplayName).GetLevel(levelDisplayName);
-
         lvlNameText = this.GetComponentInChildren<TMP_Text>();
         lvlNameText.text = lvlSelect.ToString();
         string[] list = levelDisplayName.Split(' ');
@@ -64,9 +64,9 @@ public class LevelSelectTile : Grid_Collider
 
     private bool Set_canPlay()
     {
-        if (Level_Progress_Manager.Instance.GetSection(levelDisplayName) != null)
+        if (Level_Progress_Manager.Instance.GetSection(Level_Progress_Manager.GetBuildIndexByName(levelDisplayName)) != null)
         {
-            return Level_Progress_Manager.Instance.GetSection(levelDisplayName).CanPlay;
+            return Level_Progress_Manager.Instance.GetSection(Level_Progress_Manager.GetBuildIndexByName(levelDisplayName)).CanPlay;
 
         }
 

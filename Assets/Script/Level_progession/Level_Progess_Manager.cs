@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Level_Progress_Manager : MonoBehaviour
 {
@@ -63,10 +64,44 @@ public class Level_Progress_Manager : MonoBehaviour
     #endregion
 
 
-    const string ScriptAbleObject_FilePath = "Assets/Scenes/Playable Prototype/Section_Manage";
+    private static Dictionary<string, int> sceneNameToIndex;
+
+    public static void InitializeSceneLookup()
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        sceneNameToIndex = new Dictionary<string, int>();
+
+        for (int i = 0; i < sceneCount; i++)
+        {
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
+            sceneNameToIndex[name] = i;
+        }
+    }
+
+    public static int GetBuildIndexByName(string sceneName)
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+
+        for (int i = 0; i < sceneCount; i++)
+        {
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
 
 
-    public void SetSceneState(string SceneName, bool State)
+            if (name == sceneName)
+            {
+                Debug.Log($" Found scene '{sceneName}' at build index {i}");
+                return i;
+            }
+        }
+
+        Debug.LogWarning($" No Scene '{sceneName}' not found in Build Settings!");
+        return -1;
+    }
+
+
+    public void SetSceneState(int SceneName, bool State)
     {
         GetSection(SceneName).UpdateSceneState(SceneName, State);
     }
@@ -74,13 +109,11 @@ public class Level_Progress_Manager : MonoBehaviour
 
 
 
-    public Level_Section GetSection(string SceneName)
+    public Level_Section GetSection(int SceneName)
     {
-        Debug.Log(SceneName);
-
-
         foreach (var section in _base_Allsection)
         {
+            Debug.Log($"Comapred Input {SceneName} With {section.name}");
             if (section.IsSceneInthisSection(SceneName))
             {
                 return section;
@@ -97,9 +130,9 @@ public class Level_Progress_Manager : MonoBehaviour
     [System.Serializable]
     public class SaveData
     {
-        Dictionary<string, bool> SceneNameToValue = new Dictionary<string, bool>();
+        Dictionary<int, bool> SceneNameToValue = new Dictionary<int, bool>();
 
-        public void AddNewScene(string Name, bool Value)
+        public void AddNewScene(int Name, bool Value)
         {
             SceneNameToValue[Name] = Value;
         }

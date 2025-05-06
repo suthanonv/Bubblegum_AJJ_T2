@@ -96,9 +96,11 @@ public class Base_Movement : MonoBehaviour, I_move
 
     public void OnInvalidMove()
     {
-
+        UnityEvent_onInvalidMove.Invoke();
         ResetOnEndFreame();
     }
+
+    [SerializeField] UnityEvent UnityEvent_onInvalidMove = new UnityEvent();
 
 
     void ResetOnEndFreame()
