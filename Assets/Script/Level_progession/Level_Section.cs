@@ -1,42 +1,53 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [CreateAssetMenu(menuName = "Level_Section")]
 public class Level_Section : ScriptableObject
 {
-
-
-    [SerializeField] bool _canPlayThisSection = false;
-
+    [SerializeField] private bool _canPlayThisSection = false;
     public bool CanPlay => _canPlayThisSection;
 
+    // Use SceneAsset in editor for convenience
+#if UNITY_EDITOR
+    [SerializeField] private List<SceneAsset> _sceneAssetsInSection = new List<SceneAsset>();
+#endif
 
-    [SerializeField] List<SceneAsset> _scene_InSection = new List<SceneAsset>();
+    // Scene names used in runtime
+    [SerializeField] private List<string> _sceneNamesInSection = new List<string>();
 
+    private List<Level_Info> _level_Info_List;
+    public List<Level_Info> All_Level_Info => Get_LevelInfo();
 
-    List<Level_Info> _level_Info_List;
+    [SerializeField] private int RequirementToClear = 2;
+    [SerializeField] private List<Level_Section> NextSection;
 
-    public List<Level_Info> All_Level_Info => _level_Info_List;
-
-    [SerializeField] int RequirementToClear = 2;
-
-    [SerializeField] List<Level_Section> NextSection;
-
-    private void OnValidate()
+    private List<Level_Info> Get_LevelInfo()
     {
-        _level_Info_List = new List<Level_Info>();
-        foreach (SceneAsset scene in _scene_InSection)
+        if (_level_Info_List == null || _level_Info_List.Count == 0)
         {
-            if (scene == null) continue;
-            Level_Info level_Info = new Level_Info(scene, false);
-            _level_Info_List.Add(level_Info);
+            SetUp();
         }
+
+        return _level_Info_List;
     }
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        _sceneNamesInSection = _sceneAssetsInSection
+            .Where(scene => scene != null)
+            .Select(scene => scene.name)
+            .ToList();
+    }
+#endif
+
     [ContextMenu("Set Level to Clear All")]
-    void SetLevelClear()
+    private void SetLevelClear()
     {
         foreach (Level_Info i in _level_Info_List)
         {
@@ -44,64 +55,67 @@ public class Level_Section : ScriptableObject
         }
     }
 
-    public bool IsSceneInthisSection(string Name)
+    private void SetUp()
     {
-        return _level_Info_List.FirstOrDefault(i => i._name == Name) != null;
-    }
-
-    public void UpdateSceneState(string name, bool State)
-    {
-        _level_Info_List.FirstOrDefault(i => i._name == name).SetNewState(State);
-        isAllStateClear();
-    }
-
-
-    void isAllStateClear()
-    {
-        int count = 0;
-        foreach (Level_Info i in _level_Info_List)
+        _level_Info_List = new List<Level_Info>();
+        foreach (string sceneName in _sceneNamesInSection)
         {
-            if (i.IsClear)
-            {
-                count++;
-            }
+            if (string.IsNullOrEmpty(sceneName)) continue;
+            Level_Info level_Info = new Level_Info(sceneName, false);
+            _level_Info_List.Add(level_Info);
         }
+    }
 
-        if (count >= RequirementToClear)
+    public bool IsSceneInthisSection(string name)
+    {
+        return _level_Info_List.FirstOrDefault(i => i.SceneName == name) != null;
+    }
+
+    public void UpdateSceneState(string name, bool state)
+    {
+        var info = _level_Info_List.FirstOrDefault(i => i.SceneName == name);
+        if (info != null)
+        {
+            info.SetNewState(state);
+            CheckAllClear();
+        }
+    }
+
+    private void CheckAllClear()
+    {
+        int clearCount = _level_Info_List.Count(i => i.IsClear);
+
+        if (clearCount >= RequirementToClear)
         {
             UpdateSection();
         }
     }
 
     public bool SectionClear { get; private set; }
+
     public void UpdateSection()
     {
         SectionClear = true;
-        foreach (Level_Section i in NextSection)
+        foreach (Level_Section section in NextSection)
         {
-            i._canPlayThisSection = true;
+            section._canPlayThisSection = true;
         }
     }
-
 }
-
-
 [System.Serializable]
 public class Level_Info
 {
-    public string _name;
-    public SceneAsset SceneAsset { get; }
+    public string SceneName { get; private set; }
     public bool IsClear { get; private set; }
 
-    public Level_Info(SceneAsset SceneAsset, bool State)
+    public Level_Info(string sceneName, bool isClear)
     {
-        this.SceneAsset = SceneAsset;
-        _name = SceneAsset.name;
-        IsClear = State;
+        SceneName = sceneName;
+        IsClear = isClear;
     }
 
-    public void SetNewState(bool State)
+    public void SetNewState(bool state)
     {
-        IsClear = State;
+        IsClear = state;
     }
 }

@@ -250,6 +250,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5806945292cfb31498400a220e7c8c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base_Allsection:
+  - {fileID: 11400000, guid: e9337a17e991890498e9cd3c74bc2f0b, type: 2}
+  - {fileID: 11400000, guid: 1cd15322b581d1244b187d744714be4a, type: 2}
+  - {fileID: 11400000, guid: 1e564329327c7294ca87875f76246140, type: 2}
+  - {fileID: 11400000, guid: fbf15605757f93e468ea033bef708900, type: 2}
+  - {fileID: 11400000, guid: cc25cc21bb9a2bd4aa25cf715da7e23d, type: 2}
+  - {fileID: 11400000, guid: 2bfe29552b1e5f74ba8806a3dfc769b5, type: 2}
+  - {fileID: 11400000, guid: 2d892373bd4accb4c904024a5be8bdc7, type: 2}
+  - {fileID: 11400000, guid: a138dddc0fcbaf54d9484debf09f5f49, type: 2}
+  - {fileID: 11400000, guid: 20156081b47a73242aa77684f8154853, type: 2}
+  - {fileID: 11400000, guid: 2206a72f55c46e34ba8b04678907c369, type: 2}
 --- !u!1 &8194199723930464663
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,6 +478,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5775108240387342459}
     m_Modifications:
+    - target: {fileID: 895401214527259834, guid: 705018ff1d75a8d45bbc49e7a8d2df6f, type: 3}
+      propertyPath: _musicAdjustList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 895401214527259834, guid: 705018ff1d75a8d45bbc49e7a8d2df6f, type: 3}
+      propertyPath: '_musicAdjustList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c21a64c4390cd034081dc619dc4b38ee, type: 2}
     - target: {fileID: 1982452622300343394, guid: 705018ff1d75a8d45bbc49e7a8d2df6f, type: 3}
       propertyPath: m_Name
       value: BBGManager

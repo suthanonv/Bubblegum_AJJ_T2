@@ -12,7 +12,7 @@ public class Level_Progress_Manager : MonoBehaviour
     public static Level_Progress_Manager Instance => _instance;
 
 
-    List<Level_Section> _base_Allsection = new List<Level_Section>();
+    [SerializeField] List<Level_Section> _base_Allsection = new List<Level_Section>();
 
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class Level_Progress_Manager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        SetUpList();
         LoadData();
     }
 
@@ -44,7 +43,7 @@ public class Level_Progress_Manager : MonoBehaviour
         {
             foreach (var Level in section.All_Level_Info)
             {
-                newData.AddNewScene(Level._name, Level.IsClear);
+                newData.AddNewScene(Level.SceneName, Level.IsClear);
             }
         }
     }
@@ -66,11 +65,7 @@ public class Level_Progress_Manager : MonoBehaviour
 
 
     const string ScriptAbleObject_FilePath = "Assets/Scenes/Playable Prototype/Section_Manage";
-    void SetUpList()
-    {
-        _base_Allsection = ScriptableObjectFinder.LoadAllScriptableObjectsInFolder<Level_Section>(ScriptAbleObject_FilePath);
-        Debug.Log(_base_Allsection.Count());
-    }
+
 
     public void SetSceneState(string SceneName, bool State)
     {
@@ -113,9 +108,9 @@ public class Level_Progress_Manager : MonoBehaviour
             {
                 foreach (Level_Info Level in Section.All_Level_Info)
                 {
-                    if (SceneNameToValue.ContainsKey(Level._name))
+                    if (SceneNameToValue.ContainsKey(Level.SceneName))
                     {
-                        Section.UpdateSceneState(Level._name, SceneNameToValue[Level._name]);
+                        Section.UpdateSceneState(Level.SceneName, SceneNameToValue[Level.SceneName]);
                     }
                 }
             }
