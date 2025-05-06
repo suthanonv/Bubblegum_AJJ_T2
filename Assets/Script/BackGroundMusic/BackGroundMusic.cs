@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -60,6 +60,7 @@ public class BackGroundMusic : MonoBehaviour
         }
         else
         {
+            audioSource.Stop();
             Debug.LogWarning("BGM clip is missing in selected music data.");
         }
     }
@@ -74,7 +75,6 @@ public class BackGroundMusic : MonoBehaviour
 
             foreach (var scene in ListScenesInFolder(musicData.ScenePath))
             {
-                Debug.Log($"scene {scene}");
 
                 if (scene == currentSceneName)
                 {
@@ -84,7 +84,7 @@ public class BackGroundMusic : MonoBehaviour
             }
         }
 
-        // No match found � stop music
+        // No match found – stop music
         audioSource.Stop();
         currentPlayedBGM = null;
         Debug.LogWarning("No matching music found for this scene.");
@@ -95,7 +95,6 @@ public class BackGroundMusic : MonoBehaviour
         if (folderPath == null || folderPath == string.Empty) return new List<string>();
 
         // Specify your folder inside "Assets/" (example: "Assets/Scenes")
-        folderPath = "Assets/Scenes";
         // Get all .unity files in the folder (recursive)
         string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { folderPath });
 
