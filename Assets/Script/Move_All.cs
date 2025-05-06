@@ -9,7 +9,7 @@ public class Move_All : MonoBehaviour, bbg_IInitialize
     private void Start()
     {
         this.GetComponent<All_moveable_gum_holder>().Add_moveCall_Listener(MoveAll);
-        gridManager = FindAnyObjectByType<Grid_Manager>();
+        gridManager = FindAnyObjectByType<Grid_Manager>(FindObjectsInactive.Include);
     }
 
 

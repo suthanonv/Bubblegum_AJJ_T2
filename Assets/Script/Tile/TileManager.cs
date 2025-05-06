@@ -31,7 +31,7 @@ public class TileManager : MonoBehaviour, bbg_IInitialize
     }
 
 
-    void InitializeTiles()
+    public void InitializeTiles()
     {
         tileIndex = null;
         allTile = new List<GameObject>();
