@@ -16,6 +16,8 @@ public class Attach_Moveable_List : MonoBehaviour
 
     [SerializeField] bool AddingSelfInSetUP = false;
 
+
+    public bool _AddingSelfSetUp { get { return AddingSelfInSetUP; } set { AddingSelfInSetUP = value; } }
     private void Start()
     {
         this_move = GetComponent<I_move>();
@@ -108,7 +110,6 @@ public class Attach_Moveable_List : MonoBehaviour
 
     public void Set_Same_list(List<Attach_Moveable_List> Origin)
     {
-        Debug.Log(Origin);
         push_able_List = new List<Attach_Moveable_List>(Origin);
 
     }

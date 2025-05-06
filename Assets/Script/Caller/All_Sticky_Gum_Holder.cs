@@ -34,6 +34,7 @@ public class All_Sticky_Gum_Holder : MonoBehaviour
     public void UnStick_Handle()
     {
         unstick.Invoke(StickedGum);
+        OnUnStickGum?.Invoke();
     }
 
 
@@ -41,4 +42,14 @@ public class All_Sticky_Gum_Holder : MonoBehaviour
     {
         unstick += newFunc;
     }
+
+
+    Action OnUnStickGum;
+
+    public void Add_OnUnStickGum(Action newAct)
+    {
+        OnUnStickGum += newAct;
+    }
+
+
 }
