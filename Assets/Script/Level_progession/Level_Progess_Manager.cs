@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 public class Level_Progress_Manager : MonoBehaviour
@@ -69,8 +68,11 @@ public class Level_Progress_Manager : MonoBehaviour
 
     public void SetSceneState(string SceneName, bool State)
     {
-        _base_Allsection.FirstOrDefault(i => i.IsSceneInthisSection(SceneName)).UpdateSceneState(SceneName, State);
+        GetSection(SceneName).UpdateSceneState(SceneName, State);
     }
+
+
+
 
     public Level_Section GetSection(string SceneName)
     {

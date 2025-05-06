@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -68,7 +69,12 @@ public class Level_Section : ScriptableObject
 
     public bool IsSceneInthisSection(string name)
     {
-        return _level_Info_List.FirstOrDefault(i => i.SceneName == name) != null;
+        foreach (var sceneName in All_Level_Info)
+        {
+            if (sceneName.SceneName == name) return true;
+        }
+
+        return false;
     }
 
     public void UpdateSceneState(string name, bool state)
