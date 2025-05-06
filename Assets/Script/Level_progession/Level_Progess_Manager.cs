@@ -54,11 +54,11 @@ public class Level_Progress_Manager : MonoBehaviour
 
     private static string folderPath => Application.persistentDataPath;
 
-
+    [ContextMenu("Reset")]
     public void ResetProgess()
     {
         SaveData newData = new SaveData();
-
+        ResetLevel();
         Save();
         LoadData();
     }
@@ -68,6 +68,7 @@ public class Level_Progress_Manager : MonoBehaviour
         foreach (var section in _base_Allsection)
         {
             section.ResetSection();
+
         }
     }
 
