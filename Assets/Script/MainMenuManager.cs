@@ -16,6 +16,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OpenOptions()
     {
+        if (FindFirstObjectByType<Cloud>() != null) return;
         EscMenuManager.OpenEscMenu();
         EscMenuManager.OpenSetting();
     }

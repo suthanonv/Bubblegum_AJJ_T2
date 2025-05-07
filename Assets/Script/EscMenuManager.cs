@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,7 +8,7 @@ public class EscMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject Menu;
     [SerializeField] Settings Settings;
-    [SerializeField] TMP_Text levelName; 
+    [SerializeField] TMP_Text levelName;
     LevelLoader levelLoader;
     Input_handle input;
     bool isOpen;
@@ -28,8 +27,9 @@ public class EscMenuManager : MonoBehaviour
 
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Escape))
-       {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (FindFirstObjectByType<Cloud>() != null) return;
             if (isOpen)
             {
                 CloseEscMenu();
@@ -38,9 +38,9 @@ public class EscMenuManager : MonoBehaviour
             {
                 OpenEscMenu();
             }
-       }
-       if (isOpen)
-       {
+        }
+        if (isOpen)
+        {
             if (CurrentSelect < 5 && Input.GetKeyDown(KeyCode.S))
             {
                 CurrentSelect++;
