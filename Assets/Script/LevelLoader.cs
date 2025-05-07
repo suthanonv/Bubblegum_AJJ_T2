@@ -51,13 +51,12 @@ public class LevelLoader : MonoBehaviour
     }
     public void reloadScene()
     {
+        if (FindAnyObjectByType<Cloud>() != null) return;
 
         Debug.Log($"{this.gameObject.name}, reloadScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
-
-
 
         StartCoroutine(ASyncLoadScene(_currentLevel, 0.8f));
     }
@@ -72,6 +71,10 @@ public class LevelLoader : MonoBehaviour
         //LoadLevel(_currentLevel + 1);
         StartCoroutine(ASyncLoadScene(lvl, 1));
     }
+
+
+
+
     IEnumerator ASyncLoadScene(int levelNumber, float duration)
     {
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;

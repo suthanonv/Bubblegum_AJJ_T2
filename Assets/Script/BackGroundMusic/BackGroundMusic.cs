@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
@@ -8,10 +7,12 @@ public class BackGroundMusic : MonoBehaviour
 
     static BackGroundMusic instance;
 
-    [SerializeField] private List<BackGroundMusicAdjust> _musicAdjustList = new List<BackGroundMusicAdjust>();
+
+    [SerializeField] AudioClip BGM_GamePlay;
+    [SerializeField] AudioClip Bgm_EndCredit;
 
     private AudioSource audioSource;
-    private BackGroundMusicAdjust currentPlayedBGM = null;
+    private AudioClip currentPlayedBGM = null;
 
     private void Awake()
     {
@@ -44,12 +45,12 @@ public class BackGroundMusic : MonoBehaviour
         }
     }
 
-    private void PlayMusic(BackGroundMusicAdjust musicData)
+    private void PlayMusic(AudioClip musicData)
     {
         if (musicData == currentPlayedBGM) return;
 
         currentPlayedBGM = musicData;
-        audioSource.clip = musicData.BGM;
+        audioSource.clip = musicData;
 
         if (audioSource.clip != null)
         {
@@ -79,34 +80,21 @@ public class BackGroundMusic : MonoBehaviour
 
         if (Level_Progress_Manager.GetBuildIndexByName(currentSceneName) == 1)
         {
-            PlayMusic(_musicAdjustList[0]);
+            PlayMusic(BGM_GamePlay);
             return;
         }
 
 
         if (Level_Progress_Manager.GetBuildIndexByName(currentSceneName) == sceneCount - 1)
         {
-            PlayMusic(_musicAdjustList[1]);
+            PlayMusic(Bgm_EndCredit);
+            return;
         }
 
-        Debug.Log($"Current scene name: {currentSceneName}");
 
-        foreach (var musicData in _musicAdjustList)
-        {
-            foreach (var i in musicData.AllScene)
-            {
-                if (i == currentSceneName)
-                {
-                    PlayMusic(musicData);
-                    return;
-                }
-            }
-        }
 
-        // No match found – stop music
-        audioSource.Stop();
-        currentPlayedBGM = null;
-        Debug.LogWarning("No matching music found for this scene.");
+        PlayMusic(BGM_GamePlay);
+
     }
 
 }
