@@ -31,8 +31,8 @@ public class VolumeSettings : MonoBehaviour
     private void Start()
     {
         musicSlider.value = PlayerPrefs.GetFloat(PREF_MUSIC, 0.5f);
-        sfxSlider.value = PlayerPrefs.GetFloat(PREF_SFX, 1f);
-        MasterSlider.value = PlayerPrefs.GetFloat(PREF_MASTER, 1f);
+        sfxSlider.value = PlayerPrefs.GetFloat(PREF_SFX, 0.5f);
+        MasterSlider.value = PlayerPrefs.GetFloat(PREF_MASTER, 0.5f);
 
         // Apply loaded values
         SetMusicVolume(musicSlider.value);

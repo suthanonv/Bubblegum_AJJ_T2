@@ -98,6 +98,8 @@ public class Move_All : MonoBehaviour, bbg_IInitialize
 
             if (moveTile.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
+                if (tile.OcupiedObject == null) continue;
+
                 if (tile.OcupiedObject.TryFindComponent_InChild<Object_Interactable>(out Object_Interactable Interact_Obj))
                 {
                     Interact_Obj.Interact(Main_Move_Object);
