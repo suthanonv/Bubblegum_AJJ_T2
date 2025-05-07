@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -152,18 +153,48 @@ public class Level_Progress_Manager : MonoBehaviour
     }
 
 
-    [System.Serializable]
+    [Serializable]
+    public class SceneStatePair
+    {
+        public int SceneName;
+        public bool Value;
+    }
+
+    [Serializable]
     public class SaveData
     {
-        Dictionary<int, bool> SceneNameToValue = new Dictionary<int, bool>();
+        [SerializeField]
+        private List<SceneStatePair> SceneNameToValueList = new List<SceneStatePair>();
+
+        private Dictionary<int, bool> SceneNameToValue = new Dictionary<int, bool>();
 
         public void AddNewScene(int Name, bool Value)
         {
+            // Update internal dictionary
             SceneNameToValue[Name] = Value;
+
+            // Update list for serialization
+            var existing = SceneNameToValueList.Find(pair => pair.SceneName == Name);
+            if (existing != null)
+            {
+                existing.Value = Value;
+            }
+            else
+            {
+                SceneNameToValueList.Add(new SceneStatePair { SceneName = Name, Value = Value });
+            }
         }
 
         public void LoadSceneState(List<Level_Section> All_Level)
         {
+            // Rebuild dictionary from list
+            SceneNameToValue.Clear();
+            foreach (var pair in SceneNameToValueList)
+            {
+                SceneNameToValue[pair.SceneName] = pair.Value;
+            }
+
+            // Use dictionary to update scenes
             foreach (Level_Section Section in All_Level)
             {
                 foreach (Level_Info Level in Section.All_Level_Info)
@@ -175,7 +206,6 @@ public class Level_Progress_Manager : MonoBehaviour
                 }
             }
         }
-
     }
 }
 
