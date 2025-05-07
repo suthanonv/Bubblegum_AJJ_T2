@@ -14,7 +14,7 @@ public class Attach_Moveable_List : MonoBehaviour
     List<Attach_Moveable_List> base_group = new List<Attach_Moveable_List>();
 
 
-    [SerializeField] bool AddingSelfInSetUP = false;
+    [SerializeField] bool AddingSelfInSetUP = true;
 
 
     public bool _AddingSelfSetUp { get { return AddingSelfInSetUP; } set { AddingSelfInSetUP = value; } }
