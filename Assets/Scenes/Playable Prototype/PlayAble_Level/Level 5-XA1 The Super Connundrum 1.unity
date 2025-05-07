@@ -1500,6 +1500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orange Tree Big (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4277798134890518312, guid: fc915bccb2b71a940a348d5cba140c7d, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 7146105941437285430, guid: fc915bccb2b71a940a348d5cba140c7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.01
@@ -26407,12 +26411,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 367193155}
     m_Modifications:
     - target: {fileID: 30035962369810185, guid: b55026410d3db7246842abdce1d402d3, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30035962369810185, guid: b55026410d3db7246842abdce1d402d3, type: 3}
       propertyPath: m_Color.a
       value: 0.23529412
       objectReference: {fileID: 0}
     - target: {fileID: 30035962369810185, guid: b55026410d3db7246842abdce1d402d3, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 30035962369810185, guid: b55026410d3db7246842abdce1d402d3, type: 3}
       propertyPath: m_SortingLayerID
@@ -26432,11 +26440,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533522280393805529, guid: b55026410d3db7246842abdce1d402d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.158
+      value: 3.13
       objectReference: {fileID: 0}
     - target: {fileID: 8533522280393805529, guid: b55026410d3db7246842abdce1d402d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38300002
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 8533522280393805529, guid: b55026410d3db7246842abdce1d402d3, type: 3}
       propertyPath: m_LocalPosition.z
