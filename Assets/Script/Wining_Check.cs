@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wining_Check : MonoBehaviour
 {
@@ -43,10 +44,15 @@ public class Wining_Check : MonoBehaviour
             }
         }
 
-
+       
         _completedLevel = true;
         SoundManager.PlaySound(SoundType.Effect_Winning);
         Debug.Log("[Wining_Check] All tiles are in win state. Broadcasting victory.");
+        int buildIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        Level_Progress_Manager.Instance.SetSceneState(buildIndex, true);
+        Level_Progress_Manager.Instance.SaveNow(); 
+
         OnWin?.Invoke();
     }
 

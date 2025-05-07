@@ -9,6 +9,7 @@ public class Level_Progress_Manager : MonoBehaviour
 
     private static Level_Progress_Manager _instance;
 
+    public void SaveNow() => Save();
 
     public static Level_Progress_Manager Instance => _instance;
 

@@ -20,10 +20,17 @@ public class Cinematic_manager : MonoBehaviour
     private void BeginMethod()
     {
         OnStart?.Invoke();
-        FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include).enabled = false;
-        FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = false;
-        FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = false;
+
+        var escMenu = FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include);
+        if (escMenu != null) escMenu.enabled = false;
+
+        var inputHandle = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
+        if (inputHandle != null) inputHandle.enabled = false;
+
+        var bgm = FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include);
+        if (bgm != null) bgm.enabled = false;
     }
+
 
 
 
@@ -42,10 +49,14 @@ public class Cinematic_manager : MonoBehaviour
 
     void Delayed()
     {
-        FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include).enabled = true;
+        var escMenu = FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include);
+        if (escMenu != null) escMenu.enabled = true;
 
-        FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = true;
-        FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = true;
+        var inputHandle = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
+        if (inputHandle != null) inputHandle.enabled = true;
+
+        var bgm = FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include);
+        if (bgm != null) bgm.enabled = true;
     }
 
 
