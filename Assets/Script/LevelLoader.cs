@@ -35,6 +35,7 @@ public class LevelLoader : MonoBehaviour
         //LoadLevel(_currentLevel + 1);
 
         StartCoroutine(ASyncLoadScene(_currentLevel + 1, 0.8f));
+        //Debug.Log("load next scene");
     }
     public void loadPreviousScene()
     {

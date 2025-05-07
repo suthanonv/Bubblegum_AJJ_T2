@@ -5,6 +5,7 @@ public class Load_Condition : MonoBehaviour
 {
     [SerializeField] private Level_Section section;
     [SerializeField] private LevelLoader levelLoader;
+    [SerializeField] private int sceneToendcredit;
 
     public void LoadingType()
     {
@@ -12,7 +13,7 @@ public class Load_Condition : MonoBehaviour
         int currentIndex = Level_Progress_Manager.GetBuildIndexByName(SceneManager.GetActiveScene().name);
 
         // If current scene is the last one
-        if (currentIndex == sceneCount - 1)
+        if (currentIndex == sceneCount - 2)
         {
             levelLoader.loadNextScene();
             return;

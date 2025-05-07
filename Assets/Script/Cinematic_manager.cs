@@ -62,19 +62,24 @@ public class Cinematic_manager : MonoBehaviour
 
     private void Awake()
     {
+        
+        if (playedCinematicList.Contains(Cinimatic_index))
+        {
+            Debug.Log($"[Cinematic_manager] Cinematic {Cinimatic_index} already played. Skipping.");
+            return;
+        }
 
-        FindAnyObjectByType<ButtonCommand_Handle>().Add_Esc_Action(StopMethod);
-
-
-        if (playedCinematicList.Contains(Cinimatic_index)) return;
-
+        
         playedCinematicList.Add(Cinimatic_index);
 
+        
+        FindAnyObjectByType<ButtonCommand_Handle>()?.Add_Esc_Action(StopMethod);
+
+        
         video = GetComponent<VideoPlayer>();
         _clip = video.clip;
         video.Play();
         StartCoroutine(VideoClip(_clip.length));
-
     }
 
     IEnumerator VideoClip(double Time)

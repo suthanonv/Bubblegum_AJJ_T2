@@ -130,8 +130,25 @@ public class Level_Progress_Manager : MonoBehaviour
 
     public void SetSceneState(int SceneName, bool State)
     {
-        GetSection(SceneName).UpdateSceneState(SceneName, State);
+        Level_Section section = GetSection(SceneName);
+
+        if (section == null)
+        {
+            
+            int lastSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
+            if (SceneName == lastSceneIndex)
+            {
+                Debug.Log($"[Level_Progress_Manager] Scene index {SceneName} is the final scene. No section found — skipping SetSceneState is allowed.");
+                return;
+            }
+
+            Debug.LogWarning($"[Level_Progress_Manager] Could not find a Level_Section containing scene index {SceneName}.");
+            return;
+        }
+
+        section.UpdateSceneState(SceneName, State);
     }
+
 
 
 
