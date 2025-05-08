@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,86 +5,92 @@ public class Load_Condition : MonoBehaviour
 {
     [SerializeField] private Level_Section section;
     [SerializeField] private LevelLoader levelLoader;
-    [SerializeField] private int sceneToendcredit;
 
+    [Header("Scene References (Editor Only)")]
+#if UNITY_EDITOR
+    [SerializeField] private UnityEditor.SceneAsset MenuScene;
+    [SerializeField] private UnityEditor.SceneAsset Cinematic;
+    [SerializeField] private UnityEditor.SceneAsset LevelSelectScene;
+    [SerializeField] private UnityEditor.SceneAsset FirstLevelScene;
+    [SerializeField] private UnityEditor.SceneAsset EndCreditScene;
+#endif
 
+    [Header("Scene Names (Used in Build)")]
+    [SerializeField] private string MenuSceneName;
+    [SerializeField] private string CinematicName;
+    [SerializeField] private string LevelSelectSceneName;
+    [SerializeField] private string FirstLevelSceneName;
+    [SerializeField] private string EndCreditSceneName;
 
-    int _menuScene_Index;
-
-    int _levelScene_Index;
-
-    int _firstLevel_Index;
-
-    int _endCredit_Scene;
+    private int _menuSceneIndex;
+    private int _cinematicIndex;
+    private int _levelSelectSceneIndex;
+    private int _firstLevelSceneIndex;
+    private int _endCreditSceneIndex;
 
 #if UNITY_EDITOR
-    [SerializeField] SceneAsset MenuScene;
-
-    [SerializeField] SceneAsset Level_Select_Scene;
-
-    [SerializeField] SceneAsset FirstLevelScene;
-
-    [SerializeField] SceneAsset EndCreditScene;
-
     private void OnValidate()
     {
-        if (MenuScene == null || Level_Select_Scene == null || FirstLevelScene == null || EndCreditScene == null) return;
-
-        _menuScene_Index = Level_Progress_Manager.GetBuildIndexByName(MenuScene.name);
-        _levelScene_Index = Level_Progress_Manager.GetBuildIndexByName(Level_Select_Scene.name);
-        _firstLevel_Index = Level_Progress_Manager.GetBuildIndexByName(FirstLevelScene.name);
-        _endCredit_Scene = Level_Progress_Manager.GetBuildIndexByName(EndCreditScene.name);
+        if (MenuScene != null) MenuSceneName = MenuScene.name;
+        if (Cinematic != null) CinematicName = Cinematic.name;
+        if (LevelSelectScene != null) LevelSelectSceneName = LevelSelectScene.name;
+        if (FirstLevelScene != null) FirstLevelSceneName = FirstLevelScene.name;
+        if (EndCreditScene != null) EndCreditSceneName = EndCreditScene.name;
     }
+#endif
 
-
-#endif 
-
-
+    private void Start()
+    {
+        _menuSceneIndex = Level_Progress_Manager.GetBuildIndexByName(MenuSceneName);
+        _cinematicIndex = Level_Progress_Manager.GetBuildIndexByName(CinematicName);
+        _levelSelectSceneIndex = Level_Progress_Manager.GetBuildIndexByName(LevelSelectSceneName);
+        _firstLevelSceneIndex = Level_Progress_Manager.GetBuildIndexByName(FirstLevelSceneName);
+        _endCreditSceneIndex = Level_Progress_Manager.GetBuildIndexByName(EndCreditSceneName);
+    }
 
     public void LoadingType()
     {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentIndex + 1;
         int sceneCount = SceneManager.sceneCountInBuildSettings;
-        int currentIndex = Level_Progress_Manager.GetBuildIndexByName(SceneManager.GetActiveScene().name);
 
-        // If current scene is the last one
-        if (currentIndex == sceneCount)
+        //  If current is second to last to next is end credit
+        if (currentIndex == sceneCount - 2)
         {
-            levelLoader.loadNextScene();
+            levelLoader.LoadLevel(_endCreditSceneIndex);
             return;
         }
 
-        // If current scene is the first one
-        if (currentIndex == _menuScene_Index)
+        //  If on Main Menu
+        if (currentIndex == _menuSceneIndex)
         {
-            if (section.GetLevel(_firstLevel_Index).IsClear)
+            if (section.GetLevel(_firstLevelSceneIndex).IsClear)
             {
-                levelLoader.LoadLevel(_levelScene_Index);
+                levelLoader.LoadLevel(_levelSelectSceneIndex); // Continue
             }
             else
             {
-                levelLoader.LoadLevel(1);
+                levelLoader.LoadLevel(_cinematicIndex); // New Game
             }
             return;
         }
 
-        // Check if next scene is in this section
-        int nextSceneName = currentIndex + 1;
-
-        if (section.SectionClear == false)
+        //  If section not yet cleareds
+        if (!section.SectionClear)
         {
-            if (section.IsSceneInthisSection(nextSceneName))
+            if (section.IsSceneInthisSection(nextSceneIndex))
             {
-                levelLoader.loadNextScene();
+                levelLoader.loadNextScene(); // Proceed to next
                 return;
             }
             else
             {
-                levelLoader.loadLevelSelectedScene(_levelScene_Index);
+                levelLoader.loadLevelSelectedScene(_levelSelectSceneIndex); // Back to select
                 return;
             }
         }
 
-        levelLoader.loadLevelSelectedScene(_levelScene_Index);
+        //  Section cleared to go to level select
+        levelLoader.loadLevelSelectedScene(_levelSelectSceneIndex);
     }
-
 }
