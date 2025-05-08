@@ -4,17 +4,43 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
 {
     public override Bubble_Gum_State state => Bubble_Gum_State.Stick;
 
+
+    All_Sticky_Gum_Holder _stick_Gum_Holder;
+
+    StateControl<Bubble_Gum_State> _mainGumState;
+
+
+    Attach_Moveable_List _attach_Moveable_List;
+
+    MainComponent_Transform _mainComponent_Transform;
+    private void Awake()
+    {
+        SetUp();
+    }
+
+    void SetUp()
+    {
+        _stick_Gum_Holder = FindAnyObjectByType<All_Sticky_Gum_Holder>(FindObjectsInactive.Include);
+        _mainGumState = this.transform.parent.GetComponent<StateControl<Bubble_Gum_State>>();
+        _mainComponent_Transform = this.transform.parent.GetComponent<MainComponent_Transform>();
+        _attach_Moveable_List = this.transform.GetComponentInChildren<Attach_Moveable_List>();
+
+
+    }
+
+
+
     public override void OnEnterState()
     {
         SoundManager.PlaySound(SoundType.BBG_Stick, 1f);
 
         base.OnEnterState();
-        FindFirstObjectByType<All_Sticky_Gum_Holder>().Add_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
-        if (this.transform.parent.GetComponent<MainComponent_Transform>().currentTile_index == Vector2Int.zero)
+        _stick_Gum_Holder.Add_Sticky_Gum(_mainGumState);
+        if (_mainComponent_Transform.currentTile_index == Vector2Int.zero)
         {
-            if (this.transform.GetComponentInChildren<Attach_Moveable_List>()._AddingSelfSetUp == true)
+            if (_attach_Moveable_List._AddingSelfSetUp == true)
             {
-                this.transform.GetComponentInChildren<Attach_Moveable_List>()._AddingSelfSetUp = false;
+                _attach_Moveable_List._AddingSelfSetUp = false;
             }
         }
     }
@@ -26,11 +52,8 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
         base.OnExitState();
 
 
-        if (FindFirstObjectByType<All_Sticky_Gum_Holder>() != null)
-        {
+        _stick_Gum_Holder.Remove_Sticky_Gum(_mainGumState);
 
-            FindFirstObjectByType<All_Sticky_Gum_Holder>().Remove_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
-        }
         foreach (Transform i in this.transform)
         {
             if (i.gameObject.TryGetComponent<Attach_Moveable_List>(out Attach_Moveable_List attached))
