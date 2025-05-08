@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,28 +8,60 @@ public class Load_Condition : MonoBehaviour
     [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private int sceneToendcredit;
 
+
+
+
+    [SerializeField] SceneAsset MenuScene;
+    int _menuScene_Index;
+
+    [SerializeField] SceneAsset Level_Select_Scene;
+    int _levelScene_Index;
+
+    [SerializeField] SceneAsset FirstLevelScene;
+    int _firstLevel_Index;
+
+    [SerializeField] SceneAsset EndCreditScene;
+    int _endCredit_Scene;
+
+#if UNITY_EDITOR
+
+    private void OnValidate()
+    {
+        if (MenuScene == null || Level_Select_Scene == null || FirstLevelScene == null || EndCreditScene == null) return;
+
+        _menuScene_Index = Level_Progress_Manager.GetBuildIndexByName(MenuScene.name);
+        _levelScene_Index = Level_Progress_Manager.GetBuildIndexByName(Level_Select_Scene.name);
+        _firstLevel_Index = Level_Progress_Manager.GetBuildIndexByName(FirstLevelScene.name);
+        _endCredit_Scene = Level_Progress_Manager.GetBuildIndexByName(EndCreditScene.name);
+    }
+
+
+#endif 
+
+
+
     public void LoadingType()
     {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         int currentIndex = Level_Progress_Manager.GetBuildIndexByName(SceneManager.GetActiveScene().name);
 
         // If current scene is the last one
-        if (currentIndex == sceneCount - 2)
+        if (currentIndex == sceneCount)
         {
             levelLoader.loadNextScene();
             return;
         }
 
         // If current scene is the first one
-        if (currentIndex == 0)
+        if (currentIndex == _menuScene_Index)
         {
-            if (section.SectionClear)
+            if (section.GetLevel(_firstLevel_Index).IsClear)
             {
-                levelLoader.LoadLevel(1);
+                levelLoader.LoadLevel(_levelScene_Index);
             }
             else
             {
-                levelLoader.LoadLevel(2);
+                levelLoader.LoadLevel(1);
             }
             return;
         }
@@ -49,12 +82,12 @@ public class Load_Condition : MonoBehaviour
             }
             else
             {
-                levelLoader.loadLevelSelectedScene(1);
+                levelLoader.loadLevelSelectedScene(_levelScene_Index);
                 return;
             }
         }
 
-        levelLoader.loadLevelSelectedScene(1);
+        levelLoader.loadLevelSelectedScene(_levelScene_Index);
 
     }
 

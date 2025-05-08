@@ -33,7 +33,7 @@ public class All_Sticky_Gum_Holder : MonoBehaviour
 
     public void UnStick_Handle()
     {
-        unstick.Invoke(StickedGum);
+        unstick?.Invoke(StickedGum);
         OnUnStickGum?.Invoke();
     }
 

@@ -118,7 +118,6 @@ public class Level_Progress_Manager : MonoBehaviour
 
             if (name == sceneName)
             {
-                Debug.Log($" Found scene '{sceneName}' at build index {i}");
                 return i;
             }
         }
@@ -134,7 +133,7 @@ public class Level_Progress_Manager : MonoBehaviour
 
         if (section == null)
         {
-            
+
             int lastSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
             if (SceneName == lastSceneIndex)
             {
@@ -157,7 +156,6 @@ public class Level_Progress_Manager : MonoBehaviour
     {
         foreach (var section in _base_Allsection)
         {
-            Debug.Log($"Comapred Input {SceneName} With {section.name}");
             if (section.IsSceneInthisSection(SceneName))
             {
                 return section;

@@ -112,7 +112,7 @@ public class EscMenuManager : MonoBehaviour
         }
         else if (CurrentSelect == 3)
         {
-            levelLoader.loadLevelSelectedScene(1);
+            levelLoader.loadLevelSelectedScene(2);
             CloseEscMenu();
         }
         else if (CurrentSelect == 4)

@@ -46,6 +46,7 @@ public class Level_Section : ScriptableObject
             .Select(scene => GetBuildIndexByName(scene.name))
             .Where(index => index >= 0)
             .ToList();
+        SetUp();
     }
 
     // Helper method to get build index from scene name
@@ -71,6 +72,19 @@ public class Level_Section : ScriptableObject
         }
     }
 
+#if UNITY_EDITOR
+    [ContextMenu("reset list")]
+
+    void ResetList()
+    {
+
+        _sceneIndexesInSection = _sceneAssetsInSection
+            .Where(scene => scene != null)
+            .Select(scene => GetBuildIndexByName(scene.name))
+            .Where(index => index >= 0)
+            .ToList();
+    }
+#endif
     private void SetUp()
     {
         _level_Info_List = new List<Level_Info>();

@@ -9,7 +9,7 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
         SoundManager.PlaySound(SoundType.BBG_Stick, 1f);
 
         base.OnEnterState();
-        FindAnyObjectByType<All_Sticky_Gum_Holder>().Add_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
+        FindFirstObjectByType<All_Sticky_Gum_Holder>().Add_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
         if (this.transform.parent.GetComponent<MainComponent_Transform>().currentTile_index == Vector2Int.zero)
         {
             if (this.transform.GetComponentInChildren<Attach_Moveable_List>()._AddingSelfSetUp == true)
@@ -24,7 +24,13 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
         SoundManager.PlaySound(SoundType.BBG_Unstick, 1f);
 
         base.OnExitState();
-        FindAnyObjectByType<All_Sticky_Gum_Holder>().Remove_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
+
+
+        if (FindFirstObjectByType<All_Sticky_Gum_Holder>() != null)
+        {
+
+            FindFirstObjectByType<All_Sticky_Gum_Holder>().Remove_Sticky_Gum(this.transform.parent.gameObject.GetComponent<StateControl<Bubble_Gum_State>>());
+        }
         foreach (Transform i in this.transform)
         {
             if (i.gameObject.TryGetComponent<Attach_Moveable_List>(out Attach_Moveable_List attached))
