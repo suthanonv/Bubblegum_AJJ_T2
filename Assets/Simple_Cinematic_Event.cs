@@ -5,10 +5,12 @@ using UnityEngine.Video;
 public class Simple_Cinematic_Event : MonoBehaviour
 {
     VideoPlayer _vd_player;
-    [SerializeField] SceneAsset NextScene;
     int _nextScene;
 
 #if UNITY_EDITOR
+
+    [SerializeField] SceneAsset NextScene;
+
     private void OnValidate()
     {
         if (NextScene == null) return;

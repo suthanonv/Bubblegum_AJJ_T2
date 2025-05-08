@@ -10,20 +10,22 @@ public class Load_Condition : MonoBehaviour
 
 
 
-
-    [SerializeField] SceneAsset MenuScene;
     int _menuScene_Index;
 
-    [SerializeField] SceneAsset Level_Select_Scene;
     int _levelScene_Index;
 
-    [SerializeField] SceneAsset FirstLevelScene;
     int _firstLevel_Index;
 
-    [SerializeField] SceneAsset EndCreditScene;
     int _endCredit_Scene;
 
 #if UNITY_EDITOR
+    [SerializeField] SceneAsset MenuScene;
+
+    [SerializeField] SceneAsset Level_Select_Scene;
+
+    [SerializeField] SceneAsset FirstLevelScene;
+
+    [SerializeField] SceneAsset EndCreditScene;
 
     private void OnValidate()
     {
@@ -69,10 +71,6 @@ public class Load_Condition : MonoBehaviour
         // Check if next scene is in this section
         int nextSceneName = currentIndex + 1;
 
-
-
-
-
         if (section.SectionClear == false)
         {
             if (section.IsSceneInthisSection(nextSceneName))
@@ -88,7 +86,6 @@ public class Load_Condition : MonoBehaviour
         }
 
         levelLoader.loadLevelSelectedScene(_levelScene_Index);
-
     }
 
 }
