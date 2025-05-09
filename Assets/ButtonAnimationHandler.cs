@@ -24,7 +24,7 @@ public class ButtonAnimationHandler : MonoBehaviour, IPointerEnterHandler, IPoin
         float elapsedTime = 0f;
         while(elapsedTime < _moveTime)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             if (startingAnimation)
             {
                 //endPosition = _startPos + new Vector3(0f, _verticalMoveAmount, 0f);

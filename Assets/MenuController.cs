@@ -47,11 +47,10 @@ public class MenuController : MonoBehaviour
 
     public void Unpause()
     {
-        isPaused = false;
-        InputHandler.SetActive(true);
-
         if (onMainPanel)
         {
+            InputHandler.SetActive(true);
+            isPaused = false;
             CloseEscapeMenu();
         }
         else
