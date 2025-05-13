@@ -4,28 +4,72 @@ using System.Collections.Generic;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+    /// <important>
+    /// Script By: Time (Mono) M
+    /// To easily navigate this script, press 'ctrl + F' and type "////" to search through different sections
+    /// Last Updated: 13th May, 2025
+    /// <important>
+    
+    [Header("Input Handler")]
     [SerializeField] private GameObject InputHandler; //for disabling player controls. TEMP FIX. CHANGE LATER!!!!
-    [SerializeField] private GameObject EscapeMenu;
+    [Header("Escape Menu")]
+    [SerializeField] private GameObject EscapeMenuObject;
     [SerializeField] private GameObject[] EscapeMenuButtons; //for use with Unity Input system
     //[SerializeField] private GameObject[] EscapeMenuPanels;
 
+    [Header("Escape Menu Screens")]
     [SerializeField] private GameObject MainPanel;
     [SerializeField] private GameObject SettingsPanel;
 
     LevelLoader _levelLoader;
 
-    bool onMainPanel = true;
+    bool onMainPanel = true; //to allow for pressing escape in settings tabs to return to main escape menu
     
 
     bool isPaused;
 
+    [Header("Settings Screen: Video")]
+    public Dropdown resolutionDropdown;
+    private Resolution[] resolutions;
+
+    //// void Start
     private void Start()
     {
+        //Find LevelLoader
         _levelLoader = FindFirstObjectByType<LevelLoader>();
+
+        //Find Screen Resolutions
+        resolutions = Screen.resolutions;
+
+        resolutionDropdown.ClearOptions();
+
+        List<string> optionsList = new List<string>();
+
+        int currentResolution = 0;
+        bool currentResolutionChecked = false;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            optionsList.Add(option);
+
+            if (!currentResolutionChecked && (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height))
+            {
+                currentResolution = 1;
+                currentResolutionChecked = true;
+            }
+        }
+
+        resolutionDropdown.AddOptions(optionsList);
+        resolutionDropdown.value = currentResolution;
+        resolutionDropdown.RefreshShownValue();
     }
+
+    //// void Update
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -64,14 +108,15 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    //// UI System Related
     private void OpenEscapeMenu()
     {
-        EscapeMenu.SetActive(true);
+        EscapeMenuObject.SetActive(true);
         Debug.Log(name + ": OpenEscapeMenu()");
     }
     private void CloseEscapeMenu()
     {
-        EscapeMenu.SetActive(false);
+        EscapeMenuObject.SetActive(false);
         Debug.Log(name + ": CloseEscapeMenu()");
     }
 
@@ -134,6 +179,7 @@ public class MenuController : MonoBehaviour
 
 
     //For swapping between pages
+    [Header("Settings Pages")]
     public List<GameObject> SettingsMenuPanels = new List<GameObject>();
     public void Settings_SwitchPanel()//gets button pressed --> links to gameObject in list --> toggles active
     {
@@ -182,10 +228,31 @@ public class MenuController : MonoBehaviour
             Debug.Log(name + " uhhhh something fucked up happened");
         }
     }
+
+
+    ////Per-Page controls
+    /// <summary>
+    /// Page: Controls
+    /// </summary>
+
+
+    /// <summary>
+    /// Page: Video
+    /// </summary>
+    public void SetFullscreen(bool isfullscreen)
+    {
+        Screen.fullScreen = isfullscreen;
+    }
+    public void SetQuality(int quality)
+    {
+        QualitySettings.SetQualityLevel(quality);
+    }
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex]; 
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);//Screen.fullscreen is a bool so players SetFullscreen() take priority (setting resolutions shouldnt override that)
+    }
     
-
-    //Per-Page controls
-
 
     private void OnEnable() //For using keyboard controls in UI
     {
