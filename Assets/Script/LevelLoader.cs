@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class LevelLoader : MonoBehaviour
 {
+    public event Action OnBeginLoad;
     [SerializeField] Get_Input get_Input;
     [SerializeField] GameObject inputGameObject;
     GameObject newInput;
@@ -78,6 +79,7 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator ASyncLoadScene(int levelNumber, float duration)
     {
+        OnBeginLoad?.Invoke();
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;
         loadSceneCanva = loadScene.transform.parent.gameObject;
         loadSceneProgressBar = loadScene.GetComponentInChildren<UnityEngine.UI.Slider>(true);

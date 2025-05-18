@@ -45,6 +45,8 @@ public class LevelSelectTile : Grid_Collider
         moveTile.Add_tile_Condition(Check);
 
         level = FindAnyObjectByType<LevelLoader>();
+        if (level != null)
+            level.OnBeginLoad += DisableSelf;
         string fullPath = SceneUtility.GetScenePathByBuildIndex(lvlSelect);
 
 
@@ -86,15 +88,17 @@ public class LevelSelectTile : Grid_Collider
         {
             if (_canPlay && !isClicked)
             {
-                if (level == null) level = FindAnyObjectByType<LevelLoader>();
+                if (level == null)
+                {
+                    level = FindAnyObjectByType<LevelLoader>();
+                    level.OnBeginLoad += DisableSelf;
+                }
+
+                Debug.Log("IM loadingggggggggg");
                 isClicked = true;
                 level.loadLevelSelectedScene(lvlSelect);
             }
-
         }
-
-
-
     }
 
 
@@ -103,7 +107,10 @@ public class LevelSelectTile : Grid_Collider
     public bool CanPlay => _canPlay;
 
 
-
+    void DisableSelf()
+    {
+        this.enabled = false;
+    }
     private bool Set_canPlay()
     {
         if (Level_Progress_Manager.Instance.GetSection(Level_Progress_Manager.GetBuildIndexByName(levelDisplayName)) != null)
