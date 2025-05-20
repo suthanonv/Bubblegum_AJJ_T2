@@ -238,6 +238,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// </summary>
         public void StartInteractiveRebind()
         {
+            m_Action.action.Disable();
             if (!ResolveActionAndBinding(out var action, out var bindingIndex))
                 return;
 
@@ -263,6 +264,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 m_RebindOperation?.Dispose();
                 m_RebindOperation = null;
                 action.Enable();
+                m_Action.action.Enable();
             }
 
             //Fixes the "InvalidOperationException: Cannot rebind action x while it is enabled" error

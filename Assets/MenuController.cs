@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,7 +34,7 @@ public class MenuController : MonoBehaviour
     bool isPaused;
 
     [Header("Settings Screen: Video")]
-    public Dropdown resolutionDropdown;
+    public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
 
     //// void Start
@@ -44,7 +45,6 @@ public class MenuController : MonoBehaviour
 
         //Find Screen Resolutions
         resolutions = Screen.resolutions;
-
         resolutionDropdown.ClearOptions();
 
         List<string> optionsList = new List<string>();
@@ -55,6 +55,7 @@ public class MenuController : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
+            Debug.Log(option);
             optionsList.Add(option);
 
             if (!currentResolutionChecked && (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height))
@@ -249,7 +250,7 @@ public class MenuController : MonoBehaviour
     }
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex]; 
+        Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);//Screen.fullscreen is a bool so players SetFullscreen() take priority (setting resolutions shouldnt override that)
     }
     
