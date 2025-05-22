@@ -27,7 +27,7 @@ public class InputMove_Holder : MonoBehaviour
     public void Remove_moveable(Base_Movement move)
     {
         moveObject.Remove(move);
-        LayerInfo getLayer = allLayer.FirstOrDefault(i => i.Direction == move.GetDirection(direction) && i.LayerIndex == move.Movelayer);
+        LayerInfo getLayer = allLayer.FirstOrDefault(i => i.Direction == move.GetDirection(InputDirection) && i.LayerIndex == move.Movelayer);
         if (getLayer != null) getLayer.Data.ObjectToMove.Remove(move);
 
     }
@@ -46,11 +46,11 @@ public class InputMove_Holder : MonoBehaviour
         _onfinishmove += func;
     }
     #endregion
-    Vector2Int direction;
+    Vector2Int InputDirection;
 
     public void MoveAll_call(Vector2Int Direction)
     {
-        direction = Direction;
+        InputDirection = Direction;
         GenLayer(Direction);
         currentLayerIndex = 0;
         ExecuteNextLayer();
@@ -105,7 +105,7 @@ public class InputMove_Holder : MonoBehaviour
 
     void ExcuteLayer(LayerInfo layer, Action callBack)
     {
-        moveCall?.Invoke(layer.Direction, layer.Data.ObjectToMove, callBack);
+        moveCall?.Invoke(InputDirection, layer.Data.ObjectToMove, callBack);
     }
 }
 
