@@ -13,6 +13,11 @@ public class Attach_Moveable_List : MonoBehaviour
 
     List<Attach_Moveable_List> base_group = new List<Attach_Moveable_List>();
 
+
+    [SerializeField] bool AddingSelfInSetUP = true;
+
+
+    public bool _AddingSelfSetUp { get { return AddingSelfInSetUP; } set { AddingSelfInSetUP = value; } }
     private void Start()
     {
         this_move = GetComponent<I_move>();
@@ -39,7 +44,8 @@ public class Attach_Moveable_List : MonoBehaviour
 
     void SetUP()
     {
-        this.Add_New_Moveable(base_group);
+        if (AddingSelfInSetUP)
+            this.Add_New_Moveable(base_group);
     }
 
     public void Reset_List(HashSet<Attach_Moveable_List> visited = null)
@@ -104,7 +110,6 @@ public class Attach_Moveable_List : MonoBehaviour
 
     public void Set_Same_list(List<Attach_Moveable_List> Origin)
     {
-        Debug.Log(Origin);
         push_able_List = new List<Attach_Moveable_List>(Origin);
 
     }

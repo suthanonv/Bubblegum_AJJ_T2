@@ -20,10 +20,17 @@ public class Cinematic_manager : MonoBehaviour
     private void BeginMethod()
     {
         OnStart?.Invoke();
-        FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include).enabled = false;
-        FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = false;
-        FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = false;
+
+        var escMenu = FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include);
+        if (escMenu != null) escMenu.enabled = false;
+
+        var inputHandle = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
+        if (inputHandle != null) inputHandle.enabled = false;
+
+        var bgm = FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include);
+        if (bgm != null) bgm.enabled = false;
     }
+
 
 
 
@@ -42,28 +49,37 @@ public class Cinematic_manager : MonoBehaviour
 
     void Delayed()
     {
-        FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include).enabled = true;
+        var escMenu = FindAnyObjectByType<EscMenuManager>(FindObjectsInactive.Include);
+        if (escMenu != null) escMenu.enabled = true;
 
-        FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include).enabled = true;
-        FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include).enabled = true;
+        var inputHandle = FindAnyObjectByType<Input_handle>(FindObjectsInactive.Include);
+        if (inputHandle != null) inputHandle.enabled = true;
+
+        var bgm = FindAnyObjectByType<BackGroundMusic>(FindObjectsInactive.Include);
+        if (bgm != null) bgm.enabled = true;
     }
 
 
     private void Awake()
     {
+        
+        if (playedCinematicList.Contains(Cinimatic_index))
+        {
+            Debug.Log($"[Cinematic_manager] Cinematic {Cinimatic_index} already played. Skipping.");
+            return;
+        }
 
-        FindAnyObjectByType<ButtonCommand_Handle>().Add_Esc_Action(StopMethod);
-
-
-        if (playedCinematicList.Contains(Cinimatic_index)) return;
-
+        
         playedCinematicList.Add(Cinimatic_index);
 
+        
+        FindAnyObjectByType<ButtonCommand_Handle>()?.Add_Esc_Action(StopMethod);
+
+        
         video = GetComponent<VideoPlayer>();
         _clip = video.clip;
         video.Play();
         StartCoroutine(VideoClip(_clip.length));
-
     }
 
     IEnumerator VideoClip(double Time)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 [RequireComponent(typeof(MainComponent_Transform))]
 public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
 {
@@ -89,7 +90,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
     }
     Action onMove;
     Action onFinishMove;
-
+    [SerializeField] UnityEvent<MoveAble_Tile> OnSetNewTile = new UnityEvent<MoveAble_Tile>();
     bool OnActive = false;
     public void Position(Vector2Int newPosition, Action OnMove = null, Action OnFinishMove = null)
     {
@@ -111,6 +112,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
         Vector2 current_Pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
         currentTile_index = newPosition;
         Vector2 _future_pos = grid_Manager.Get_Tile(currentTile_index).transform.position;
+        _curernt_Tile = grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>();
 
         StartCoroutine(Lerping_Move(current_Pos, _future_pos, Duration(), onMove, onFinishMove));
         grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>().SetOccupiedObject(main);
@@ -126,10 +128,11 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
         Vector2 _future_pos = _future_tile.gameObject.transform.position;
 
         transform.position = _future_pos;
-
+        _curernt_Tile = grid_Manager.Get_Tile(currentTile_index).GetComponent<MoveAble_Tile>();
         _future_tile.SetOccupiedObject(main);
         RayCastSetPosAgain();
     }
+    MoveAble_Tile _curernt_Tile;
 
     void RayCastSetPosAgain()
     {
@@ -189,8 +192,11 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
         Debug.Log("On finish Lerping Call Onfinish Move");
         OnFinishMove?.Invoke();
 
+        OnSetNewTile.Invoke(_curernt_Tile);
         OnActive = false;
     }
+
+
 
 
     public void AddOnMoveListener(Action OnMoveCall)
