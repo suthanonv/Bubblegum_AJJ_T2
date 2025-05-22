@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
 [RequireComponent(typeof(Grouping))]
-public class Group_Moving : Base_Movement
+public class GroupPushable : Base_Movement
 {
     Grouping attached_obj;
     public override int Movelayer => -1;
@@ -44,4 +43,6 @@ public class Group_Moving : Base_Movement
         return pos;
 
     }
+
+
 }

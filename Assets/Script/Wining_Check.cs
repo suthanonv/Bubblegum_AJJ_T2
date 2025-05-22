@@ -12,7 +12,7 @@ public class Wining_Check : MonoBehaviour
 
     private void Start()
     {
-        var gumHolder = FindAnyObjectByType<All_moveable_gum_holder>();
+        var gumHolder = FindAnyObjectByType<InputMove_Holder>();
         if (gumHolder != null)
         {
             gumHolder.OnFinishMove_AddListener(Check_isWining);

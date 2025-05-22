@@ -3,10 +3,10 @@ using UnityEngine;
 public class Movement_Controler : MonoBehaviour
 {
     Movement move;
-    All_moveable_gum_holder move_holder;
+    InputMove_Holder move_holder;
     void Awake()
     {
-        move_holder = FindAnyObjectByType<All_moveable_gum_holder>();
+        move_holder = FindAnyObjectByType<InputMove_Holder>();
         move = GetComponent<Movement>();
 
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_PreEnter_Listener(Add_move);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Movement_Controler))]
+[RequireComponent(typeof(MoveByInput))]
 public class Movement : Base_Movement
 {
 

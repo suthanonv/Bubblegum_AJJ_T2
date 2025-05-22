@@ -15,7 +15,6 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
 
     Grid_Manager gridManage;
 
-    [SerializeField] private Move_All moveAll;
     [SerializeField] private MainComponent_Transform movementComponent;
     [SerializeField] private Main_BubbleGumstate bubbleGumStateComponent;
     [SerializeField] private Attach_Moveable_List attach_Moveable_List;

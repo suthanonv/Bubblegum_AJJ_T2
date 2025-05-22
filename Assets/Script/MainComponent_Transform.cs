@@ -8,6 +8,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
     Grid_Manager grid_Manager;
 
     MainComponent main;
+    public MainComponent Main => main;
     Direction _currentDirectionEnum;
 
     public Direction CurretionDirectionEnum => _currentDirectionEnum;
