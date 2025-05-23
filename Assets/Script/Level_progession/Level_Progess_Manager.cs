@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,14 +8,14 @@ public class Level_Progress_Manager : MonoBehaviour
     private static Level_Progress_Manager _instance;
     public static Level_Progress_Manager Instance => _instance;
 
-    [SerializeField] List<Level_Section> _base_Allsection = new List<Level_Section>();
+    [SerializeField] private List<Level_Section> _base_Allsection = new List<Level_Section>();
 
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject); // Optional
+            DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
         {
@@ -38,13 +37,30 @@ public class Level_Progress_Manager : MonoBehaviour
 
     void Save()
     {
+        SaveData newData = new SaveData();
 
+        foreach (var section in _base_Allsection)
+        {
+            foreach (var level in section.All_Level_Info)
+            {
+                newData.AddNewScene(level.SceneName, level.IsClear);
+            }
+        }
+
+        string json = JsonUtility.ToJson(newData, true);
+
+#if UNITY_WEBGL
+        PlayerPrefs.SetString("SaveProgress", json);
+        PlayerPrefs.Save();
+#else
+        string path = Application.persistentDataPath + "/Progression.json";
+        System.IO.File.WriteAllText(path, json);
+#endif
     }
 
     [ContextMenu("Reset")]
-    public void ResetProgess()
+    public void ResetProgress()
     {
-        SaveData newData = new SaveData();
         ResetLevel();
         Save();
         LoadData();
@@ -60,10 +76,23 @@ public class Level_Progress_Manager : MonoBehaviour
 
     void LoadData()
     {
+        string json = "";
 
+#if !UNITY_WEBGL
+#else
+        string path = Application.persistentDataPath + "/Progression.json";
+        if (System.IO.File.Exists(path))
+        {
+            json = System.IO.File.ReadAllText(path);
+        }
+#endif
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            SaveData loadedData = JsonUtility.FromJson<SaveData>(json);
+            loadedData.LoadSceneState(_base_Allsection);
+        }
     }
-
-    private static Dictionary<string, int> sceneNameToIndex;
 
     public static void InitializeSceneLookup()
     {
@@ -73,7 +102,7 @@ public class Level_Progress_Manager : MonoBehaviour
         for (int i = 0; i < sceneCount; i++)
         {
             string path = SceneUtility.GetScenePathByBuildIndex(i);
-            string name = Path.GetFileNameWithoutExtension(path);
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
             sceneNameToIndex[name] = i;
         }
     }
@@ -85,50 +114,49 @@ public class Level_Progress_Manager : MonoBehaviour
         for (int i = 0; i < sceneCount; i++)
         {
             string path = SceneUtility.GetScenePathByBuildIndex(i);
-            string name = Path.GetFileNameWithoutExtension(path);
+            string name = System.IO.Path.GetFileNameWithoutExtension(path);
 
             if (name == sceneName)
-            {
                 return i;
-            }
         }
 
-        Debug.LogWarning($"No Scene '{sceneName}' found in Build Settings!");
+        Debug.LogWarning($"[Level_Progress_Manager] Scene '{sceneName}' not found in Build Settings!");
         return -1;
     }
 
-    public void SetSceneState(int SceneName, bool State)
+    public void SetSceneState(int sceneIndex, bool state)
     {
-        Level_Section section = GetSection(SceneName);
+        Level_Section section = GetSection(sceneIndex);
 
         if (section == null)
         {
             int lastSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
-            if (SceneName == lastSceneIndex)
+
+            if (sceneIndex == lastSceneIndex)
             {
-                Debug.Log($"[Level_Progress_Manager] Scene index {SceneName} is the final scene. No section found — skipping SetSceneState is allowed.");
+                Debug.Log($"[Level_Progress_Manager] Scene index {sceneIndex} is the final scene. Skipping SetSceneState.");
                 return;
             }
 
-            Debug.LogWarning($"[Level_Progress_Manager] Could not find a Level_Section containing scene index {SceneName}.");
+            Debug.LogWarning($"[Level_Progress_Manager] No Level_Section found containing scene index {sceneIndex}.");
             return;
         }
 
-        section.UpdateSceneState(SceneName, State);
+        section.UpdateSceneState(sceneIndex, state);
     }
 
-    public Level_Section GetSection(int SceneName)
+    public Level_Section GetSection(int sceneIndex)
     {
         foreach (var section in _base_Allsection)
         {
-            if (section.IsSceneInthisSection(SceneName))
-            {
+            if (section.IsSceneInthisSection(sceneIndex))
                 return section;
-            }
         }
 
         return null;
     }
+
+    private static Dictionary<string, int> sceneNameToIndex;
 
     [Serializable]
     public class SceneStatePair
@@ -140,26 +168,21 @@ public class Level_Progress_Manager : MonoBehaviour
     [Serializable]
     public class SaveData
     {
-        [SerializeField]
-        private List<SceneStatePair> SceneNameToValueList = new List<SceneStatePair>();
+        [SerializeField] private List<SceneStatePair> SceneNameToValueList = new List<SceneStatePair>();
         private Dictionary<int, bool> SceneNameToValue = new Dictionary<int, bool>();
 
-        public void AddNewScene(int Name, bool Value)
+        public void AddNewScene(int name, bool value)
         {
-            SceneNameToValue[Name] = Value;
+            SceneNameToValue[name] = value;
 
-            var existing = SceneNameToValueList.Find(pair => pair.SceneName == Name);
+            var existing = SceneNameToValueList.Find(pair => pair.SceneName == name);
             if (existing != null)
-            {
-                existing.Value = Value;
-            }
+                existing.Value = value;
             else
-            {
-                SceneNameToValueList.Add(new SceneStatePair { SceneName = Name, Value = Value });
-            }
+                SceneNameToValueList.Add(new SceneStatePair { SceneName = name, Value = value });
         }
 
-        public void LoadSceneState(List<Level_Section> All_Level)
+        public void LoadSceneState(List<Level_Section> allLevels)
         {
             SceneNameToValue.Clear();
             foreach (var pair in SceneNameToValueList)
@@ -167,13 +190,13 @@ public class Level_Progress_Manager : MonoBehaviour
                 SceneNameToValue[pair.SceneName] = pair.Value;
             }
 
-            foreach (Level_Section Section in All_Level)
+            foreach (var section in allLevels)
             {
-                foreach (Level_Info Level in Section.All_Level_Info)
+                foreach (var level in section.All_Level_Info)
                 {
-                    if (SceneNameToValue.ContainsKey(Level.SceneName))
+                    if (SceneNameToValue.ContainsKey(level.SceneName))
                     {
-                        Section.UpdateSceneState(Level.SceneName, SceneNameToValue[Level.SceneName]);
+                        section.UpdateSceneState(level.SceneName, SceneNameToValue[level.SceneName]);
                     }
                 }
             }

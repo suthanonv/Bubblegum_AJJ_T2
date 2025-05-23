@@ -476,7 +476,6 @@ GameObject:
   m_Component:
   - component: {fileID: 405536051837307350}
   - component: {fileID: 6281009509631055343}
-  - component: {fileID: 8019986631779921247}
   - component: {fileID: 3755323061635729514}
   m_Layer: 0
   m_Name: Pushable
@@ -522,20 +521,6 @@ MonoBehaviour:
   UnityEvent_onInvalidMove:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8019986631779921247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3887559715865695826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Group: []
-  AddingSelfInSetUP: 0
 --- !u!114 &3755323061635729514
 MonoBehaviour:
   m_ObjectHideFlags: 0

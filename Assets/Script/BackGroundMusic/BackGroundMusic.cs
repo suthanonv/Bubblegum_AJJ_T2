@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
-public class BackGroundMusic : MonoBehaviour
+public class BackGroundMusic : Singleton<BackGroundMusic>
 {
 
     static BackGroundMusic instance;
@@ -14,19 +14,6 @@ public class BackGroundMusic : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip currentPlayedBGM = null;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
-    }
 
     private void Start()
     {

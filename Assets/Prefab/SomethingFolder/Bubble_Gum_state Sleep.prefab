@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 9090284667224409142}
   - component: {fileID: 2932776110857278530}
   - component: {fileID: 5939070939184892162}
+  - component: {fileID: 7125546487332372947}
   m_Layer: 0
   m_Name: Walk
   m_TagString: Untagged
@@ -225,6 +226,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 2381752518797789037}
+--- !u!114 &7125546487332372947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840535531427500405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f3313df6569864eaee487e313bc149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddFromStart: 0
 --- !u!1 &1361204526407947077
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,8 +406,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3326657405361263867}
   - component: {fileID: 9018236769664841538}
-  - component: {fileID: 5739459924472443303}
   - component: {fileID: 8926692752383462405}
+  - component: {fileID: 1501930013158023710}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -450,20 +464,6 @@ MonoBehaviour:
   UnityEvent_onInvalidMove:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5739459924472443303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531752683541527988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Group: []
-  AddingSelfInSetUP: 1
 --- !u!114 &8926692752383462405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +477,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 2381752518797789037}
+--- !u!114 &1501930013158023710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531752683541527988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa837a78ff8362e47a83770373756987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseGroup: []
+  _addingSelf: 1
 --- !u!1 &1537281957013531622
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3990788363010865033}
   - component: {fileID: 1634357157566291353}
-  - component: {fileID: 5915969615312138480}
+  - component: {fileID: 4061919533780692782}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -899,7 +913,7 @@ MonoBehaviour:
   UnityEvent_onInvalidMove:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5915969615312138480
+--- !u!114 &4061919533780692782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -908,11 +922,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3851578593971767071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Script: {fileID: 11500000, guid: aa837a78ff8362e47a83770373756987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Group: []
-  AddingSelfInSetUP: 1
+  BaseGroup: []
+  _addingSelf: 1
 --- !u!1 &4088049004969115594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,7 +2041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a55c713573078042b771e49ebc20d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAll: {fileID: 0}
   movementComponent: {fileID: 1272283085219849108}
   bubbleGumStateComponent: {fileID: 2255999318209877694}
-  attach_Moveable_List: {fileID: 5739459924472443303}
+  attach_Moveable_List: {fileID: 1501930013158023710}
