@@ -1,24 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UndoAndRedoController : MonoBehaviour
+public class UndoAndRedoController : Singleton<UndoAndRedoController>, I_SceneChange
 {
-    [SerializeField] private Input_handle inputHandle;
-    [SerializeField] private Get_Input get_input;
+
     private BubbleGum_UndoManager bubblegum_undoManager;
     private Box_UndoAndRedo box_UndoAndRedo;
     TileManager tileManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        LevelLoader.Instance.AddSceneChangeEvent(this);
+    }
+
+    public void OnStartScene()
+    {
         StoreAllMoveableObject();
         tileManager = FindAnyObjectByType<TileManager>();
         bubblegum_undoManager = GetComponent<BubbleGum_UndoManager>();
         box_UndoAndRedo = GetComponent<Box_UndoAndRedo>();
-        if (inputHandle != null)
-        {
-            inputHandle.AddRegisterStateListener(RegisterAllCharacterStates);
-        }
+
+        Input_handle.Instance.AddRegisterStateListener(RegisterAllCharacterStates);
+
         if (bubblegum_undoManager != null)
         {
             Debug.LogError($"{bubblegum_undoManager} is missing");
@@ -28,6 +31,12 @@ public class UndoAndRedoController : MonoBehaviour
             Debug.LogError($"{box_UndoAndRedo} is missing");
         }
     }
+
+    public void OnEndScene()
+    {
+
+    }
+
 
 
     List<MainComponent_Transform> moveableObjectList = new List<MainComponent_Transform>();
@@ -83,7 +92,7 @@ public class UndoAndRedoController : MonoBehaviour
     {
         foreach (var character in BubbleGum_UndoManager.AllCharacters)
         {
-            character.RegisterState(get_input.direction);
+            character.RegisterState(Get_Input.Instance.direction);
         }
         foreach (var character in Box_UndoAndRedo.AllBoxes)
         {

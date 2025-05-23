@@ -2,16 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameSystem : MonoBehaviour
+public class GameSystem : Singleton<GameSystem>
 {
-    [SerializeField] Get_Input get_Input;
-    [SerializeField] GameObject inputGameObject;
     [SerializeField] Wining_Check wining_Check;
-    [SerializeField] LevelLoader levelLoader;
 
     [SerializeField] private int sceneTransitionTime = 1;
 
-    Load_Condition loadCondition;
     private void Start()
     {
         if (wining_Check != null)
@@ -23,7 +19,6 @@ public class GameSystem : MonoBehaviour
             Debug.LogError("[GameSystem] Wining_Check not assigned.");
         }
 
-        loadCondition = FindAnyObjectByType<Load_Condition>();
     }
     private void HandleWin()
     {
@@ -45,7 +40,7 @@ public class GameSystem : MonoBehaviour
     {
         Debug.Log("[GameSystem] Handling win... loading next scene.");
 
-        loadCondition.LoadingType();
+        Load_Condition.Instance.LoadingType();
 
     }
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-public class All_Sticky_Gum_Holder : MonoBehaviour
+public class All_Sticky_Gum_Holder : Singleton<All_Sticky_Gum_Holder>
 {
     System.Action<List<StateControl<Bubble_Gum_State>>> unstick;
     List<StateControl<Bubble_Gum_State>> StickedGum = new List<StateControl<Bubble_Gum_State>>();
@@ -10,7 +9,7 @@ public class All_Sticky_Gum_Holder : MonoBehaviour
 
     private void Start()
     {
-        FindAnyObjectByType<ButtonCommand_Handle>().Add_Space_Action(UnStick_Handle);
+        ButtonCommand_Handle.Instance.Add_Space_Action(UnStick_Handle);
     }
 
 

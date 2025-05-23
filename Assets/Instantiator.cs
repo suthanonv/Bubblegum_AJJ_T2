@@ -6,13 +6,13 @@ public class Instantiator : Singleton<Instantiator>
 {
     [SerializeField] private string folderPath = "Assets/Prefab/SingletonObject";
 
-    [SerializeField] private List<GameObject> loadedPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> Singleton_List = new List<GameObject>();
 
 #if UNITY_EDITOR
     [ContextMenu("Load All Prefabs")]
     void LoadAllPrefabs()
     {
-        loadedPrefabs.Clear();
+        Singleton_List.Clear();
 
         string[] guids = AssetDatabase.FindAssets("t:GameObject", new[] { folderPath });
 
@@ -23,7 +23,7 @@ public class Instantiator : Singleton<Instantiator>
 
             if (prefab != null)
             {
-                loadedPrefabs.Add(prefab);
+                Singleton_List.Add(prefab);
                 Debug.Log("Loaded: " + prefab.name);
             }
         }
@@ -32,7 +32,7 @@ public class Instantiator : Singleton<Instantiator>
 
     protected override void Init()
     {
-        foreach (GameObject prefab in loadedPrefabs)
+        foreach (GameObject prefab in Singleton_List)
         {
             Instantiate(prefab);
             prefab.gameObject.name = $"{prefab.name}";

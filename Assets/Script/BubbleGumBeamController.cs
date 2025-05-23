@@ -3,32 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BubbleGumBeamController : MonoBehaviour
+public class BubbleGumBeamController : Singleton<BubbleGumBeamController>, I_SceneChange
 {
     List<Main_BubbleGumstate> AllGums = new List<Main_BubbleGumstate>();
 
     [SerializeField] AnimationClip _beamUpClip;
-    UndoAndRedoController undocontroler;
     Input_handle _inputHandle;
     private void Start()
     {
-        FindAnyObjectByType<LevelLoader>().AddListener(OnLoadNewScene);
+        FindAnyObjectByType<LevelLoader>().AddSceneChangeEvent(this);
         FindAnyObjectByType<GameSystem>().SetHandleWinTransition(PlayAllAnimation);
-        undocontroler = FindAnyObjectByType<UndoAndRedoController>();
-        _inputHandle = FindAnyObjectByType<Input_handle>();
-        OnLoadNewScene();
+        _inputHandle = Input_handle.Instance;
     }
-
-    public void OnLoadNewScene()
+    #region I_SceneChange  Method
+    public void OnStartScene()
     {
-        undocontroler.EnableUndo = true;
-        _inputHandle.EnableMove = true;
+        UndoAndRedoController.Instance.EnableUndo = true;
+        Input_handle.Instance.EnableMove = true;
         foreach (var i in FindObjectsByType<Main_BubbleGumstate>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
             AllGums.Add(i);
         }
     }
 
+    public void OnEndScene()
+    {
+        AllGums = new List<Main_BubbleGumstate>();
+    }
+    #endregion
     void PlayAllAnimation(System.Action Callback)
     {
         CurrentLevelClass.SetNewLevel(SceneManager.GetActiveScene().buildIndex - 1);
@@ -40,8 +42,8 @@ public class BubbleGumBeamController : MonoBehaviour
     IEnumerator Animated(System.Action Callback)
     {
         SoundManager.PlaySound(SoundType.Effect_Warp, 1f);
-        undocontroler.EnableUndo = false;
-        _inputHandle.EnableMove = false;
+        UndoAndRedoController.Instance.EnableUndo = false;
+        Input_handle.Instance.EnableMove = false;
         foreach (var gum in AllGums)
         {
             gum.SetState(Bubble_Gum_State.Normal);

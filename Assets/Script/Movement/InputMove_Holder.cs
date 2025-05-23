@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InputMove_Holder : MonoBehaviour
+public class InputMove_Holder : Singleton<InputMove_Holder>, I_SceneChange
 {
     List<Base_Movement> moveObject = new List<Base_Movement>();
     Action<Vector2Int, List<Base_Movement>, Action> moveCall;
@@ -14,8 +14,20 @@ public class InputMove_Holder : MonoBehaviour
 
     private void Start()
     {
-        FindAnyObjectByType<Input_handle>().AddMovementListener(MoveAll_call);
+        LevelLoader.Instance.AddSceneChangeEvent(this);
+        Input_handle.Instance.AddMovementListener(MoveAll_call);
     }
+
+    public void OnStartScene()
+    {
+
+    }
+
+    public void OnEndScene()
+    {
+        moveObject = new List<Base_Movement>();
+    }
+
 
     #region Add/remove moveable class
     public void Add_movealbe(Base_Movement move)

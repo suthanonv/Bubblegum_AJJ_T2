@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Get_Input : MonoBehaviour
+public class Get_Input : Singleton<Get_Input>
 {
     private Input_handle _inputHandle;
     private Vector2Int _direction = Vector2Int.zero;
@@ -18,16 +16,18 @@ public class Get_Input : MonoBehaviour
     [SerializeField] private InputAction playerMovementControls;
     [SerializeField] private InputAction playerButtonPressed;
 
+    public bool EnableInput = true;
+
     bool yes = false;
 
-    private void Awake()
+    protected override void Init()
     {
         Initialize();
     }
 
     public void Start()
     {
-        
+
         if (playerMovementControls == null || playerButtonPressed == null)
         {
             Debug.LogError("Player movement or button input action is not assigned.");
@@ -86,6 +86,7 @@ public class Get_Input : MonoBehaviour
 
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
+        if (EnableInput == false) return;
         Vector2 input = context.ReadValue<Vector2>();
 
         if (context.performed)
@@ -105,6 +106,7 @@ public class Get_Input : MonoBehaviour
 
     private void OnButtonPressed(InputAction.CallbackContext context)
     {
+        if (EnableInput == false) return;
         if (context.performed)
         {
             string buttonName = context.control.name;
@@ -113,6 +115,7 @@ public class Get_Input : MonoBehaviour
     }
     private void inputBuffering()
     {
+        if (EnableInput == false) return;
         if (Time.time >= nextMoveTime && queuedDirection != Vector2Int.zero)
         {
             _direction = queuedDirection;

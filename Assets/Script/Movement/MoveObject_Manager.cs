@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-public class MoveObject_Manager : MonoBehaviour, bbg_IInitialize
+public class MoveObject_Manager : Singleton<MoveObject_Manager>, I_SceneChange
 {
     Grid_Manager gridManager;
     Vector2Int InputDirection = new Vector2Int(0, 0);
@@ -13,9 +13,24 @@ public class MoveObject_Manager : MonoBehaviour, bbg_IInitialize
 
     private void Start()
     {
-        this.GetComponent<InputMove_Holder>().Add_moveCall_Listener(MoveAll);
-        gridManager = FindAnyObjectByType<Grid_Manager>(FindObjectsInactive.Include);
+        InputMove_Holder.Instance.Add_moveCall_Listener(MoveAll);
+        LevelLoader.Instance.AddSceneChangeEvent(this);
     }
+
+    public void OnStartScene()
+    {
+        gridManager = FindAnyObjectByType<Grid_Manager>(FindObjectsInactive.Include);
+        movePath = new List<MovePath>();
+        groupInfo = new List<ObjectGroup>();
+        resolvedTile = new Dictionary<Vector2Int, bool>();
+        DebugingPath = new List<MovePath>();
+        possibleMoveObject = new List<Base_Movement>();
+    }
+
+    public void OnEndScene()
+    {
+    }
+
 
     public int InitializeLayer() => 1;
     public Action Initialize()
@@ -91,6 +106,7 @@ public class MoveObject_Manager : MonoBehaviour, bbg_IInitialize
         foreach (Vector2Int futureMove in serchGroup.GroupMovePos)
         {
             if (serchGroup.IsComplete(futureMove)) continue;
+            Debug.Log($"futureMove {futureMove} ,Direction {moveObject.GetDirection(Direction)}");
             MoveAble_Tile moveTile = gridManager.Get_Tile(futureMove - moveObject.GetDirection(Direction)).GetComponent<MoveAble_Tile>();
 
             if (moveTile.OcupiedObject == null)

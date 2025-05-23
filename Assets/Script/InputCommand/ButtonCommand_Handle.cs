@@ -2,12 +2,9 @@ using System;
 using UnityEngine;
 
 
-public class ButtonCommand_Handle : MonoBehaviour
+public class ButtonCommand_Handle : Singleton<ButtonCommand_Handle>
 {
 
-    private Input_handle inputHandle;
-    [SerializeField] private UndoAndRedoController undoController;
-    [SerializeField] private LevelLoader levelLoader;
     [SerializeField] private float inputCooldown = 0.25f;
     private float nextMoveTime = 0f;
 
@@ -16,14 +13,8 @@ public class ButtonCommand_Handle : MonoBehaviour
 
     private void Start()
     {
-        inputHandle = GetComponent<Input_handle>();
 
-        if (inputHandle != null)
-        {
-            inputHandle.AddButtonListener(OnKeyBoardButtonPress);
-        }
-        if (inputHandle == null) Debug.LogError("[ButtonCommand_Handle] Input_handle missing!");
-        if (undoController == null) Debug.LogError("[ButtonCommand_Handle] UndoAndRedoController missing!");
+        Input_handle.Instance.AddButtonListener(OnKeyBoardButtonPress);
 
 
     }
@@ -38,10 +29,10 @@ public class ButtonCommand_Handle : MonoBehaviour
             _buttonCommand = buttonName;
 
             if (buttonName == "space") Space_button_Action?.Invoke();
-            else if (buttonName == "z") undoController.Undo();
-            else if (buttonName == "r") levelLoader.reloadScene();
-            else if (buttonName == "o") levelLoader.loadPreviousScene();
-            else if (buttonName == "p") levelLoader.loadNextScene();
+            else if (buttonName == "z") UndoAndRedoController.Instance.Undo();
+            else if (buttonName == "r") LevelLoader.Instance.reloadScene();
+            else if (buttonName == "o") LevelLoader.Instance.loadPreviousScene();
+            else if (buttonName == "p") LevelLoader.Instance.loadNextScene();
             else if (buttonName == "escape") Esc_button_Action?.Invoke();
 
             nextMoveTime = Time.time + inputCooldown;

@@ -1,14 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class Input_handle : MonoBehaviour
+public class Input_handle : Singleton<Input_handle>
 {
     private System.Action<Vector2Int> _input_action;
     private System.Action<string> _buttonPressedAction;
     private System.Action _registerStateAllCharacters;
 
-    private void Start()
-    {
-    }
 
     public void AddRegisterStateListener(System.Action action)
     {
@@ -36,6 +33,7 @@ public class Input_handle : MonoBehaviour
     public void CallingMovement(Vector2Int Direction)
     {
         if (EnableMove == false) return;
+        Debug.Log("Call Move");
         _registerStateAllCharacters.Invoke();
         _input_action?.Invoke(Direction);
     }

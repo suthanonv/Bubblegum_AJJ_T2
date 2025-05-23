@@ -2,15 +2,17 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Load_Condition : MonoBehaviour
+public class Load_Condition : Singleton<Load_Condition>
 {
     [SerializeField] private Level_Section firstSection;
-    [SerializeField] private LevelLoader levelLoader;
+    private LevelLoader levelLoader;
 
     [SerializeField] private int _menuScene_Index;
     [SerializeField] private int _levelScene_Index;
     [SerializeField] private int _firstLevel_Index;
     [SerializeField] private int _endCredit_Scene;
+
+
 
 #if UNITY_EDITOR
 
@@ -32,8 +34,11 @@ public class Load_Condition : MonoBehaviour
 
     private void Start()
     {
-        if (levelLoader == null) levelLoader = FindAnyObjectByType<LevelLoader>();
+        levelLoader = LevelLoader.Instance;
     }
+
+
+
 
     public void LoadingType()
     {

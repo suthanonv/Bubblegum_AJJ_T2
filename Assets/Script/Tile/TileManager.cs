@@ -78,6 +78,7 @@ public class TileManager : MonoBehaviour, bbg_IInitialize
     }
     public Tile GetTile(Vector2Int index)
     {
+        Debug.Log($"Output Index {index}");
         return (tileIndex[index.x, index.y].GetComponent<Tile>());
     }
 

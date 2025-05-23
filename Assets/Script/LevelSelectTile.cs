@@ -111,6 +111,12 @@ public class LevelSelectTile : Grid_Collider
     {
         this.enabled = false;
     }
+
+    public void OnDestroy()
+    {
+        level.OnBeginLoad -= DisableSelf;
+    }
+
     private bool Set_canPlay()
     {
         if (Level_Progress_Manager.Instance.GetSection(Level_Progress_Manager.GetBuildIndexByName(levelDisplayName)) != null)

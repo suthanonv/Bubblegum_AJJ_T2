@@ -3,10 +3,8 @@ using UnityEngine;
 public class Movement_Controler : MonoBehaviour
 {
     Movement move;
-    InputMove_Holder move_holder;
     void Awake()
     {
-        move_holder = FindAnyObjectByType<InputMove_Holder>();
         move = GetComponent<Movement>();
 
         this.transform.parent.GetComponent<StateBehaviour<Bubble_Gum_State>>().Add_PreEnter_Listener(Add_move);
@@ -14,12 +12,12 @@ public class Movement_Controler : MonoBehaviour
     }
     public void Add_move()
     {
-        move_holder.Add_movealbe(move);
+        InputMove_Holder.Instance.Add_movealbe(move);
     }
 
     public void Remove_move()
     {
         Debug.Log("Removed Move");
-        move_holder.Remove_moveable(move);
+        InputMove_Holder.Instance.Remove_moveable(move);
     }
 }

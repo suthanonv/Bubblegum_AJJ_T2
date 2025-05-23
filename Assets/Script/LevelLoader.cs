@@ -2,38 +2,36 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : Singleton<LevelLoader>
 {
     public event Action OnBeginLoad;
-    [SerializeField] Get_Input get_Input;
-    [SerializeField] GameObject inputGameObject;
-    GameObject newInput;
+    public event Action OnEndLoad;
+
     GameObject cloud;
     UnityEngine.UI.Slider loadSceneProgressBar;
     GameObject loadScene;
     GameObject loadSceneCanva;
     //private bool LoadTimeChecker;
 
-    public static LevelLoader Instance;
 
-    private void Awake()
+    protected override void Init()
     {
-        if (Instance != null) { Debug.Log("LevelLoader: Instance Check = !Null"); Destroy(this.gameObject); } else { DontDestroyOnLoad(this.gameObject); Instance = this; }
+        base.Init();
         this.transform.parent = null;
     }
 
+
+
+
     public void LoadLevel(int levelNumber)
     {
-        inputGameObject.SetActive(false);
-        SceneManager.LoadScene(levelNumber);
-        Destroy(this.gameObject);
+
+        StartCoroutine(LoadScene(levelNumber));
     }
     public void loadNextScene()
     {
 
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (get_Input == null)
-            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
 
@@ -45,8 +43,6 @@ public class LevelLoader : MonoBehaviour
 
         Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (get_Input == null)
-            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
 
 
@@ -58,8 +54,6 @@ public class LevelLoader : MonoBehaviour
 
         Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (get_Input == null)
-            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         int levelLoaderIndex = Level_Progress_Manager.GetBuildIndexByName("Level Loader");
 
@@ -70,8 +64,6 @@ public class LevelLoader : MonoBehaviour
     {
         Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (get_Input == null)
-            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         int levelLoaderIndex = Level_Progress_Manager.GetBuildIndexByName("Main Menu");
 
@@ -84,8 +76,6 @@ public class LevelLoader : MonoBehaviour
 
         Debug.Log($"{this.gameObject.name}, reloadScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (get_Input == null)
-            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         StartCoroutine(ASyncLoadScene(_currentLevel, 0.8f));
     }
@@ -94,15 +84,23 @@ public class LevelLoader : MonoBehaviour
 
         //  Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
-        if (get_Input == null)
-            Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
         StartCoroutine(ASyncLoadScene(lvl, 1));
     }
 
 
-
+    IEnumerator LoadScene(int SceneIndex)
+    {
+        AsyncOperation asyncload = SceneManager.LoadSceneAsync(SceneIndex);
+        StartCoroutine(CheckLoadTime());
+        while (!asyncload.isDone)
+        {
+            //loadSceneProgressBar.value = asyncload.progress;
+            yield return null;
+        }
+        OnEndLoad?.Invoke();
+    }
 
     IEnumerator ASyncLoadScene(int levelNumber, float duration)
     {
@@ -135,12 +133,13 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
 
-        loadSceneComplete?.Invoke();
-        newInput = FindAnyObjectByType<Get_Input>().gameObject;
-        newInput.SetActive(false);
+        OnEndLoad?.Invoke();
+        Get_Input.Instance.EnableInput = false;
         yield return new WaitForSeconds(0.05f);
         time = 0;
         startingPos = Vector2.zero;
+
+
         while (time < duration)
         {
             cloud.transform.localPosition = Vector2.Lerp(startingPos, new Vector2(-3520, -1980), time / duration);
@@ -148,11 +147,11 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         cloud.transform.localPosition = new Vector2(-3520, -1980);
-        newInput.SetActive(true);
+        Get_Input.Instance.EnableInput = true;
 
         OnFinishCloud?.Invoke();
         Destroy(loadSceneCanva);
-        Destroy(gameObject);
+
     }
 
     System.Action OnFinishCloud;
@@ -175,14 +174,14 @@ public class LevelLoader : MonoBehaviour
         //LoadTimeChecker = true;
     }
 
-    public delegate void OnLoadSceneComplete();
-    OnLoadSceneComplete loadSceneComplete;
 
 
 
-    public void AddListener(OnLoadSceneComplete listener)
+    public void AddSceneChangeEvent(I_SceneChange SceneChangeEvent)
     {
-        loadSceneComplete += listener;
+        OnBeginLoad += SceneChangeEvent.OnEndScene;
+        OnEndLoad += SceneChangeEvent.OnStartScene;
+        SceneChangeEvent.OnStartScene();
     }
 
 
