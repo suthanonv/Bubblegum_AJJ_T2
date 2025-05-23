@@ -30,6 +30,11 @@ public class Load_Condition : MonoBehaviour
     }
 #endif
 
+    private void Start()
+    {
+        if (levelLoader == null) levelLoader = FindAnyObjectByType<LevelLoader>();
+    }
+
     public void LoadingType()
     {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
