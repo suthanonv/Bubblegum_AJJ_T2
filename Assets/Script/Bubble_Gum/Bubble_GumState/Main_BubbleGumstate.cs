@@ -10,6 +10,10 @@ public class Main_BubbleGumstate : StateControl<Bubble_Gum_State>
         base.SetState(_newState);
     }
 
+    public void IntilizeStateAgain()
+    {
+        base.SetState(GetCurrentState());
+    }
 
 
 }

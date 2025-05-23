@@ -9,7 +9,7 @@ public class Move_All : MonoBehaviour, bbg_IInitialize
     private void Start()
     {
         this.GetComponent<All_moveable_gum_holder>().Add_moveCall_Listener(MoveAll);
-        gridManager = FindAnyObjectByType<Grid_Manager>();
+        gridManager = FindAnyObjectByType<Grid_Manager>(FindObjectsInactive.Include);
     }
 
 
@@ -98,6 +98,8 @@ public class Move_All : MonoBehaviour, bbg_IInitialize
 
             if (moveTile.TryGetComponent<MoveAble_Tile>(out MoveAble_Tile tile))
             {
+                if (tile.OcupiedObject == null) continue;
+
                 if (tile.OcupiedObject.TryFindComponent_InChild<Object_Interactable>(out Object_Interactable Interact_Obj))
                 {
                     Interact_Obj.Interact(Main_Move_Object);

@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -197,6 +197,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  UnityEvent_onInvalidMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2932776110857278530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +322,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -6833389537024690228, guid: 1e0c3539b371f384b8de771f7541bac1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -444,6 +447,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  UnityEvent_onInvalidMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5739459924472443303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Group: []
+  AddingSelfInSetUP: 1
 --- !u!114 &8926692752383462405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +543,19 @@ MonoBehaviour:
       m_Calls: []
   On_PreEnterState:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5939070939184892162}
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
+        m_MethodName: _Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1893476906574181955
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +697,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -764,7 +784,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -876,6 +896,9 @@ MonoBehaviour:
   OnfinishMove:
     m_PersistentCalls:
       m_Calls: []
+  UnityEvent_onInvalidMove:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5915969615312138480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Group: []
+  AddingSelfInSetUP: 1
 --- !u!1 &4088049004969115594
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +987,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -1128,7 +1153,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -8583516207479176198, guid: 9f8f57e05ef620541af875b530ab30c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1237,7 +1262,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -1395,7 +1420,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -1774,7 +1799,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -1861,7 +1886,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: -99
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
@@ -1955,6 +1980,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSetNewTile:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9069447542810040607
 GameObject:
   m_ObjectHideFlags: 0

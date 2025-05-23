@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BubbleGumBeamController : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class BubbleGumBeamController : MonoBehaviour
 
     void PlayAllAnimation(System.Action Callback)
     {
+        CurrentLevelClass.SetNewLevel(SceneManager.GetActiveScene().buildIndex - 1);
+
         StartCoroutine(Animated(Callback));
     }
 

@@ -33,7 +33,9 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 1.5f));
+
+        StartCoroutine(ASyncLoadScene(_currentLevel + 1, 0.8f));
+        //Debug.Log("load next scene");
     }
     public void loadPreviousScene()
     {
@@ -44,8 +46,9 @@ public class LevelLoader : MonoBehaviour
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
 
+
         //LoadLevel(_currentLevel - 1);
-        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 1.5f));
+        StartCoroutine(ASyncLoadScene(_currentLevel - 1, 0.8f));
     }
     public void loadLevelSelectScene()
     {
@@ -73,44 +76,37 @@ public class LevelLoader : MonoBehaviour
     }
     public void reloadScene()
     {
+        if (FindAnyObjectByType<Cloud>() != null) return;
 
         Debug.Log($"{this.gameObject.name}, reloadScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
-
-        //LoadLevel(_currentLevel);
-        StartCoroutine(ASyncLoadScene(_currentLevel, 1));
+        StartCoroutine(ASyncLoadScene(_currentLevel, 0.8f));
     }
     public void loadLevelSelectedScene(int lvl)
     {
 
-        Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
+        //  Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
         //LoadLevel(_currentLevel + 1);
-        StartCoroutine(ASyncLoadScene(lvl, 1.5f));
+        StartCoroutine(ASyncLoadScene(lvl, 1));
     }
+
+
+
+
     IEnumerator ASyncLoadScene(int levelNumber, float duration)
     {
         loadScene = FindAnyObjectByType<Sceneloader>(FindObjectsInactive.Include).gameObject;
         loadSceneCanva = loadScene.transform.parent.gameObject;
         loadSceneProgressBar = loadScene.GetComponentInChildren<UnityEngine.UI.Slider>(true);
         cloud = FindAnyObjectByType<Cloud>(FindObjectsInactive.Include).gameObject;
-        //LoadTimeChecker = false;
-        //loadScene.SetActive(true);
-        //loadSceneProgressBar.value = 0f;
         cloud.SetActive(true);
-        /*
-        for(int i = 0; i < 880/cloudSpeed; i++)
-        {
-            cloud.transform.position += new Vector3(-4f*cloudSpeed, -2.25f*cloudSpeed);
-            yield return null;
-        }
-        */
         float time = 0;
         Vector2 startingPos = new Vector2(3520, 1980);
         while (time < duration)
@@ -138,13 +134,6 @@ public class LevelLoader : MonoBehaviour
         newInput = FindAnyObjectByType<Get_Input>().gameObject;
         newInput.SetActive(false);
         yield return new WaitForSeconds(0.05f);
-        /*
-        for (int i = 0; i < 880/cloudSpeed; i++)
-        {
-            cloud.transform.position += new Vector3(-4f * cloudSpeed, -2.25f * cloudSpeed);
-            yield return null;
-        }
-        */
         time = 0;
         startingPos = Vector2.zero;
         while (time < duration)
@@ -156,8 +145,7 @@ public class LevelLoader : MonoBehaviour
         cloud.transform.localPosition = new Vector2(-3520, -1980);
         newInput.SetActive(true);
 
-        CurrentLevelClass.SetNewLevel(levelNumber - 1);
-
+        OnFinishCloud?.Invoke();
         Destroy(loadSceneCanva);
         Destroy(gameObject);
     }

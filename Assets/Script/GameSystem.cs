@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSystem : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameSystem : MonoBehaviour
 
     [SerializeField] private int sceneTransitionTime = 1;
 
+    Load_Condition loadCondition;
     private void Start()
     {
         if (wining_Check != null)
@@ -20,9 +22,12 @@ public class GameSystem : MonoBehaviour
         {
             Debug.LogError("[GameSystem] Wining_Check not assigned.");
         }
+
+        loadCondition = FindAnyObjectByType<Load_Condition>();
     }
     private void HandleWin()
     {
+        Level_Progress_Manager.Instance.SetSceneState(SceneManager.GetActiveScene().buildIndex, true);
         _transition.Invoke(loadNextScene);
     }
 
@@ -39,7 +44,9 @@ public class GameSystem : MonoBehaviour
     void loadNextScene()
     {
         Debug.Log("[GameSystem] Handling win... loading next scene.");
-        levelLoader.loadNextScene();
+
+        loadCondition.LoadingType();
+
     }
 
     private void Update()

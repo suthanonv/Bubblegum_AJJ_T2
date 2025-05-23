@@ -50,7 +50,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     {
         if (movementComponent == null || bubbleGumStateComponent == null || attach_Moveable_List == null)
         {
-            Debug.LogWarning($"[{gameObject.name}] RegisterState failed — Required component missing.");
+            Debug.LogWarning($"[{bubbleGumStateComponent.gameObject.name}] RegisterState failed — Required component missing.");
             return;
         }
 

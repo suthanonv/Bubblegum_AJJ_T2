@@ -42,9 +42,6 @@ public class Awake_Gum_Animate_control : MonoBehaviour
     }
     void Walk()
     {
-
-
-
         Vector2Int Direction = mainComponent.Current_direction;
 
         Animator.SetFloat("X", Direction.x);
@@ -55,8 +52,18 @@ public class Awake_Gum_Animate_control : MonoBehaviour
         SoundManager.PlaySound(SoundType.BBG_Jump);
     }
 
+    public void OnInvalidMove()
+    {
+        Vector2Int Direction = mainComponent.Current_direction;
+
+        Animator.SetFloat("X", Direction.x);
+        Animator.SetFloat("Y", Direction.y);
+
+        Animator.Play("Base Layer.Normal.InvalidMove", 0, 0f);
+
+    }
+
     void Idle()
     {
-        Animator.Play("Base Layer.Normal.IDLE", 0, 0f);
     }
 }

@@ -31,6 +31,11 @@ public class MoveAble_Tile : Tile
         return CanMoveConditon?.Invoke(_object) ?? true;
     }
 
+    public void Add_tile_Condition(Func<MainComponent, bool> _new)
+    {
+        CanMoveConditon = _new;
+    }
+
     public void SetOccupiedObject(MainComponent _ocupiedObject)
     {
         this.OcupiedObject = _ocupiedObject;

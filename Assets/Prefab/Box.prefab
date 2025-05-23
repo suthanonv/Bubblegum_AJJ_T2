@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4710437835335302370}
   - component: {fileID: 1321974986924875830}
   - component: {fileID: 3332894187817002972}
+  - component: {fileID: 3537833072582631863}
   m_Layer: 0
   m_Name: Pushable
   m_TagString: Untagged
@@ -48,8 +49,23 @@ MonoBehaviour:
   mainComponent: {fileID: 6512104036304233723}
   OnMoveing:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3537833072582631863}
+        m_TargetAssemblyTypeName: RockMovingSound, Assembly-CSharp
+        m_MethodName: PlayRockSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnfinishMove:
+    m_PersistentCalls:
+      m_Calls: []
+  UnityEvent_onInvalidMove:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &3332894187817002972
@@ -62,6 +78,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e2e9a3cc8cf00b4d9c20334e751de8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Group: []
+  AddingSelfInSetUP: 1
+--- !u!114 &3537833072582631863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2878998804350581745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dbe0c8c55a5d044a139a266201ef75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3209950375038732076
@@ -137,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainComponent: {fileID: 6512104036304233723}
+  Starting_Gum: []
 --- !u!1 &5708393902772530993
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +305,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1375023435
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 5725184139431673129, guid: d21bf613b6cf23d499665098e522eb4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -299,3 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5a7117547b2b346a02ef11b600c325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSetNewTile:
+    m_PersistentCalls:
+      m_Calls: []

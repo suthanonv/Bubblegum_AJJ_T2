@@ -19,6 +19,9 @@ public class Sticky : MonoBehaviour
             state.SetState(Bubble_Gum_State.Stick);
             Attach_Moveable_List attach_Moveable_List = state.GetComponent<MainComponent>().FindComponnet_InChild<Attach_Moveable_List>();
 
+
+            if (attach_Moveable_List == null) return;
+
             attach_Moveable_List.Remove_Moveable(attach_Moveable_List);
 
         }
