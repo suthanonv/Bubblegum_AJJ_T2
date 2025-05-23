@@ -13,7 +13,7 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
     }
 
     [SerializeField] MainComponent_Transform movementComponent;
-    [SerializeField] private Attach_Moveable_List attach_Moveable_List;
+    [SerializeField] private Grouping attach_Moveable_List;
 
     Grid_Manager gridManage;
 
@@ -50,7 +50,7 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
             return;
         }
 
-        var fullGroup = attach_Moveable_List.Get_List();
+        var fullGroup = attach_Moveable_List.GetGroup();
         List<GameObject> attachedObjects = new List<GameObject>();
 
         foreach (var move in fullGroup)
@@ -94,7 +94,7 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
 
     private BoxSnapshot GetCurrentSnapshot()
     {
-        var group = attach_Moveable_List?.Get_List();
+        var group = attach_Moveable_List?.GetGroup();
         List<GameObject> attachedObjects = new List<GameObject>();
 
         if (group != null)
@@ -117,18 +117,18 @@ public class Box_UndoAndRedo : UndoAndRedo<Box_UndoAndRedo.BoxSnapshot>
     {
         if (previousAttachList == null || previousAttachList.Count == 0) return;
 
-        List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List>();
+        List<Grouping> attachMoveables = new List<Grouping>();
 
         foreach (var obj in previousAttachList)
         {
-            var attach = obj?.GetComponent<Attach_Moveable_List>();
+            var attach = obj?.GetComponent<Grouping>();
             if (attach != null)
                 attachMoveables.Add(attach);
         }
 
         foreach (var item in attachMoveables)
         {
-            item.Set_Same_list(attachMoveables);
+            item.SetSameGroup(attachMoveables);
             Debug.Log("มึงนี่เองไอเหี้ย RestoreAttachment ของ กล่อง ");
         }
 

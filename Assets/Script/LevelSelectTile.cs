@@ -22,9 +22,9 @@ public class LevelSelectTile : Grid_Collider
     bool Check(MainComponent something) => _canPlay;
 
     Level_Section section;
-    [SerializeField] SceneAsset lvlSelect_Scene;
 
 #if UNITY_EDITOR
+    [SerializeField] SceneAsset lvlSelect_Scene;
     private void OnValidate()
     {
         if (lvlSelect_Scene == null)

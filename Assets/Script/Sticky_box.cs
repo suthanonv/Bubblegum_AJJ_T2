@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sticky_box : MonoBehaviour
+public class StickableBox : MonoBehaviour
 {
     [SerializeField] MainComponent mainComponent;
-    Attach_Moveable_List Attach_Moveable_List;
+    Grouping Attach_Moveable_List;
 
     [SerializeField] List<MainComponent> Starting_Gum;
 
     private void Start()
     {
-        Attach_Moveable_List = mainComponent.FindComponnet_InChild<Attach_Moveable_List>();
+        Attach_Moveable_List = mainComponent.FindComponnet_InChild<Grouping>();
 
         foreach (var item in Starting_Gum)
         {
@@ -27,26 +27,25 @@ public class Sticky_box : MonoBehaviour
 
     void SetUpGum(MainComponent mainComponent)
     {
+        Debug.Log("Stick now");
         if (mainComponent.TryGetComponent<StateControl<Bubble_Gum_State>>(out StateControl<Bubble_Gum_State> state))
         {
             state.SetState(Bubble_Gum_State.Stick);
-            Attach_Moveable_List attach_Moveable_List = state.GetComponent<MainComponent>().FindComponnet_InChild<Attach_Moveable_List>();
-
-            Debug.Log("Stick now");
+            Grouping attach_Moveable_List = state.GetComponent<MainComponent>().FindComponnet_InChild<Grouping>();
 
             attach_Moveable_List.Reset_List();
 
-            attach_Moveable_List.Add_New_Moveable(Attach_Moveable_List.Get_List());
-            Attach_Moveable_List.Add_New_Moveable(attach_Moveable_List.Get_List());
+            attach_Moveable_List.AddNewObjectIntoGroup(Attach_Moveable_List.GetGroup());
+            Attach_Moveable_List.AddNewObjectIntoGroup(attach_Moveable_List.GetGroup());
         }
 
         else
         {
-            if (mainComponent.TryFindComponent_InChild<Attach_Moveable_List>(out Attach_Moveable_List attach))
+            if (mainComponent.TryFindComponent_InChild<Grouping>(out Grouping attach))
             {
 
-                attach.Add_New_Moveable(Attach_Moveable_List.Get_List());
-                attach.Add_New_Moveable(attach.Get_List());
+                attach.AddNewObjectIntoGroup(Attach_Moveable_List.GetGroup());
+                Attach_Moveable_List.AddNewObjectIntoGroup(attach.GetGroup());
             }
         }
     }

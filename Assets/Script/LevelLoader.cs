@@ -28,7 +28,6 @@ public class LevelLoader : MonoBehaviour
     public void loadNextScene()
     {
 
-        Debug.Log($"{this.gameObject.name}, loadNextScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");

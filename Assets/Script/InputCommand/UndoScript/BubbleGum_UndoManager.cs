@@ -17,7 +17,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
 
     [SerializeField] private MainComponent_Transform movementComponent;
     [SerializeField] private Main_BubbleGumstate bubbleGumStateComponent;
-    [SerializeField] private Attach_Moveable_List attach_Moveable_List;
+    [SerializeField] private Grouping attach_Moveable_List;
 
     public static List<BubbleGum_UndoManager> AllCharacters = new List<BubbleGum_UndoManager>();
 
@@ -54,7 +54,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
         }
 
 
-        var group = attach_Moveable_List.Get_List();
+        var group = attach_Moveable_List.GetGroup();
         List<GameObject> attachedObjects = new List<GameObject>();
         Debug.Log($"Debuging Gum State{movementComponent.gameObject.name} , {bubbleGumStateComponent.GetCurrentState()} , {group.Count}");
 
@@ -124,7 +124,7 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
 
     private CharacterSnapshot GetCurrentSnapshot()
     {
-        var group = attach_Moveable_List?.Get_List();
+        var group = attach_Moveable_List?.GetGroup();
         List<GameObject> attachedObjects = new List<GameObject>();
 
         if (group != null)
@@ -147,18 +147,18 @@ public class BubbleGum_UndoManager : UndoAndRedo<BubbleGum_UndoManager.Character
     private void RestoreAttachment(List<GameObject> previousAttachList)
     {
         if (previousAttachList == null || previousAttachList.Count == 0) return;
-        List<Attach_Moveable_List> attachMoveables = new List<Attach_Moveable_List>();
+        List<Grouping> attachMoveables = new List<Grouping>();
 
         foreach (var obj in previousAttachList)
         {
-            var attach = obj?.GetComponent<Attach_Moveable_List>();
+            var attach = obj?.GetComponent<Grouping>();
             attachMoveables.Add(attach);
         }
 
 
         foreach (var item in attachMoveables)
         {
-            item.Set_Same_list(attachMoveables);
+            item.SetSameGroup(attachMoveables);
             Debug.Log("มึงนี่เองไอเหี้ย RestoreAttachment ของ Bubblegum ");
         }
 

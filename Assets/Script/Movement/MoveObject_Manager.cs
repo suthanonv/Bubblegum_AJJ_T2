@@ -240,13 +240,6 @@ public class MoveObject_Manager : MonoBehaviour, bbg_IInitialize
         }
         else
         {
-            if (info.PathOwner.mainTransform.Main.TryFindComponent_InChild<Object_Interactable>(out Object_Interactable moveInteract))
-            {
-                if (info.MoveTile.OcupiedObject != null)
-                {
-                    moveInteract.Interact(info.MoveTile.OcupiedObject);
-                }
-            }
 
             if (info.MoveTile.OcupiedObject != null)
             {

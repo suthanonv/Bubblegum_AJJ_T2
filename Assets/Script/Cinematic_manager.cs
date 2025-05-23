@@ -15,8 +15,17 @@ public class Cinematic_manager : MonoBehaviour
     [SerializeField] int Cinimatic_index = 0;
 
     static List<int> playedCinematicList = new List<int>();
+    [SerializeField] float VideoTime;
 
+#if UNITY_EDITOR
+    [SerializeField] VideoClip _videoClip;
+    private void OnValidate()
+    {
 
+        if (_videoClip == null) return;
+        VideoTime = (float)_videoClip.length;
+    }
+#endif
     private void BeginMethod()
     {
         OnStart?.Invoke();
@@ -62,24 +71,28 @@ public class Cinematic_manager : MonoBehaviour
 
     private void Awake()
     {
-        
+
         if (playedCinematicList.Contains(Cinimatic_index))
         {
             Debug.Log($"[Cinematic_manager] Cinematic {Cinimatic_index} already played. Skipping.");
             return;
         }
 
-        
+
         playedCinematicList.Add(Cinimatic_index);
-
-        
         FindAnyObjectByType<ButtonCommand_Handle>()?.Add_Esc_Action(StopMethod);
-
-        
         video = GetComponent<VideoPlayer>();
         _clip = video.clip;
-        video.Play();
-        StartCoroutine(VideoClip(_clip.length));
+
+        WebglVideoPlayer webPlay = GetComponent<WebglVideoPlayer>();
+        if (webPlay == null)
+        {
+            video.Play();
+        }
+        else
+        {
+        }
+        StartCoroutine(VideoClip(VideoTime));
     }
 
     IEnumerator VideoClip(double Time)

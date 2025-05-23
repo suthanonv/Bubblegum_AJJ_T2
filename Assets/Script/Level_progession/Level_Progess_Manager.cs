@@ -6,13 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Level_Progress_Manager : MonoBehaviour
 {
-
     private static Level_Progress_Manager _instance;
-
-    public void SaveNow() => Save();
-
     public static Level_Progress_Manager Instance => _instance;
-
 
     [SerializeField] List<Level_Section> _base_Allsection = new List<Level_Section>();
 
@@ -21,40 +16,30 @@ public class Level_Progress_Manager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject); // Optional
         }
         else if (_instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
         LoadData();
     }
 
+    public void SaveNow() => Save();
 
-    #region SaveLoad
     private void OnApplicationQuit()
     {
+#if !UNITY_WEBGL
         Save();
+#endif
     }
 
     void Save()
     {
-        SaveData newData = new SaveData();
 
-        foreach (var section in _base_Allsection)
-        {
-            foreach (var Level in section.All_Level_Info)
-            {
-                newData.AddNewScene(Level.SceneName, Level.IsClear);
-            }
-        }
-
-        string json = JsonUtility.ToJson(newData, true);
-        string path = Path.Combine(folderPath, "Progession.json");
-        File.WriteAllText(path, json);
     }
-
-    private static string folderPath => Application.persistentDataPath;
 
     [ContextMenu("Reset")]
     public void ResetProgess()
@@ -70,26 +55,13 @@ public class Level_Progress_Manager : MonoBehaviour
         foreach (var section in _base_Allsection)
         {
             section.ResetSection();
-
         }
     }
 
     void LoadData()
     {
-        string path = Path.Combine(folderPath, "Progession" + ".json");
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            SaveData loadedData = JsonUtility.FromJson<SaveData>(json);
-            loadedData.LoadSceneState(_base_Allsection);
-        }
 
     }
-
-    #endregion
-
-
-
 
     private static Dictionary<string, int> sceneNameToIndex;
 
@@ -101,7 +73,7 @@ public class Level_Progress_Manager : MonoBehaviour
         for (int i = 0; i < sceneCount; i++)
         {
             string path = SceneUtility.GetScenePathByBuildIndex(i);
-            string name = System.IO.Path.GetFileNameWithoutExtension(path);
+            string name = Path.GetFileNameWithoutExtension(path);
             sceneNameToIndex[name] = i;
         }
     }
@@ -113,8 +85,7 @@ public class Level_Progress_Manager : MonoBehaviour
         for (int i = 0; i < sceneCount; i++)
         {
             string path = SceneUtility.GetScenePathByBuildIndex(i);
-            string name = System.IO.Path.GetFileNameWithoutExtension(path);
-
+            string name = Path.GetFileNameWithoutExtension(path);
 
             if (name == sceneName)
             {
@@ -122,10 +93,9 @@ public class Level_Progress_Manager : MonoBehaviour
             }
         }
 
-        Debug.LogWarning($" No Scene '{sceneName}' not found in Build Settings!");
+        Debug.LogWarning($"No Scene '{sceneName}' found in Build Settings!");
         return -1;
     }
-
 
     public void SetSceneState(int SceneName, bool State)
     {
@@ -133,7 +103,6 @@ public class Level_Progress_Manager : MonoBehaviour
 
         if (section == null)
         {
-
             int lastSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
             if (SceneName == lastSceneIndex)
             {
@@ -148,10 +117,6 @@ public class Level_Progress_Manager : MonoBehaviour
         section.UpdateSceneState(SceneName, State);
     }
 
-
-
-
-
     public Level_Section GetSection(int SceneName)
     {
         foreach (var section in _base_Allsection)
@@ -160,14 +125,10 @@ public class Level_Progress_Manager : MonoBehaviour
             {
                 return section;
             }
-
         }
 
-
         return null;
-
     }
-
 
     [Serializable]
     public class SceneStatePair
@@ -181,15 +142,12 @@ public class Level_Progress_Manager : MonoBehaviour
     {
         [SerializeField]
         private List<SceneStatePair> SceneNameToValueList = new List<SceneStatePair>();
-
         private Dictionary<int, bool> SceneNameToValue = new Dictionary<int, bool>();
 
         public void AddNewScene(int Name, bool Value)
         {
-            // Update internal dictionary
             SceneNameToValue[Name] = Value;
 
-            // Update list for serialization
             var existing = SceneNameToValueList.Find(pair => pair.SceneName == Name);
             if (existing != null)
             {
@@ -203,14 +161,12 @@ public class Level_Progress_Manager : MonoBehaviour
 
         public void LoadSceneState(List<Level_Section> All_Level)
         {
-            // Rebuild dictionary from list
             SceneNameToValue.Clear();
             foreach (var pair in SceneNameToValueList)
             {
                 SceneNameToValue[pair.SceneName] = pair.Value;
             }
 
-            // Use dictionary to update scenes
             foreach (Level_Section Section in All_Level)
             {
                 foreach (Level_Info Level in Section.All_Level_Info)
@@ -224,5 +180,3 @@ public class Level_Progress_Manager : MonoBehaviour
         }
     }
 }
-
-

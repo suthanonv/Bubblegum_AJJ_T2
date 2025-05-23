@@ -1,11 +1,7 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
@@ -14,7 +10,7 @@ public class MenuController : MonoBehaviour
     /// To easily navigate this script, press 'ctrl + F' and type "////" to search through different sections
     /// Last Updated: 13th May, 2025
     /// <important>
-    
+
     [Header("Input Handler")]
     [SerializeField] private GameObject InputHandler; //for disabling player controls. TEMP FIX. CHANGE LATER!!!!
     [Header("Escape Menu")]
@@ -29,7 +25,7 @@ public class MenuController : MonoBehaviour
     LevelLoader _levelLoader;
 
     bool onMainPanel = true; //to allow for pressing escape in settings tabs to return to main escape menu
-    
+
 
     bool isPaused;
 
@@ -73,7 +69,7 @@ public class MenuController : MonoBehaviour
     //// void Update
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log(name + ": Escape Key has been pressed.");
             if (!isPaused)
@@ -135,7 +131,7 @@ public class MenuController : MonoBehaviour
         CloseEscapeMenu();
         Unpause();
         _levelLoader.loadLevelSelectScene();
-        
+
     }
 
     public void MainMenuButton()
@@ -144,7 +140,7 @@ public class MenuController : MonoBehaviour
         CloseEscapeMenu();
         Unpause();
         _levelLoader.loadMainMenu();
-        
+
     }
 
     public void ReturnToPreviousPanel()
@@ -195,7 +191,7 @@ public class MenuController : MonoBehaviour
     }
     private int Settings_GetActivePanel()
     {
-        foreach(GameObject g in SettingsMenuPanels)
+        foreach (GameObject g in SettingsMenuPanels)
         {
             if (g)
             {
@@ -213,7 +209,7 @@ public class MenuController : MonoBehaviour
             panel.SetActive(true);
             //Debug.Log(name + ": Toggled Panel: " + panel.name + ", " + enable);
         }
-        else if(!enable)
+        else if (!enable)
         {
             foreach (GameObject g in SettingsMenuPanels)//using this in case of panels that are accidentally open
             {
@@ -253,7 +249,7 @@ public class MenuController : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);//Screen.fullscreen is a bool so players SetFullscreen() take priority (setting resolutions shouldnt override that)
     }
-    
+
 
     private void OnEnable() //For using keyboard controls in UI
     {

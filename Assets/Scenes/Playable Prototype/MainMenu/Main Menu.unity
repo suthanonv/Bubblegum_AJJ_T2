@@ -752,7 +752,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1666268886}
   mainMenuManager: {fileID: 1174108290}
-  escMenuManager: {fileID: 0}
   index: 2
 --- !u!1001 &470612932
 PrefabInstance:
@@ -959,7 +958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 955901664}
   mainMenuManager: {fileID: 1174108290}
-  escMenuManager: {fileID: 1906959985}
   index: 1
 --- !u!1 &611141457
 GameObject:
@@ -1482,7 +1480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1219979930}
   mainMenuManager: {fileID: 1174108290}
-  escMenuManager: {fileID: 0}
   index: 0
 --- !u!1 &880981410
 GameObject:
@@ -1910,6 +1907,8 @@ MonoBehaviour:
         m_CallState: 2
   RemoveBackScene: 1
   Cinimatic_index: 0
+  VideoTime: 0
+  _videoClip: {fileID: 0}
 --- !u!328 &1099602279
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -2009,7 +2008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lvlLoader: {fileID: 1842973592}
-  escMenuManager: {fileID: 0}
+  EscMenuManager: {fileID: 1906959985}
 --- !u!1 &1219979928
 GameObject:
   m_ObjectHideFlags: 0

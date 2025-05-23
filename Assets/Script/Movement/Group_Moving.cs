@@ -24,7 +24,7 @@ public class Group_Moving : Base_Movement
     {
 
         HashSet<Vector2Int> group_Info = new HashSet<Vector2Int>();
-
+        Debug.Log(attached_obj.GetGroup().Count);
         foreach (Grouping group in attached_obj.GetGroup())
         {
             I_move get = group.GetComponent<I_move>();
@@ -44,4 +44,7 @@ public class Group_Moving : Base_Movement
         return pos;
 
     }
+
 }
+
+

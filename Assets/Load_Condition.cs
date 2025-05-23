@@ -4,26 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class Load_Condition : MonoBehaviour
 {
-    [SerializeField] private Level_Section section;
+    [SerializeField] private Level_Section firstSection;
     [SerializeField] private LevelLoader levelLoader;
-    [SerializeField] private int sceneToendcredit;
 
-
-
-
-    [SerializeField] SceneAsset MenuScene;
-    int _menuScene_Index;
-
-    [SerializeField] SceneAsset Level_Select_Scene;
-    int _levelScene_Index;
-
-    [SerializeField] SceneAsset FirstLevelScene;
-    int _firstLevel_Index;
-
-    [SerializeField] SceneAsset EndCreditScene;
-    int _endCredit_Scene;
+    [SerializeField] private int _menuScene_Index;
+    [SerializeField] private int _levelScene_Index;
+    [SerializeField] private int _firstLevel_Index;
+    [SerializeField] private int _endCredit_Scene;
 
 #if UNITY_EDITOR
+
+    [SerializeField] private SceneAsset MenuScene;
+    [SerializeField] private SceneAsset Level_Select_Scene;
+    [SerializeField] private SceneAsset FirstLevelScene;
+    [SerializeField] private SceneAsset EndCreditScene;
 
     private void OnValidate()
     {
@@ -34,11 +28,7 @@ public class Load_Condition : MonoBehaviour
         _firstLevel_Index = Level_Progress_Manager.GetBuildIndexByName(FirstLevelScene.name);
         _endCredit_Scene = Level_Progress_Manager.GetBuildIndexByName(EndCreditScene.name);
     }
-
-
-#endif 
-
-
+#endif
 
     public void LoadingType()
     {
@@ -46,49 +36,43 @@ public class Load_Condition : MonoBehaviour
         int currentIndex = Level_Progress_Manager.GetBuildIndexByName(SceneManager.GetActiveScene().name);
 
         // If current scene is the last one
-        if (currentIndex == sceneCount)
+        if (currentIndex == sceneCount - 1)
         {
             levelLoader.loadNextScene();
             return;
         }
 
-        // If current scene is the first one
+        // If current scene is the menu
         if (currentIndex == _menuScene_Index)
         {
-            if (section.GetLevel(_firstLevel_Index).IsClear)
+            if (firstSection.GetLevel(_firstLevel_Index).IsClear)
             {
                 levelLoader.LoadLevel(_levelScene_Index);
             }
             else
             {
-                levelLoader.LoadLevel(1);
+                levelLoader.LoadLevel(_firstLevel_Index);
             }
             return;
         }
 
-        // Check if next scene is in this section
-        int nextSceneName = currentIndex + 1;
+        // Check if next scene is in the same section
+        int nextSceneIndex = currentIndex + 1;
 
-
-
-
-
-        if (section.SectionClear == false)
+        if (!firstSection.SectionClear)
         {
-            if (section.IsSceneInthisSection(nextSceneName))
+            if (firstSection.IsSceneInthisSection(nextSceneIndex))
             {
                 levelLoader.loadNextScene();
-                return;
             }
             else
             {
                 levelLoader.loadLevelSelectedScene(_levelScene_Index);
-                return;
             }
+            return;
         }
 
+        // Section cleared, go to level select
         levelLoader.loadLevelSelectedScene(_levelScene_Index);
-
     }
-
 }
