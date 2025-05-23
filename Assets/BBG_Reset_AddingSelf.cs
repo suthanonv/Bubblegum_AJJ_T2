@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BBG_Reset_AddingSelf : MonoBehaviour
 {
-    Attach_Moveable_List Attach_Moveable_List;
+    Grouping Attach_Moveable_List;
 
     private void Awake()
     {
-        Attach_Moveable_List = this.GetComponent<Attach_Moveable_List>();
+        Attach_Moveable_List = this.GetComponent<Grouping>();
     }
 
     void Start()
@@ -17,9 +17,9 @@ public class BBG_Reset_AddingSelf : MonoBehaviour
 
     void ResetSetUp()
     {
-        if (Attach_Moveable_List._AddingSelfSetUp == false)
+        if (Attach_Moveable_List._AddingSelf == false)
         {
-            Attach_Moveable_List._AddingSelfSetUp = true;
+            Attach_Moveable_List._AddingSelf = true;
         }
     }
 

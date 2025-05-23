@@ -10,7 +10,7 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
     StateControl<Bubble_Gum_State> _mainGumState;
 
 
-    Attach_Moveable_List _attach_Moveable_List;
+    Grouping _attach_Moveable_List;
 
     MainComponent_Transform _mainComponent_Transform;
     private void Awake()
@@ -23,7 +23,7 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
         _stick_Gum_Holder = FindAnyObjectByType<All_Sticky_Gum_Holder>(FindObjectsInactive.Include);
         _mainGumState = this.transform.parent.GetComponent<StateControl<Bubble_Gum_State>>();
         _mainComponent_Transform = this.transform.parent.GetComponent<MainComponent_Transform>();
-        _attach_Moveable_List = this.transform.GetComponentInChildren<Attach_Moveable_List>();
+        _attach_Moveable_List = this.transform.GetComponentInChildren<Grouping>();
 
 
     }
@@ -38,9 +38,9 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
         _stick_Gum_Holder.Add_Sticky_Gum(_mainGumState);
         if (_mainComponent_Transform.currentTile_index == Vector2Int.zero)
         {
-            if (_attach_Moveable_List._AddingSelfSetUp == true)
+            if (_attach_Moveable_List._AddingSelf == true)
             {
-                _attach_Moveable_List._AddingSelfSetUp = false;
+                _attach_Moveable_List._AddingSelf = false;
             }
         }
     }
@@ -56,7 +56,7 @@ public class StickyGum_behave : StateBehaviour<Bubble_Gum_State>
 
         foreach (Transform i in this.transform)
         {
-            if (i.gameObject.TryGetComponent<Attach_Moveable_List>(out Attach_Moveable_List attached))
+            if (i.gameObject.TryGetComponent<Grouping>(out Grouping attached))
             {
                 attached.Reset_List();
             }
