@@ -4,32 +4,21 @@ using UnityEngine;
 public class UndoAndRedoController : Singleton<UndoAndRedoController>, I_SceneChange
 {
 
-    private BubbleGum_UndoManager bubblegum_undoManager;
-    private Box_UndoAndRedo box_UndoAndRedo;
+
     TileManager tileManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         LevelLoader.Instance.AddSceneChangeEvent(this);
+        Input_handle.Instance.AddRegisterStateListener(RegisterAllCharacterStates);
     }
 
     public void OnStartScene()
     {
         StoreAllMoveableObject();
         tileManager = FindAnyObjectByType<TileManager>();
-        bubblegum_undoManager = GetComponent<BubbleGum_UndoManager>();
-        box_UndoAndRedo = GetComponent<Box_UndoAndRedo>();
 
-        Input_handle.Instance.AddRegisterStateListener(RegisterAllCharacterStates);
 
-        if (bubblegum_undoManager != null)
-        {
-            Debug.LogError($"{bubblegum_undoManager} is missing");
-        }
-        if (box_UndoAndRedo != null)
-        {
-            Debug.LogError($"{box_UndoAndRedo} is missing");
-        }
+
     }
 
     public void OnEndScene()

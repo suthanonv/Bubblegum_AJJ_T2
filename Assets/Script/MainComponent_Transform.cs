@@ -96,6 +96,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
     {
         if (OnActive)
         {
+            StopAllCoroutines();
             this.transform.position = grid_Manager.Get_Tile(currentTile_index).transform.position;
             onFinishMove.Invoke();
             OnActive = false;
@@ -120,6 +121,7 @@ public class MainComponent_Transform : MonoBehaviour, bbg_IInitialize
 
     public void InstantSetPosition(Vector2Int newPosition)
     {
+        StopAllCoroutines();
         currentTile_index = newPosition;
 
         MoveAble_Tile _future_tile = grid_Manager.Get_Tile(newPosition).GetComponent<MoveAble_Tile>();
