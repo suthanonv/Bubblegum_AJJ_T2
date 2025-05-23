@@ -1,8 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,8 +24,6 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject MainPanel;
     [SerializeField] private GameObject SettingsPanel;
 
-    LevelLoader _levelLoader;
-
     bool onMainPanel = true; //to allow for pressing escape in settings tabs to return to main escape menu
     
 
@@ -40,9 +36,6 @@ public class MenuController : MonoBehaviour
     //// void Start
     private void Start()
     {
-        //Find LevelLoader
-        _levelLoader = FindFirstObjectByType<LevelLoader>();
-
         //Find Screen Resolutions
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
@@ -134,7 +127,7 @@ public class MenuController : MonoBehaviour
         Debug.Log(name + ": LevelSelectButton pressed");
         CloseEscapeMenu();
         Unpause();
-        _levelLoader.loadLevelSelectScene();
+        LevelLoader.Instance.loadLevelSelectScene();
         
     }
 
@@ -143,7 +136,7 @@ public class MenuController : MonoBehaviour
         Debug.Log(name + ": MainMenuButton pressed");
         CloseEscapeMenu();
         Unpause();
-        _levelLoader.loadMainMenu();
+        LevelLoader.Instance.loadMainMenu();
         
     }
 

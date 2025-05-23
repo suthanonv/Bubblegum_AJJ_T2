@@ -12,10 +12,13 @@ public class LevelLoader : MonoBehaviour
     GameObject loadScene;
     GameObject loadSceneCanva;
     //private bool LoadTimeChecker;
+
+    public static LevelLoader Instance;
+
     private void Awake()
     {
+        if (Instance != null) { Debug.Log("LevelLoader: Instance Check = !Null"); Destroy(this.gameObject); } else { DontDestroyOnLoad(this.gameObject); Instance = this; }
         this.transform.parent = null;
-        DontDestroyOnLoad(this.gameObject);
     }
 
     public void LoadLevel(int levelNumber)
@@ -58,21 +61,22 @@ public class LevelLoader : MonoBehaviour
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
+        int levelLoaderIndex = Level_Progress_Manager.GetBuildIndexByName("Level Loader");
 
         //LoadLevel(_currentLevel - 1);
-        StartCoroutine(ASyncLoadScene(1, 1.5f));
+        StartCoroutine(ASyncLoadScene(levelLoaderIndex, 1.5f));
     }
     public void loadMainMenu()
     {
-
         Debug.Log($"{this.gameObject.name}, loadPreviousScene Set inputGameObject to false");
         int _currentLevel = SceneManager.GetActiveScene().buildIndex;
         if (get_Input == null)
             Debug.LogWarning("[LevelLoader] get_Input is not assigned. Input will not be disabled.");
 
+        int levelLoaderIndex = Level_Progress_Manager.GetBuildIndexByName("Main Menu");
 
         //LoadLevel(_currentLevel - 1);
-        StartCoroutine(ASyncLoadScene(0, 1.5f));
+        StartCoroutine(ASyncLoadScene(levelLoaderIndex, 1.5f));
     }
     public void reloadScene()
     {
